@@ -1,475 +1,57 @@
 {
-  "Air": {
-    "display_title": "Air",
+  "a Beautiful Snow": {
+    "display_title": "a Beautiful Snow",
+    "artist": "yassu",
+    "preview_file": "a Beautiful Snow.ogg",
+    "metadata": {
+      "genre": "Instrumental",
+      "bpm": "131",
+      "original_file": "_7.bme",
+      "mod_time": "2008-02-19 22:10:16"
+    }
+  },
+  "A BEAUTIFUL WINGS": {
+    "display_title": "A BEAUTIFUL WINGS",
     "artist": "SHIKI",
-    "preview_file": "Air.ogg",
+    "preview_file": "A BEAUTIFUL WINGS.ogg",
     "metadata": {
-      "genre": "TRANCE CORE(7key)",
-      "bpm": "180",
-      "original_file": "air7light.bme",
-      "mod_time": "2003-12-23 21:48:56"
+      "genre": "HAPPY HARDCORE",
+      "bpm": "178",
+      "original_file": "ABW7a.bme",
+      "mod_time": "2005-08-02 00:42:54"
     }
   },
-  "Amethyst[hjabo]": {
-    "display_title": "Amethyst[hjabo]",
-    "artist": "hjabo",
-    "preview_file": "Amethyst[hjabo].ogg",
+  "A c i - L": {
+    "display_title": "A c i - L",
+    "artist": "g",
+    "preview_file": "A c i - L.ogg",
     "metadata": {
-      "genre": "Techno",
-      "bpm": "151",
-      "original_file": "17.bms",
-      "mod_time": "2021-02-28 14:46:52"
+      "genre": "t r a n c e",
+      "bpm": "162",
+      "original_file": "aciLez.bms",
+      "mod_time": "2002-05-12 11:12:18"
     }
   },
-  "ametsuchi": {
-    "display_title": "ametsuchi",
-    "artist": "stereoberry",
-    "preview_file": "ametsuchi.ogg",
+  "A D D i c T i O N 4 5 0 0 0 0 0": {
+    "display_title": "A D D i c T i O N 4 5 0 0 0 0 0",
+    "artist": "- 4 5",
+    "preview_file": "A D D i c T i O N 4 5 0 0 0 0 0.ogg",
     "metadata": {
-      "genre": "discopunk / shoegazer",
-      "bpm": "122",
-      "original_file": "_5.bms",
-      "mod_time": "2008-01-13 23:36:26"
-    }
-  },
-  "AMMO RELOADED DB": {
-    "display_title": "AMMO RELOADED DB",
-    "artist": "ALL NERD IS LOVE",
-    "preview_file": "AMMO RELOADED DB.ogg",
-    "metadata": {
-      "genre": "FUNKOT DB(?)",
-      "bpm": "10000198",
-      "original_file": "_5k.bms",
-      "mod_time": "2020-08-14 21:38:11"
-    }
-  },
-  "Amnehilesie": {
-    "display_title": "Amnehilesie",
-    "artist": "MisomyL",
-    "preview_file": "Amnehilesie.ogg",
-    "metadata": {
-      "genre": "La soletude",
-      "bpm": "230",
-      "original_file": "amnehilasie[SPN].bms",
-      "mod_time": "2018-11-05 05:34:58"
-    }
-  },
-  "Amoeba": {
-    "display_title": "Amoeba",
-    "artist": "TRM with Re:GD-Altanate",
-    "preview_file": "Amoeba.ogg",
-    "metadata": {
-      "genre": "Euphoric Trance",
+      "genre": "T e c h n o",
       "bpm": "155",
-      "original_file": "amoeba DPA.bme",
-      "mod_time": "2020-12-20 03:03:24"
+      "original_file": "_BN.bms",
+      "mod_time": "2017-10-01 17:01:09"
     }
   },
-  "AMOEBA_REBELL": {
-    "display_title": "AMOEBA_REBELL",
-    "artist": "",
-    "preview_file": "AMOEBA_REBELL.ogg",
+  "Absurd Gaff": {
+    "display_title": "Absurd Gaff",
+    "artist": "siromaru",
+    "preview_file": "Absurd Gaff.ogg",
     "metadata": {
-      "genre": "NITZHONOT",
-      "bpm": "148",
-      "original_file": "amoeba_7A_key.bms",
-      "mod_time": "2021-05-30 20:11:16"
-    }
-  },
-  "AMOLTAMISS": {
-    "display_title": "AMOLTAMISS",
-    "artist": "yororeri / 314",
-    "preview_file": "AMOLTAMISS.ogg",
-    "metadata": {
-      "genre": "ROCK",
-      "bpm": "150",
-      "original_file": "amo14.bme",
-      "mod_time": "2002-08-24 19:30:00"
-    }
-  },
-  "Amorphous": {
-    "display_title": "Amorphous",
-    "artist": "amorphous",
-    "preview_file": "Amorphous.ogg",
-    "metadata": {
-      "genre": "amorphous",
-      "bpm": "114",
-      "original_file": "_em_amor_7kEasy.bms",
-      "mod_time": "2022-10-24 00:07:06"
-    }
-  },
-  "amourazard": {
-    "display_title": "amourazard",
-    "artist": "Orphex",
-    "preview_file": "amourazard.ogg",
-    "metadata": {
-      "genre": "sppedcore/extratone",
-      "bpm": "1200",
-      "original_file": "amourazard_another.bms",
-      "mod_time": "2015-09-19 22:56:16"
-    }
-  },
-  "Amphisbaena": {
-    "display_title": "Amphisbaena",
-    "artist": "gҏČZ",
-    "preview_file": "Amphisbaena.ogg",
-    "metadata": {
-      "genre": "crossover orchestra",
-      "bpm": "185",
-      "original_file": "_amphisbaena_5.bms",
-      "mod_time": "2015-09-24 00:01:54"
-    }
-  },
-  "Amplifying Effect": {
-    "display_title": "Amplifying Effect",
-    "artist": "Is-m",
-    "preview_file": "Amplifying Effect.ogg",
-    "metadata": {
-      "genre": "TECHNO",
-      "bpm": "150",
-      "original_file": "_56_11.bme",
-      "mod_time": "2019-06-21 09:37:05"
-    }
-  },
-  "Amusing Colorful Pudding": {
-    "display_title": "Amusing Colorful Pudding",
-    "artist": "yukitani / DKN",
-    "preview_file": "Amusing Colorful Pudding.ogg",
-    "metadata": {
-      "genre": "Electro Swing Pop",
-      "bpm": "226",
-      "original_file": "acpn.bme",
-      "mod_time": "2014-10-18 20:01:34"
-    }
-  },
-  "Amusing Night Party": {
-    "display_title": "Amusing Night Party",
-    "artist": "yukitani",
-    "preview_file": "Amusing Night Party.ogg",
-    "metadata": {
-      "genre": "Boogie Woogie",
-      "bpm": "196",
-      "original_file": "anp_dpa.bme",
-      "mod_time": "2014-04-21 13:28:44"
-    }
-  },
-  "Amusing Reflection Rag": {
-    "display_title": "Amusing Reflection Rag",
-    "artist": "yukitani / DKN",
-    "preview_file": "Amusing Reflection Rag.ogg",
-    "metadata": {
-      "genre": "Polka / Ragtime Core",
-      "bpm": "158",
-      "original_file": "arr_dpa.bms",
-      "mod_time": "2015-09-24 22:51:26"
-    }
-  },
-  "an avenging battle - DL mix -": {
-    "display_title": "an avenging battle - DL mix -",
-    "artist": "Ogu Remixed. Reila*",
-    "preview_file": "an avenging battle - DL mix -.ogg",
-    "metadata": {
-      "genre": "TRANCE",
-      "bpm": "136",
-      "original_file": "aab_rmx_h.bme",
-      "mod_time": "2014-10-18 01:16:55"
-    }
-  },
-  "An Ego": {
-    "display_title": "An Ego",
-    "artist": "/3 vs mentalhealz",
-    "preview_file": "An Ego.ogg",
-    "metadata": {
-      "genre": "CROSSBREED",
-      "bpm": "175",
-      "original_file": "9-pi3_vs_mentalhealz-An_Ego-5.bms",
-      "mod_time": "2013-09-23 20:34:00"
-    }
-  },
-  "AN ENCHANTING DANCE": {
-    "display_title": "AN ENCHANTING DANCE",
-    "artist": "ɐ",
-    "preview_file": "AN ENCHANTING DANCE.ogg",
-    "metadata": {
-      "genre": "[GiWFeBbNgX]",
-      "bpm": "140",
-      "original_file": "_03_easiest.bme",
-      "mod_time": "2013-09-20 01:43:53"
-    }
-  },
-  "An Ending (Piano only)": {
-    "display_title": "An Ending (Piano only)",
-    "artist": "Original:Toby Fox",
-    "preview_file": "An Ending (Piano only).ogg",
-    "metadata": {
-      "genre": "Piano",
-      "bpm": "99.96",
-      "original_file": "_piano.bms",
-      "mod_time": "2022-03-19 23:02:50"
-    }
-  },
-  "Anabiosis Anatomical": {
-    "display_title": "Anabiosis Anatomical",
-    "artist": "phol-mk",
-    "preview_file": "Anabiosis Anatomical.ogg",
-    "metadata": {
-      "genre": "SHOWDOWN",
-      "bpm": "190",
-      "original_file": "anan.bms",
-      "mod_time": "2009-09-26 15:17:53"
-    }
-  },
-  "anachronism": {
-    "display_title": "anachronism",
-    "artist": "dj fujii",
-    "preview_file": "anachronism.ogg",
-    "metadata": {
-      "genre": "d&b",
-      "bpm": "173.4",
-      "original_file": "a.bms",
-      "mod_time": "1999-12-14 21:01:50"
-    }
-  },
-  "analog sky": {
-    "display_title": "analog sky",
-    "artist": "knot / iimode-do /A-zert",
-    "preview_file": "analog sky.ogg",
-    "metadata": {
-      "genre": "Techno",
+      "genre": "schranz",
       "bpm": "160",
-      "original_file": "nm_a7.bme",
-      "mod_time": "2006-08-29 04:00:00"
-    }
-  },
-  "Anarchist": {
-    "display_title": "Anarchist",
-    "artist": "uet",
-    "preview_file": "Anarchist.ogg",
-    "metadata": {
-      "genre": "Raggatek",
-      "bpm": "200",
-      "original_file": "_anarchist_dph.bms",
-      "mod_time": "2019-03-08 09:51:52"
-    }
-  },
-  "Anavatapta": {
-    "display_title": "Anavatapta",
-    "artist": "ikaruga_nex",
-    "preview_file": "Anavatapta.ogg",
-    "metadata": {
-      "genre": "darkcore",
-      "bpm": "165",
-      "original_file": "darkcore_H.bms",
-      "mod_time": "2016-02-21 20:25:10"
-    }
-  },
-  "Ancient": {
-    "display_title": "Ancient",
-    "artist": "morigasigeru",
-    "preview_file": "Ancient.ogg",
-    "metadata": {
-      "genre": "DUBSTEP",
-      "bpm": "140",
-      "original_file": "02-Ancient_dp.bms",
-      "mod_time": "2009-12-31 21:07:16"
-    }
-  },
-  "Ancient Blaze": {
-    "display_title": "Ancient Blaze",
-    "artist": "Ta2'nbeaT",
-    "preview_file": "Ancient Blaze.ogg",
-    "metadata": {
-      "genre": "Contemporary",
-      "bpm": "149",
-      "original_file": "Ancient Blaze[Another].bms",
-      "mod_time": "2012-08-23 14:05:20"
-    }
-  },
-  "Ancient Memory": {
-    "display_title": "Ancient Memory",
-    "artist": "ZUN (Arr.sun3)",
-    "preview_file": "Ancient Memory.ogg",
-    "metadata": {
-      "genre": "Ancient beats",
-      "bpm": "180",
-      "original_file": "Ancient Memory(HYPER).bme",
-      "mod_time": "2006-03-24 04:00:08"
-    }
-  },
-  "and more or less": {
-    "display_title": "and more or less",
-    "artist": "picton",
-    "preview_file": "and more or less.ogg",
-    "metadata": {
-      "genre": "HIP ROCK",
-      "bpm": "95",
-      "original_file": "01-and_more_or_less-sp.bms",
-      "mod_time": "2010-02-01 00:56:38"
-    }
-  },
-  "And There Were You": {
-    "display_title": "And There Were You",
-    "artist": "Ixia",
-    "preview_file": "And There Were You.ogg",
-    "metadata": {
-      "genre": "Episode.2",
-      "bpm": "105",
-      "original_file": "atwy_7n.bme",
-      "mod_time": "2013-09-23 23:50:28"
-    }
-  },
-  "Andrew Helio's 災難": {
-    "display_title": "Andrew Helio's 災難",
-    "artist": "ROKINA feat.Sam & Anna",
-    "preview_file": "Andrew Helio's 災難.ogg",
-    "metadata": {
-      "genre": "EXTREME HAZARD",
-      "bpm": "0.99",
-      "original_file": "00andrew_e.bms",
-      "mod_time": "2013-04-03 22:12:10"
-    }
-  },
-  "Andro": {
-    "display_title": "Andro",
-    "artist": "g@e",
-    "preview_file": "Andro.ogg",
-    "metadata": {
-      "genre": "LOGICAL FORMAT[EASY]",
-      "bpm": "0.99",
-      "original_file": "00_andro_e.bme",
-      "mod_time": "2015-09-26 13:19:08"
-    }
-  },
-  "Andromeda[hurirai]": {
-    "display_title": "Andromeda[hurirai]",
-    "artist": "hurirai",
-    "preview_file": "Andromeda[hurirai].ogg",
-    "metadata": {
-      "genre": "reincarnation",
-      "bpm": "193",
-      "original_file": "_default.bms",
-      "mod_time": "2016-10-01 21:30:34"
-    }
-  },
-  "Andromeda[Lime]": {
-    "display_title": "Andromeda[Lime]",
-    "artist": "Lime",
-    "preview_file": "Andromeda[Lime].ogg",
-    "metadata": {
-      "genre": "Trancecore",
-      "bpm": "172",
-      "original_file": "andromeda_set.bms",
-      "mod_time": "2010-09-17 10:59:42"
-    }
-  },
-  "Anemos": {
-    "display_title": "Anemos",
-    "artist": "yaG",
-    "preview_file": "Anemos.ogg",
-    "metadata": {
-      "genre": "PROGRESSIVE",
-      "bpm": "408",
-      "original_file": "_anemos_5.bms",
-      "mod_time": "2013-04-04 21:04:28"
-    }
-  },
-  "Angedicinae": {
-    "display_title": "Angedicinae",
-    "artist": "HAL feat.ۓ",
-    "preview_file": "Angedicinae.ogg",
-    "metadata": {
-      "genre": "Snuggle Core",
-      "bpm": "172",
-      "original_file": "Angedicinae_normal.bms",
-      "mod_time": "2018-11-11 00:01:47"
-    }
-  },
-  "Angel": {
-    "display_title": "Angel",
-    "artist": "POM",
-    "preview_file": "Angel.ogg",
-    "metadata": {
-      "genre": "EURO DANCE",
-      "bpm": "172",
-      "original_file": "angel1.5.bms",
-      "mod_time": "2000-05-21 05:15:04"
-    }
-  },
-  "Angel dust": {
-    "display_title": "Angel dust",
-    "artist": "LV.4",
-    "preview_file": "Angel dust.ogg",
-    "metadata": {
-      "genre": "HARD NRG",
-      "bpm": "170",
-      "original_file": "angeldust7n.bms",
-      "mod_time": "2006-08-26 21:46:56"
-    }
-  },
-  "Angel Falls": {
-    "display_title": "Angel Falls",
-    "artist": "816ThreeNumbers",
-    "preview_file": "Angel Falls.ogg",
-    "metadata": {
-      "genre": "Symphonic J-Core",
-      "bpm": "160",
-      "original_file": "angel_falls_bms_a.bms",
-      "mod_time": "2021-08-30 20:18:42"
-    }
-  },
-  "Angel Of Darkness -2016ReEdit-": {
-    "display_title": "Angel Of Darkness -2016ReEdit-",
-    "artist": "96ZUMMER",
-    "preview_file": "Angel Of Darkness -2016ReEdit-.ogg",
-    "metadata": {
-      "genre": "HARDCORE",
-      "bpm": "239",
-      "original_file": "_sp_fsrs.bms",
-      "mod_time": "2020-05-03 17:36:51"
-    }
-  },
-  "Angel Wing[SUPER STAR 弘之]": {
-    "display_title": "Angel Wing[SUPER STAR 弘之]",
-    "artist": "SUPER STAR OV",
-    "preview_file": "Angel Wing[SUPER STAR 弘之].ogg",
-    "metadata": {
-      "genre": "ONLY ONE ANTHEM",
-      "bpm": "160",
-      "original_file": "AngelWing-N-.bms",
-      "mod_time": "2011-09-18 07:31:14"
-    }
-  },
-  "Angel Wing[uma]": {
-    "display_title": "Angel Wing[uma]",
-    "artist": "uma",
-    "preview_file": "Angel Wing[uma].ogg",
-    "metadata": {
-      "genre": "Progressive Hardcore",
-      "bpm": "244",
-      "original_file": "_nomal.bms",
-      "mod_time": "2014-10-18 02:18:34"
-    }
-  },
-  "Angel's Salad": {
-    "display_title": "Angel's Salad",
-    "artist": "Unknown Artist",
-    "preview_file": "Angel's Salad.ogg",
-    "metadata": {
-      "genre": "LE MYTHE",
-      "bpm": "Unknown BPM",
-      "original_file": "_7N.bms",
-      "mod_time": "2020-11-02 09:00:34"
-    }
-  },
-  "Angelic heart": {
-    "display_title": "Angelic heart",
-    "artist": "white bird",
-    "preview_file": "Angelic heart.ogg",
-    "metadata": {
-      "genre": "Liquid funk / Animation",
-      "bpm": "42.5",
-      "original_file": "7a.bme",
-      "mod_time": "2010-09-23 05:57:22"
+      "original_file": "_abs07_01.bme",
+      "mod_time": "2008-09-20 01:34:06"
     }
   },
   "Angelic layer": {
@@ -483,292 +65,6 @@
       "mod_time": "2006-12-13 21:52:38"
     }
   },
-  "ANGELIC MIRAGE": {
-    "display_title": "ANGELIC MIRAGE",
-    "artist": "sun3",
-    "preview_file": "ANGELIC MIRAGE.ogg",
-    "metadata": {
-      "genre": "Nu-style Gabba",
-      "bpm": "180",
-      "original_file": "ANGELIC MIRAGE(ANOTHER).bme",
-      "mod_time": "2007-09-27 00:49:04"
-    }
-  },
-  "Angelic Sky": {
-    "display_title": "Angelic Sky",
-    "artist": "Unknown Artist",
-    "preview_file": "Angelic Sky.ogg",
-    "metadata": {
-      "genre": "NATURE TRANCE",
-      "bpm": "Unknown BPM",
-      "original_file": "Angelic Sky[B].bms",
-      "mod_time": "2016-08-24 22:11:46"
-    }
-  },
-  "Angelic Snow": {
-    "display_title": "Angelic Snow",
-    "artist": "Est",
-    "preview_file": "Angelic Snow.ogg",
-    "metadata": {
-      "genre": "TRANCE",
-      "bpm": "148",
-      "original_file": "as_h7.bme",
-      "mod_time": "2006-01-08 15:22:20"
-    }
-  },
-  "Angelico": {
-    "display_title": "Angelico",
-    "artist": "anubasu-anubasu",
-    "preview_file": "Angelico.ogg",
-    "metadata": {
-      "genre": "Celtic Trance [Dutch Style]",
-      "bpm": "140",
-      "original_file": "0.ct_h.bms",
-      "mod_time": "2013-08-03 00:55:58"
-    }
-  },
-  "AnGeLoS": {
-    "display_title": "AnGeLoS",
-    "artist": "9640",
-    "preview_file": "AnGeLoS.ogg",
-    "metadata": {
-      "genre": "TRANCE",
-      "bpm": "150",
-      "original_file": "__7key_A.bms",
-      "mod_time": "2016-06-04 16:36:28"
-    }
-  },
-  "AngelPainter": {
-    "display_title": "AngelPainter",
-    "artist": "˂Ƃ܂ / obj:sagoo",
-    "preview_file": "AngelPainter.ogg",
-    "metadata": {
-      "genre": "ӂӂ|bv",
-      "bpm": "128",
-      "original_file": "AngelPainter_14sagi.bme",
-      "mod_time": "2020-05-18 23:43:58"
-    }
-  },
-  "Anger Control": {
-    "display_title": "Anger Control",
-    "artist": "Lokan",
-    "preview_file": "Anger Control.ogg",
-    "metadata": {
-      "genre": "House",
-      "bpm": "138",
-      "original_file": "_anger_control_7KEYS.bms",
-      "mod_time": "2020-11-12 11:11:54"
-    }
-  },
-  "Anhedonia": {
-    "display_title": "Anhedonia",
-    "artist": "Silent Spica",
-    "preview_file": "Anhedonia.ogg",
-    "metadata": {
-      "genre": "Spiritual Core [HYPER]",
-      "bpm": "180",
-      "original_file": "02_anhedonia_h.bms",
-      "mod_time": "2012-09-24 11:06:02"
-    }
-  },
-  "ANIMA": {
-    "display_title": "ANIMA",
-    "artist": "FROL",
-    "preview_file": "ANIMA.ogg",
-    "metadata": {
-      "genre": "DEEP HOUSE",
-      "bpm": "135",
-      "original_file": "frol-anima-1p1.bms",
-      "mod_time": "2003-09-18 22:48:44"
-    }
-  },
-  "Anima Mundi -Incipiens Finis-": {
-    "display_title": "Anima Mundi -Incipiens Finis-",
-    "artist": "Limstella",
-    "preview_file": "Anima Mundi -Incipiens Finis-.ogg",
-    "metadata": {
-      "genre": "DEMENTIA PROVECTO",
-      "bpm": "190",
-      "original_file": "_anima_a.bms",
-      "mod_time": "2015-09-19 01:40:32"
-    }
-  },
-  "Animal Crossing Main Theme 7KEY": {
-    "display_title": "Animal Crossing Main Theme 7KEY",
-    "artist": "Nintendo remixed by zatsuzatsu",
-    "preview_file": "Animal Crossing Main Theme 7KEY.ogg",
-    "metadata": {
-      "genre": "Lo-Fi Remix",
-      "bpm": "100",
-      "original_file": "_7key_a.bms",
-      "mod_time": "2020-05-30 16:19:26"
-    }
-  },
-  "ANIMALBACK": {
-    "display_title": "ANIMALBACK",
-    "artist": "CYANDOG",
-    "preview_file": "ANIMALBACK.ogg",
-    "metadata": {
-      "genre": "FIDGET",
-      "bpm": "130",
-      "original_file": "1p-n.bms",
-      "mod_time": "2009-05-05 01:33:08"
-    }
-  },
-  "animalise": {
-    "display_title": "animalise",
-    "artist": "cosmic",
-    "preview_file": "animalise.ogg",
-    "metadata": {
-      "genre": "ethnic",
-      "bpm": "180",
-      "original_file": "animalise.bms",
-      "mod_time": "1999-09-11 23:13:22"
-    }
-  },
-  "Animation": {
-    "display_title": "Animation",
-    "artist": "disconaut",
-    "preview_file": "Animation.ogg",
-    "metadata": {
-      "genre": "Supersonic",
-      "bpm": "175",
-      "original_file": "animation_easy_dp.bms",
-      "mod_time": "2011-07-15 23:13:56"
-    }
-  },
-  "animatronics": {
-    "display_title": "animatronics",
-    "artist": "oxygen",
-    "preview_file": "animatronics.ogg",
-    "metadata": {
-      "genre": "TECHNO",
-      "bpm": "148",
-      "original_file": "_14a.bms",
-      "mod_time": "2018-10-21 16:01:18"
-    }
-  },
-  "Animosity": {
-    "display_title": "Animosity",
-    "artist": "iJ",
-    "preview_file": "Animosity.ogg",
-    "metadata": {
-      "genre": "GOTHIC HARDCORE",
-      "bpm": "215",
-      "original_file": "animosity_normal.bms",
-      "mod_time": "2020-11-01 04:13:52"
-    }
-  },
-  "Annihilate the living": {
-    "display_title": "Annihilate the living",
-    "artist": "Rocky",
-    "preview_file": "Annihilate the living.ogg",
-    "metadata": {
-      "genre": "hard epic",
-      "bpm": "155.75",
-      "original_file": "an7n.bms",
-      "mod_time": "2013-09-18 12:49:24"
-    }
-  },
-  "Annihilation": {
-    "display_title": "Annihilation",
-    "artist": "Zicra",
-    "preview_file": "Annihilation.ogg",
-    "metadata": {
-      "genre": "UpliftingTrance",
-      "bpm": "138",
-      "original_file": "Annihilation_A.bms",
-      "mod_time": "2017-07-23 18:41:14"
-    }
-  },
-  "Annuy Boys & Girls": {
-    "display_title": "Annuy Boys & Girls",
-    "artist": "Miii (BGA:WCMP)",
-    "preview_file": "Annuy Boys & Girls.ogg",
-    "metadata": {
-      "genre": "Skweee",
-      "bpm": "97",
-      "original_file": "bms.bms",
-      "mod_time": "2012-09-23 02:34:12"
-    }
-  },
-  "Anokumene": {
-    "display_title": "Anokumene",
-    "artist": "Jun Kuroda",
-    "preview_file": "Anokumene.ogg",
-    "metadata": {
-      "genre": "Artcore",
-      "bpm": "186",
-      "original_file": "Anokumene_Another7.bms",
-      "mod_time": "2016-10-01 06:36:06"
-    }
-  },
-  "Anosognosia": {
-    "display_title": "Anosognosia",
-    "artist": "saaa",
-    "preview_file": "Anosognosia.ogg",
-    "metadata": {
-      "genre": "EUPHORIC FRENCHCORE",
-      "bpm": "9999210",
-      "original_file": "anoso_I.bms",
-      "mod_time": "2019-09-28 16:21:04"
-    }
-  },
-  "Another": {
-    "display_title": "Another",
-    "artist": "polycube",
-    "preview_file": "Another.ogg",
-    "metadata": {
-      "genre": "ELECTRONIC DANCE",
-      "bpm": "150",
-      "original_file": "ano_01.bme",
-      "mod_time": "2013-09-23 18:38:08"
-    }
-  },
-  "Another Alien World": {
-    "display_title": "Another Alien World",
-    "artist": "ZUN (Arr.sun3)",
-    "preview_file": "Another Alien World.ogg",
-    "metadata": {
-      "genre": "Hard Techno",
-      "bpm": "150",
-      "original_file": "Another Alien World(HYPER).bms",
-      "mod_time": "2009-08-19 20:57:54"
-    }
-  },
-  "Another day": {
-    "display_title": "Another day",
-    "artist": "Modulation Spin",
-    "preview_file": "Another day.ogg",
-    "metadata": {
-      "genre": "Handz Up",
-      "bpm": "140",
-      "original_file": "anotherday_another.bms",
-      "mod_time": "2009-09-25 18:42:44"
-    }
-  },
-  "Another Day[GUANA]": {
-    "display_title": "Another Day[GUANA]",
-    "artist": "GUANA / LuCenT",
-    "preview_file": "Another Day[GUANA].ogg",
-    "metadata": {
-      "genre": "Electronic",
-      "bpm": "150",
-      "original_file": "_01_AnotherDay_B.bms",
-      "mod_time": "2019-09-28 15:45:02"
-    }
-  },
-  "Another Horizon": {
-    "display_title": "Another Horizon",
-    "artist": "DJ_Misamiko",
-    "preview_file": "Another Horizon.ogg",
-    "metadata": {
-      "genre": "TRANCE",
-      "bpm": "145",
-      "original_file": "Another Horizon_beginner.bms",
-      "mod_time": "2012-02-10 15:32:52"
-    }
-  },
   "another justice": {
     "display_title": "another justice",
     "artist": "ZUN Remixed by rider / obj:Ds",
@@ -778,72 +74,6 @@
       "bpm": "182",
       "original_file": "30_justice_7x.bme",
       "mod_time": "2010-05-04 22:58:02"
-    }
-  },
-  "another one": {
-    "display_title": "another one",
-    "artist": "nya_n",
-    "preview_file": "another one.ogg",
-    "metadata": {
-      "genre": "trance",
-      "bpm": "150",
-      "original_file": "BOF_5key.bms",
-      "mod_time": "2005-08-07 01:13:38"
-    }
-  },
-  "Another Sky": {
-    "display_title": "Another Sky",
-    "artist": "Ym1024",
-    "preview_file": "Another Sky.ogg",
-    "metadata": {
-      "genre": "Airy Trance",
-      "bpm": "150",
-      "original_file": "asky_[7-4_Normal].bme",
-      "mod_time": "2009-04-03 02:39:32"
-    }
-  },
-  "Anotherkinetic": {
-    "display_title": "Anotherkinetic",
-    "artist": "zatsuzatsu",
-    "preview_file": "Anotherkinetic.ogg",
-    "metadata": {
-      "genre": "BROKEN TECHNO",
-      "bpm": "148",
-      "original_file": "_7h.bms",
-      "mod_time": "2021-10-31 02:12:58"
-    }
-  },
-  "ANOZER": {
-    "display_title": "ANOZER",
-    "artist": "Flapper.",
-    "preview_file": "ANOZER.ogg",
-    "metadata": {
-      "genre": "Artcore",
-      "bpm": "182",
-      "original_file": "ANOZER_-_A.bms",
-      "mod_time": "2018-08-14 21:44:42"
-    }
-  },
-  "Antares": {
-    "display_title": "Antares",
-    "artist": "Higa Kengo",
-    "preview_file": "Antares.ogg",
-    "metadata": {
-      "genre": "Hard Renaissance",
-      "bpm": "172",
-      "original_file": "antares_h.bms",
-      "mod_time": "2014-10-14 22:50:58"
-    }
-  },
-  "Anthemizer": {
-    "display_title": "Anthemizer",
-    "artist": "gya9 vs anubasu-anubasu",
-    "preview_file": "Anthemizer.ogg",
-    "metadata": {
-      "genre": "HARD TRANCE",
-      "bpm": "148",
-      "original_file": "0.gyanubasu_7n.bms",
-      "mod_time": "2013-09-23 21:48:40"
     }
   },
   "anti": {
@@ -857,17 +87,6 @@
       "mod_time": "2004-09-11 00:08:58"
     }
   },
-  "Anti Function": {
-    "display_title": "Anti Function",
-    "artist": "Is-m",
-    "preview_file": "Anti Function.ogg",
-    "metadata": {
-      "genre": "OLDSKOOL TECH*TRICK",
-      "bpm": "150",
-      "original_file": "_52_25.bme",
-      "mod_time": "2018-05-13 21:07:20"
-    }
-  },
   "antilife": {
     "display_title": "antilife",
     "artist": "Ó}}jA",
@@ -879,26 +98,125 @@
       "mod_time": "2009-09-26 14:48:06"
     }
   },
-  "volcanic": {
-    "display_title": "volcanic",
-    "artist": "DETRO",
-    "preview_file": "volcanic.ogg",
+  "Aragami": {
+    "display_title": "Aragami",
+    "artist": "xi",
+    "preview_file": "Aragami.ogg",
     "metadata": {
-      "genre": "{P[m",
-      "bpm": "191",
-      "original_file": "04_vol_boss.bms",
-      "mod_time": "2008-07-30 12:27:46"
+      "genre": "LIFE STREAM",
+      "bpm": "196",
+      "original_file": "_Aragami_NB.bme",
+      "mod_time": "2014-10-19 18:36:26"
     }
   },
-  "すまいる・まじっく": {
-    "display_title": "すまいる・まじっく",
-    "artist": "Vɂ",
-    "preview_file": "すまいる・まじっく.ogg",
+  "Arcadia": {
+    "display_title": "Arcadia",
+    "artist": "HaL feat. riri",
+    "preview_file": "Arcadia.ogg",
     "metadata": {
-      "genre": "School Idol Girl's Road v",
-      "bpm": "205",
-      "original_file": "smile_magic_spa.bms",
-      "mod_time": "2015-09-27 22:38:58"
+      "genre": "tribal pop",
+      "bpm": "120",
+      "original_file": "sp2_another.bme",
+      "mod_time": "2005-10-10 12:30:36"
+    }
+  },
+  "Be-Music Primary": {
+    "display_title": "Be-Music Primary",
+    "artist": "BMP",
+    "preview_file": "Be-Music Primary.ogg",
+    "metadata": {
+      "genre": "House",
+      "bpm": "130",
+      "original_file": "BMPrimary 7Pineapple.bms",
+      "mod_time": "2011-07-29 11:47:24"
+    }
+  },
+  "Betelgeuse": {
+    "display_title": "Betelgeuse",
+    "artist": "̂`(G.G with Anne-Ninne)",
+    "preview_file": "Betelgeuse.ogg",
+    "metadata": {
+      "genre": "NOSTALGIC STAR TRANCE 2",
+      "bpm": "145",
+      "original_file": "Betelgeuse(NORMAL7).bme",
+      "mod_time": "2009-09-13 18:51:34"
+    }
+  },
+  "BRAIN HACKER": {
+    "display_title": "BRAIN HACKER",
+    "artist": "SOMON",
+    "preview_file": "BRAIN HACKER.ogg",
+    "metadata": {
+      "genre": "TECH-BREAKBEATS",
+      "bpm": "158",
+      "original_file": "_SPA.bms",
+      "mod_time": "2021-10-03 11:13:42"
+    }
+  },
+  "CLOUDY PARK": {
+    "display_title": "CLOUDY PARK",
+    "artist": "Yu^ta",
+    "preview_file": "CLOUDY PARK.ogg",
+    "metadata": {
+      "genre": "̃J[rB2",
+      "bpm": "112",
+      "original_file": "_04_cloudypark-a.bms",
+      "mod_time": "2016-01-07 12:33:58"
+    }
+  },
+  "ClowN CrowN": {
+    "display_title": "ClowN CrowN",
+    "artist": "daisan / object by meteor*",
+    "preview_file": "ClowN CrowN.ogg",
+    "metadata": {
+      "genre": "WW[r[g",
+      "bpm": "145",
+      "original_file": "CLCR_m_14hell.bms",
+      "mod_time": "2013-12-22 02:08:38"
+    }
+  },
+  "Damnation 565": {
+    "display_title": "Damnation 565",
+    "artist": "ETIA.",
+    "preview_file": "Damnation 565.ogg",
+    "metadata": {
+      "genre": "ÓTdqy",
+      "bpm": "152",
+      "original_file": "_another.bme",
+      "mod_time": "2016-09-04 06:55:14"
+    }
+  },
+  "Dilapidated city": {
+    "display_title": "Dilapidated city",
+    "artist": "ridis",
+    "preview_file": "Dilapidated city.ogg",
+    "metadata": {
+      "genre": "Easy listening",
+      "bpm": "122",
+      "original_file": "dcity7.bms",
+      "mod_time": "2005-08-04 16:47:00"
+    }
+  },
+  "drivin'FTR": {
+    "display_title": "drivin'FTR",
+    "artist": "remixed by Yamajet / bga:cyclia",
+    "preview_file": "drivin'FTR.ogg",
+    "metadata": {
+      "genre": "TECHNO",
+      "bpm": "147",
+      "original_file": "cyc-drivin_ftr_7h.bme",
+      "mod_time": "2005-09-11 22:20:22"
+    }
+  },
+  "G e n g a o z o": {
+    "display_title": "G e n g a o z o",
+    "artist": "455 / rio",
+    "preview_file": "G e n g a o z o.ogg",
+    "metadata": {
+      "genre": "P s y",
+      "bpm": "153",
+      "original_file": "gengaozoA.bme",
+      "mod_time": "2003-08-04 09:11:12"
     }
   }
 }
