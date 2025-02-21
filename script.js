@@ -7,6 +7,29 @@ const progressDurations = [1, 2, 4, 6, 8, 10];
 let isPlaying = false;
 let incorrectGuesses = [];
 
+function cleanupText(text) {
+    try {
+        // Handle common encoding issues
+        if (text.includes('Š') || text.includes('ƒ') || text.includes('}')) {
+            text = decodeURIComponent(escape(text));
+        }
+        
+        // Remove any remaining strange characters
+        text = text.replace(/[^\x00-\x7F\u3000-\u9FFF]/g, '');
+        
+        // Remove any "#ARTIST" prefix
+        text = text.replace(/#ARTIST\s*/, '');
+        
+        // Trim any extra spaces
+        text = text.trim();
+        
+        return text || "Unknown Artist";
+    } catch (e) {
+        console.log('Error cleaning up text:', text, e);
+        return text;
+    }
+}
+
 function processTitle(title) {
     let aliases = [title.toLowerCase()];
     // Remove spaces
@@ -29,10 +52,10 @@ async function loadGameData() {
         }
         gameData = await response.json();
         
-        // Build song list with aliases
+        // Build song list with aliases and clean artist names
         songList = Object.values(gameData).map(song => ({
             title: song.display_title,
-            artist: song.artist,
+            artist: cleanupText(song.artist),
             aliases: processTitle(song.display_title)
         }));
         
@@ -49,6 +72,7 @@ function startGame() {
     const songs = Object.keys(gameData);
     const randomSong = songs[Math.floor(Math.random() * songs.length)];
     currentSong = gameData[randomSong];
+    currentSong.cleanArtist = cleanupText(currentSong.artist);
     
     const player = document.getElementById('audio-player');
     player.src = `game_previews/${currentSong.preview_file}`;
@@ -213,13 +237,13 @@ function submitGuess() {
     );
     
     if (isCorrect) {
-        showResult('Correct! The song was ' + currentSong.display_title + ' by ' + currentSong.artist);
+        showResult('Correct! The song was ' + currentSong.display_title + ' by ' + currentSong.cleanArtist);
         revealFullSong();
     } else {
         incorrectGuesses.push(guess);
         attempts++;
         if (attempts >= maxAttempts) {
-            showResult('Game Over! The song was ' + currentSong.display_title + ' by ' + currentSong.artist);
+            showResult('Game Over! The song was ' + currentSong.display_title + ' by ' + currentSong.cleanArtist);
             revealFullSong();
         } else {
             showResult('Try again! ' + (maxAttempts - attempts) + ' attempts remaining');
@@ -233,7 +257,7 @@ function submitGuess() {
 function skipGuess() {
     attempts++;
     if (attempts >= maxAttempts) {
-        showResult('Game Over! The song was ' + currentSong.display_title + ' by ' + currentSong.artist);
+        showResult('Game Over! The song was ' + currentSong.display_title + ' by ' + currentSong.cleanArtist);
         revealFullSong();
     } else {
         showResult('Skipped! ' + (maxAttempts - attempts) + ' attempts remaining');
