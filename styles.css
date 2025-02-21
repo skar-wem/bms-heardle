@@ -236,10 +236,30 @@ body {
 .guess-item {
     margin: 5px 0;
     padding: 10px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 6px;
     color: rgba(255, 0, 0, 0.8);
     font-size: 0.9em;
+    text-align: center; /* Add this line */
+}
+
+@keyframes pulseRed {
+    0% {
+        background: rgba(255, 0, 0, 0.4);
+        transform: scale(1);
+    }
+    50% {
+        background: rgba(255, 0, 0, 0.2);
+        transform: scale(1.02);
+    }
+    100% {
+        background: rgba(255, 255, 255, 0.1);
+        transform: scale(1);
+    }
+}
+
+.guess-item.new {
+    animation: pulseRed 0.5s ease-out forwards;
 }
 
 .modal {

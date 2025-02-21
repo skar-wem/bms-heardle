@@ -315,8 +315,10 @@ function updateProgressBar() {
 
 function updateGuessHistory() {
     const historyDiv = document.getElementById('guess-history');
-    historyDiv.innerHTML = incorrectGuesses.map(guess => 
-        `<div class="guess-item">${guess}</div>`
+    const previousCount = historyDiv.childElementCount;
+    
+    historyDiv.innerHTML = incorrectGuesses.map((guess, index) => 
+        `<div class="guess-item${index === previousCount ? ' new' : ''}">${guess}</div>`
     ).join('');
 }
 
@@ -408,6 +410,7 @@ function submitGuess() {
 function skipGuess() {
     if (isGameOver) return;
     
+    incorrectGuesses.push("⏭️ Skipped"); // Add skip to guess history with an emoji
     attempts++;
     if (attempts >= maxAttempts) {
         showModal(`Game Over! The song was "${currentSong.display_title}" by ${currentSong.cleanArtist}`);
@@ -415,6 +418,7 @@ function skipGuess() {
     } else {
         showResult(`Skipped! ${maxAttempts - attempts} attempts remaining`);
         updateProgressBar();
+        updateGuessHistory();  // Add this line to update the display
     }
 }
 
@@ -422,18 +426,15 @@ function revealFullSong() {
     const player = document.getElementById('audio-player');
     const playButton = document.querySelector('.play-button');
     
-    // Remove any existing timeupdate listeners
-    player.removeEventListener('timeupdate', stopAtDuration);
-    
     // Switch to preview file for reveal
-    player.src = `game_audio/${currentSong.preview_file}`;
+    player.src = `game_audio/${currentSong.preview_file}`;  // Use preview file for reveal
     player.currentTime = 0;
     player.play();
     playButton.textContent = 'Stop';
     isPlaying = true;
 
-    // Start wave animation for reveal
-    if (!animationId && audioContext) {
+    // Start wave animation for reveal if it exists
+    if (audioContext && !animationId) {
         drawWave();
     }
 }
