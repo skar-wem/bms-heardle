@@ -75,7 +75,7 @@ function startGame() {
     currentSong.cleanArtist = cleanupText(currentSong.artist);
     
     const player = document.getElementById('audio-player');
-    player.src = `game_previews/${currentSong.preview_file}`;
+    player.src = `game_audio/${currentSong.heardle_file}`; // Use heardle file for gameplay
     
     incorrectGuesses = [];
     updateGuessHistory();
@@ -165,6 +165,7 @@ function setupAutocomplete() {
     });
 }
 
+// Update playCurrentSegment to handle file switching
 function playCurrentSegment() {
     if (isGameOver && !isPlaying) return;
 
@@ -178,7 +179,17 @@ function playCurrentSegment() {
         isPlaying = false;
         progressFill.style.transition = 'none';
         progressFill.style.width = '0%';
+        
+        // If we're in reveal mode (game over), switch back to heardle file
+        if (!isGameOver) {
+            player.src = `game_audio/${currentSong.heardle_file}`;
+        }
         return;
+    }
+
+    // Make sure we're using the heardle file during gameplay
+    if (!isGameOver && player.src.includes(currentSong.preview_file)) {
+        player.src = `game_audio/${currentSong.heardle_file}`;
     }
 
     const duration = progressDurations[attempts];
@@ -245,6 +256,9 @@ function showModal(message, isSuccess = false) {
     modalMessage.textContent = message;
     modal.style.display = 'block';
     isGameOver = true;
+    
+    // Remove the click-outside-to-close behavior
+    modal.onclick = null;
 }
 
 function startNewGame() {
@@ -253,9 +267,31 @@ function startNewGame() {
     isGameOver = false;
     attempts = 0;
     incorrectGuesses = [];
+    isPlaying = false;
+    
+    const player = document.getElementById('audio-player');
+    player.pause();
+    const playButton = document.querySelector('.play-button');
+    playButton.textContent = 'Play';
+    
+    // Clear result message
+    showResult('');
+    
     updateProgressBar();
     updateGuessHistory();
     startGame();
+    
+    // Reset submit button state
+    updateSubmitButtonState();
+}
+
+function updateSubmitButtonState() {
+    const submitButton = document.getElementById('submit-button');
+    const guessInput = document.getElementById('guess-input');
+    const isEmpty = !guessInput.value.trim();
+    
+    submitButton.disabled = isEmpty;
+    submitButton.classList.toggle('button-disabled', isEmpty);
 }
 
 function submitGuess() {
@@ -263,6 +299,9 @@ function submitGuess() {
     
     const guessInput = document.getElementById('guess-input');
     const guess = guessInput.value.trim();
+    
+    if (!guess) return; // Don't process empty guesses
+    
     const currentAliases = processTitle(currentSong.display_title);
     const guessAliases = processTitle(guess);
     
@@ -288,7 +327,9 @@ function submitGuess() {
         }
     }
     guessInput.value = '';
+    updateSubmitButtonState(); // Update submit button state after clearing input
 }
+
 
 function skipGuess() {
     if (isGameOver) return;
@@ -306,6 +347,9 @@ function skipGuess() {
 function revealFullSong() {
     const player = document.getElementById('audio-player');
     const playButton = document.querySelector('.play-button');
+    
+    // Switch to preview file for reveal
+    player.src = `game_audio/${currentSong.preview_file}`;
     player.currentTime = 0;
     player.play();
     playButton.textContent = 'Stop';
@@ -318,22 +362,42 @@ function showResult(message) {
 
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
+    // Play button listener
     document.getElementById('playButton').addEventListener('click', playCurrentSegment);
-    document.getElementById('submit-button').addEventListener('click', submitGuess);
+    
+    // Submit button listener
+    const submitButton = document.getElementById('submit-button');
+    submitButton.addEventListener('click', submitGuess);
+    
+    // Skip button listener
     document.getElementById('skip-button').addEventListener('click', skipGuess);
-    document.getElementById('guess-input').addEventListener('keypress', function(e) {
+    
+    // Guess input listeners
+    const guessInput = document.getElementById('guess-input');
+    guessInput.addEventListener('input', updateSubmitButtonState);
+    guessInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter' && !document.querySelector('.suggestion-box').contains(document.activeElement)) {
             submitGuess();
         }
     });
     
-    // Add modal close listener
+    // Modal listeners
+    const modal = document.getElementById('gameOverModal');
+    const newGameButton = document.getElementById('newGameButton');
+    if (newGameButton) {
+        newGameButton.addEventListener('click', startNewGame);
+    }
+    
+    // Prevent modal close on click outside when game is over
     document.addEventListener('click', function(e) {
-        const modal = document.getElementById('gameOverModal');
-        if (e.target === modal) {
+        if (e.target === modal && !isGameOver) {
             modal.style.display = 'none';
         }
     });
     
+    // Initialize submit button state
+    updateSubmitButtonState();
+    
+    // Load game data
     loadGameData();
 });

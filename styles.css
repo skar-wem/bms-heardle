@@ -318,6 +318,12 @@ body {
     margin-top: 4px;
 }
 
+.button-disabled {
+    background: #666 !important;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
+}
+
 .hidden {
     display: none;
 }

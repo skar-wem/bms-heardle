@@ -2,7 +2,8 @@
   "- JUPITER -": {
     "display_title": "- JUPITER -",
     "artist": "SHIKI",
-    "preview_file": "- JUPITER -.ogg",
+    "heardle_file": "- JUPITER -_heardle.ogg",
+    "preview_file": "- JUPITER -_preview.ogg",
     "metadata": {
       "genre": "Dutch Trance",
       "bpm": "144",
@@ -13,7 +14,8 @@
   "a Beautiful Snow": {
     "display_title": "a Beautiful Snow",
     "artist": "yassu",
-    "preview_file": "a Beautiful Snow.ogg",
+    "heardle_file": "a Beautiful Snow_heardle.ogg",
+    "preview_file": "a Beautiful Snow_preview.ogg",
     "metadata": {
       "genre": "Instrumental",
       "bpm": "131",
@@ -24,7 +26,8 @@
   "A BEAUTIFUL WINGS": {
     "display_title": "A BEAUTIFUL WINGS",
     "artist": "SHIKI",
-    "preview_file": "A BEAUTIFUL WINGS.ogg",
+    "heardle_file": "A BEAUTIFUL WINGS_heardle.ogg",
+    "preview_file": "A BEAUTIFUL WINGS_preview.ogg",
     "metadata": {
       "genre": "HAPPY HARDCORE",
       "bpm": "178",
@@ -35,7 +38,8 @@
   "A c i - L": {
     "display_title": "A c i - L",
     "artist": "裏 吉 川",
-    "preview_file": "A c i - L.ogg",
+    "heardle_file": "A c i - L_heardle.ogg",
+    "preview_file": "A c i - L_preview.ogg",
     "metadata": {
       "genre": "t r a n c e",
       "bpm": "162",
@@ -46,7 +50,8 @@
   "A D D i c T i O N 4 5 0 0 0 0 0": {
     "display_title": "A D D i c T i O N 4 5 0 0 0 0 0",
     "artist": "- 4 5",
-    "preview_file": "A D D i c T i O N 4 5 0 0 0 0 0.ogg",
+    "heardle_file": "A D D i c T i O N 4 5 0 0 0 0 0_heardle.ogg",
+    "preview_file": "A D D i c T i O N 4 5 0 0 0 0 0_preview.ogg",
     "metadata": {
       "genre": "T e c h n o",
       "bpm": "155",
@@ -57,7 +62,8 @@
   "Absurd Gaff": {
     "display_title": "Absurd Gaff",
     "artist": "siromaru",
-    "preview_file": "Absurd Gaff.ogg",
+    "heardle_file": "Absurd Gaff_heardle.ogg",
+    "preview_file": "Absurd Gaff_preview.ogg",
     "metadata": {
       "genre": "schranz",
       "bpm": "160",
@@ -68,7 +74,8 @@
   "Afterwhile": {
     "display_title": "Afterwhile",
     "artist": "Meisolate",
-    "preview_file": "Afterwhile.ogg",
+    "heardle_file": "Afterwhile_heardle.ogg",
+    "preview_file": "Afterwhile_preview.ogg",
     "metadata": {
       "genre": "PROGRESSIVE HOUSE",
       "bpm": "128",
@@ -79,7 +86,8 @@
   "Alastor": {
     "display_title": "Alastor",
     "artist": "鳩",
-    "preview_file": "Alastor.ogg",
+    "heardle_file": "Alastor_heardle.ogg",
+    "preview_file": "Alastor_preview.ogg",
     "metadata": {
       "genre": "DarkBreaks",
       "bpm": "170",
@@ -90,7 +98,8 @@
   "Altale": {
     "display_title": "Altale",
     "artist": "削除",
-    "preview_file": "Altale.ogg",
+    "heardle_file": "Altale_heardle.ogg",
+    "preview_file": "Altale_preview.ogg",
     "metadata": {
       "genre": "fantasy",
       "bpm": "90",
@@ -101,7 +110,8 @@
   "Angelic layer": {
     "display_title": "Angelic layer",
     "artist": "SHIKI",
-    "preview_file": "Angelic layer.ogg",
+    "heardle_file": "Angelic layer_heardle.ogg",
+    "preview_file": "Angelic layer_preview.ogg",
     "metadata": {
       "genre": "TRANCE",
       "bpm": "146",
@@ -112,7 +122,8 @@
   "ANIMA": {
     "display_title": "ANIMA",
     "artist": "FROL",
-    "preview_file": "ANIMA.ogg",
+    "heardle_file": "ANIMA_heardle.ogg",
+    "preview_file": "ANIMA_preview.ogg",
     "metadata": {
       "genre": "DEEP HOUSE",
       "bpm": "135",
@@ -123,7 +134,8 @@
   "another justice": {
     "display_title": "another justice",
     "artist": "ZUN Remixed by rider / obj:Ds",
-    "preview_file": "another justice.ogg",
+    "heardle_file": "another justice_heardle.ogg",
+    "preview_file": "another justice_preview.ogg",
     "metadata": {
       "genre": "HARDCORE",
       "bpm": "182",
@@ -134,7 +146,8 @@
   "anti": {
     "display_title": "anti",
     "artist": "SUKE underground",
-    "preview_file": "anti.ogg",
+    "heardle_file": "anti_heardle.ogg",
+    "preview_file": "anti_preview.ogg",
     "metadata": {
       "genre": "MINIMAL",
       "bpm": "148",
@@ -145,7 +158,8 @@
   "antilife": {
     "display_title": "antilife",
     "artist": "甘党マニア",
-    "preview_file": "antilife.ogg",
+    "heardle_file": "antilife_heardle.ogg",
+    "preview_file": "antilife_preview.ogg",
     "metadata": {
       "genre": "---",
       "bpm": "166",
@@ -156,7 +170,8 @@
   "Aragami": {
     "display_title": "Aragami",
     "artist": "xi",
-    "preview_file": "Aragami.ogg",
+    "heardle_file": "Aragami_heardle.ogg",
+    "preview_file": "Aragami_preview.ogg",
     "metadata": {
       "genre": "LIFE STREAM",
       "bpm": "196",
@@ -167,7 +182,8 @@
   "Arcadia": {
     "display_title": "Arcadia",
     "artist": "HaL feat. riri",
-    "preview_file": "Arcadia.ogg",
+    "heardle_file": "Arcadia_heardle.ogg",
+    "preview_file": "Arcadia_preview.ogg",
     "metadata": {
       "genre": "tribal pop",
       "bpm": "120",
@@ -178,7 +194,8 @@
   "Artificial Rose": {
     "display_title": "Artificial Rose",
     "artist": "メアリー",
-    "preview_file": "Artificial Rose.ogg",
+    "heardle_file": "Artificial Rose_heardle.ogg",
+    "preview_file": "Artificial Rose_preview.ogg",
     "metadata": {
       "genre": "Intelligence Arts",
       "bpm": "175",
@@ -189,7 +206,8 @@
   "ASTRO": {
     "display_title": "ASTRO",
     "artist": "ラスとルーク",
-    "preview_file": "ASTRO.ogg",
+    "heardle_file": "ASTRO_heardle.ogg",
+    "preview_file": "ASTRO_preview.ogg",
     "metadata": {
       "genre": "SOFT LANDING",
       "bpm": "180",
@@ -200,7 +218,8 @@
   "ATHAZA": {
     "display_title": "ATHAZA",
     "artist": "LeaF",
-    "preview_file": "ATHAZA.ogg",
+    "heardle_file": "ATHAZA_heardle.ogg",
+    "preview_file": "ATHAZA_preview.ogg",
     "metadata": {
       "genre": "IMAGINARY FLOWER",
       "bpm": "280",
@@ -211,7 +230,8 @@
   "AVALON": {
     "display_title": "AVALON",
     "artist": "Team:SASAKURATION",
-    "preview_file": "AVALON.ogg",
+    "heardle_file": "AVALON_heardle.ogg",
+    "preview_file": "AVALON_preview.ogg",
     "metadata": {
       "genre": "Ω",
       "bpm": "2008",
@@ -222,7 +242,8 @@
   "B.B.K.K.B.K.K": {
     "display_title": "B.B.K.K.B.K.K",
     "artist": "nora2r / 出前",
-    "preview_file": "B.B.K.K.B.K.K.ogg",
+    "heardle_file": "B.B.K.K.B.K.K_heardle.ogg",
+    "preview_file": "B.B.K.K.B.K.K_preview.ogg",
     "metadata": {
       "genre": "UK HARDCORE",
       "bpm": "170",
@@ -233,7 +254,8 @@
   "Baby Baby Frenzy": {
     "display_title": "Baby Baby Frenzy",
     "artist": "er",
-    "preview_file": "Baby Baby Frenzy.ogg",
+    "heardle_file": "Baby Baby Frenzy_heardle.ogg",
+    "preview_file": "Baby Baby Frenzy_preview.ogg",
     "metadata": {
       "genre": "TECHNO POP",
       "bpm": "165",
@@ -244,7 +266,8 @@
   "Be-Music Primary": {
     "display_title": "Be-Music Primary",
     "artist": "BMP",
-    "preview_file": "Be-Music Primary.ogg",
+    "heardle_file": "Be-Music Primary_heardle.ogg",
+    "preview_file": "Be-Music Primary_preview.ogg",
     "metadata": {
       "genre": "House",
       "bpm": "130",
@@ -255,7 +278,8 @@
   "Betelgeuse": {
     "display_title": "Betelgeuse",
     "artist": "きのこ〜ず(G.G with Anne-Ninne)",
-    "preview_file": "Betelgeuse.ogg",
+    "heardle_file": "Betelgeuse_heardle.ogg",
+    "preview_file": "Betelgeuse_preview.ogg",
     "metadata": {
       "genre": "NOSTALGIC STAR TRANCE 2",
       "bpm": "145",
@@ -266,7 +290,8 @@
   "Bird Sprite -D.K.R. mix-": {
     "display_title": "Bird Sprite -D.K.R. mix-",
     "artist": "ツナマヨちゃん",
-    "preview_file": "Bird Sprite -D.K.R. mix-.ogg",
+    "heardle_file": "Bird Sprite -D.K.R. mix-_heardle.ogg",
+    "preview_file": "Bird Sprite -D.K.R. mix-_preview.ogg",
     "metadata": {
       "genre": "木工ボンドオブジェ",
       "bpm": "146",
@@ -277,7 +302,8 @@
   "BlythE：ExtenD": {
     "display_title": "BlythE：ExtenD",
     "artist": "remixed celas feat.ARU",
-    "preview_file": "BlythE：ExtenD.ogg",
+    "heardle_file": "BlythE：ExtenD_heardle.ogg",
+    "preview_file": "BlythE：ExtenD_preview.ogg",
     "metadata": {
       "genre": "trance hi-speed",
       "bpm": "182",
@@ -288,7 +314,8 @@
   "BOUNCE THE TECH": {
     "display_title": "BOUNCE THE TECH",
     "artist": "Sound piercer vs. Iriss",
-    "preview_file": "BOUNCE THE TECH.ogg",
+    "heardle_file": "BOUNCE THE TECH_heardle.ogg",
+    "preview_file": "BOUNCE THE TECH_preview.ogg",
     "metadata": {
       "genre": "TECH DANCE",
       "bpm": "154",
@@ -299,7 +326,8 @@
   "BRAIN HACKER": {
     "display_title": "BRAIN HACKER",
     "artist": "SOMON",
-    "preview_file": "BRAIN HACKER.ogg",
+    "heardle_file": "BRAIN HACKER_heardle.ogg",
+    "preview_file": "BRAIN HACKER_preview.ogg",
     "metadata": {
       "genre": "TECH-BREAKBEATS",
       "bpm": "158",
@@ -310,7 +338,8 @@
   "Castorpollux": {
     "display_title": "Castorpollux",
     "artist": "sound piercer",
-    "preview_file": "Castorpollux.ogg",
+    "heardle_file": "Castorpollux_heardle.ogg",
+    "preview_file": "Castorpollux_preview.ogg",
     "metadata": {
       "genre": "Pop Rock",
       "bpm": "186",
@@ -321,7 +350,8 @@
   "Celestial Axes": {
     "display_title": "Celestial Axes",
     "artist": "------",
-    "preview_file": "Celestial Axes.ogg",
+    "heardle_file": "Celestial Axes_heardle.ogg",
+    "preview_file": "Celestial Axes_preview.ogg",
     "metadata": {
       "genre": "GrimReaper",
       "bpm": "218",
@@ -332,7 +362,8 @@
   "Central GRAY": {
     "display_title": "Central GRAY",
     "artist": "P.E.",
-    "preview_file": "Central GRAY.ogg",
+    "heardle_file": "Central GRAY_heardle.ogg",
+    "preview_file": "Central GRAY_preview.ogg",
     "metadata": {
       "genre": "TRANCE",
       "bpm": "148",
@@ -343,7 +374,8 @@
   "Chocomint Mille-feuille": {
     "display_title": "Chocomint Mille-feuille",
     "artist": "NASA",
-    "preview_file": "Chocomint Mille-feuille.ogg",
+    "heardle_file": "Chocomint Mille-feuille_heardle.ogg",
+    "preview_file": "Chocomint Mille-feuille_preview.ogg",
     "metadata": {
       "genre": "Sweetie Chiptune",
       "bpm": "185",
@@ -354,7 +386,8 @@
   "CLOUDY PARK": {
     "display_title": "CLOUDY PARK",
     "artist": "Yu^ta",
-    "preview_file": "CLOUDY PARK.ogg",
+    "heardle_file": "CLOUDY PARK_heardle.ogg",
+    "preview_file": "CLOUDY PARK_preview.ogg",
     "metadata": {
       "genre": "星のカービィ2",
       "bpm": "112",
@@ -365,7 +398,8 @@
   "ClowN CrowN": {
     "display_title": "ClowN CrowN",
     "artist": "daisan / object by meteor*",
-    "preview_file": "ClowN CrowN.ogg",
+    "heardle_file": "ClowN CrowN_heardle.ogg",
+    "preview_file": "ClowN CrowN_preview.ogg",
     "metadata": {
       "genre": "ジャジービート",
       "bpm": "145",
@@ -376,7 +410,8 @@
   "cold planet": {
     "display_title": "cold planet",
     "artist": "knot",
-    "preview_file": "cold planet.ogg",
+    "heardle_file": "cold planet_heardle.ogg",
+    "preview_file": "cold planet_preview.ogg",
     "metadata": {
       "genre": "TECHNO",
       "bpm": "174",
@@ -387,7 +422,8 @@
   "colorbar": {
     "display_title": "colorbar",
     "artist": "roop",
-    "preview_file": "colorbar.ogg",
+    "heardle_file": "colorbar_heardle.ogg",
+    "preview_file": "colorbar_preview.ogg",
     "metadata": {
       "genre": "HOUSE",
       "bpm": "130",
@@ -398,7 +434,8 @@
   "Curry": {
     "display_title": "Curry",
     "artist": "India Action Team",
-    "preview_file": "Curry.ogg",
+    "heardle_file": "Curry_heardle.ogg",
+    "preview_file": "Curry_preview.ogg",
     "metadata": {
       "genre": "House",
       "bpm": "128",
@@ -409,7 +446,8 @@
   "CUTSIC": {
     "display_title": "CUTSIC",
     "artist": "roop vs Jamadanischer",
-    "preview_file": "CUTSIC.ogg",
+    "heardle_file": "CUTSIC_heardle.ogg",
+    "preview_file": "CUTSIC_preview.ogg",
     "metadata": {
       "genre": "HOUSE",
       "bpm": "135",
@@ -420,7 +458,8 @@
   "Damnation 565": {
     "display_title": "Damnation 565",
     "artist": "ETIA.",
-    "preview_file": "Damnation 565.ogg",
+    "heardle_file": "Damnation 565_heardle.ogg",
+    "preview_file": "Damnation 565_preview.ogg",
     "metadata": {
       "genre": "古典電子音楽",
       "bpm": "152",
@@ -431,7 +470,8 @@
   "DEEP MARINE STRIKER": {
     "display_title": "DEEP MARINE STRIKER",
     "artist": "ZUN Remixed by rider obj みっと",
-    "preview_file": "DEEP MARINE STRIKER.ogg",
+    "heardle_file": "DEEP MARINE STRIKER_heardle.ogg",
+    "preview_file": "DEEP MARINE STRIKER_preview.ogg",
     "metadata": {
       "genre": "JUMPSTYLE",
       "bpm": "165",
@@ -442,7 +482,8 @@
   "Dilapidated city": {
     "display_title": "Dilapidated city",
     "artist": "ridis",
-    "preview_file": "Dilapidated city.ogg",
+    "heardle_file": "Dilapidated city_heardle.ogg",
+    "preview_file": "Dilapidated city_preview.ogg",
     "metadata": {
       "genre": "Easy listening",
       "bpm": "122",
@@ -453,7 +494,8 @@
   "Din Don Dan(nmk Eurobeat Mix)": {
     "display_title": "Din Don Dan(nmk Eurobeat Mix)",
     "artist": "nmk feat.橘花音",
-    "preview_file": "Din Don Dan(nmk Eurobeat Mix).ogg",
+    "heardle_file": "Din Don Dan(nmk Eurobeat Mix)_heardle.ogg",
+    "preview_file": "Din Don Dan(nmk Eurobeat Mix)_preview.ogg",
     "metadata": {
       "genre": "Eurobeat",
       "bpm": "153",
@@ -464,7 +506,8 @@
   "Door Nock": {
     "display_title": "Door Nock",
     "artist": "BilliumMoto",
-    "preview_file": "Door Nock.ogg",
+    "heardle_file": "Door Nock_heardle.ogg",
+    "preview_file": "Door Nock_preview.ogg",
     "metadata": {
       "genre": "Bass Garage",
       "bpm": "136",
@@ -475,7 +518,8 @@
   "Doppelganger": {
     "display_title": "Doppelganger",
     "artist": "LeaF",
-    "preview_file": "Doppelganger.ogg",
+    "heardle_file": "Doppelganger_heardle.ogg",
+    "preview_file": "Doppelganger_preview.ogg",
     "metadata": {
       "genre": "EINSAMKEIT",
       "bpm": "280",
@@ -486,7 +530,8 @@
   "DRAGONLADY": {
     "display_title": "DRAGONLADY",
     "artist": "Nankumo / BGA：壱Air",
-    "preview_file": "DRAGONLADY.ogg",
+    "heardle_file": "DRAGONLADY_heardle.ogg",
+    "preview_file": "DRAGONLADY_preview.ogg",
     "metadata": {
       "genre": "HAPPY",
       "bpm": "150",
@@ -497,7 +542,8 @@
   "drivin'FTR": {
     "display_title": "drivin'FTR",
     "artist": "remixed by Yamajet / bga:cyclia",
-    "preview_file": "drivin'FTR.ogg",
+    "heardle_file": "drivin'FTR_heardle.ogg",
+    "preview_file": "drivin'FTR_preview.ogg",
     "metadata": {
       "genre": "TECHNO",
       "bpm": "147",
@@ -508,7 +554,8 @@
   "Eisenschweif": {
     "display_title": "Eisenschweif",
     "artist": "STASTA",
-    "preview_file": "Eisenschweif.ogg",
+    "heardle_file": "Eisenschweif_heardle.ogg",
+    "preview_file": "Eisenschweif_preview.ogg",
     "metadata": {
       "genre": "Hi-TECH FULL ON",
       "bpm": "146",
@@ -519,7 +566,8 @@
   "electric butterfly": {
     "display_title": "electric butterfly",
     "artist": "養土卵 光 / 浜 柔好",
-    "preview_file": "electric butterfly.ogg",
+    "heardle_file": "electric butterfly_heardle.ogg",
+    "preview_file": "electric butterfly_preview.ogg",
     "metadata": {
       "genre": "Happy Hardcore",
       "bpm": "185",
@@ -530,7 +578,8 @@
   "ELECTRiCiTY": {
     "display_title": "ELECTRiCiTY",
     "artist": "NIKITA / misokabocha",
-    "preview_file": "ELECTRiCiTY.ogg",
+    "heardle_file": "ELECTRiCiTY_heardle.ogg",
+    "preview_file": "ELECTRiCiTY_preview.ogg",
     "metadata": {
       "genre": "HAPPY ELECTRO pf",
       "bpm": "175",
@@ -541,7 +590,8 @@
   "EUROPEAN AVIATION": {
     "display_title": "EUROPEAN AVIATION",
     "artist": "naotyu-",
-    "preview_file": "EUROPEAN AVIATION.ogg",
+    "heardle_file": "EUROPEAN AVIATION_heardle.ogg",
+    "preview_file": "EUROPEAN AVIATION_preview.ogg",
     "metadata": {
       "genre": "techno",
       "bpm": "135",
@@ -552,7 +602,8 @@
   "Evangelize": {
     "display_title": "Evangelize",
     "artist": "syatten + 140",
-    "preview_file": "Evangelize.ogg",
+    "heardle_file": "Evangelize_heardle.ogg",
+    "preview_file": "Evangelize_preview.ogg",
     "metadata": {
       "genre": "Trance",
       "bpm": "140",
@@ -563,7 +614,8 @@
   "EXILE": {
     "display_title": "EXILE",
     "artist": "-45 / obj;Nemes",
-    "preview_file": "EXILE.ogg",
+    "heardle_file": "EXILE_heardle.ogg",
+    "preview_file": "EXILE_preview.ogg",
     "metadata": {
       "genre": "Goa Trance",
       "bpm": "157",
@@ -574,7 +626,8 @@
   "F": {
     "display_title": "F",
     "artist": "bubbles",
-    "preview_file": "F.ogg",
+    "heardle_file": "F_heardle.ogg",
+    "preview_file": "F_preview.ogg",
     "metadata": {
       "genre": "RAVE",
       "bpm": "153",
@@ -585,7 +638,8 @@
   "Far East Nation": {
     "display_title": "Far East Nation",
     "artist": "fen",
-    "preview_file": "Far East Nation.ogg",
+    "heardle_file": "Far East Nation_heardle.ogg",
+    "preview_file": "Far East Nation_preview.ogg",
     "metadata": {
       "genre": "TURNTABLISM",
       "bpm": "85",
@@ -596,7 +650,8 @@
   "far in the blue sky": {
     "display_title": "far in the blue sky",
     "artist": "saikoro",
-    "preview_file": "far in the blue sky.ogg",
+    "heardle_file": "far in the blue sky_heardle.ogg",
+    "preview_file": "far in the blue sky_preview.ogg",
     "metadata": {
       "genre": "trance",
       "bpm": "148",
@@ -607,7 +662,8 @@
   "Finixe": {
     "display_title": "Finixe",
     "artist": "Silentroom × iimo",
-    "preview_file": "Finixe.ogg",
+    "heardle_file": "Finixe_heardle.ogg",
+    "preview_file": "Finixe_preview.ogg",
     "metadata": {
       "genre": "LEGEND",
       "bpm": "222",
@@ -618,7 +674,8 @@
   "FIONA": {
     "display_title": "FIONA",
     "artist": "w_tre",
-    "preview_file": "FIONA.ogg",
+    "heardle_file": "FIONA_heardle.ogg",
+    "preview_file": "FIONA_preview.ogg",
     "metadata": {
       "genre": "Chiptune",
       "bpm": "150",
@@ -629,7 +686,8 @@
   "Fiore Tempesta": {
     "display_title": "Fiore Tempesta",
     "artist": "ROKINA on schwarzekugel",
-    "preview_file": "Fiore Tempesta.ogg",
+    "heardle_file": "Fiore Tempesta_heardle.ogg",
+    "preview_file": "Fiore Tempesta_preview.ogg",
     "metadata": {
       "genre": "HARD WALTZ",
       "bpm": "222",
@@ -640,7 +698,8 @@
   "FIRST COMES SCRATCHING": {
     "display_title": "FIRST COMES SCRATCHING",
     "artist": "ETIA.",
-    "preview_file": "FIRST COMES SCRATCHING.ogg",
+    "heardle_file": "FIRST COMES SCRATCHING_heardle.ogg",
+    "preview_file": "FIRST COMES SCRATCHING_preview.ogg",
     "metadata": {
       "genre": "NU-SKOOL BREAKS",
       "bpm": "152",
@@ -651,7 +710,8 @@
   "Flesvelka": {
     "display_title": "Flesvelka",
     "artist": "Grand Thaw",
-    "preview_file": "Flesvelka.ogg",
+    "heardle_file": "Flesvelka_heardle.ogg",
+    "preview_file": "Flesvelka_preview.ogg",
     "metadata": {
       "genre": "Musette",
       "bpm": "134",
@@ -662,7 +722,8 @@
   "FLY UP TO SKY": {
     "display_title": "FLY UP TO SKY",
     "artist": "Gun-SEKI",
-    "preview_file": "FLY UP TO SKY.ogg",
+    "heardle_file": "FLY UP TO SKY_heardle.ogg",
+    "preview_file": "FLY UP TO SKY_preview.ogg",
     "metadata": {
       "genre": "HAPPY HOUSE",
       "bpm": "155",
@@ -673,7 +734,8 @@
   "FUXXING YOUR BRAIN": {
     "display_title": "FUXXING YOUR BRAIN",
     "artist": "q/stol",
-    "preview_file": "FUXXING YOUR BRAIN.ogg",
+    "heardle_file": "FUXXING YOUR BRAIN_heardle.ogg",
+    "preview_file": "FUXXING YOUR BRAIN_preview.ogg",
     "metadata": {
       "genre": "BREAKCORE",
       "bpm": "184",
@@ -684,7 +746,8 @@
   "G e n g a o z o": {
     "display_title": "G e n g a o z o",
     "artist": "455 / rio",
-    "preview_file": "G e n g a o z o.ogg",
+    "heardle_file": "G e n g a o z o_heardle.ogg",
+    "preview_file": "G e n g a o z o_preview.ogg",
     "metadata": {
       "genre": "P s y",
       "bpm": "153",
@@ -695,7 +758,8 @@
   "GAMEBOY": {
     "display_title": "GAMEBOY",
     "artist": "Silentroom × 駿",
-    "preview_file": "GAMEBOY.ogg",
+    "heardle_file": "GAMEBOY_heardle.ogg",
+    "preview_file": "GAMEBOY_preview.ogg",
     "metadata": {
       "genre": "ONCE UPON A TIME",
       "bpm": "105",
@@ -706,7 +770,8 @@
   "Gang Riots": {
     "display_title": "Gang Riots",
     "artist": "saaa",
-    "preview_file": "Gang Riots.ogg",
+    "heardle_file": "Gang Riots_heardle.ogg",
+    "preview_file": "Gang Riots_preview.ogg",
     "metadata": {
       "genre": "UPTEMPO HARDCORE",
       "bpm": "205",
@@ -717,7 +782,8 @@
   "Halcyon": {
     "display_title": "Halcyon",
     "artist": "xi",
-    "preview_file": "Halcyon.ogg",
+    "heardle_file": "Halcyon_heardle.ogg",
+    "preview_file": "Halcyon_preview.ogg",
     "metadata": {
       "genre": "RENAISSANCE HARDCORE",
       "bpm": "95.5",
@@ -728,7 +794,8 @@
   "HI-TENSION みすちー☆": {
     "display_title": "HI-TENSION みすちー☆",
     "artist": "ZUN(Arr.sun3) / Ds",
-    "preview_file": "HI-TENSION みすちー☆.ogg",
+    "heardle_file": "HI-TENSION みすちー☆_heardle.ogg",
+    "preview_file": "HI-TENSION みすちー☆_preview.ogg",
     "metadata": {
       "genre": "EURO TRANCE",
       "bpm": "165",
@@ -739,7 +806,8 @@
   "hypocrite": {
     "display_title": "hypocrite",
     "artist": "ああああ",
-    "preview_file": "hypocrite.ogg",
+    "heardle_file": "hypocrite_heardle.ogg",
+    "preview_file": "hypocrite_preview.ogg",
     "metadata": {
       "genre": "ああああ[SP NORMAL]",
       "bpm": "163",
@@ -750,7 +818,8 @@
   "ice valley ＂beyond the searoad＂": {
     "display_title": "ice valley ＂beyond the searoad＂",
     "artist": "maki",
-    "preview_file": "ice valley ＂beyond the searoad＂.ogg",
+    "heardle_file": "ice valley ＂beyond the searoad＂_heardle.ogg",
+    "preview_file": "ice valley ＂beyond the searoad＂_preview.ogg",
     "metadata": {
       "genre": "fantastical synth beat -biginner-",
       "bpm": "136",
@@ -761,7 +830,8 @@
   "IKAROS": {
     "display_title": "IKAROS",
     "artist": "ETIA. feat. Jenga",
-    "preview_file": "IKAROS.ogg",
+    "heardle_file": "IKAROS_heardle.ogg",
+    "preview_file": "IKAROS_preview.ogg",
     "metadata": {
       "genre": "HYBRIDIZED J-CORE",
       "bpm": "175",
@@ -772,7 +842,8 @@
   "Implexrough": {
     "display_title": "Implexrough",
     "artist": "Silentroom × mommy × Nate",
-    "preview_file": "Implexrough.ogg",
+    "heardle_file": "Implexrough_heardle.ogg",
+    "preview_file": "Implexrough_preview.ogg",
     "metadata": {
       "genre": "FORTISSIMO",
       "bpm": "150",
@@ -783,7 +854,8 @@
   "IN": {
     "display_title": "IN",
     "artist": "Zris feat. Katie",
-    "preview_file": "IN.ogg",
+    "heardle_file": "IN_heardle.ogg",
+    "preview_file": "IN_preview.ogg",
     "metadata": {
       "genre": "N",
       "bpm": "133",
@@ -794,7 +866,8 @@
   "jellyfish memories": {
     "display_title": "jellyfish memories",
     "artist": "11. House Team",
-    "preview_file": "jellyfish memories.ogg",
+    "heardle_file": "jellyfish memories_heardle.ogg",
+    "preview_file": "jellyfish memories_preview.ogg",
     "metadata": {
       "genre": "HOUSE",
       "bpm": "128",
@@ -805,7 +878,8 @@
   "JULIAN for B.O.F. 2009": {
     "display_title": "JULIAN for B.O.F. 2009",
     "artist": "Queen P.A.L.",
-    "preview_file": "JULIAN for B.O.F. 2009.ogg",
+    "heardle_file": "JULIAN for B.O.F. 2009_heardle.ogg",
+    "preview_file": "JULIAN for B.O.F. 2009_preview.ogg",
     "metadata": {
       "genre": "EURO DANCE  [ 7key ]",
       "bpm": "153",
@@ -816,7 +890,8 @@
   "JUMMER": {
     "display_title": "JUMMER",
     "artist": "momo★yama　(BGA:アカツキユウ)",
-    "preview_file": "JUMMER.ogg",
+    "heardle_file": "JUMMER_heardle.ogg",
+    "preview_file": "JUMMER_preview.ogg",
     "metadata": {
       "genre": "ENERGETIC TRANCE",
       "bpm": "150",
@@ -827,7 +902,8 @@
   "Karakuri Plum": {
     "display_title": "Karakuri Plum",
     "artist": "Mitsu☆",
-    "preview_file": "Karakuri Plum.ogg",
+    "heardle_file": "Karakuri Plum_heardle.ogg",
+    "preview_file": "Karakuri Plum_preview.ogg",
     "metadata": {
       "genre": "RISING SPEEDCORE",
       "bpm": "195",
@@ -838,7 +914,8 @@
   "KARASU": {
     "display_title": "KARASU",
     "artist": "scytheleg",
-    "preview_file": "KARASU.ogg",
+    "heardle_file": "KARASU_heardle.ogg",
+    "preview_file": "KARASU_preview.ogg",
     "metadata": {
       "genre": "ASIAN DNB",
       "bpm": "184",
@@ -849,7 +926,8 @@
   "KRAKEN": {
     "display_title": "KRAKEN",
     "artist": "HEXAHEDRA",
-    "preview_file": "KRAKEN.ogg",
+    "heardle_file": "KRAKEN_heardle.ogg",
+    "preview_file": "KRAKEN_preview.ogg",
     "metadata": {
       "genre": "HARDCORE ULTIMATE",
       "bpm": "172",
@@ -860,7 +938,8 @@
   "Kreuz": {
     "display_title": "Kreuz",
     "artist": "sky_delta",
-    "preview_file": "Kreuz.ogg",
+    "heardle_file": "Kreuz_heardle.ogg",
+    "preview_file": "Kreuz_preview.ogg",
     "metadata": {
       "genre": "IDM",
       "bpm": "91.5",
@@ -871,7 +950,8 @@
   "Kronos": {
     "display_title": "Kronos",
     "artist": "削除 / うまい棒",
-    "preview_file": "Kronos.ogg",
+    "heardle_file": "Kronos_heardle.ogg",
+    "preview_file": "Kronos_preview.ogg",
     "metadata": {
       "genre": "Desire",
       "bpm": "156",
@@ -882,7 +962,8 @@
   "Kurofune": {
     "display_title": "Kurofune",
     "artist": "54cm",
-    "preview_file": "Kurofune.ogg",
+    "heardle_file": "Kurofune_heardle.ogg",
+    "preview_file": "Kurofune_preview.ogg",
     "metadata": {
       "genre": "EDM opens JP-Classic",
       "bpm": "132",
@@ -893,7 +974,8 @@
   "kyrka": {
     "display_title": "kyrka",
     "artist": "MILK",
-    "preview_file": "kyrka.ogg",
+    "heardle_file": "kyrka_heardle.ogg",
+    "preview_file": "kyrka_preview.ogg",
     "metadata": {
       "genre": "TRANCE",
       "bpm": "142",
@@ -904,7 +986,8 @@
   "Lambda Driver": {
     "display_title": "Lambda Driver",
     "artist": "SPELL BREAK",
-    "preview_file": "Lambda Driver.ogg",
+    "heardle_file": "Lambda Driver_heardle.ogg",
+    "preview_file": "Lambda Driver_preview.ogg",
     "metadata": {
       "genre": "HARD DANCE",
       "bpm": "155",
@@ -915,7 +998,8 @@
   "Lapis": {
     "display_title": "Lapis",
     "artist": "SHIKI",
-    "preview_file": "Lapis.ogg",
+    "heardle_file": "Lapis_heardle.ogg",
+    "preview_file": "Lapis_preview.ogg",
     "metadata": {
       "genre": "TRANCE",
       "bpm": "146",
@@ -926,7 +1010,8 @@
   "Lemuria": {
     "display_title": "Lemuria",
     "artist": "Festa",
-    "preview_file": "Lemuria.ogg",
+    "heardle_file": "Lemuria_heardle.ogg",
+    "preview_file": "Lemuria_preview.ogg",
     "metadata": {
       "genre": "LIFE STREAM",
       "bpm": "47.75",
@@ -937,7 +1022,8 @@
   "Leonids": {
     "display_title": "Leonids",
     "artist": "horoscope",
-    "preview_file": "Leonids.ogg",
+    "heardle_file": "Leonids_heardle.ogg",
+    "preview_file": "Leonids_preview.ogg",
     "metadata": {
       "genre": "リュウセイグン",
       "bpm": "162",
@@ -948,7 +1034,8 @@
   "Lostlove": {
     "display_title": "Lostlove",
     "artist": "maklow",
-    "preview_file": "Lostlove.ogg",
+    "heardle_file": "Lostlove_heardle.ogg",
+    "preview_file": "Lostlove_preview.ogg",
     "metadata": {
       "genre": "dream trance",
       "bpm": "125",
@@ -959,7 +1046,8 @@
   "LOVE'S REBIRTH": {
     "display_title": "LOVE'S REBIRTH",
     "artist": "TAROS",
-    "preview_file": "LOVE'S REBIRTH.ogg",
+    "heardle_file": "LOVE'S REBIRTH_heardle.ogg",
+    "preview_file": "LOVE'S REBIRTH_preview.ogg",
     "metadata": {
       "genre": "EURO HOUSE",
       "bpm": "150",
@@ -970,7 +1058,8 @@
   "Love's Rebirth '06": {
     "display_title": "Love's Rebirth '06",
     "artist": "小宮真央 with Na+",
-    "preview_file": "Love's Rebirth '06.ogg",
+    "heardle_file": "Love's Rebirth '06_heardle.ogg",
+    "preview_file": "Love's Rebirth '06_preview.ogg",
     "metadata": {
       "genre": "J-EuroPop",
       "bpm": "148",
@@ -981,7 +1070,8 @@
   "LOVE☆BEAM (orange summer mix)": {
     "display_title": "LOVE☆BEAM (orange summer mix)",
     "artist": "honey princess",
-    "preview_file": "LOVE☆BEAM (orange summer mix).ogg",
+    "heardle_file": "LOVE☆BEAM (orange summer mix)_heardle.ogg",
+    "preview_file": "LOVE☆BEAM (orange summer mix)_preview.ogg",
     "metadata": {
       "genre": "H.H.P",
       "bpm": "188.8",
@@ -992,7 +1082,8 @@
   "LUNASA the Stormcauser": {
     "display_title": "LUNASA the Stormcauser",
     "artist": "ZUN (Remixed by EXCALIpUR)",
-    "preview_file": "LUNASA the Stormcauser.ogg",
+    "heardle_file": "LUNASA the Stormcauser_heardle.ogg",
+    "preview_file": "LUNASA the Stormcauser_preview.ogg",
     "metadata": {
       "genre": "FREEFORM",
       "bpm": "148",
@@ -1003,7 +1094,8 @@
   "M-A": {
     "display_title": "M-A",
     "artist": "Musical Masterpiece obj:CELI",
-    "preview_file": "M-A.ogg",
+    "heardle_file": "M-A_heardle.ogg",
+    "preview_file": "M-A_preview.ogg",
     "metadata": {
       "genre": "MM SEQUENCER",
       "bpm": "200",
@@ -1014,7 +1106,8 @@
   "MAGENTA POTION": {
     "display_title": "MAGENTA POTION",
     "artist": "EmoCo. × NO|SER",
-    "preview_file": "MAGENTA POTION.ogg",
+    "heardle_file": "MAGENTA POTION_heardle.ogg",
+    "preview_file": "MAGENTA POTION_preview.ogg",
     "metadata": {
       "genre": "Aphrodite",
       "bpm": "150",
@@ -1025,7 +1118,8 @@
   "Marmot": {
     "display_title": "Marmot",
     "artist": "Lian",
-    "preview_file": "Marmot.ogg",
+    "heardle_file": "Marmot_heardle.ogg",
+    "preview_file": "Marmot_preview.ogg",
     "metadata": {
       "genre": "Confusing",
       "bpm": "160",
@@ -1036,7 +1130,8 @@
   "Merry Christmas Mr. Lawrence": {
     "display_title": "Merry Christmas Mr. Lawrence",
     "artist": "坂本 龍一",
-    "preview_file": "Merry Christmas Mr. Lawrence.ogg",
+    "heardle_file": "Merry Christmas Mr. Lawrence_heardle.ogg",
+    "preview_file": "Merry Christmas Mr. Lawrence_preview.ogg",
     "metadata": {
       "genre": "PIANO",
       "bpm": "106",
@@ -1047,7 +1142,8 @@
   "METABOKNIGHT": {
     "display_title": "METABOKNIGHT",
     "artist": "silcostones",
-    "preview_file": "METABOKNIGHT.ogg",
+    "heardle_file": "METABOKNIGHT_heardle.ogg",
+    "preview_file": "METABOKNIGHT_preview.ogg",
     "metadata": {
       "genre": "BOOT CAMP MUSIC",
       "bpm": "150",
@@ -1058,7 +1154,8 @@
   "Milly Barll": {
     "display_title": "Milly Barll",
     "artist": "mゼ / obj.BAmO",
-    "preview_file": "Milly Barll.ogg",
+    "heardle_file": "Milly Barll_heardle.ogg",
+    "preview_file": "Milly Barll_preview.ogg",
     "metadata": {
       "genre": "Techno",
       "bpm": "140",
@@ -1069,7 +1166,8 @@
   "MirroR": {
     "display_title": "MirroR",
     "artist": "dj-B",
-    "preview_file": "MirroR.ogg",
+    "heardle_file": "MirroR_heardle.ogg",
+    "preview_file": "MirroR_preview.ogg",
     "metadata": {
       "genre": "Progressive Rock",
       "bpm": "135",
@@ -1080,7 +1178,8 @@
   "Moon-gate": {
     "display_title": "Moon-gate",
     "artist": "Music:しらいし/obj:tts1374",
-    "preview_file": "Moon-gate.ogg",
+    "heardle_file": "Moon-gate_heardle.ogg",
+    "preview_file": "Moon-gate_preview.ogg",
     "metadata": {
       "genre": "Crystal Trance",
       "bpm": "170",
@@ -1091,7 +1190,8 @@
   "My Soul, Your Beats!": {
     "display_title": "My Soul, Your Beats!",
     "artist": "Lia / celas & 44teru-k",
-    "preview_file": "My Soul, Your Beats!.ogg",
+    "heardle_file": "My Soul, Your Beats!_heardle.ogg",
+    "preview_file": "My Soul, Your Beats!_preview.ogg",
     "metadata": {
       "genre": "Angel Beats!",
       "bpm": "145",
@@ -1102,7 +1202,8 @@
   "myste`re": {
     "display_title": "myste`re",
     "artist": "HOUJIROU / BGA: hardlove",
-    "preview_file": "myste`re.ogg",
+    "heardle_file": "myste`re_heardle.ogg",
+    "preview_file": "myste`re_preview.ogg",
     "metadata": {
       "genre": "Drum 'n Bass",
       "bpm": "170",
@@ -1113,7 +1214,8 @@
   "N - flat waves -": {
     "display_title": "N - flat waves -",
     "artist": "er",
-    "preview_file": "N - flat waves -.ogg",
+    "heardle_file": "N - flat waves -_heardle.ogg",
+    "preview_file": "N - flat waves -_preview.ogg",
     "metadata": {
       "genre": "HARD RENAISSANCE",
       "bpm": "195",
@@ -1124,7 +1226,8 @@
   "nativeFaith": {
     "display_title": "nativeFaith",
     "artist": "ZUN Remixed by Ωμεγα",
-    "preview_file": "nativeFaith.ogg",
+    "heardle_file": "nativeFaith_heardle.ogg",
+    "preview_file": "nativeFaith_preview.ogg",
     "metadata": {
       "genre": "RENAISSUWAKO",
       "bpm": "154",
@@ -1135,7 +1238,8 @@
   "NewGamePlus": {
     "display_title": "NewGamePlus",
     "artist": "DhiArk",
-    "preview_file": "NewGamePlus.ogg",
+    "heardle_file": "NewGamePlus_heardle.ogg",
+    "preview_file": "NewGamePlus_preview.ogg",
     "metadata": {
       "genre": "VGM 2A03",
       "bpm": "188",
@@ -1143,21 +1247,11 @@
       "mod_time": "2013-09-23 05:47:42"
     }
   },
-  "NightTheater": {
-    "display_title": "NightTheater",
-    "artist": "わかどり",
-    "preview_file": "NightTheater.ogg",
-    "metadata": {
-      "genre": "Jazz-Funk",
-      "bpm": "151",
-      "original_file": "_spa.bms",
-      "mod_time": "2020-10-21 22:34:53"
-    }
-  },
   "NS18": {
     "display_title": "NS18",
     "artist": "3034",
-    "preview_file": "NS18.ogg",
+    "heardle_file": "NS18_heardle.ogg",
+    "preview_file": "NS18_preview.ogg",
     "metadata": {
       "genre": "EXTREME TECHNO",
       "bpm": "230",
@@ -1168,7 +1262,8 @@
   "NS20": {
     "display_title": "NS20",
     "artist": "3034",
-    "preview_file": "NS20.ogg",
+    "heardle_file": "NS20_heardle.ogg",
+    "preview_file": "NS20_preview.ogg",
     "metadata": {
       "genre": "ROTTERDAM TECHNO",
       "bpm": "215",
@@ -1179,7 +1274,8 @@
   "NS22": {
     "display_title": "NS22",
     "artist": "3034",
-    "preview_file": "NS22.ogg",
+    "heardle_file": "NS22_heardle.ogg",
+    "preview_file": "NS22_preview.ogg",
     "metadata": {
       "genre": "SAMPLING HARDCORE",
       "bpm": "222",
@@ -1190,7 +1286,8 @@
   "NS31": {
     "display_title": "NS31",
     "artist": "3034 remixed by 0310",
-    "preview_file": "NS31.ogg",
+    "heardle_file": "NS31_heardle.ogg",
+    "preview_file": "NS31_preview.ogg",
     "metadata": {
       "genre": "Sampled Schranz",
       "bpm": "310",
@@ -1201,7 +1298,8 @@
   "nulctrl": {
     "display_title": "nulctrl",
     "artist": "Silentroom",
-    "preview_file": "nulctrl.ogg",
+    "heardle_file": "nulctrl_heardle.ogg",
+    "preview_file": "nulctrl_preview.ogg",
     "metadata": {
       "genre": "MOTION",
       "bpm": "100",
@@ -1212,7 +1310,8 @@
   "Number Y": {
     "display_title": "Number Y",
     "artist": "Lemi.",
-    "preview_file": "Number Y.ogg",
+    "heardle_file": "Number Y_heardle.ogg",
+    "preview_file": "Number Y_preview.ogg",
     "metadata": {
       "genre": "Cyber Art",
       "bpm": "186",
@@ -1223,7 +1322,8 @@
   "OAA-γ": {
     "display_title": "OAA-γ",
     "artist": "dj sept-em",
-    "preview_file": "OAA-γ.ogg",
+    "heardle_file": "OAA-γ_heardle.ogg",
+    "preview_file": "OAA-γ_preview.ogg",
     "metadata": {
       "genre": "Goa Trance Techno /7key",
       "bpm": "160",
@@ -1234,7 +1334,8 @@
   "Ocean Memory": {
     "display_title": "Ocean Memory",
     "artist": "Junk",
-    "preview_file": "Ocean Memory.ogg",
+    "heardle_file": "Ocean Memory_heardle.ogg",
+    "preview_file": "Ocean Memory_preview.ogg",
     "metadata": {
       "genre": "HYPER TRANCE",
       "bpm": "151",
@@ -1245,7 +1346,8 @@
   "oceanbird": {
     "display_title": "oceanbird",
     "artist": "Xacla / TOHRU MiTSUHASHi",
-    "preview_file": "oceanbird.ogg",
+    "heardle_file": "oceanbird_heardle.ogg",
+    "preview_file": "oceanbird_preview.ogg",
     "metadata": {
       "genre": "Euphoric Trance",
       "bpm": "137",
@@ -1256,7 +1358,8 @@
   "Odin": {
     "display_title": "Odin",
     "artist": "しらいし",
-    "preview_file": "Odin.ogg",
+    "heardle_file": "Odin_heardle.ogg",
+    "preview_file": "Odin_preview.ogg",
     "metadata": {
       "genre": "Classical Trance",
       "bpm": "163",
@@ -1267,7 +1370,8 @@
   "On And On": {
     "display_title": "On And On",
     "artist": "ETIA. feat. Jenga",
-    "preview_file": "On And On.ogg",
+    "heardle_file": "On And On_heardle.ogg",
+    "preview_file": "On And On_preview.ogg",
     "metadata": {
       "genre": "J-CORE",
       "bpm": "170",
@@ -1278,7 +1382,8 @@
   "P-ChicK-ParK(・◇・)": {
     "display_title": "P-ChicK-ParK(・◇・)",
     "artist": "ピヨスケ",
-    "preview_file": "P-ChicK-ParK(・◇・).ogg",
+    "heardle_file": "P-ChicK-ParK(・◇・)_heardle.ogg",
+    "preview_file": "P-ChicK-ParK(・◇・)_preview.ogg",
     "metadata": {
       "genre": "PoPStepS[ANOTHER7]",
       "bpm": "170",
@@ -1289,7 +1394,8 @@
   "P.S Plasma Strike": {
     "display_title": "P.S Plasma Strike",
     "artist": "Kinato",
-    "preview_file": "P.S Plasma Strike.ogg",
+    "heardle_file": "P.S Plasma Strike_heardle.ogg",
+    "preview_file": "P.S Plasma Strike_preview.ogg",
     "metadata": {
       "genre": "Techno Trance",
       "bpm": "162",
@@ -1300,7 +1406,8 @@
   "Parousia": {
     "display_title": "Parousia",
     "artist": "xi",
-    "preview_file": "Parousia.ogg",
+    "heardle_file": "Parousia_heardle.ogg",
+    "preview_file": "Parousia_preview.ogg",
     "metadata": {
       "genre": "APOCALYPSIS JOHANNIS",
       "bpm": "158",
@@ -1311,7 +1418,8 @@
   "PEACE BREAKER": {
     "display_title": "PEACE BREAKER",
     "artist": "Omnipotenx",
-    "preview_file": "PEACE BREAKER.ogg",
+    "heardle_file": "PEACE BREAKER_heardle.ogg",
+    "preview_file": "PEACE BREAKER_preview.ogg",
     "metadata": {
       "genre": "SYMPHONIC SCHRANZ",
       "bpm": "160",
@@ -1322,7 +1430,8 @@
   "Plastic Mind": {
     "display_title": "Plastic Mind",
     "artist": "ZUN/arr.みょん / iimode-do / かげきち",
-    "preview_file": "Plastic Mind.ogg",
+    "heardle_file": "Plastic Mind_heardle.ogg",
+    "preview_file": "Plastic Mind_preview.ogg",
     "metadata": {
       "genre": "Break Core",
       "bpm": "200",
@@ -1333,7 +1442,8 @@
   "platinum garden": {
     "display_title": "platinum garden",
     "artist": "paraoka",
-    "preview_file": "platinum garden.ogg",
+    "heardle_file": "platinum garden_heardle.ogg",
+    "preview_file": "platinum garden_preview.ogg",
     "metadata": {
       "genre": "breakbeats(maniac)",
       "bpm": "152",
@@ -1344,7 +1454,8 @@
   "Poppin' Shower": {
     "display_title": "Poppin' Shower",
     "artist": "P*Light",
-    "preview_file": "Poppin' Shower.ogg",
+    "heardle_file": "Poppin' Shower_heardle.ogg",
+    "preview_file": "Poppin' Shower_preview.ogg",
     "metadata": {
       "genre": "HAPPY SWEETS CORE",
       "bpm": "175",
@@ -1355,7 +1466,8 @@
   "PUPA": {
     "display_title": "PUPA",
     "artist": "モリモリあつし / Ds",
-    "preview_file": "PUPA.ogg",
+    "heardle_file": "PUPA_heardle.ogg",
+    "preview_file": "PUPA_preview.ogg",
     "metadata": {
       "genre": "HARD RENAISSANCE",
       "bpm": "151.5",
@@ -1366,7 +1478,8 @@
   "Pusha Plucka!!": {
     "display_title": "Pusha Plucka!!",
     "artist": "GNMD / mov: litmus*",
-    "preview_file": "Pusha Plucka!!.ogg",
+    "heardle_file": "Pusha Plucka!!_heardle.ogg",
+    "preview_file": "Pusha Plucka!!_preview.ogg",
     "metadata": {
       "genre": "Future House",
       "bpm": "126",
@@ -1377,7 +1490,8 @@
   "Quad Queens": {
     "display_title": "Quad Queens",
     "artist": "D.J.Nero",
-    "preview_file": "Quad Queens.ogg",
+    "heardle_file": "Quad Queens_heardle.ogg",
+    "preview_file": "Quad Queens_preview.ogg",
     "metadata": {
       "genre": "RENAISSANCE",
       "bpm": "157",
@@ -1388,7 +1502,8 @@
   "Qualia": {
     "display_title": "Qualia",
     "artist": "Junk / obj : RNJK",
-    "preview_file": "Qualia.ogg",
+    "heardle_file": "Qualia_heardle.ogg",
+    "preview_file": "Qualia_preview.ogg",
     "metadata": {
       "genre": "Future Pop",
       "bpm": "133",
@@ -1399,7 +1514,8 @@
   "Quark": {
     "display_title": "Quark",
     "artist": "Hate vs Brilliance",
-    "preview_file": "Quark.ogg",
+    "heardle_file": "Quark_heardle.ogg",
+    "preview_file": "Quark_preview.ogg",
     "metadata": {
       "genre": "FREEFORM",
       "bpm": "180",
@@ -1410,7 +1526,8 @@
   "Quickening 2 the RED": {
     "display_title": "Quickening 2 the RED",
     "artist": "Loki-mitsu + Mentalstock",
-    "preview_file": "Quickening 2 the RED.ogg",
+    "heardle_file": "Quickening 2 the RED_heardle.ogg",
+    "preview_file": "Quickening 2 the RED_preview.ogg",
     "metadata": {
       "genre": "ETHEREAL ELECTRONIC",
       "bpm": "37.5",
@@ -1421,7 +1538,8 @@
   "RAKUGAKI NOTE": {
     "display_title": "RAKUGAKI NOTE",
     "artist": "kas_0120",
-    "preview_file": "RAKUGAKI NOTE.ogg",
+    "heardle_file": "RAKUGAKI NOTE_heardle.ogg",
+    "preview_file": "RAKUGAKI NOTE_preview.ogg",
     "metadata": {
       "genre": "CHIPTUNE LAG",
       "bpm": "168",
@@ -1432,7 +1550,8 @@
   "REZIDUAL MiND": {
     "display_title": "REZIDUAL MiND",
     "artist": "あとぅす feat.つゆり花鈴",
-    "preview_file": "REZIDUAL MiND.ogg",
+    "heardle_file": "REZIDUAL MiND_heardle.ogg",
+    "preview_file": "REZIDUAL MiND_preview.ogg",
     "metadata": {
       "genre": "Nostalgic J-POP",
       "bpm": "157",
@@ -1443,7 +1562,8 @@
   "Right Back": {
     "display_title": "Right Back",
     "artist": "ag",
-    "preview_file": "Right Back.ogg",
+    "heardle_file": "Right Back_heardle.ogg",
+    "preview_file": "Right Back_preview.ogg",
     "metadata": {
       "genre": "90'S HOUSE",
       "bpm": "124",
@@ -1454,7 +1574,8 @@
   "rough": {
     "display_title": "rough",
     "artist": "mommy",
-    "preview_file": "rough.ogg",
+    "heardle_file": "rough_heardle.ogg",
+    "preview_file": "rough_preview.ogg",
     "metadata": {
       "genre": "PIANO SOLO",
       "bpm": "296",
@@ -1465,7 +1586,8 @@
   "Ruins Ray": {
     "display_title": "Ruins Ray",
     "artist": "kurena",
-    "preview_file": "Ruins Ray.ogg",
+    "heardle_file": "Ruins Ray_heardle.ogg",
+    "preview_file": "Ruins Ray_preview.ogg",
     "metadata": {
       "genre": "RENAISSANCE",
       "bpm": "172",
@@ -1476,7 +1598,8 @@
   "S t r a i n": {
     "display_title": "S t r a i n",
     "artist": "Y.W",
-    "preview_file": "S t r a i n.ogg",
+    "heardle_file": "S t r a i n_heardle.ogg",
+    "preview_file": "S t r a i n_preview.ogg",
     "metadata": {
       "genre": "Techno core",
       "bpm": "175",
@@ -1487,7 +1610,8 @@
   "Scaffold": {
     "display_title": "Scaffold",
     "artist": "ETIA.",
-    "preview_file": "Scaffold.ogg",
+    "heardle_file": "Scaffold_heardle.ogg",
+    "preview_file": "Scaffold_preview.ogg",
     "metadata": {
       "genre": "Hi-TECH FULL ON",
       "bpm": "150",
@@ -1498,7 +1622,8 @@
   "SCHREiKRiEG": {
     "display_title": "SCHREiKRiEG",
     "artist": "tkqn14",
-    "preview_file": "SCHREiKRiEG.ogg",
+    "heardle_file": "SCHREiKRiEG_heardle.ogg",
+    "preview_file": "SCHREiKRiEG_preview.ogg",
     "metadata": {
       "genre": "HARMONiC SCHRANZ",
       "bpm": "160",
@@ -1509,7 +1634,8 @@
   "schwerkraft": {
     "display_title": "schwerkraft",
     "artist": "ROKINA",
-    "preview_file": "schwerkraft.ogg",
+    "heardle_file": "schwerkraft_heardle.ogg",
+    "preview_file": "schwerkraft_preview.ogg",
     "metadata": {
       "genre": "ASTRALCORE",
       "bpm": "999",
@@ -1520,7 +1646,8 @@
   "SEKIDO": {
     "display_title": "SEKIDO",
     "artist": "DJ Eye",
-    "preview_file": "SEKIDO.ogg",
+    "heardle_file": "SEKIDO_heardle.ogg",
+    "preview_file": "SEKIDO_preview.ogg",
     "metadata": {
       "genre": "TRIBAL TECHNO",
       "bpm": "146",
@@ -1531,7 +1658,8 @@
   "SHERRY FLIP": {
     "display_title": "SHERRY FLIP",
     "artist": "えびです meets ポート・フィリップ",
-    "preview_file": "SHERRY FLIP.ogg",
+    "heardle_file": "SHERRY FLIP_heardle.ogg",
+    "preview_file": "SHERRY FLIP_preview.ogg",
     "metadata": {
       "genre": "Electro swing",
       "bpm": "118",
@@ -1542,7 +1670,8 @@
   "SIREN OF DAWN": {
     "display_title": "SIREN OF DAWN",
     "artist": "イズミケイ",
-    "preview_file": "SIREN OF DAWN.ogg",
+    "heardle_file": "SIREN OF DAWN_heardle.ogg",
+    "preview_file": "SIREN OF DAWN_preview.ogg",
     "metadata": {
       "genre": "TECHNO",
       "bpm": "155",
@@ -1553,7 +1682,8 @@
   "Soul of Deep-sea Fish": {
     "display_title": "Soul of Deep-sea Fish",
     "artist": "HOUJIROU",
-    "preview_file": "Soul of Deep-sea Fish.ogg",
+    "heardle_file": "Soul of Deep-sea Fish_heardle.ogg",
+    "preview_file": "Soul of Deep-sea Fish_preview.ogg",
     "metadata": {
       "genre": "TECHNO / TECH DANCE　[ANOTHER]",
       "bpm": "145",
@@ -1564,7 +1694,8 @@
   "STARDUST CITY": {
     "display_title": "STARDUST CITY",
     "artist": "SHiNKA",
-    "preview_file": "STARDUST CITY.ogg",
+    "heardle_file": "STARDUST CITY_heardle.ogg",
+    "preview_file": "STARDUST CITY_preview.ogg",
     "metadata": {
       "genre": "Trance",
       "bpm": "143",
@@ -1575,7 +1706,8 @@
   "Stargazer": {
     "display_title": "Stargazer",
     "artist": "Lime",
-    "preview_file": "Stargazer.ogg",
+    "heardle_file": "Stargazer_heardle.ogg",
+    "preview_file": "Stargazer_preview.ogg",
     "metadata": {
       "genre": "Scene",
       "bpm": "87",
@@ -1586,7 +1718,8 @@
   "Strawberry Mint Chocolate": {
     "display_title": "Strawberry Mint Chocolate",
     "artist": "Yu^ta feat. みずにんじん",
-    "preview_file": "Strawberry Mint Chocolate.ogg",
+    "heardle_file": "Strawberry Mint Chocolate_heardle.ogg",
+    "preview_file": "Strawberry Mint Chocolate_preview.ogg",
     "metadata": {
       "genre": "Happy Hardcore",
       "bpm": "192",
@@ -1597,7 +1730,8 @@
   "sunken azure world": {
     "display_title": "sunken azure world",
     "artist": "maki",
-    "preview_file": "sunken azure world.ogg",
+    "heardle_file": "sunken azure world_heardle.ogg",
+    "preview_file": "sunken azure world_preview.ogg",
     "metadata": {
       "genre": "instrumental [7KEYS NORMAL]",
       "bpm": "136",
@@ -1608,7 +1742,8 @@
   "SunnyShinyRing": {
     "display_title": "SunnyShinyRing",
     "artist": "みここ ＆ 虹野ひかり",
-    "preview_file": "SunnyShinyRing.ogg",
+    "heardle_file": "SunnyShinyRing_heardle.ogg",
+    "preview_file": "SunnyShinyRing_preview.ogg",
     "metadata": {
       "genre": "Happy",
       "bpm": "186",
@@ -1619,7 +1754,8 @@
   "SUPERNOVA[BACO]": {
     "display_title": "SUPERNOVA[BACO]",
     "artist": "BACO",
-    "preview_file": "SUPERNOVA[BACO].ogg",
+    "heardle_file": "SUPERNOVA[BACO]_heardle.ogg",
+    "preview_file": "SUPERNOVA[BACO]_preview.ogg",
     "metadata": {
       "genre": "TRANCE REQUIEM",
       "bpm": "150",
@@ -1630,7 +1766,8 @@
   "symbolic gear": {
     "display_title": "symbolic gear",
     "artist": "siromaru",
-    "preview_file": "symbolic gear.ogg",
+    "heardle_file": "symbolic gear_heardle.ogg",
+    "preview_file": "symbolic gear_preview.ogg",
     "metadata": {
       "genre": "schranz",
       "bpm": "155",
@@ -1641,7 +1778,8 @@
   "The Clock Song": {
     "display_title": "The Clock Song",
     "artist": "ぶどうとう",
-    "preview_file": "The Clock Song.ogg",
+    "heardle_file": "The Clock Song_heardle.ogg",
+    "preview_file": "The Clock Song_preview.ogg",
     "metadata": {
       "genre": "PERFECTNESS",
       "bpm": "4800",
@@ -1652,7 +1790,8 @@
   "The End of Yggdrasil": {
     "display_title": "The End of Yggdrasil",
     "artist": "ginkiha　Notes:キラ",
-    "preview_file": "The End of Yggdrasil.ogg",
+    "heardle_file": "The End of Yggdrasil_heardle.ogg",
+    "preview_file": "The End of Yggdrasil_preview.ogg",
     "metadata": {
       "genre": "ODYSSEY",
       "bpm": "92.5",
@@ -1663,7 +1802,8 @@
   "The Formula": {
     "display_title": "The Formula",
     "artist": "Junk",
-    "preview_file": "The Formula.ogg",
+    "heardle_file": "The Formula_heardle.ogg",
+    "preview_file": "The Formula_preview.ogg",
     "metadata": {
       "genre": "TRANCE",
       "bpm": "144",
@@ -1674,7 +1814,8 @@
   "The Island of Albatross": {
     "display_title": "The Island of Albatross",
     "artist": "anubasu-anubasu",
-    "preview_file": "The Island of Albatross.ogg",
+    "heardle_file": "The Island of Albatross_heardle.ogg",
+    "preview_file": "The Island of Albatross_preview.ogg",
     "metadata": {
       "genre": "ENERGETIC TRANCE",
       "bpm": "148",
@@ -1685,7 +1826,8 @@
   "The Lamia 170": {
     "display_title": "The Lamia 170",
     "artist": "w_tre / Mer",
-    "preview_file": "The Lamia 170.ogg",
+    "heardle_file": "The Lamia 170_heardle.ogg",
+    "preview_file": "The Lamia 170_preview.ogg",
     "metadata": {
       "genre": "Piano Progressive Metal",
       "bpm": "170",
@@ -1696,7 +1838,8 @@
   "the lost dedicated": {
     "display_title": "the lost dedicated",
     "artist": "哀愁マニア",
-    "preview_file": "the lost dedicated.ogg",
+    "heardle_file": "the lost dedicated_heardle.ogg",
+    "preview_file": "the lost dedicated_preview.ogg",
     "metadata": {
       "genre": "hi-nrg / trance",
       "bpm": "134",
@@ -1707,7 +1850,8 @@
   "theme of Maia": {
     "display_title": "theme of Maia",
     "artist": "ねこみみ魔法使い",
-    "preview_file": "theme of Maia.ogg",
+    "heardle_file": "theme of Maia_heardle.ogg",
+    "preview_file": "theme of Maia_preview.ogg",
     "metadata": {
       "genre": "Synth Rock",
       "bpm": "232",
@@ -1718,7 +1862,8 @@
   "Toki": {
     "display_title": "Toki",
     "artist": "puru / kkkfff2",
-    "preview_file": "Toki.ogg",
+    "heardle_file": "Toki_heardle.ogg",
+    "preview_file": "Toki_preview.ogg",
     "metadata": {
       "genre": "ProgressiveTrance",
       "bpm": "130",
@@ -1729,7 +1874,8 @@
   "Toki (Sound piercer's Timesucker Remix)": {
     "display_title": "Toki (Sound piercer's Timesucker Remix)",
     "artist": "puru twk. sound piercer (feat.Hee Bun.D)",
-    "preview_file": "Toki (Sound piercer's Timesucker Remix).ogg",
+    "heardle_file": "Toki (Sound piercer's Timesucker Remix)_heardle.ogg",
+    "preview_file": "Toki (Sound piercer's Timesucker Remix)_preview.ogg",
     "metadata": {
       "genre": "Freeform / Gabber",
       "bpm": "184",
@@ -1740,7 +1886,8 @@
   "Trick or Treat": {
     "display_title": "Trick or Treat",
     "artist": "Lime / aui / obj:epics-",
-    "preview_file": "Trick or Treat.ogg",
+    "heardle_file": "Trick or Treat_heardle.ogg",
+    "preview_file": "Trick or Treat_preview.ogg",
     "metadata": {
       "genre": "Gothic Dance",
       "bpm": "140",
@@ -1751,7 +1898,8 @@
   "Triumphal Return": {
     "display_title": "Triumphal Return",
     "artist": "TamaDo",
-    "preview_file": "Triumphal Return.ogg",
+    "heardle_file": "Triumphal Return_heardle.ogg",
+    "preview_file": "Triumphal Return_preview.ogg",
     "metadata": {
       "genre": "Epilogue",
       "bpm": "260",
@@ -1762,7 +1910,8 @@
   "Ultramarine": {
     "display_title": "Ultramarine",
     "artist": "TAK/eff_01x",
-    "preview_file": "Ultramarine.ogg",
+    "heardle_file": "Ultramarine_heardle.ogg",
+    "preview_file": "Ultramarine_preview.ogg",
     "metadata": {
       "genre": "Trance",
       "bpm": "144",
@@ -1773,7 +1922,8 @@
   "Under The Sunshine": {
     "display_title": "Under The Sunshine",
     "artist": "dai",
-    "preview_file": "Under The Sunshine.ogg",
+    "heardle_file": "Under The Sunshine_heardle.ogg",
+    "preview_file": "Under The Sunshine_preview.ogg",
     "metadata": {
       "genre": "House",
       "bpm": "126",
@@ -1784,7 +1934,8 @@
   "unquenchable": {
     "display_title": "unquenchable",
     "artist": "dj Extrose",
-    "preview_file": "unquenchable.ogg",
+    "heardle_file": "unquenchable_heardle.ogg",
+    "preview_file": "unquenchable_preview.ogg",
     "metadata": {
       "genre": "SPEED TEK",
       "bpm": "210",
@@ -1795,7 +1946,8 @@
   "Valedict": {
     "display_title": "Valedict",
     "artist": "void",
-    "preview_file": "Valedict.ogg",
+    "heardle_file": "Valedict_heardle.ogg",
+    "preview_file": "Valedict_preview.ogg",
     "metadata": {
       "genre": "Sci-fi",
       "bpm": "156",
@@ -1806,7 +1958,8 @@
   "VALLISTA": {
     "display_title": "VALLISTA",
     "artist": "削除 / Mentalstock",
-    "preview_file": "VALLISTA.ogg",
+    "heardle_file": "VALLISTA_heardle.ogg",
+    "preview_file": "VALLISTA_preview.ogg",
     "metadata": {
       "genre": "Overture / IDM",
       "bpm": "180",
@@ -1817,7 +1970,8 @@
   "Vantablack": {
     "display_title": "Vantablack",
     "artist": "siqlo",
-    "preview_file": "Vantablack.ogg",
+    "heardle_file": "Vantablack_heardle.ogg",
+    "preview_file": "Vantablack_preview.ogg",
     "metadata": {
       "genre": "Hi-Tech Psy Trance",
       "bpm": "1",
@@ -1828,7 +1982,8 @@
   "Vorota Collapse": {
     "display_title": "Vorota Collapse",
     "artist": "eicateve",
-    "preview_file": "Vorota Collapse.ogg",
+    "heardle_file": "Vorota Collapse_heardle.ogg",
+    "preview_file": "Vorota Collapse_preview.ogg",
     "metadata": {
       "genre": "Nustyle Gabba / Another Story",
       "bpm": "162",
@@ -1839,7 +1994,8 @@
   "Vorota[Auratus]": {
     "display_title": "Vorota[Auratus]",
     "artist": "Auratus / A.M.",
-    "preview_file": "Vorota[Auratus].ogg",
+    "heardle_file": "Vorota[Auratus]_heardle.ogg",
+    "preview_file": "Vorota[Auratus]_preview.ogg",
     "metadata": {
       "genre": "Psytrance",
       "bpm": "145",
@@ -1850,7 +2006,8 @@
   "we are the xxxx": {
     "display_title": "we are the xxxx",
     "artist": "ikaruga_nex feat. Salita",
-    "preview_file": "we are the xxxx.ogg",
+    "heardle_file": "we are the xxxx_heardle.ogg",
+    "preview_file": "we are the xxxx_preview.ogg",
     "metadata": {
       "genre": "freeform",
       "bpm": "173",
@@ -1861,7 +2018,8 @@
   "WHIRLWIND": {
     "display_title": "WHIRLWIND",
     "artist": "Linne X SCTL",
-    "preview_file": "WHIRLWIND.ogg",
+    "heardle_file": "WHIRLWIND_heardle.ogg",
+    "preview_file": "WHIRLWIND_preview.ogg",
     "metadata": {
       "genre": "Piano Trance",
       "bpm": "140",
@@ -1872,7 +2030,8 @@
   "Xecus": {
     "display_title": "Xecus",
     "artist": "SHIKI/fity",
-    "preview_file": "Xecus.ogg",
+    "heardle_file": "Xecus_heardle.ogg",
+    "preview_file": "Xecus_preview.ogg",
     "metadata": {
       "genre": "Trance core",
       "bpm": "182",
@@ -1883,7 +2042,8 @@
   "Xepher ～Piano ver～": {
     "display_title": "Xepher ～Piano ver～",
     "artist": "Tatsh/MIDI:Ayato/BMS:YAN*TS",
-    "preview_file": "Xepher ～Piano ver～.ogg",
+    "heardle_file": "Xepher ～Piano ver～_heardle.ogg",
+    "preview_file": "Xepher ～Piano ver～_preview.ogg",
     "metadata": {
       "genre": "MEDIEVAL PIANO",
       "bpm": "170",
@@ -1894,7 +2054,8 @@
   "XVOTO": {
     "display_title": "XVOTO",
     "artist": "ETIA. feat. Jenga",
-    "preview_file": "XVOTO.ogg",
+    "heardle_file": "XVOTO_heardle.ogg",
+    "preview_file": "XVOTO_preview.ogg",
     "metadata": {
       "genre": "MIXTURE/BREAKS",
       "bpm": "120",
@@ -1905,7 +2066,8 @@
   "YAKEKUSO BOYS": {
     "display_title": "YAKEKUSO BOYS",
     "artist": "長沼浩太（バナナ太郎）",
-    "preview_file": "YAKEKUSO BOYS.ogg",
+    "heardle_file": "YAKEKUSO BOYS_heardle.ogg",
+    "preview_file": "YAKEKUSO BOYS_preview.ogg",
     "metadata": {
       "genre": "HARD TECHNO",
       "bpm": "145",
@@ -1916,7 +2078,8 @@
   "Yakumo ＞＞JOINT STRUGGLE": {
     "display_title": "Yakumo ＞＞JOINT STRUGGLE",
     "artist": "くっちー vs あっきー / obj:おーた",
-    "preview_file": "Yakumo ＞＞JOINT STRUGGLE.ogg",
+    "heardle_file": "Yakumo ＞＞JOINT STRUGGLE_heardle.ogg",
+    "preview_file": "Yakumo ＞＞JOINT STRUGGLE_preview.ogg",
     "metadata": {
       "genre": "SUKIMA TOUR",
       "bpm": "187",
@@ -1927,7 +2090,8 @@
   "YUGAMINAI LOVE": {
     "display_title": "YUGAMINAI LOVE",
     "artist": "kinohito",
-    "preview_file": "YUGAMINAI LOVE.ogg",
+    "heardle_file": "YUGAMINAI LOVE_heardle.ogg",
+    "preview_file": "YUGAMINAI LOVE_preview.ogg",
     "metadata": {
       "genre": "HONKAKUTEKI HIP HOP",
       "bpm": "92",
@@ -1938,7 +2102,8 @@
   "ZERODAY": {
     "display_title": "ZERODAY",
     "artist": "Lunatic Sounds / Yusi.",
-    "preview_file": "ZERODAY.ogg",
+    "heardle_file": "ZERODAY_heardle.ogg",
+    "preview_file": "ZERODAY_preview.ogg",
     "metadata": {
       "genre": "Schranz",
       "bpm": "159",
@@ -1949,7 +2114,8 @@
   "ZEUS": {
     "display_title": "ZEUS",
     "artist": "ルゼ",
-    "preview_file": "ZEUS.ogg",
+    "heardle_file": "ZEUS_heardle.ogg",
+    "preview_file": "ZEUS_preview.ogg",
     "metadata": {
       "genre": "PANDORA BOX[ANOTHER7]",
       "bpm": "170",
