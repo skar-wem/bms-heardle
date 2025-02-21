@@ -3,10 +3,80 @@ let currentSong = null;
 let attempts = 0;
 let songList = [];
 const maxAttempts = 6;
-const progressDurations = [1, 2, 4, 6, 8, 10];
+const progressDurations = [1, 2, 4, 8, 12, 16];
 let isPlaying = false;
 let incorrectGuesses = [];
 let isGameOver = false;
+let audioContext;
+let analyser;
+let waveCanvas;
+let waveCtx;
+let animationId;
+
+function initAudioVisualizer() {
+    // Create audio context and analyzer
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    analyser = audioContext.createAnalyser();
+    analyser.fftSize = 2048;
+    
+    // Set up canvas
+    waveCanvas = document.getElementById('waveCanvas');
+    waveCtx = waveCanvas.getContext('2d');
+    
+    // Set canvas size
+    function resizeCanvas() {
+        waveCanvas.width = window.innerWidth;
+        waveCanvas.height = window.innerHeight;
+    }
+    
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    
+    // Connect audio to analyzer
+    const audioElement = document.getElementById('audio-player');
+    const source = audioContext.createMediaElementSource(audioElement);
+    source.connect(analyser);
+    analyser.connect(audioContext.destination);
+}
+
+function drawWave() {
+    const bufferLength = analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+    analyser.getByteTimeDomainData(dataArray);
+    
+    // Keep the existing dark background
+    waveCtx.fillStyle = 'rgba(3, 3, 4, 1)';  // Match the dark background color
+    waveCtx.fillRect(0, 0, waveCanvas.width, waveCanvas.height);
+    
+    // Draw wave with glow effect
+    waveCtx.lineWidth = 2;
+    waveCtx.strokeStyle = isPlaying ? 'rgba(0, 243, 255, 0.4)' : 'rgba(255, 0, 255, 0.2)';
+    waveCtx.shadowBlur = 15;
+    waveCtx.shadowColor = isPlaying ? 'rgba(0, 243, 255, 0.4)' : 'rgba(255, 0, 255, 0.2)';
+    
+    waveCtx.beginPath();
+    
+    const sliceWidth = waveCanvas.width / bufferLength;
+    let x = 0;
+    
+    for (let i = 0; i < bufferLength; i++) {
+        const v = dataArray[i] / 128.0;
+        const y = (v * waveCanvas.height / 4) + (waveCanvas.height / 2);
+        
+        if (i === 0) {
+            waveCtx.moveTo(x, y);
+        } else {
+            waveCtx.lineTo(x, y);
+        }
+        
+        x += sliceWidth;
+    }
+    
+    waveCtx.lineTo(waveCanvas.width, waveCanvas.height / 2);
+    waveCtx.stroke();
+    
+    animationId = requestAnimationFrame(drawWave);
+}
 
 function processTitle(title) {
     let aliases = [title.toLowerCase()];
@@ -165,7 +235,7 @@ function setupAutocomplete() {
     });
 }
 
-// Update playCurrentSegment to handle file switching
+// Update playCurrentSegment function
 function playCurrentSegment() {
     if (isGameOver && !isPlaying) return;
 
@@ -180,16 +250,12 @@ function playCurrentSegment() {
         progressFill.style.transition = 'none';
         progressFill.style.width = '0%';
         
-        // If we're in reveal mode (game over), switch back to heardle file
-        if (!isGameOver) {
-            player.src = `game_audio/${currentSong.heardle_file}`;
+        // Cancel animation when stopped
+        if (animationId) {
+            cancelAnimationFrame(animationId);
+            animationId = null;
         }
         return;
-    }
-
-    // Make sure we're using the heardle file during gameplay
-    if (!isGameOver && player.src.includes(currentSong.preview_file)) {
-        player.src = `game_audio/${currentSong.heardle_file}`;
     }
 
     const duration = progressDurations[attempts];
@@ -198,11 +264,22 @@ function playCurrentSegment() {
     player.currentTime = 0;
     progressFill.style.transition = 'none';
     progressFill.style.width = '0%';
-    
-    // Force a reflow
     progressFill.offsetHeight;
 
-    // Start playback
+    // Set audio duration limit
+    player.addEventListener('timeupdate', function stopAtDuration() {
+        if (player.currentTime >= duration) {
+            player.pause();
+            player.removeEventListener('timeupdate', stopAtDuration);
+            playButton.textContent = 'Play';
+            isPlaying = false;
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+            }
+        }
+    });
+
     const playPromise = player.play();
     
     if (playPromise !== undefined) {
@@ -210,18 +287,15 @@ function playCurrentSegment() {
             playButton.textContent = 'Stop';
             isPlaying = true;
 
-            // Start progress bar animation
+            // Start wave animation
+            if (!animationId && audioContext) {
+                drawWave();
+            }
+
             requestAnimationFrame(() => {
                 progressFill.style.transition = `width ${duration}s linear`;
                 progressFill.style.width = '100%';
             });
-
-            // Set up the end timer
-            setTimeout(() => {
-                player.pause();
-                playButton.textContent = 'Play';
-                isPlaying = false;
-            }, duration * 1000);
         });
     }
 }
@@ -348,12 +422,20 @@ function revealFullSong() {
     const player = document.getElementById('audio-player');
     const playButton = document.querySelector('.play-button');
     
+    // Remove any existing timeupdate listeners
+    player.removeEventListener('timeupdate', stopAtDuration);
+    
     // Switch to preview file for reveal
     player.src = `game_audio/${currentSong.preview_file}`;
     player.currentTime = 0;
     player.play();
     playButton.textContent = 'Stop';
     isPlaying = true;
+
+    // Start wave animation for reveal
+    if (!animationId && audioContext) {
+        drawWave();
+    }
 }
 
 function showResult(message) {
@@ -362,12 +444,26 @@ function showResult(message) {
 
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
-    // Play button listener
-    document.getElementById('playButton').addEventListener('click', playCurrentSegment);
+    // Play button listener with audio context initialization
+    document.getElementById('playButton').addEventListener('click', async () => {
+        // Initialize audio context on first play
+        if (!audioContext) {
+            try {
+                await initAudioVisualizer();
+            } catch (e) {
+                console.error('Error initializing audio visualizer:', e);
+            }
+        }
+        playCurrentSegment();
+    });
     
     // Submit button listener
     const submitButton = document.getElementById('submit-button');
-    submitButton.addEventListener('click', submitGuess);
+    submitButton.addEventListener('click', () => {
+        if (!submitButton.classList.contains('button-disabled')) {
+            submitGuess();
+        }
+    });
     
     // Skip button listener
     document.getElementById('skip-button').addEventListener('click', skipGuess);
@@ -376,22 +472,44 @@ document.addEventListener('DOMContentLoaded', () => {
     const guessInput = document.getElementById('guess-input');
     guessInput.addEventListener('input', updateSubmitButtonState);
     guessInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter' && !document.querySelector('.suggestion-box').contains(document.activeElement)) {
+        if (e.key === 'Enter' && 
+            !document.querySelector('.suggestion-box').contains(document.activeElement) &&
+            guessInput.value.trim()) {
             submitGuess();
         }
     });
     
     // Modal listeners
     const modal = document.getElementById('gameOverModal');
-    const newGameButton = document.getElementById('newGameButton');
-    if (newGameButton) {
-        newGameButton.addEventListener('click', startNewGame);
-    }
+    const modalButton = document.querySelector('.modal-button');
+    modalButton.addEventListener('click', startNewGame);
     
-    // Prevent modal close on click outside when game is over
-    document.addEventListener('click', function(e) {
+    // Prevent modal close on click outside
+    modal.addEventListener('click', function(e) {
         if (e.target === modal && !isGameOver) {
             modal.style.display = 'none';
+        }
+    });
+    
+    // Handle window resize for canvas
+    window.addEventListener('resize', () => {
+        if (waveCanvas) {
+            waveCanvas.width = window.innerWidth;
+            waveCanvas.height = window.innerHeight;
+        }
+    });
+    
+    // Initialize audio player
+    const player = document.getElementById('audio-player');
+    player.addEventListener('ended', () => {
+        if (!isGameOver) {
+            const playButton = document.querySelector('.play-button');
+            playButton.textContent = 'Play';
+            isPlaying = false;
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+            }
         }
     });
     

@@ -182,6 +182,23 @@ body {
     transition: all 0.3s ease;
 }
 
+.content-wrapper {
+    position: relative;
+    z-index: 1;
+}
+
+#waveCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 1;  /* Set to 1 to maintain background color */
+    pointer-events: none;
+    background: linear-gradient(135deg, #030304 0%, #050507 100%);  /* Match body background */
+}
+
 #submit-button {
     background: var(--neon-pink);
     color: var(--text-primary);
