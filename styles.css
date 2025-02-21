@@ -1,210 +1,323 @@
+:root {
+    --neon-blue: #00f3ff;
+    --neon-pink: #ff00ff;
+    --dark-bg: #050507;    /* Darker background */
+    --darker-bg: #020203;  /* Even darker background */
+    --panel-bg: rgba(10, 10, 15, 0.9);  /* Darker panels */
+    --text-primary: #ffffff;
+    --text-secondary: #8a8a9a;
+}
+
 body {
-     max-width: 800px;
-     margin: 0 auto;
-     padding: 20px;
-     font-family: Arial, sans-serif;
-     background-color: #1a1a1a;
-     color: #ffffff;
- }
- 
- .header {
-     text-align: center;
-     margin-bottom: 30px;
- }
- 
- .header h1 {
-     margin-bottom: 10px;
-     color: #4CAF50;
- }
- 
- .header p {
-     color: #999;
-     margin: 5px 0;
- }
- 
- .game-info {
-     background: #2a2a2a;
-     padding: 15px;
-     border-radius: 10px;
-     margin-bottom: 20px;
-     font-size: 14px;
-     color: #999;
- }
- 
- #player-container {
-     background: #2a2a2a;
-     padding: 20px;
-     border-radius: 10px;
-     margin: 20px 0;
- }
- 
- .play-button {
-     background: #4CAF50;
-     border: none;
-     color: white;
-     padding: 15px 30px;
-     border-radius: 25px;
-     cursor: pointer;
-     font-size: 16px;
-     width: 100%;
-     margin-bottom: 15px;
- }
- 
- .play-button:hover {
-     background: #45a049;
- }
- 
- .progress-container {
-     position: relative;
-     margin-bottom: 20px;
- }
- 
- .progress-segments {
-     display: flex;
-     gap: 5px;
-     margin-bottom: 10px;
- }
- 
- .progress-segment {
-     flex: 1;
-     height: 10px;
-     background-color: #333;
-     border-radius: 5px;
- }
- 
- .progress-segment.played {
-     background-color: #4CAF50;
- }
- 
- .progress-segment.current {
-     background-color: #666;
- }
- 
- .progress-bar {
-     width: 100%;
-     height: 4px;
-     background: #333;
-     border-radius: 2px;
-     overflow: hidden;
-     margin-top: 10px;
- }
- 
- .progress-fill {
-     width: 0%;
-     height: 100%;
-     background: #4CAF50;
-     transition: width 0.1s linear;
- }
- 
- .input-container {
-     position: relative;
-     margin-bottom: 10px;
- }
- 
- #guess-input {
-     width: 100%;
-     padding: 15px;
-     margin: 10px 0;
-     border: none;
-     border-radius: 5px;
-     background: #333;
-     color: white;
-     font-size: 16px;
-     box-sizing: border-box;
- }
- 
- .button-container {
-     display: flex;
-     gap: 10px;
- }
- 
- button {
-     flex: 1;
-     padding: 10px;
-     border: none;
-     border-radius: 5px;
-     cursor: pointer;
-     font-size: 16px;
- }
- 
- #submit-button {
-     background: #4CAF50;
-     color: white;
- }
- 
- #skip-button {
-     background: #666;
-     color: white;
- }
- 
- #result {
-     margin-top: 20px;
-     padding: 15px;
-     border-radius: 5px;
-     background: #2a2a2a;
-     text-align: center;
- }
- 
- #guess-history {
-     margin-top: 10px;
-     padding: 15px;
-     background: #2a2a2a;
-     border-radius: 5px;
- }
- 
- .guess-item {
-     margin: 5px 0;
-     padding: 8px;
-     background: #333;
-     border-radius: 3px;
-     color: #ff4444;
-     font-size: 14px;
- }
- 
- .game-stats {
-     text-align: center;
-     margin-top: 20px;
-     color: #999;
-     font-size: 14px;
- }
- 
- .hidden {
-     display: none;
- }
- 
- /* Autocomplete styles */
- .suggestion-box {
-     position: absolute;
-     top: 100%;
-     left: 0;
-     right: 0;
-     background: #333;
-     border-radius: 5px;
-     max-height: 200px;
-     overflow-y: auto;
-     display: none;
-     z-index: 1000;
-     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
- }
- 
- .suggestion-item {
-     padding: 10px 15px;
-     cursor: pointer;
-     border-bottom: 1px solid #444;
- }
- 
- .suggestion-item:hover,
- .suggestion-item.selected {
-     background: #444;
- }
- 
- .song-title {
-     color: white;
-     font-size: 14px;
- }
- 
- .song-artist {
-     color: #999;
-     font-size: 12px;
-     margin-top: 2px;
- }
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Outfit', sans-serif;
+    background: linear-gradient(135deg, #030304 0%, #050507 100%);  /* Darker gradient */
+    color: var(--text-primary);
+    position: relative;
+    min-height: 100vh;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    text-shadow: 0 0 10px var(--neon-blue);
+}
+
+.header h1 {
+    margin-bottom: 10px;
+    color: var(--neon-blue);
+    font-size: 3em;
+    letter-spacing: 2px;
+}
+
+.header p {
+    color: var(--text-secondary);
+    margin: 5px 0;
+    font-size: 1.1em;
+}
+
+.game-info {
+    background: var(--panel-bg);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    border: 1px solid rgba(0, 243, 255, 0.1);
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#player-container {
+    background: var(--panel-bg);
+    padding: 25px;
+    border-radius: 15px;
+    margin: 30px 0;
+    border: 1px solid rgba(255, 0, 255, 0.1);
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.play-button {
+    background: transparent;
+    border: 2px solid var(--neon-blue);
+    color: var(--neon-blue);
+    padding: 15px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1.2em;
+    width: 100%;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+}
+
+.play-button:hover {
+    background: var(--neon-blue);
+    color: var(--darker-bg);
+    box-shadow: 0 0 20px var(--neon-blue);
+}
+
+.progress-container {
+    position: relative;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.progress-segments {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+.progress-segment {
+    flex: 1;
+    height: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.progress-segment.played {
+    background-color: var(--neon-pink);
+    box-shadow: 0 0 10px var(--neon-pink);
+}
+
+.progress-segment.current {
+    background-color: rgba(255, 0, 255, 0.3);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 15px;
+}
+
+.progress-fill {
+    width: 0%;
+    height: 100%;
+    background: var(--neon-blue);
+    box-shadow: 0 0 10px var(--neon-blue);
+    transition: width linear;
+    will-change: width;
+    transform: translateZ(0);
+}
+
+.input-container {
+    position: relative;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#game-controls {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#guess-input {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: 2px solid rgba(255, 0, 255, 0.3);
+    border-radius: 10px;
+    background: rgba(16, 16, 24, 0.8);
+    color: var(--text-primary);
+    font-size: 1em;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+#guess-input:focus {
+    outline: none;
+    border-color: var(--neon-pink);
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.2);
+}
+
+.button-container {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+}
+
+.button-container button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+#submit-button {
+    background: var(--neon-pink);
+    color: var(--text-primary);
+}
+
+#submit-button:hover {
+    box-shadow: 0 0 20px var(--neon-pink);
+}
+
+#skip-button {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+}
+
+#skip-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+#result {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    background: var(--panel-bg);
+    text-align: center;
+    border: 1px solid rgba(0, 243, 255, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#guess-history {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.guess-item {
+    margin: 5px 0;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    color: rgba(255, 0, 0, 0.8);
+    font-size: 0.9em;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--panel-bg);
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid var(--neon-blue);
+    box-shadow: 0 0 30px rgba(0, 243, 255, 0.2);
+    max-width: 400px;
+    width: 90%;
+}
+
+.modal-title {
+    color: var(--neon-blue);
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+.modal-text {
+    margin-bottom: 25px;
+    color: var(--text-secondary);
+}
+
+.modal-button {
+    background: var(--neon-pink);
+    color: var(--text-primary);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.modal-button:hover {
+    box-shadow: 0 0 20px var(--neon-pink);
+}
+
+.suggestion-box {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #0a0a0f;  /* Solid dark background instead of transparent */
+    border-radius: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+    z-index: 1000;
+    border: 1px solid rgba(255, 0, 255, 0.2);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.suggestion-item {
+    padding: 12px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease;
+}
+
+.suggestion-item:hover,
+.suggestion-item.selected {
+    background: #151520;  /* Solid color instead of transparent */
+}
+
+.song-title {
+    color: var(--text-primary);
+    font-size: 0.9em;
+}
+
+.song-artist {
+    color: var(--text-secondary);
+    font-size: 0.8em;
+    margin-top: 4px;
+}
+
+.hidden {
+    display: none;
+}

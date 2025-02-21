@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>BMS Heardle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -18,7 +21,9 @@
     </div>
 
     <div id="player-container">
-        <button class="play-button" id="playButton">Play</button>
+        <button class="play-button" id="playButton">
+            <span class="button-text">Play</span>
+        </button>
         <div class="progress-container">
             <div class="progress-segments">
                 <div class="progress-segment"></div>
@@ -50,6 +55,15 @@
 
     <div class="game-stats">
         <p>Total songs: <span id="song-count">0</span></p>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div id="gameOverModal" class="modal">
+        <div class="modal-content">
+            <h2 class="modal-title">Game Over</h2>
+            <p class="modal-text" id="modalMessage"></p>
+            <button class="modal-button" onclick="startNewGame()">Play Again</button>
+        </div>
     </div>
 
     <script src="script.js"></script>

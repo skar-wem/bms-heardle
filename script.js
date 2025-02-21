@@ -6,10 +6,25 @@ const maxAttempts = 6;
 const progressDurations = [1, 2, 4, 6, 8, 10];
 let isPlaying = false;
 let incorrectGuesses = [];
+let isGameOver = false;
+
+function processTitle(title) {
+    let aliases = [title.toLowerCase()];
+    // Remove spaces
+    aliases.push(title.toLowerCase().replace(/\s+/g, ''));
+    // Remove special characters
+    aliases.push(title.toLowerCase().replace(/[^a-z0-9]/g, ''));
+    // Handle spaced letters (e.g., "g e n g a o z o" -> "gengaozo")
+    if (title.includes(' ')) {
+        let spacedVersion = title.toLowerCase().replace(/\s+/g, '');
+        aliases.push(spacedVersion);
+    }
+    return [...new Set(aliases)];
+}
 
 function cleanupText(text) {
     try {
-        // Handle common encoding issues
+        // Try common encodings
         if (text.includes('Š') || text.includes('ƒ') || text.includes('}')) {
             text = decodeURIComponent(escape(text));
         }
@@ -30,20 +45,6 @@ function cleanupText(text) {
     }
 }
 
-function processTitle(title) {
-    let aliases = [title.toLowerCase()];
-    // Remove spaces
-    aliases.push(title.toLowerCase().replace(/\s+/g, ''));
-    // Remove special characters
-    aliases.push(title.toLowerCase().replace(/[^a-z0-9]/g, ''));
-    // Handle spaced letters (e.g., "g e n g a o z o" -> "gengaozo")
-    if (title.includes(' ')) {
-        let spacedVersion = title.toLowerCase().replace(/\s+/g, '');
-        aliases.push(spacedVersion);
-    }
-    return [...new Set(aliases)];
-}
-
 async function loadGameData() {
     try {
         const response = await fetch('game_data.json');
@@ -52,7 +53,6 @@ async function loadGameData() {
         }
         gameData = await response.json();
         
-        // Build song list with aliases and clean artist names
         songList = Object.values(gameData).map(song => ({
             title: song.display_title,
             artist: cleanupText(song.artist),
@@ -77,19 +77,9 @@ function startGame() {
     const player = document.getElementById('audio-player');
     player.src = `game_previews/${currentSong.preview_file}`;
     
-    player.addEventListener('timeupdate', updateProgressFill);
     incorrectGuesses = [];
     updateGuessHistory();
     updateProgressBar();
-}
-
-function updateProgressFill() {
-    if (isPlaying) {
-        const player = document.getElementById('audio-player');
-        const duration = progressDurations[attempts];
-        const percentage = (player.currentTime / duration) * 100;
-        document.querySelector('.progress-fill').style.width = `${Math.min(percentage, 100)}%`;
-    }
 }
 
 function setupAutocomplete() {
@@ -176,18 +166,32 @@ function setupAutocomplete() {
 }
 
 function playCurrentSegment() {
+    if (isGameOver && !isPlaying) return;
+
     const player = document.getElementById('audio-player');
     const playButton = document.querySelector('.play-button');
+    const progressFill = document.querySelector('.progress-fill');
 
     if (isPlaying) {
         player.pause();
         playButton.textContent = 'Play';
         isPlaying = false;
+        progressFill.style.transition = 'none';
+        progressFill.style.width = '0%';
         return;
     }
 
+    const duration = progressDurations[attempts];
+
+    // Reset and prepare for playback
     player.currentTime = 0;
-    document.querySelector('.progress-fill').style.width = '0%';
+    progressFill.style.transition = 'none';
+    progressFill.style.width = '0%';
+    
+    // Force a reflow
+    progressFill.offsetHeight;
+
+    // Start playback
     const playPromise = player.play();
     
     if (playPromise !== undefined) {
@@ -195,11 +199,18 @@ function playCurrentSegment() {
             playButton.textContent = 'Stop';
             isPlaying = true;
 
+            // Start progress bar animation
+            requestAnimationFrame(() => {
+                progressFill.style.transition = `width ${duration}s linear`;
+                progressFill.style.width = '100%';
+            });
+
+            // Set up the end timer
             setTimeout(() => {
                 player.pause();
                 playButton.textContent = 'Play';
                 isPlaying = false;
-            }, progressDurations[attempts] * 1000);
+            }, duration * 1000);
         });
     }
 }
@@ -224,7 +235,32 @@ function updateGuessHistory() {
     ).join('');
 }
 
+function showModal(message, isSuccess = false) {
+    const modal = document.getElementById('gameOverModal');
+    const modalMessage = document.getElementById('modalMessage');
+    const modalTitle = document.querySelector('.modal-title');
+    
+    modalTitle.textContent = isSuccess ? 'Congratulations!' : 'Game Over';
+    modalTitle.style.color = isSuccess ? 'var(--neon-pink)' : 'var(--neon-blue)';
+    modalMessage.textContent = message;
+    modal.style.display = 'block';
+    isGameOver = true;
+}
+
+function startNewGame() {
+    const modal = document.getElementById('gameOverModal');
+    modal.style.display = 'none';
+    isGameOver = false;
+    attempts = 0;
+    incorrectGuesses = [];
+    updateProgressBar();
+    updateGuessHistory();
+    startGame();
+}
+
 function submitGuess() {
+    if (isGameOver) return;
+    
     const guessInput = document.getElementById('guess-input');
     const guess = guessInput.value.trim();
     const currentAliases = processTitle(currentSong.display_title);
@@ -237,16 +273,16 @@ function submitGuess() {
     );
     
     if (isCorrect) {
-        showResult('Correct! The song was ' + currentSong.display_title + ' by ' + currentSong.cleanArtist);
+        showModal(`Correct! The song was "${currentSong.display_title}" by ${currentSong.cleanArtist}`, true);
         revealFullSong();
     } else {
         incorrectGuesses.push(guess);
         attempts++;
         if (attempts >= maxAttempts) {
-            showResult('Game Over! The song was ' + currentSong.display_title + ' by ' + currentSong.cleanArtist);
+            showModal(`Game Over! The song was "${currentSong.display_title}" by ${currentSong.cleanArtist}`);
             revealFullSong();
         } else {
-            showResult('Try again! ' + (maxAttempts - attempts) + ' attempts remaining');
+            showResult(`Try again! ${maxAttempts - attempts} attempts remaining`);
             updateProgressBar();
             updateGuessHistory();
         }
@@ -255,12 +291,14 @@ function submitGuess() {
 }
 
 function skipGuess() {
+    if (isGameOver) return;
+    
     attempts++;
     if (attempts >= maxAttempts) {
-        showResult('Game Over! The song was ' + currentSong.display_title + ' by ' + currentSong.cleanArtist);
+        showModal(`Game Over! The song was "${currentSong.display_title}" by ${currentSong.cleanArtist}`);
         revealFullSong();
     } else {
-        showResult('Skipped! ' + (maxAttempts - attempts) + ' attempts remaining');
+        showResult(`Skipped! ${maxAttempts - attempts} attempts remaining`);
         updateProgressBar();
     }
 }
@@ -288,5 +326,14 @@ document.addEventListener('DOMContentLoaded', () => {
             submitGuess();
         }
     });
+    
+    // Add modal close listener
+    document.addEventListener('click', function(e) {
+        const modal = document.getElementById('gameOverModal');
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+    
     loadGameData();
 });
