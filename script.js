@@ -1,10 +1,25 @@
 let gameData = null;
 let currentSong = null;
 let attempts = 0;
+let songList = [];
 const maxAttempts = 6;
-const progressDurations = [1, 2, 4, 6, 8, 10]; // Updated durations
+const progressDurations = [1, 2, 4, 6, 8, 10];
 let isPlaying = false;
 let incorrectGuesses = [];
+
+function processTitle(title) {
+    let aliases = [title.toLowerCase()];
+    // Remove spaces
+    aliases.push(title.toLowerCase().replace(/\s+/g, ''));
+    // Remove special characters
+    aliases.push(title.toLowerCase().replace(/[^a-z0-9]/g, ''));
+    // Handle spaced letters (e.g., "g e n g a o z o" -> "gengaozo")
+    if (title.includes(' ')) {
+        let spacedVersion = title.toLowerCase().replace(/\s+/g, '');
+        aliases.push(spacedVersion);
+    }
+    return [...new Set(aliases)];
+}
 
 async function loadGameData() {
     try {
@@ -13,7 +28,16 @@ async function loadGameData() {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         gameData = await response.json();
+        
+        // Build song list with aliases
+        songList = Object.values(gameData).map(song => ({
+            title: song.display_title,
+            artist: song.artist,
+            aliases: processTitle(song.display_title)
+        }));
+        
         document.getElementById('song-count').textContent = Object.keys(gameData).length;
+        setupAutocomplete();
         startGame();
     } catch (error) {
         console.error('Error loading game data:', error);
@@ -42,6 +66,89 @@ function updateProgressFill() {
         const percentage = (player.currentTime / duration) * 100;
         document.querySelector('.progress-fill').style.width = `${Math.min(percentage, 100)}%`;
     }
+}
+
+function setupAutocomplete() {
+    const input = document.getElementById('guess-input');
+    const suggestionBox = document.createElement('div');
+    suggestionBox.className = 'suggestion-box';
+    input.parentNode.appendChild(suggestionBox);
+
+    let selectedIndex = -1;
+
+    input.addEventListener('input', function() {
+        const query = this.value.toLowerCase();
+        if (query.length < 2) {
+            suggestionBox.innerHTML = '';
+            suggestionBox.style.display = 'none';
+            return;
+        }
+
+        const suggestions = songList.filter(song => 
+            song.title.toLowerCase().includes(query) || 
+            song.artist.toLowerCase().includes(query) ||
+            song.aliases.some(alias => alias.includes(query))
+        ).slice(0, 5);
+
+        if (suggestions.length > 0) {
+            suggestionBox.innerHTML = suggestions.map(song => 
+                `<div class="suggestion-item" data-title="${song.title}">
+                    <div class="song-title">${song.title}</div>
+                    <div class="song-artist">${song.artist}</div>
+                </div>`
+            ).join('');
+            suggestionBox.style.display = 'block';
+            selectedIndex = -1;
+        } else {
+            suggestionBox.innerHTML = '';
+            suggestionBox.style.display = 'none';
+        }
+    });
+
+    input.addEventListener('keydown', function(e) {
+        const suggestions = suggestionBox.getElementsByClassName('suggestion-item');
+        
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            selectedIndex = Math.min(selectedIndex + 1, suggestions.length - 1);
+            updateSelection();
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            selectedIndex = Math.max(selectedIndex - 1, -1);
+            updateSelection();
+        } else if (e.key === 'Enter' && selectedIndex >= 0) {
+            e.preventDefault();
+            if (suggestions[selectedIndex]) {
+                input.value = suggestions[selectedIndex].dataset.title;
+                suggestionBox.style.display = 'none';
+                submitGuess();
+            }
+        }
+
+        function updateSelection() {
+            Array.from(suggestions).forEach((suggestion, index) => {
+                suggestion.classList.toggle('selected', index === selectedIndex);
+                if (index === selectedIndex) {
+                    input.value = suggestion.dataset.title;
+                }
+            });
+        }
+    });
+
+    suggestionBox.addEventListener('click', function(e) {
+        const item = e.target.closest('.suggestion-item');
+        if (item) {
+            input.value = item.dataset.title;
+            suggestionBox.style.display = 'none';
+            submitGuess();
+        }
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!input.contains(e.target) && !suggestionBox.contains(e.target)) {
+            suggestionBox.style.display = 'none';
+        }
+    });
 }
 
 function playCurrentSegment() {
@@ -96,9 +203,16 @@ function updateGuessHistory() {
 function submitGuess() {
     const guessInput = document.getElementById('guess-input');
     const guess = guessInput.value.trim();
-    const correctTitle = currentSong.display_title.toLowerCase();
+    const currentAliases = processTitle(currentSong.display_title);
+    const guessAliases = processTitle(guess);
     
-    if (guess.toLowerCase() === correctTitle) {
+    const isCorrect = guessAliases.some(guessAlias => 
+        currentAliases.some(currentAlias => 
+            currentAlias === guessAlias
+        )
+    );
+    
+    if (isCorrect) {
         showResult('Correct! The song was ' + currentSong.display_title + ' by ' + currentSong.artist);
         revealFullSong();
     } else {
@@ -146,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('submit-button').addEventListener('click', submitGuess);
     document.getElementById('skip-button').addEventListener('click', skipGuess);
     document.getElementById('guess-input').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
+        if (e.key === 'Enter' && !document.querySelector('.suggestion-box').contains(document.activeElement)) {
             submitGuess();
         }
     });
