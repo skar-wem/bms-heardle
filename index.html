@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BMS Heardle</title>
+    <style>
+        /* Basic styling */
+        .progress-bar {
+            width: 100%;
+            background-color: #ddd;
+        }
+        .progress {
+            width: 0%;
+            height: 20px;
+            background-color: #4CAF50;
+        }
+        #player-container {
+            margin: 20px 0;
+        }
+        #guess-input {
+            width: 300px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>BMS Heardle</h1>
+    <div id="player-container">
+        <audio id="audio-player" controls></audio>
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+    </div>
+    <div id="game-controls">
+        <input type="text" id="guess-input" placeholder="Type your guess...">
+        <button onclick="submitGuess()">Submit</button>
+        <button onclick="skipGuess()">Skip</button>
+    </div>
+    <div id="result"></div>
+
+    <script>
+        // Your game logic will go here
+    </script>
+</body>
+</html>
