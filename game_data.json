@@ -161,7 +161,7 @@
   },
   "another justice": {
     "display_title": "another justice",
-    "artist": "ZUN Remixed by rider",
+    "artist": "ZUN Remixed by rider / obj:Ds",
     "heardle_file": "another justice_heardle.ogg",
     "preview_file": "another justice_preview.ogg",
     "metadata": {
@@ -463,7 +463,7 @@
   },
   "ClowN CrowN": {
     "display_title": "ClowN CrowN",
-    "artist": "daisan",
+    "artist": "daisan / object by meteor*",
     "heardle_file": "ClowN CrowN_heardle.ogg",
     "preview_file": "ClowN CrowN_preview.ogg",
     "metadata": {
@@ -542,7 +542,7 @@
   },
   "DEEP MARINE STRIKER": {
     "display_title": "DEEP MARINE STRIKER",
-    "artist": "ZUN Remixed by rider",
+    "artist": "ZUN Remixed by rider obj みっと",
     "heardle_file": "DEEP MARINE STRIKER_heardle.ogg",
     "preview_file": "DEEP MARINE STRIKER_preview.ogg",
     "metadata": {
@@ -609,7 +609,7 @@
   },
   "DRAGONLADY": {
     "display_title": "DRAGONLADY",
-    "artist": "Nankumo",
+    "artist": "Nankumo / BGA：壱Air",
     "heardle_file": "DRAGONLADY_heardle.ogg",
     "preview_file": "DRAGONLADY_preview.ogg",
     "metadata": {
@@ -625,7 +625,7 @@
   },
   "drivin'FTR": {
     "display_title": "drivin'FTR",
-    "artist": "remixed by Yamajet",
+    "artist": "remixed by Yamajet / bga:cyclia",
     "heardle_file": "drivin'FTR_heardle.ogg",
     "preview_file": "drivin'FTR_preview.ogg",
     "metadata": {
@@ -714,7 +714,7 @@
   },
   "EXILE": {
     "display_title": "EXILE",
-    "artist": "-45",
+    "artist": "-45 / obj;Nemes",
     "heardle_file": "EXILE_heardle.ogg",
     "preview_file": "EXILE_preview.ogg",
     "metadata": {
@@ -1027,7 +1027,7 @@
   },
   "JUMMER": {
     "display_title": "JUMMER",
-    "artist": "momo★yama",
+    "artist": "momo★yama　(BGA:アカツキユウ)",
     "heardle_file": "JUMMER_heardle.ogg",
     "preview_file": "JUMMER_preview.ogg",
     "metadata": {
@@ -1276,7 +1276,7 @@
   },
   "M-A": {
     "display_title": "M-A",
-    "artist": "Musical Masterpiece",
+    "artist": "Musical Masterpiece obj:CELI",
     "heardle_file": "M-A_heardle.ogg",
     "preview_file": "M-A_preview.ogg",
     "metadata": {
@@ -1323,10 +1323,7 @@
       "genre": "PIANO",
       "bpm": "106",
       "original_file": "_merry_dph.bme",
-      "mod_time": "2014-05-28 14:02:54",
-      "insane_levels": [
-        "★10"
-      ]
+      "mod_time": "2014-05-28 14:02:54"
     }
   },
   "METABOKNIGHT": {
@@ -1343,7 +1340,7 @@
   },
   "Milly Barll": {
     "display_title": "Milly Barll",
-    "artist": "mゼ",
+    "artist": "mゼ / obj.BAmO",
     "heardle_file": "Milly Barll_heardle.ogg",
     "preview_file": "Milly Barll_preview.ogg",
     "metadata": {
@@ -1370,7 +1367,7 @@
   },
   "Moon-gate": {
     "display_title": "Moon-gate",
-    "artist": "しらいし",
+    "artist": "Music:しらいし/obj:tts1374",
     "heardle_file": "Moon-gate_heardle.ogg",
     "preview_file": "Moon-gate_preview.ogg",
     "metadata": {
@@ -1397,7 +1394,7 @@
   },
   "myste`re": {
     "display_title": "myste`re",
-    "artist": "HOUJIROU",
+    "artist": "HOUJIROU / BGA: hardlove",
     "heardle_file": "myste`re_heardle.ogg",
     "preview_file": "myste`re_preview.ogg",
     "metadata": {
@@ -1750,7 +1747,7 @@
   },
   "Qualia": {
     "display_title": "Qualia",
-    "artist": "Junk",
+    "artist": "Junk / obj : RNJK",
     "heardle_file": "Qualia_heardle.ogg",
     "preview_file": "Qualia_preview.ogg",
     "metadata": {
@@ -2200,7 +2197,7 @@
   },
   "Trick or Treat": {
     "display_title": "Trick or Treat",
-    "artist": "Lime / aui",
+    "artist": "Lime / aui / obj:epics-",
     "heardle_file": "Trick or Treat_heardle.ogg",
     "preview_file": "Trick or Treat_preview.ogg",
     "metadata": {
@@ -2423,7 +2420,7 @@
   },
   "Yakumo ＞＞JOINT STRUGGLE": {
     "display_title": "Yakumo ＞＞JOINT STRUGGLE",
-    "artist": "くっちー vs あっきー",
+    "artist": "くっちー vs あっきー / obj:おーた",
     "heardle_file": "Yakumo ＞＞JOINT STRUGGLE_heardle.ogg",
     "preview_file": "Yakumo ＞＞JOINT STRUGGLE_preview.ogg",
     "metadata": {
@@ -2586,7 +2583,7 @@
   },
   "Caelumize": {
     "display_title": "Caelumize",
-    "artist": "void",
+    "artist": "void obj.Cloudy Boy",
     "heardle_file": "Caelumize_heardle.ogg",
     "preview_file": "Caelumize_preview.ogg",
     "metadata": {
@@ -2844,7 +2841,7 @@
   },
   "happy century": {
     "display_title": "happy century",
-    "artist": "recognize m.",
+    "artist": "recognize m. // bga:66",
     "heardle_file": "happy century_heardle.ogg",
     "preview_file": "happy century_preview.ogg",
     "metadata": {
@@ -3633,7 +3630,7 @@
   },
   "Midnight Driving": {
     "display_title": "Midnight Driving",
-    "artist": "yassu",
+    "artist": "yassu / 小宮真央 (obj:MiiA)",
     "heardle_file": "Midnight Driving_heardle.ogg",
     "preview_file": "Midnight Driving_preview.ogg",
     "metadata": {
@@ -3991,7 +3988,7 @@
   },
   "東の国のFLYING PAPARAZZI！": {
     "display_title": "東の国のFLYING PAPARAZZI！",
-    "artist": "樋奈月みつ",
+    "artist": "樋奈月みつ　obj:TONO",
     "heardle_file": "東の国のFLYING PAPARAZZI！_heardle.ogg",
     "preview_file": "東の国のFLYING PAPARAZZI！_preview.ogg",
     "metadata": {
@@ -4019,6 +4016,1205 @@
       "mod_time": "2010-05-15 06:00:10",
       "insane_levels": [
         "★2"
+      ]
+    }
+  },
+  "88D": {
+    "display_title": "88D",
+    "artist": "mommy",
+    "heardle_file": "88D_heardle.ogg",
+    "preview_file": "88D_preview.ogg",
+    "metadata": {
+      "genre": "HOUSE",
+      "bpm": "135",
+      "original_file": "88D_7A_.bme",
+      "mod_time": "2014-04-27 20:13:30",
+      "insane_levels": [
+        "★3"
+      ]
+    }
+  },
+  "8th：Planet": {
+    "display_title": "8th：Planet",
+    "artist": "P4koo",
+    "heardle_file": "8th：Planet_heardle.ogg",
+    "preview_file": "8th：Planet_preview.ogg",
+    "metadata": {
+      "genre": "Space Techno",
+      "bpm": "158",
+      "original_file": "8planet7N.bme",
+      "mod_time": "2013-05-14 22:33:32",
+      "insane_levels": [
+        "★3"
+      ]
+    }
+  },
+  "Act #000000": {
+    "display_title": "Act #000000",
+    "artist": "Saz",
+    "heardle_file": "Act #000000_heardle.ogg",
+    "preview_file": "Act #000000_preview.ogg",
+    "metadata": {
+      "genre": "trance/hardstyle",
+      "bpm": "150",
+      "original_file": "Saz^Actkuro.bme",
+      "mod_time": "2007-10-13 23:49:14",
+      "insane_levels": [
+        "★3"
+      ]
+    }
+  },
+  "affected": {
+    "display_title": "affected",
+    "artist": "System SFM",
+    "heardle_file": "affected_heardle.ogg",
+    "preview_file": "affected_preview.ogg",
+    "metadata": {
+      "genre": "TRANCE",
+      "bpm": "144",
+      "original_file": "affected_7l.bme",
+      "mod_time": "2005-03-27 19:47:50",
+      "insane_levels": [
+        "★3"
+      ]
+    }
+  },
+  "CHERRY DOLL": {
+    "display_title": "CHERRY DOLL",
+    "artist": "カラフル・サウンズ・ポート",
+    "heardle_file": "CHERRY DOLL_heardle.ogg",
+    "preview_file": "CHERRY DOLL_preview.ogg",
+    "metadata": {
+      "genre": "Bubblegum Dnace",
+      "bpm": "137",
+      "original_file": "cherry_doll_n.bms",
+      "mod_time": "2010-12-07 20:32:36",
+      "insane_levels": [
+        "★3"
+      ]
+    }
+  },
+  "Debut": {
+    "display_title": "Debut",
+    "artist": "sweez, tigerlily, roop feat. lily, photonskyto",
+    "heardle_file": "Debut_heardle.ogg",
+    "preview_file": "Debut_preview.ogg",
+    "metadata": {
+      "genre": "ELECTRO",
+      "bpm": "140",
+      "original_file": "_1p.bms",
+      "mod_time": "2010-09-24 03:33:40",
+      "insane_levels": [
+        "★3"
+      ]
+    }
+  },
+  "elegante": {
+    "display_title": "elegante",
+    "artist": "高嶺　愛花",
+    "heardle_file": "elegante_heardle.ogg",
+    "preview_file": "elegante_preview.ogg",
+    "metadata": {
+      "genre": "Maiden House",
+      "bpm": "133",
+      "original_file": "03_another.bme",
+      "mod_time": "2010-09-24 18:35:58",
+      "insane_levels": [
+        "★3"
+      ]
+    }
+  },
+  "Faith": {
+    "display_title": "Faith",
+    "artist": "CrossGear",
+    "heardle_file": "Faith_heardle.ogg",
+    "preview_file": "Faith_preview.ogg",
+    "metadata": {
+      "genre": "Progressive Trance",
+      "bpm": "152",
+      "original_file": "[03 SP HYPER].bms",
+      "mod_time": "2010-01-24 21:43:18",
+      "insane_levels": [
+        "★3"
+      ]
+    }
+  },
+  "Imperishable Night 2006": {
+    "display_title": "Imperishable Night 2006",
+    "artist": "篠螺悠那 feat. 鯛の小骨",
+    "heardle_file": "Imperishable Night 2006_heardle.ogg",
+    "preview_file": "Imperishable Night 2006_preview.ogg",
+    "metadata": {
+      "genre": "Euro Rave",
+      "bpm": "161",
+      "original_file": "imperi_7.bme",
+      "mod_time": "2006-04-28 02:07:34",
+      "insane_levels": [
+        "★3",
+        "★10"
+      ]
+    }
+  },
+  "J2U": {
+    "display_title": "J2U",
+    "artist": "しろ",
+    "heardle_file": "J2U_heardle.ogg",
+    "preview_file": "J2U_preview.ogg",
+    "metadata": {
+      "genre": "j-euro",
+      "bpm": "158",
+      "original_file": "j2u@@.bms",
+      "mod_time": "2000-03-16 22:19:52",
+      "insane_levels": [
+        "★3"
+      ]
+    }
+  },
+  "Jade Star": {
+    "display_title": "Jade Star",
+    "artist": "SHIKI",
+    "heardle_file": "Jade Star_heardle.ogg",
+    "preview_file": "Jade Star_preview.ogg",
+    "metadata": {
+      "genre": "Trance",
+      "bpm": "152",
+      "original_file": "shiki_jadestar7ano.bms",
+      "mod_time": "2007-08-23 14:06:45",
+      "insane_levels": [
+        "★3"
+      ]
+    }
+  },
+  "kindly breeze": {
+    "display_title": "kindly breeze",
+    "artist": "mo_no_chrome feat.Salita",
+    "heardle_file": "kindly breeze_heardle.ogg",
+    "preview_file": "kindly breeze_preview.ogg",
+    "metadata": {
+      "genre": "House",
+      "bpm": "128",
+      "original_file": "kindly breeze_A.bms",
+      "mod_time": "2014-10-18 21:58:42",
+      "insane_levels": [
+        "★3"
+      ]
+    }
+  },
+  "L9": {
+    "display_title": "L9",
+    "artist": "paraoka",
+    "heardle_file": "L9_heardle.ogg",
+    "preview_file": "L9_preview.ogg",
+    "metadata": {
+      "genre": "progressive(LIGHT 7)",
+      "bpm": "123",
+      "original_file": "9_7l.bme",
+      "mod_time": "2001-10-17 21:11:30",
+      "insane_levels": [
+        "★3",
+        "★12",
+        "★15",
+        "★23"
+      ]
+    }
+  },
+  "Mirai": {
+    "display_title": "Mirai",
+    "artist": "Est",
+    "heardle_file": "Mirai_heardle.ogg",
+    "preview_file": "Mirai_preview.ogg",
+    "metadata": {
+      "genre": "TRANCE",
+      "bpm": "152",
+      "original_file": "mirai.bme",
+      "mod_time": "2004-12-20 17:54:50",
+      "insane_levels": [
+        "★3"
+      ]
+    }
+  },
+  "night starter": {
+    "display_title": "night starter",
+    "artist": "ken",
+    "heardle_file": "night starter_heardle.ogg",
+    "preview_file": "night starter_preview.ogg",
+    "metadata": {
+      "genre": "Digi rock",
+      "bpm": "149",
+      "original_file": "nightnormal.bms",
+      "mod_time": "2000-04-01 17:38:30",
+      "insane_levels": [
+        "★3"
+      ]
+    }
+  },
+  "Over the Sky": {
+    "display_title": "Over the Sky",
+    "artist": "やっす〜/竹ボーキ",
+    "heardle_file": "Over the Sky_heardle.ogg",
+    "preview_file": "Over the Sky_preview.ogg",
+    "metadata": {
+      "genre": "Instrumental Rock",
+      "bpm": "144",
+      "original_file": "_Light[5key].bms",
+      "mod_time": "2004-08-25 14:56:00",
+      "insane_levels": [
+        "★3"
+      ]
+    }
+  },
+  "Poison AND÷OR Affection": {
+    "display_title": "Poison AND÷OR Affection",
+    "artist": "LeaF",
+    "heardle_file": "Poison AND÷OR Affection_heardle.ogg",
+    "preview_file": "Poison AND÷OR Affection_preview.ogg",
+    "metadata": {
+      "genre": "DEPENDANCE MUSIC",
+      "bpm": "120",
+      "original_file": "_N7.bms",
+      "mod_time": "2014-10-14 00:11:04",
+      "insane_levels": [
+        "★3"
+      ]
+    }
+  },
+  "PrayStation": {
+    "display_title": "PrayStation",
+    "artist": "Ras",
+    "heardle_file": "PrayStation_heardle.ogg",
+    "preview_file": "PrayStation_preview.ogg",
+    "metadata": {
+      "genre": "ELECTRO",
+      "bpm": "142",
+      "original_file": "PrayStation_0.bms",
+      "mod_time": "2012-03-31 02:52:18",
+      "insane_levels": [
+        "★3"
+      ]
+    }
+  },
+  "ROTTELER'S HOME": {
+    "display_title": "ROTTELER'S HOME",
+    "artist": "clap stick",
+    "heardle_file": "ROTTELER'S HOME_heardle.ogg",
+    "preview_file": "ROTTELER'S HOME_preview.ogg",
+    "metadata": {
+      "genre": "rotterdam house tatse",
+      "bpm": "200",
+      "original_file": "rottelh14e.bme",
+      "mod_time": "2005-10-30 14:00:00"
+    }
+  },
+  "STAGER": {
+    "display_title": "STAGER",
+    "artist": "Ras",
+    "heardle_file": "STAGER_heardle.ogg",
+    "preview_file": "STAGER_preview.ogg",
+    "metadata": {
+      "genre": "Tech electro",
+      "bpm": "146",
+      "original_file": "STAGER[7_Another].bms",
+      "mod_time": "2013-09-22 07:51:06",
+      "insane_levels": [
+        "★3"
+      ]
+    }
+  },
+  "Starry Fate": {
+    "display_title": "Starry Fate",
+    "artist": "TiS feat.紅梔子",
+    "heardle_file": "Starry Fate_heardle.ogg",
+    "preview_file": "Starry Fate_preview.ogg",
+    "metadata": {
+      "genre": "EUROBEAT",
+      "bpm": "162",
+      "original_file": "starryfate_A.bms",
+      "mod_time": "2015-07-04 16:50:34",
+      "insane_levels": [
+        "★3"
+      ]
+    }
+  },
+  "started": {
+    "display_title": "started",
+    "artist": "Ym1024 feat. lamie*",
+    "heardle_file": "started_heardle.ogg",
+    "preview_file": "started_preview.ogg",
+    "metadata": {
+      "genre": "J-Airy Pop",
+      "bpm": "136",
+      "original_file": "start_[7-6_Hyper].bme",
+      "mod_time": "2010-09-20 23:20:40",
+      "insane_levels": [
+        "★3"
+      ]
+    }
+  },
+  "subconsciousness": {
+    "display_title": "subconsciousness",
+    "artist": "guna with チーム・キュッキュ",
+    "heardle_file": "subconsciousness_heardle.ogg",
+    "preview_file": "subconsciousness_preview.ogg",
+    "metadata": {
+      "genre": "instrumental",
+      "bpm": "136",
+      "original_file": "subcons_n7.bme",
+      "mod_time": "2007-08-18 16:09:00",
+      "insane_levels": [
+        "★3",
+        "★19"
+      ]
+    }
+  },
+  "Super Mario Brothers Main Theme": {
+    "display_title": "Super Mario Brothers Main Theme",
+    "artist": "siromaru",
+    "heardle_file": "Super Mario Brothers Main Theme_heardle.ogg",
+    "preview_file": "Super Mario Brothers Main Theme_preview.ogg",
+    "metadata": {
+      "genre": "Game Music Arrange [7key]",
+      "bpm": "218",
+      "original_file": "mario_7.bme",
+      "mod_time": "2002-09-16 17:01:12",
+      "insane_levels": [
+        "★3"
+      ]
+    }
+  },
+  "the sorrow of the islands": {
+    "display_title": "the sorrow of the islands",
+    "artist": "narve",
+    "heardle_file": "the sorrow of the islands_heardle.ogg",
+    "preview_file": "the sorrow of the islands_preview.ogg",
+    "metadata": {
+      "genre": "ibiza trance",
+      "bpm": "139",
+      "original_file": "islands_7.bme",
+      "mod_time": "2002-04-20 01:05:28",
+      "insane_levels": [
+        "★3",
+        "★6"
+      ]
+    }
+  },
+  "x-Aria": {
+    "display_title": "x-Aria",
+    "artist": "ridis",
+    "heardle_file": "x-Aria_heardle.ogg",
+    "preview_file": "x-Aria_preview.ogg",
+    "metadata": {
+      "genre": "intelligence",
+      "bpm": "130",
+      "original_file": "x-aria_7another.bme",
+      "mod_time": "2004-08-18 23:36:04",
+      "insane_levels": [
+        "★3",
+        "★8"
+      ]
+    }
+  },
+  "You're My Shining Star": {
+    "display_title": "You're My Shining Star",
+    "artist": "上杉うた feat.ARU＆MIKU",
+    "heardle_file": "You're My Shining Star_heardle.ogg",
+    "preview_file": "You're My Shining Star_preview.ogg",
+    "metadata": {
+      "genre": "jp-trance",
+      "bpm": "136",
+      "original_file": "_shiningstar_7a.bme",
+      "mod_time": "2009-09-21 19:48:10",
+      "insane_levels": [
+        "★3"
+      ]
+    }
+  },
+  "ΔΔ": {
+    "display_title": "ΔΔ",
+    "artist": "KA-KU",
+    "heardle_file": "ΔΔ_heardle.ogg",
+    "preview_file": "ΔΔ_preview.ogg",
+    "metadata": {
+      "genre": "SYMPHONIC WAVE",
+      "bpm": "200",
+      "original_file": "_dd_a.bms",
+      "mod_time": "2012-09-24 23:41:06",
+      "insane_levels": [
+        "★3"
+      ]
+    }
+  },
+  "おでんぱ☆ラヴガール -BMS EDIT-": {
+    "display_title": "おでんぱ☆ラヴガール -BMS EDIT-",
+    "artist": "ねこみりん feat.みゆ / むらしん",
+    "heardle_file": "おでんぱ☆ラヴガール -BMS EDIT-_heardle.ogg",
+    "preview_file": "おでんぱ☆ラヴガール -BMS EDIT-_preview.ogg",
+    "metadata": {
+      "genre": "AKIBA POP",
+      "bpm": "142",
+      "original_file": "_odenpa_lovegirl_7key.bme",
+      "mod_time": "2006-08-27 23:48:34",
+      "insane_levels": [
+        "★3"
+      ]
+    }
+  },
+  "その斯くも美しき紅に": {
+    "display_title": "その斯くも美しき紅に",
+    "artist": "天音",
+    "heardle_file": "その斯くも美しき紅に_heardle.ogg",
+    "preview_file": "その斯くも美しき紅に_preview.ogg",
+    "metadata": {
+      "genre": "Drum 'n' ambient",
+      "bpm": "155",
+      "original_file": "kourou_3another_nobga.bme",
+      "mod_time": "2007-01-19 23:28:38",
+      "insane_levels": [
+        "★3",
+        "★9"
+      ]
+    }
+  },
+  "タイヨウパラダイス(Lemon beads J-core bootleg)": {
+    "display_title": "タイヨウパラダイス(Lemon beads J-core bootleg)",
+    "artist": "nao/雪仁/水城新人 remixed by Lemon beads",
+    "heardle_file": "タイヨウパラダイス(Lemon beads J-core bootleg)_heardle.ogg",
+    "preview_file": "タイヨウパラダイス(Lemon beads J-core bootleg)_preview.ogg",
+    "metadata": {
+      "genre": "ネコぱら Vol.1 〜ソレイユ開店しました！〜",
+      "bpm": "180",
+      "original_file": "lemon_nekopara_master.bms",
+      "mod_time": "2015-12-18 18:05:42",
+      "insane_levels": [
+        "★3",
+        "★13"
+      ]
+    }
+  },
+  "夜桜": {
+    "display_title": "夜桜",
+    "artist": "彩音 / 小宮真央",
+    "heardle_file": "夜桜_heardle.ogg",
+    "preview_file": "夜桜_preview.ogg",
+    "metadata": {
+      "genre": "oriental -5key-",
+      "bpm": "135",
+      "original_file": "_52.bms",
+      "mod_time": "2006-02-11 23:00:00",
+      "insane_levels": [
+        "★3",
+        "★5"
+      ]
+    }
+  },
+  "感情の摩天楼 ～ Cosmic Mind": {
+    "display_title": "感情の摩天楼 ～ Cosmic Mind",
+    "artist": "zun",
+    "heardle_file": "感情の摩天楼 ～ Cosmic Mind_heardle.ogg",
+    "preview_file": "感情の摩天楼 ～ Cosmic Mind_preview.ogg",
+    "metadata": {
+      "genre": "東方星蓮船",
+      "bpm": "155",
+      "original_file": "_c_mind14n.bme",
+      "mod_time": "2010-01-24 17:03:40",
+      "insane_levels": [
+        "★3"
+      ]
+    }
+  },
+  "斧と盾": {
+    "display_title": "斧と盾",
+    "artist": "tarolabo BGA:MiRA vo:小宮真央",
+    "heardle_file": "斧と盾_heardle.ogg",
+    "preview_file": "斧と盾_preview.ogg",
+    "metadata": {
+      "genre": "[Orchestra]",
+      "bpm": "160",
+      "original_file": "axand_07_11.bme",
+      "mod_time": "2007-08-25 22:33:30",
+      "insane_levels": [
+        "★3"
+      ]
+    }
+  },
+  "桜華月": {
+    "display_title": "桜華月",
+    "artist": "AKITO",
+    "heardle_file": "桜華月_heardle.ogg",
+    "preview_file": "桜華月_preview.ogg",
+    "metadata": {
+      "genre": "JP-SPIRITUAL POP",
+      "bpm": "138",
+      "original_file": "sakura_14normal.bme",
+      "mod_time": "2003-03-14 16:52:50",
+      "insane_levels": [
+        "★7",
+        "★8"
+      ]
+    }
+  },
+  "死腐乃美「彼岸花」第二～空虚偽心～赤紅": {
+    "display_title": "死腐乃美「彼岸花」第二～空虚偽心～赤紅",
+    "artist": "44teru-k",
+    "heardle_file": "死腐乃美「彼岸花」第二～空虚偽心～赤紅_heardle.ogg",
+    "preview_file": "死腐乃美「彼岸花」第二～空虚偽心～赤紅_preview.ogg",
+    "metadata": {
+      "genre": "artcore",
+      "bpm": "180",
+      "original_file": "_higa2_7a.bme",
+      "mod_time": "2009-07-11 22:24:48",
+      "insane_levels": [
+        "★3"
+      ]
+    }
+  },
+  "煉獄-Priestess": {
+    "display_title": "煉獄-Priestess",
+    "artist": "Luxion mixed by lemon",
+    "heardle_file": "煉獄-Priestess_heardle.ogg",
+    "preview_file": "煉獄-Priestess_preview.ogg",
+    "metadata": {
+      "genre": "DOUBLEKILL",
+      "bpm": "196",
+      "original_file": "_1rengoku_Priestess .bme",
+      "mod_time": "2014-01-27 22:59:56",
+      "insane_levels": [
+        "★3",
+        "★23"
+      ]
+    }
+  },
+  "物怪舞踏": {
+    "display_title": "物怪舞踏",
+    "artist": "篠螺悠那",
+    "heardle_file": "物怪舞踏_heardle.ogg",
+    "preview_file": "物怪舞踏_preview.ogg",
+    "metadata": {
+      "genre": "fantasia",
+      "bpm": "182",
+      "original_file": "mononoke_7n.bme",
+      "mod_time": "2005-08-03 19:28:54",
+      "insane_levels": [
+        "★3"
+      ]
+    }
+  },
+  "雪解け色フラワーズ": {
+    "display_title": "雪解け色フラワーズ",
+    "artist": "daisan / zue-row",
+    "heardle_file": "雪解け色フラワーズ_heardle.ogg",
+    "preview_file": "雪解け色フラワーズ_preview.ogg",
+    "metadata": {
+      "genre": "Euphoric Artbreaks",
+      "bpm": "150",
+      "original_file": "yukidoke_B.bme",
+      "mod_time": "2014-04-26 18:07:32",
+      "insane_levels": [
+        "★3"
+      ]
+    }
+  },
+  "風仁雷仁": {
+    "display_title": "風仁雷仁",
+    "artist": "カラフル・サウンズ・ポート",
+    "heardle_file": "風仁雷仁_heardle.ogg",
+    "preview_file": "風仁雷仁_preview.ogg",
+    "metadata": {
+      "genre": "classical crossover pop",
+      "bpm": "142",
+      "original_file": "hujin_a.bme",
+      "mod_time": "2010-09-15 00:38:08",
+      "insane_levels": [
+        "★3"
+      ]
+    }
+  },
+  "A.S.D.F": {
+    "display_title": "A.S.D.F",
+    "artist": "Needle Valley",
+    "heardle_file": "A.S.D.F_heardle.ogg",
+    "preview_file": "A.S.D.F_preview.ogg",
+    "metadata": {
+      "genre": "TECHNO",
+      "bpm": "138",
+      "original_file": "sdf.bms",
+      "mod_time": "2005-07-30 22:14:10",
+      "insane_levels": [
+        "★4"
+      ]
+    }
+  },
+  "Act Beloved": {
+    "display_title": "Act Beloved",
+    "artist": "Nene Anegasaki feat. Salita",
+    "heardle_file": "Act Beloved_heardle.ogg",
+    "preview_file": "Act Beloved_preview.ogg",
+    "metadata": {
+      "genre": "PIANO HOUSE",
+      "bpm": "131",
+      "original_file": "__spa.bme",
+      "mod_time": "2011-09-25 19:41:36",
+      "insane_levels": [
+        "★4"
+      ]
+    }
+  },
+  "Aihana": {
+    "display_title": "Aihana",
+    "artist": "高嶺　愛花",
+    "heardle_file": "Aihana_heardle.ogg",
+    "preview_file": "Aihana_preview.ogg",
+    "metadata": {
+      "genre": "Uplifting Trance",
+      "bpm": "140",
+      "original_file": "aihana_7loveplusmaxheart.bme",
+      "mod_time": "2009-09-26 19:35:34",
+      "insane_levels": [
+        "★4"
+      ]
+    }
+  },
+  "AutumnBreeze": {
+    "display_title": "AutumnBreeze",
+    "artist": "Grand thaw",
+    "heardle_file": "AutumnBreeze_heardle.ogg",
+    "preview_file": "AutumnBreeze_preview.ogg",
+    "metadata": {
+      "genre": "EPIC TRANCE",
+      "bpm": "88.6",
+      "original_file": "7A.bme",
+      "mod_time": "2005-11-06 21:22:48",
+      "insane_levels": [
+        "★4",
+        "★23"
+      ]
+    }
+  },
+  "beyond the limit": {
+    "display_title": "beyond the limit",
+    "artist": "Syatten",
+    "heardle_file": "beyond the limit_heardle.ogg",
+    "preview_file": "beyond the limit_preview.ogg",
+    "metadata": {
+      "genre": "Trance",
+      "bpm": "148",
+      "original_file": "beyond_7.bme",
+      "mod_time": "2004-04-08 23:08:00",
+      "insane_levels": [
+        "★4",
+        "★13"
+      ]
+    }
+  },
+  "cadence": {
+    "display_title": "cadence",
+    "artist": "saikoro",
+    "heardle_file": "cadence_heardle.ogg",
+    "preview_file": "cadence_preview.ogg",
+    "metadata": {
+      "genre": "trancestep",
+      "bpm": "180",
+      "original_file": "cadence-5.bms",
+      "mod_time": "2002-04-09 08:38:00",
+      "insane_levels": [
+        "★4"
+      ]
+    }
+  },
+  "Caixa D' Aqua": {
+    "display_title": "Caixa D' Aqua",
+    "artist": "NAOSUKE",
+    "heardle_file": "Caixa D' Aqua_heardle.ogg",
+    "preview_file": "Caixa D' Aqua_preview.ogg",
+    "metadata": {
+      "genre": "MPB",
+      "bpm": "264",
+      "original_file": "03_mpb_h.bms",
+      "mod_time": "2008-01-30 15:54:04",
+      "insane_levels": [
+        "★4"
+      ]
+    }
+  },
+  "Calamity Fortune": {
+    "display_title": "Calamity Fortune",
+    "artist": "ZUN remixed by LeaF",
+    "heardle_file": "Calamity Fortune_heardle.ogg",
+    "preview_file": "Calamity Fortune_preview.ogg",
+    "metadata": {
+      "genre": "EMOTIONAL HARDCORE TECHNO",
+      "bpm": "200",
+      "original_file": "_A.bms",
+      "mod_time": "2013-03-23 21:45:34",
+      "insane_levels": [
+        "★4",
+        "★7"
+      ]
+    }
+  },
+  "Childie Sharp": {
+    "display_title": "Childie Sharp",
+    "artist": "nmk/かなえゆめ",
+    "heardle_file": "Childie Sharp_heardle.ogg",
+    "preview_file": "Childie Sharp_preview.ogg",
+    "metadata": {
+      "genre": "EUROBEAT",
+      "bpm": "166",
+      "original_file": "_A.bms",
+      "mod_time": "2012-03-31 18:04:50",
+      "insane_levels": [
+        "★4"
+      ]
+    }
+  },
+  "Dance Doll Dream": {
+    "display_title": "Dance Doll Dream",
+    "artist": "daisan feat. えみゅう。 / zue-row",
+    "heardle_file": "Dance Doll Dream_heardle.ogg",
+    "preview_file": "Dance Doll Dream_preview.ogg",
+    "metadata": {
+      "genre": "Waltz",
+      "bpm": "200",
+      "original_file": "ddd_A.bme",
+      "mod_time": "2014-12-06 18:37:44",
+      "insane_levels": [
+        "★4"
+      ]
+    }
+  },
+  "DESPERATE": {
+    "display_title": "DESPERATE",
+    "artist": "NIKITA",
+    "heardle_file": "DESPERATE_heardle.ogg",
+    "preview_file": "DESPERATE_preview.ogg",
+    "metadata": {
+      "genre": "HARD ELECTRO pf",
+      "bpm": "165",
+      "original_file": "DESPERATE_A.bms",
+      "mod_time": "2013-09-17 21:28:04",
+      "insane_levels": [
+        "★4"
+      ]
+    }
+  },
+  "Dstorv": {
+    "display_title": "Dstorv",
+    "artist": "Feryquitous",
+    "heardle_file": "Dstorv_heardle.ogg",
+    "preview_file": "Dstorv_preview.ogg",
+    "metadata": {
+      "genre": "fake out",
+      "bpm": "191",
+      "original_file": "Dstorv_act1_single2.bme",
+      "mod_time": "2014-10-19 20:09:14",
+      "insane_levels": [
+        "★4"
+      ]
+    }
+  },
+  "Durandal -Magical Freezing-": {
+    "display_title": "Durandal -Magical Freezing-",
+    "artist": "ねこみりん / obj:stella",
+    "heardle_file": "Durandal -Magical Freezing-_heardle.ogg",
+    "preview_file": "Durandal -Magical Freezing-_preview.ogg",
+    "metadata": {
+      "genre": "CRYSTAL TRANCE",
+      "bpm": "150",
+      "original_file": "_durandal_radio_03.bme",
+      "mod_time": "2009-10-04 14:14:20",
+      "insane_levels": [
+        "★4"
+      ]
+    }
+  },
+  "Eclisse": {
+    "display_title": "Eclisse",
+    "artist": "moma / *8284*",
+    "heardle_file": "Eclisse_heardle.ogg",
+    "preview_file": "Eclisse_preview.ogg",
+    "metadata": {
+      "genre": "Piano Forte",
+      "bpm": "160",
+      "original_file": "eclisse_14a.bme",
+      "mod_time": "2010-12-23 22:56:17",
+      "insane_levels": [
+        "★4"
+      ]
+    }
+  },
+  "FirmamenT": {
+    "display_title": "FirmamenT",
+    "artist": "はがね / bga:BspotV / object:kumo",
+    "heardle_file": "FirmamenT_heardle.ogg",
+    "preview_file": "FirmamenT_preview.ogg",
+    "metadata": {
+      "genre": "Melodic DnB",
+      "bpm": "176",
+      "original_file": "[BMS]FirmamenT_5易.bms",
+      "mod_time": "2015-09-19 08:35:28",
+      "insane_levels": [
+        "★4"
+      ]
+    }
+  },
+  "GIN TONIC FLAVOR": {
+    "display_title": "GIN TONIC FLAVOR",
+    "artist": "q/stol / obj by bbangsami",
+    "heardle_file": "GIN TONIC FLAVOR_heardle.ogg",
+    "preview_file": "GIN TONIC FLAVOR_preview.ogg",
+    "metadata": {
+      "genre": "ELECTRO FUNK",
+      "bpm": "126",
+      "original_file": "gin_tonic_flavor_14an.bme",
+      "mod_time": "2013-09-21 08:47:50",
+      "insane_levels": [
+        "★4"
+      ]
+    }
+  },
+  "Here we go! (TM edit)": {
+    "display_title": "Here we go! (TM edit)",
+    "artist": "Awesomeman / obj:あーさん",
+    "heardle_file": "Here we go! (TM edit)_heardle.ogg",
+    "preview_file": "Here we go! (TM edit)_preview.ogg",
+    "metadata": {
+      "genre": "マイアミベース",
+      "bpm": "149",
+      "original_file": "miamibass.bms",
+      "mod_time": "2010-05-12 16:55:26",
+      "insane_levels": [
+        "★4"
+      ]
+    }
+  },
+  "Liberte": {
+    "display_title": "Liberte",
+    "artist": "源屋",
+    "heardle_file": "Liberte_heardle.ogg",
+    "preview_file": "Liberte_preview.ogg",
+    "metadata": {
+      "genre": "Trance",
+      "bpm": "142",
+      "original_file": "Liberte-Hyper.bme",
+      "mod_time": "2005-12-28 00:58:06",
+      "insane_levels": [
+        "★4"
+      ]
+    }
+  },
+  "Lieselotte": {
+    "display_title": "Lieselotte",
+    "artist": "wa. / deadblue238",
+    "heardle_file": "Lieselotte_heardle.ogg",
+    "preview_file": "Lieselotte_preview.ogg",
+    "metadata": {
+      "genre": "Gothic Lolita Memoir",
+      "bpm": "180",
+      "original_file": "_lieselotte_7x.bme",
+      "mod_time": "2012-09-15 06:36:34",
+      "insane_levels": [
+        "★4"
+      ]
+    }
+  },
+  "linear umbra": {
+    "display_title": "linear umbra",
+    "artist": "wigen",
+    "heardle_file": "linear umbra_heardle.ogg",
+    "preview_file": "linear umbra_preview.ogg",
+    "metadata": {
+      "genre": "art core",
+      "bpm": "85.5",
+      "original_file": "lu_7a.bme",
+      "mod_time": "2009-12-13 00:36:32",
+      "insane_levels": [
+        "★4"
+      ]
+    }
+  },
+  "Love & Justice": {
+    "display_title": "Love & Justice",
+    "artist": "フロン / ラズベリル / obj:vese",
+    "heardle_file": "Love & Justice_heardle.ogg",
+    "preview_file": "Love & Justice_preview.ogg",
+    "metadata": {
+      "genre": "LOVELY HIGHSPEED",
+      "bpm": "200",
+      "original_file": "_012_flonne_hys.bme",
+      "mod_time": "2010-10-28 23:40:42",
+      "insane_levels": [
+        "★4",
+        "★13",
+        "★21",
+        "★24"
+      ]
+    }
+  },
+  "Magical Love Words": {
+    "display_title": "Magical Love Words",
+    "artist": "源屋feat.ユスラ",
+    "heardle_file": "Magical Love Words_heardle.ogg",
+    "preview_file": "Magical Love Words_preview.ogg",
+    "metadata": {
+      "genre": "Akiba Pop",
+      "bpm": "155",
+      "original_file": "minamotoya_normal.bms",
+      "mod_time": "2006-08-27 21:54:16",
+      "insane_levels": [
+        "★4"
+      ]
+    }
+  },
+  "omega iii - beyond the flare": {
+    "display_title": "omega iii - beyond the flare",
+    "artist": "ATM",
+    "heardle_file": "omega iii - beyond the flare_heardle.ogg",
+    "preview_file": "omega iii - beyond the flare_preview.ogg",
+    "metadata": {
+      "genre": "organic dnb",
+      "bpm": "165",
+      "original_file": "omega_iii.bms",
+      "mod_time": "2001-12-28 15:41:08",
+      "insane_levels": [
+        "★4"
+      ]
+    }
+  },
+  "Party 4U": {
+    "display_title": "Party 4U",
+    "artist": "cranky",
+    "heardle_file": "Party 4U_heardle.ogg",
+    "preview_file": "Party 4U_preview.ogg",
+    "metadata": {
+      "genre": "RAVE",
+      "bpm": "159",
+      "original_file": "party4ux.bms",
+      "mod_time": "1999-12-24 07:11:00",
+      "insane_levels": [
+        "★4",
+        "★9",
+        "★13"
+      ]
+    }
+  },
+  "Pure Ruby": {
+    "display_title": "Pure Ruby",
+    "artist": "SHIKI",
+    "heardle_file": "Pure Ruby_heardle.ogg",
+    "preview_file": "Pure Ruby_preview.ogg",
+    "metadata": {
+      "genre": "TRANCE CORE",
+      "bpm": "178",
+      "original_file": "pure7a.bme",
+      "mod_time": "2008-09-21 08:58:26",
+      "insane_levels": [
+        "★4",
+        "★12"
+      ]
+    }
+  },
+  "Romancecar (Kukan Junkyu Edit)": {
+    "display_title": "Romancecar (Kukan Junkyu Edit)",
+    "artist": "jet:tones",
+    "heardle_file": "Romancecar (Kukan Junkyu Edit)_heardle.ogg",
+    "preview_file": "Romancecar (Kukan Junkyu Edit)_preview.ogg",
+    "metadata": {
+      "genre": "Liquid Funk",
+      "bpm": "175",
+      "original_file": "romancecar_14.bme",
+      "mod_time": "2007-03-18 01:11:00",
+      "insane_levels": [
+        "★4"
+      ]
+    }
+  },
+  "SEPIA": {
+    "display_title": "SEPIA",
+    "artist": "SHIKI/-45",
+    "heardle_file": "SEPIA_heardle.ogg",
+    "preview_file": "SEPIA_preview.ogg",
+    "metadata": {
+      "genre": "TRANCE(5key)",
+      "bpm": "142",
+      "original_file": "sepia5.bms",
+      "mod_time": "2003-01-08 02:52:02",
+      "insane_levels": [
+        "★4",
+        "★6",
+        "★8"
+      ]
+    }
+  },
+  "That's the style!!": {
+    "display_title": "That's the style!!",
+    "artist": "nez",
+    "heardle_file": "That's the style!!_heardle.ogg",
+    "preview_file": "That's the style!!_preview.ogg",
+    "metadata": {
+      "genre": "Happy HardCore",
+      "bpm": "200",
+      "original_file": "5key(Another).bms",
+      "mod_time": "2002-08-30 22:11:48",
+      "insane_levels": [
+        "★4",
+        "★10"
+      ]
+    }
+  },
+  "TURNDOWN": {
+    "display_title": "TURNDOWN",
+    "artist": "Ras",
+    "heardle_file": "TURNDOWN_heardle.ogg",
+    "preview_file": "TURNDOWN_preview.ogg",
+    "metadata": {
+      "genre": "Tech electro",
+      "bpm": "147",
+      "original_file": "TURNDOWN[another].bms",
+      "mod_time": "2014-10-19 22:31:16",
+      "insane_levels": [
+        "★4"
+      ]
+    }
+  },
+  "Wicked plot": {
+    "display_title": "Wicked plot",
+    "artist": "keyc",
+    "heardle_file": "Wicked plot_heardle.ogg",
+    "preview_file": "Wicked plot_preview.ogg",
+    "metadata": {
+      "genre": "m9 MINIMAL",
+      "bpm": "149",
+      "original_file": "_m9_1(N).bms",
+      "mod_time": "2006-05-01 19:12:06",
+      "insane_levels": [
+        "★4"
+      ]
+    }
+  },
+  "wilis": {
+    "display_title": "wilis",
+    "artist": "parakeet 41 / G",
+    "heardle_file": "wilis_heardle.ogg",
+    "preview_file": "wilis_preview.ogg",
+    "metadata": {
+      "genre": "terror",
+      "bpm": "172",
+      "original_file": "wilis.bme",
+      "mod_time": "2001-02-04 21:16:40",
+      "insane_levels": [
+        "★4"
+      ]
+    }
+  },
+  "★LittlE HearTs★": {
+    "display_title": "★LittlE HearTs★",
+    "artist": "ねこみみ魔法使い",
+    "heardle_file": "★LittlE HearTs★_heardle.ogg",
+    "preview_file": "★LittlE HearTs★_preview.ogg",
+    "metadata": {
+      "genre": "HappY PoPcorN",
+      "bpm": "200",
+      "original_file": "littlehearts.bme",
+      "mod_time": "2004-02-18 18:18:50",
+      "insane_levels": [
+        "★4",
+        "★9",
+        "★12",
+        "★23"
+      ]
+    }
+  },
+  "★SweeT DiscoverY★": {
+    "display_title": "★SweeT DiscoverY★",
+    "artist": "sasakure.UK / sept",
+    "heardle_file": "★SweeT DiscoverY★_heardle.ogg",
+    "preview_file": "★SweeT DiscoverY★_preview.ogg",
+    "metadata": {
+      "genre": "HappY PoPcorN / 14keys",
+      "bpm": "180",
+      "original_file": "sweetd~[14]sept.bme",
+      "mod_time": "2002-10-23 00:03:00",
+      "insane_levels": [
+        "★4",
+        "★6",
+        "★14"
+      ]
+    }
+  },
+  "あめふりこねこ": {
+    "display_title": "あめふりこねこ",
+    "artist": "ねこみみ魔法使い/obj:nobody",
+    "heardle_file": "あめふりこねこ_heardle.ogg",
+    "preview_file": "あめふりこねこ_preview.ogg",
+    "metadata": {
+      "genre": "shuffle",
+      "bpm": "118",
+      "original_file": "_nm21_21_5l.bms",
+      "mod_time": "2004-01-30 21:04:08",
+      "insane_levels": [
+        "★4",
+        "★21"
+      ]
+    }
+  },
+  "エストポリス伝記II ～バトル#2～": {
+    "display_title": "エストポリス伝記II ～バトル#2～",
+    "artist": "mattaku",
+    "heardle_file": "エストポリス伝記II ～バトル#2～_heardle.ogg",
+    "preview_file": "エストポリス伝記II ～バトル#2～_preview.ogg",
+    "metadata": {
+      "genre": "game music",
+      "bpm": "175",
+      "original_file": "est2 battle2 spnormal.bms",
+      "mod_time": "2010-11-21 07:13:02",
+      "insane_levels": [
+        "★4"
+      ]
+    }
+  },
+  "サンバランド": {
+    "display_title": "サンバランド",
+    "artist": "SAMBA MASTER 佐藤 -SATOH-",
+    "heardle_file": "サンバランド_heardle.ogg",
+    "preview_file": "サンバランド_preview.ogg",
+    "metadata": {
+      "genre": "ゆったり系サンバ",
+      "bpm": "132",
+      "original_file": "_sambaland_7normal.bme",
+      "mod_time": "2012-03-31 23:50:50",
+      "insane_levels": [
+        "★4",
+        "★23"
+      ]
+    }
+  },
+  "特効薬はカニピラフ": {
+    "display_title": "特効薬はカニピラフ",
+    "artist": "セナ",
+    "heardle_file": "特効薬はカニピラフ_heardle.ogg",
+    "preview_file": "特効薬はカニピラフ_preview.ogg",
+    "metadata": {
+      "genre": "Crab Music",
+      "bpm": "131.08",
+      "original_file": "_kanipilaf_04.bms",
+      "mod_time": "2013-09-23 21:53:46",
+      "insane_levels": [
+        "★4",
+        "★16"
+      ]
+    }
+  },
+  "雪月夜鐘": {
+    "display_title": "雪月夜鐘",
+    "artist": "guna",
+    "heardle_file": "雪月夜鐘_heardle.ogg",
+    "preview_file": "雪月夜鐘_preview.ogg",
+    "metadata": {
+      "genre": "fantasia",
+      "bpm": "120",
+      "original_file": "rickytick_bell_14a.bme",
+      "mod_time": "2005-08-06 15:25:50",
+      "insane_levels": [
+        "★4"
       ]
     }
   }
