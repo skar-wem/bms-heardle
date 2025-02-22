@@ -440,6 +440,10 @@ function showModal(message, isSuccess = false) {
     const modal = document.getElementById('gameOverModal');
     const modalMessage = document.getElementById('modalMessage');
     const modalTitle = document.querySelector('.modal-title');
+    const modalContent = document.querySelector('.modal-content');
+    
+    // Remove previous classes
+    modalContent.classList.remove('win', 'lose');
     
     modalTitle.textContent = isSuccess ? 'Congratulations!' : 'Game Over';
     modalTitle.style.color = isSuccess ? 'var(--neon-pink)' : 'var(--neon-blue)';
@@ -448,11 +452,52 @@ function showModal(message, isSuccess = false) {
     const [firstPart, songPart] = message.split('The song was');
     modalMessage.innerHTML = `${firstPart}The song was:<br><span class="song-reveal">${songPart}</span>`;
     
+    // Add animation class based on win/lose
+    modalContent.classList.add(isSuccess ? 'win' : 'lose');
+    
     modal.style.display = 'block';
     isGameOver = true;
     
-    // Remove the click-outside-to-close behavior
-    modal.onclick = null;
+    if (isSuccess) {
+        createWinParticles(); // Add this line
+    }
+    // Add animation to the final segment
+    const segments = document.querySelectorAll('.progress-segment');
+    const lastSegment = segments[attempts - 1];
+    if (lastSegment) {
+        lastSegment.classList.add('animate');
+        setTimeout(() => lastSegment.classList.remove('animate'), 500);
+    }
+    
+    // Play sound effect (optional)
+    playGameOverSound(isSuccess);
+}
+
+// Add a function to play sound effects (optional)
+function playGameOverSound(isSuccess) {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    if (isSuccess) {
+        // Win sound
+        oscillator.frequency.setValueAtTime(587.33, audioContext.currentTime); // D5
+        oscillator.frequency.setValueAtTime(880, audioContext.currentTime + 0.1); // A5
+        gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+    } else {
+        // Lose sound
+        oscillator.frequency.setValueAtTime(440, audioContext.currentTime); // A4
+        oscillator.frequency.setValueAtTime(349.23, audioContext.currentTime + 0.1); // F4
+        gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+    }
+    
+    oscillator.start();
+    oscillator.stop(audioContext.currentTime + 0.3);
 }
 
 function startNewGame() {
@@ -550,6 +595,8 @@ function submitGuess() {
         attempts++;
         
         if (attempts >= maxAttempts) {
+            updateProgressBar(); // Add this line to update the visual state
+            updateGuessHistory(); // Add this line to update history
             showModal(`Game Over! The song was "${currentSong.display_title}" by ${currentSong.cleanArtist}`);
             revealFullSong();
         } else {
@@ -599,6 +646,8 @@ function skipGuess() {
     attempts++;
 
     if (attempts >= maxAttempts) {
+        updateProgressBar(); // Add this line to update the visual state
+        updateGuessHistory();
         showModal(`Game Over! The song was "${currentSong.display_title}" by ${currentSong.cleanArtist}`);
         revealFullSong();
     } else {
@@ -640,6 +689,34 @@ function updateSkipButtonText() {
 
 function showResult(message) {
     document.getElementById('attempts-info').textContent = message;
+}
+
+
+function createWinParticles() {
+    const container = document.createElement('div');
+    container.style.position = 'fixed';
+    container.style.top = '0';
+    container.style.left = '0';
+    container.style.width = '100%';
+    container.style.height = '100%';
+    container.style.pointerEvents = 'none';
+    container.style.zIndex = '9998';
+    
+    for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.style.position = 'absolute';
+        particle.style.width = '10px';
+        particle.style.height = '10px';
+        particle.style.background = i % 2 ? 'var(--neon-pink)' : 'var(--neon-blue)';
+        particle.style.borderRadius = '50%';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animation = `particle ${Math.random() * 2 + 1}s ease-out`;
+        container.appendChild(particle);
+    }
+    
+    document.body.appendChild(container);
+    setTimeout(() => container.remove(), 3000);
 }
 
 async function shareResult() {
