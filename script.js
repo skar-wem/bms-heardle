@@ -81,7 +81,7 @@ function drawWave() {
     
     for (let i = 0; i < bufferLength; i += skipPoints) {
         const v = (dataArray[i] / 128.0 - 1) * 0.5;
-        const y = (v * waveCanvas.height / 4) + (waveCanvas.height / 1.6);
+        const y = (v * waveCanvas.height / 4) + (waveCanvas.height / 3);
         
         if (i === 0) {
             waveCtx.moveTo(x, y);
@@ -92,7 +92,7 @@ function drawWave() {
         x += sliceWidth;
     }
     
-    waveCtx.lineTo(waveCanvas.width, waveCanvas.height / 1.6);
+    waveCtx.lineTo(waveCanvas.width, waveCanvas.height / 3);
     waveCtx.stroke();
     
     animationId = requestAnimationFrame(drawWave);
