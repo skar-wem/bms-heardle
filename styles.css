@@ -506,8 +506,8 @@ body {
     text-align: center;
     color: var(--text-secondary);
     font-size: 0.9em;
-    margin-top: 10px;
-    min-height: 20px; /* Keep consistent height even when empty */
+    margin-top: 8px;
+    min-height: 18px; /* Keep consistent height even when empty */
 }
 
 .suggestion-box {
