@@ -2698,5 +2698,629 @@
       "original_file": "yaku_5.bms",
       "mod_time": "2001-09-23 15:29:46"
     }
+  },
+  "Aeventyr": {
+    "display_title": "Aeventyr",
+    "artist": "Grand Thaw",
+    "heardle_file": "Aeventyr_heardle.ogg",
+    "preview_file": "Aeventyr_preview.ogg",
+    "metadata": {
+      "genre": "Neo Pagan Folk",
+      "bpm": "132",
+      "original_file": "Aventyr[A].bme",
+      "mod_time": "2012-09-23 08:31:24"
+    }
+  },
+  "Air": {
+    "display_title": "Air",
+    "artist": "SHIKI",
+    "heardle_file": "Air_heardle.ogg",
+    "preview_file": "Air_preview.ogg",
+    "metadata": {
+      "genre": "TRANCE CORE(7key)",
+      "bpm": "180",
+      "original_file": "air7light.bme",
+      "mod_time": "2003-12-23 21:48:56"
+    }
+  },
+  "Amusing Night Party": {
+    "display_title": "Amusing Night Party",
+    "artist": "yukitani",
+    "heardle_file": "Amusing Night Party_heardle.ogg",
+    "preview_file": "Amusing Night Party_preview.ogg",
+    "metadata": {
+      "genre": "Boogie Woogie",
+      "bpm": "196",
+      "original_file": "anp_dpa.bme",
+      "mod_time": "2014-04-21 13:28:44"
+    }
+  },
+  "baby blue blanket": {
+    "display_title": "baby blue blanket",
+    "artist": "Sora",
+    "heardle_file": "baby blue blanket_heardle.ogg",
+    "preview_file": "baby blue blanket_preview.ogg",
+    "metadata": {
+      "genre": "Epic Trance",
+      "bpm": "142",
+      "original_file": "bbb_dp2.bms",
+      "mod_time": "2006-08-23 14:05:40"
+    }
+  },
+  "BABYLON": {
+    "display_title": "BABYLON",
+    "artist": "SHIKI",
+    "heardle_file": "BABYLON_heardle.ogg",
+    "preview_file": "BABYLON_preview.ogg",
+    "metadata": {
+      "genre": "HARD RENAISSANCE",
+      "bpm": "190",
+      "original_file": "babylon7h.bme",
+      "mod_time": "2009-09-26 18:19:06"
+    }
+  },
+  "Blink": {
+    "display_title": "Blink",
+    "artist": "Clotho feat.Salita",
+    "heardle_file": "Blink_heardle.ogg",
+    "preview_file": "Blink_preview.ogg",
+    "metadata": {
+      "genre": "Liberty Song",
+      "bpm": "162",
+      "original_file": "Blink(H).bme",
+      "mod_time": "2014-10-19 19:56:44"
+    }
+  },
+  "BRILLIANT STAR ～煌星の雫～": {
+    "display_title": "BRILLIANT STAR ～煌星の雫～",
+    "artist": "shimizushi",
+    "heardle_file": "BRILLIANT STAR ～煌星の雫～_heardle.ogg",
+    "preview_file": "BRILLIANT STAR ～煌星の雫～_preview.ogg",
+    "metadata": {
+      "genre": "White Canvas",
+      "bpm": "140",
+      "original_file": "B_STAR_03(7B).bms",
+      "mod_time": "2014-10-08 21:25:08"
+    }
+  },
+  "Cross Galaxy": {
+    "display_title": "Cross Galaxy",
+    "artist": "kanone",
+    "heardle_file": "Cross Galaxy_heardle.ogg",
+    "preview_file": "Cross Galaxy_preview.ogg",
+    "metadata": {
+      "genre": "ENERGETIC TRANCE",
+      "bpm": "150",
+      "original_file": "crossgalaxy_N.bms",
+      "mod_time": "2011-09-26 01:20:04"
+    }
+  },
+  "Cynthia -with moon light-": {
+    "display_title": "Cynthia -with moon light-",
+    "artist": "maxXx65535",
+    "heardle_file": "Cynthia -with moon light-_heardle.ogg",
+    "preview_file": "Cynthia -with moon light-_preview.ogg",
+    "metadata": {
+      "genre": "Artcore",
+      "bpm": "187",
+      "original_file": "65535_cynthia_5n.bms",
+      "mod_time": "2004-05-02 18:14:50"
+    }
+  },
+  "DANJIRI": {
+    "display_title": "DANJIRI",
+    "artist": "kireji / Symphonian",
+    "heardle_file": "DANJIRI_heardle.ogg",
+    "preview_file": "DANJIRI_preview.ogg",
+    "metadata": {
+      "genre": "HARDCORE",
+      "bpm": "186",
+      "original_file": "dnjrdn.bme",
+      "mod_time": "2010-07-30 05:40:24"
+    }
+  },
+  "Everblue": {
+    "display_title": "Everblue",
+    "artist": "Ym1024 feat. lamie*",
+    "heardle_file": "Everblue_heardle.ogg",
+    "preview_file": "Everblue_preview.ogg",
+    "metadata": {
+      "genre": "J-Airy Pop",
+      "bpm": "134",
+      "original_file": "Everblue_[7-5_Normal].bme",
+      "mod_time": "2012-09-23 21:20:36"
+    }
+  },
+  "Fading Star": {
+    "display_title": "Fading Star",
+    "artist": "ginkiha",
+    "heardle_file": "Fading Star_heardle.ogg",
+    "preview_file": "Fading Star_preview.ogg",
+    "metadata": {
+      "genre": "TRANCE",
+      "bpm": "140",
+      "original_file": "fs_h.bms",
+      "mod_time": "2012-09-29 23:09:52"
+    }
+  },
+  "fragment of tears": {
+    "display_title": "fragment of tears",
+    "artist": "五条下位＆仲村芽衣子 // movie: kagi55x",
+    "heardle_file": "fragment of tears_heardle.ogg",
+    "preview_file": "fragment of tears_preview.ogg",
+    "metadata": {
+      "genre": "HYPER J-POP YUKIATSU",
+      "bpm": "175",
+      "original_file": "_01_frag7n.bme",
+      "mod_time": "2011-09-24 22:53:36"
+    }
+  },
+  "Free Hand zero": {
+    "display_title": "Free Hand zero",
+    "artist": "菊田研究所/lactate",
+    "heardle_file": "Free Hand zero_heardle.ogg",
+    "preview_file": "Free Hand zero_preview.ogg",
+    "metadata": {
+      "genre": "progressive jazz",
+      "bpm": "260",
+      "original_file": "freehandz_hard.bms",
+      "mod_time": "2004-08-19 23:41:00"
+    }
+  },
+  "Freja": {
+    "display_title": "Freja",
+    "artist": "rider",
+    "heardle_file": "Freja_heardle.ogg",
+    "preview_file": "Freja_preview.ogg",
+    "metadata": {
+      "genre": "NUSTYLE GABBA",
+      "bpm": "91.5",
+      "original_file": "03_freja_another.bms",
+      "mod_time": "2012-05-06 23:02:30"
+    }
+  },
+  "Full of Tears": {
+    "display_title": "Full of Tears",
+    "artist": "Sentire",
+    "heardle_file": "Full of Tears_heardle.ogg",
+    "preview_file": "Full of Tears_preview.ogg",
+    "metadata": {
+      "genre": "TRAUMA",
+      "bpm": "145",
+      "original_file": "fot_another.bms",
+      "mod_time": "2006-08-27 16:54:40"
+    }
+  },
+  "G.N": {
+    "display_title": "G.N",
+    "artist": "keyc",
+    "heardle_file": "G.N_heardle.ogg",
+    "preview_file": "G.N_preview.ogg",
+    "metadata": {
+      "genre": "Nu Style Gabba",
+      "bpm": "177",
+      "original_file": "_gn1[7N].bms",
+      "mod_time": "2009-04-10 01:08:14"
+    }
+  },
+  "HAMMER the TANGRAM": {
+    "display_title": "HAMMER the TANGRAM",
+    "artist": "beatMARIO",
+    "heardle_file": "HAMMER the TANGRAM_heardle.ogg",
+    "preview_file": "HAMMER the TANGRAM_preview.ogg",
+    "metadata": {
+      "genre": "TECHNO(easy)",
+      "bpm": "144",
+      "original_file": "hama_e.bms",
+      "mod_time": "2003-10-03 01:05:38"
+    }
+  },
+  "HAPPY☆LUCKY☆BABY": {
+    "display_title": "HAPPY☆LUCKY☆BABY",
+    "artist": "DJ TAKUAN 及び 白羽美依 / Symphonian",
+    "heardle_file": "HAPPY☆LUCKY☆BABY_heardle.ogg",
+    "preview_file": "HAPPY☆LUCKY☆BABY_preview.ogg",
+    "metadata": {
+      "genre": "Jハッピコ！",
+      "bpm": "175",
+      "original_file": "happyluckybaby__7h.bme",
+      "mod_time": "2011-05-02 13:51:31"
+    }
+  },
+  "High-Priestess": {
+    "display_title": "High-Priestess",
+    "artist": "Luxion",
+    "heardle_file": "High-Priestess_heardle.ogg",
+    "preview_file": "High-Priestess_preview.ogg",
+    "metadata": {
+      "genre": "OVERKILL",
+      "bpm": "196",
+      "original_file": "H_P[NORMAL].bme",
+      "mod_time": "2012-09-22 03:49:44"
+    }
+  },
+  "HOOKER": {
+    "display_title": "HOOKER",
+    "artist": "パンダ７７号",
+    "heardle_file": "HOOKER_heardle.ogg",
+    "preview_file": "HOOKER_preview.ogg",
+    "metadata": {
+      "genre": "Tech electro",
+      "bpm": "144",
+      "original_file": "hooker_5.bms",
+      "mod_time": "2011-09-25 22:38:14"
+    }
+  },
+  "In a dream": {
+    "display_title": "In a dream",
+    "artist": "Team Shanghai Alice (Remixed by Est)",
+    "heardle_file": "In a dream_heardle.ogg",
+    "preview_file": "In a dream_preview.ogg",
+    "metadata": {
+      "genre": "TRANCE",
+      "bpm": "145",
+      "original_file": "dream.bme",
+      "mod_time": "2005-08-05 10:19:00"
+    }
+  },
+  "Jasmine Tea Girl": {
+    "display_title": "Jasmine Tea Girl",
+    "artist": "polysha",
+    "heardle_file": "Jasmine Tea Girl_heardle.ogg",
+    "preview_file": "Jasmine Tea Girl_preview.ogg",
+    "metadata": {
+      "genre": "House",
+      "bpm": "133",
+      "original_file": "SPN.bms",
+      "mod_time": "2016-09-30 02:00:54"
+    }
+  },
+  "Little ＂Sister＂ Bitch": {
+    "display_title": "Little ＂Sister＂ Bitch",
+    "artist": "t+pazolite",
+    "heardle_file": "Little ＂Sister＂ Bitch_heardle.ogg",
+    "preview_file": "Little ＂Sister＂ Bitch_preview.ogg",
+    "metadata": {
+      "genre": "Happy Hardcore -7 Q.E.D.-",
+      "bpm": "185",
+      "original_file": "mekurumekushimainecho.bme",
+      "mod_time": "2005-08-06 00:46:38"
+    }
+  },
+  "Loki": {
+    "display_title": "Loki",
+    "artist": "しらいし",
+    "heardle_file": "Loki_heardle.ogg",
+    "preview_file": "Loki_preview.ogg",
+    "metadata": {
+      "genre": "Classical Trance",
+      "bpm": "152",
+      "original_file": "_Loki_7N.bms",
+      "mod_time": "2011-03-20 16:59:18"
+    }
+  },
+  "Mario Paint (Time Regression Mix for BMS)": {
+    "display_title": "Mario Paint (Time Regression Mix for BMS)",
+    "artist": "ueotan",
+    "heardle_file": "Mario Paint (Time Regression Mix for BMS)_heardle.ogg",
+    "preview_file": "Mario Paint (Time Regression Mix for BMS)_preview.ogg",
+    "metadata": {
+      "genre": "GAMEMUSIC",
+      "bpm": "155",
+      "original_file": "#01_N.bme",
+      "mod_time": "2012-12-24 22:24:26"
+    }
+  },
+  "Memories of Sky-CoolDownMIX-": {
+    "display_title": "Memories of Sky-CoolDownMIX-",
+    "artist": "やっす〜",
+    "heardle_file": "Memories of Sky-CoolDownMIX-_heardle.ogg",
+    "preview_file": "Memories of Sky-CoolDownMIX-_preview.ogg",
+    "metadata": {
+      "genre": "HAPPY TRANCECORE",
+      "bpm": "180",
+      "original_file": "_5key[Normal].bms",
+      "mod_time": "2004-10-09 16:39:16"
+    }
+  },
+  "Midnight Driving": {
+    "display_title": "Midnight Driving",
+    "artist": "yassu / 小宮真央 (obj:MiiA)",
+    "heardle_file": "Midnight Driving_heardle.ogg",
+    "preview_file": "Midnight Driving_preview.ogg",
+    "metadata": {
+      "genre": "TRANCE",
+      "bpm": "134",
+      "original_file": "_7a_sobga_miia.bme",
+      "mod_time": "2011-02-11 08:01:14"
+    }
+  },
+  "MilK": {
+    "display_title": "MilK",
+    "artist": "モリモリあつし",
+    "heardle_file": "MilK_heardle.ogg",
+    "preview_file": "MilK_preview.ogg",
+    "metadata": {
+      "genre": "Future Bass",
+      "bpm": "150",
+      "original_file": "MilK[SP＿KAHLUA].bms",
+      "mod_time": "2015-11-26 21:27:00"
+    }
+  },
+  "Papyrus": {
+    "display_title": "Papyrus",
+    "artist": "papyrus",
+    "heardle_file": "Papyrus_heardle.ogg",
+    "preview_file": "Papyrus_preview.ogg",
+    "metadata": {
+      "genre": "Grand Finale",
+      "bpm": "150",
+      "original_file": "papy_m.bme",
+      "mod_time": "2009-09-26 22:47:46"
+    }
+  },
+  "PCM": {
+    "display_title": "PCM",
+    "artist": "E.Elgar rmx by bbangsami / deadblue238",
+    "heardle_file": "PCM_heardle.ogg",
+    "preview_file": "PCM_preview.ogg",
+    "metadata": {
+      "genre": "Pomp and hardCore Marches No.1",
+      "bpm": "175",
+      "original_file": "_pcm_5easy.bms",
+      "mod_time": "2013-03-01 21:44:12"
+    }
+  },
+  "Ray of Moonlight": {
+    "display_title": "Ray of Moonlight",
+    "artist": "-RYO-",
+    "heardle_file": "Ray of Moonlight_heardle.ogg",
+    "preview_file": "Ray of Moonlight_preview.ogg",
+    "metadata": {
+      "genre": "Piano Trance",
+      "bpm": "150",
+      "original_file": "rayofmoonlight_7keyN.bms",
+      "mod_time": "2012-09-23 23:43:10"
+    }
+  },
+  "Reason of being": {
+    "display_title": "Reason of being",
+    "artist": "sak respect for Arata Iiyoshi",
+    "heardle_file": "Reason of being_heardle.ogg",
+    "preview_file": "Reason of being_preview.ogg",
+    "metadata": {
+      "genre": "Finale",
+      "bpm": "50190",
+      "original_file": "_genesis.bms",
+      "mod_time": "2016-03-10 18:10:50"
+    }
+  },
+  "REWD B159 mix": {
+    "display_title": "REWD B159 mix",
+    "artist": "wint",
+    "heardle_file": "REWD B159 mix_heardle.ogg",
+    "preview_file": "REWD B159 mix_preview.ogg",
+    "metadata": {
+      "genre": "RAVE",
+      "bpm": "159",
+      "original_file": "rewd10.bms",
+      "mod_time": "2003-07-26 20:29:54"
+    }
+  },
+  "RE：START": {
+    "display_title": "RE：START",
+    "artist": "結月ゆかり and Ark-Z",
+    "heardle_file": "RE：START_heardle.ogg",
+    "preview_file": "RE：START_preview.ogg",
+    "metadata": {
+      "genre": "VOCALOID-TRANCEPOP",
+      "bpm": "145",
+      "original_file": "restart_spn.bms",
+      "mod_time": "2015-09-26 20:09:56"
+    }
+  },
+  "Romancing Sa・Ga3 ラストバトル RockArrange": {
+    "display_title": "Romancing Sa・Ga3 ラストバトル RockArrange",
+    "artist": "BMS:金ラメタキシード/MIDI:YNG-MK＆ヴァイス君",
+    "heardle_file": "Romancing Sa・Ga3 ラストバトル RockArrange_heardle.ogg",
+    "preview_file": "Romancing Sa・Ga3 ラストバトル RockArrange_preview.ogg",
+    "metadata": {
+      "genre": "Hard Rock",
+      "bpm": "126",
+      "original_file": "L_RSG3_LB.bms",
+      "mod_time": "2000-06-12 12:09:06"
+    }
+  },
+  "searoad tracks =side blue=": {
+    "display_title": "searoad tracks =side blue=",
+    "artist": "sasakure.UK",
+    "heardle_file": "searoad tracks =side blue=_heardle.ogg",
+    "preview_file": "searoad tracks =side blue=_preview.ogg",
+    "metadata": {
+      "genre": "Intelligence(7-Chain)",
+      "bpm": "148",
+      "original_file": "searemix2(3-7Chain).bme",
+      "mod_time": "2004-12-29 09:15:52"
+    }
+  },
+  "sensitive": {
+    "display_title": "sensitive",
+    "artist": "white crystal",
+    "heardle_file": "sensitive_heardle.ogg",
+    "preview_file": "sensitive_preview.ogg",
+    "metadata": {
+      "genre": "euro trance",
+      "bpm": "140",
+      "original_file": "sen14.bme",
+      "mod_time": "2003-05-31 16:43:26"
+    }
+  },
+  "SOLROS": {
+    "display_title": "SOLROS",
+    "artist": "Grand Thaw",
+    "heardle_file": "SOLROS_heardle.ogg",
+    "preview_file": "SOLROS_preview.ogg",
+    "metadata": {
+      "genre": "R'n'Balkan",
+      "bpm": "188",
+      "original_file": "SOLROS[MX].bme",
+      "mod_time": "2011-09-25 22:58:58"
+    }
+  },
+  "supernova[A4paper]": {
+    "display_title": "supernova[A4paper]",
+    "artist": "A4paper",
+    "heardle_file": "supernova[A4paper]_heardle.ogg",
+    "preview_file": "supernova[A4paper]_preview.ogg",
+    "metadata": {
+      "genre": "Energetic Trance",
+      "bpm": "156",
+      "original_file": "_01.bms",
+      "mod_time": "2013-05-31 03:51:54"
+    }
+  },
+  "une fleur": {
+    "display_title": "une fleur",
+    "artist": "orihika & XeON",
+    "heardle_file": "une fleur_heardle.ogg",
+    "preview_file": "une fleur_preview.ogg",
+    "metadata": {
+      "genre": "Jungle",
+      "bpm": "160",
+      "original_file": "normal.bms",
+      "mod_time": "2001-06-29 10:38:34"
+    }
+  },
+  "Velaciela": {
+    "display_title": "Velaciela",
+    "artist": "naotyu-",
+    "heardle_file": "Velaciela_heardle.ogg",
+    "preview_file": "Velaciela_preview.ogg",
+    "metadata": {
+      "genre": "Progressive Breaks",
+      "bpm": "155",
+      "original_file": "vela_07..bme",
+      "mod_time": "2006-08-25 12:04:26"
+    }
+  },
+  "world devoid of you": {
+    "display_title": "world devoid of you",
+    "artist": "void feat. Hiroko",
+    "heardle_file": "world devoid of you_heardle.ogg",
+    "preview_file": "world devoid of you_preview.ogg",
+    "metadata": {
+      "genre": "Euphoric Vocal J-Trance",
+      "bpm": "140",
+      "original_file": "11_sp_normal.bme",
+      "mod_time": "2009-02-15 11:20:58"
+    }
+  },
+  "アナログ横丁": {
+    "display_title": "アナログ横丁",
+    "artist": "牧野",
+    "heardle_file": "アナログ横丁_heardle.ogg",
+    "preview_file": "アナログ横丁_preview.ogg",
+    "metadata": {
+      "genre": "すこやか FUTURE POP",
+      "bpm": "162",
+      "original_file": "gadget[hard].bms",
+      "mod_time": "2014-10-19 23:50:40"
+    }
+  },
+  "僕たちの旅とエピローグ。": {
+    "display_title": "僕たちの旅とエピローグ。",
+    "artist": "ああああ",
+    "heardle_file": "僕たちの旅とエピローグ。_heardle.ogg",
+    "preview_file": "僕たちの旅とエピローグ。_preview.ogg",
+    "metadata": {
+      "genre": "game music",
+      "bpm": "98",
+      "original_file": "another.bms",
+      "mod_time": "2014-10-17 09:12:24"
+    }
+  },
+  "四十五年ノ雪桜": {
+    "display_title": "四十五年ノ雪桜",
+    "artist": "kozato",
+    "heardle_file": "四十五年ノ雪桜_heardle.ogg",
+    "preview_file": "四十五年ノ雪桜_preview.ogg",
+    "metadata": {
+      "genre": "Dramatical",
+      "bpm": "170",
+      "original_file": "7_another.bme",
+      "mod_time": "2007-08-11 15:24:20"
+    }
+  },
+  "夜明けの少女たち": {
+    "display_title": "夜明けの少女たち",
+    "artist": "Lubinn",
+    "heardle_file": "夜明けの少女たち_heardle.ogg",
+    "preview_file": "夜明けの少女たち_preview.ogg",
+    "metadata": {
+      "genre": "Sepia chant",
+      "bpm": "111",
+      "original_file": "G_5Key_N_steelbeast.bms",
+      "mod_time": "2009-09-26 23:47:52"
+    }
+  },
+  "幽雅に咲かせ、,墨染の桜": {
+    "display_title": "幽雅に咲かせ、,墨染の桜",
+    "artist": "zun",
+    "heardle_file": "幽雅に咲かせ、,墨染の桜_heardle.ogg",
+    "preview_file": "幽雅に咲かせ、,墨染の桜_preview.ogg",
+    "metadata": {
+      "genre": "dX",
+      "bpm": "143",
+      "original_file": "y-.bme",
+      "mod_time": "2007-12-13 20:11:12"
+    }
+  },
+  "恋の2-4-11": {
+    "display_title": "恋の2-4-11",
+    "artist": "Gun-SEKI feat.那珂",
+    "heardle_file": "恋の2-4-11_heardle.ogg",
+    "preview_file": "恋の2-4-11_preview.ogg",
+    "metadata": {
+      "genre": "IDOL SONG",
+      "bpm": "165",
+      "original_file": "koi_no_2411_hyperplus.bme",
+      "mod_time": "2014-10-17 00:38:50"
+    }
+  },
+  "月と狼と砂糖菓子": {
+    "display_title": "月と狼と砂糖菓子",
+    "artist": "campanellina",
+    "heardle_file": "月と狼と砂糖菓子_heardle.ogg",
+    "preview_file": "月と狼と砂糖菓子_preview.ogg",
+    "metadata": {
+      "genre": "スペランツァ",
+      "bpm": "180",
+      "original_file": "02_tuki_h.bms",
+      "mod_time": "2008-07-05 09:36:32"
+    }
+  },
+  "東の国のFLYING PAPARAZZI！": {
+    "display_title": "東の国のFLYING PAPARAZZI！",
+    "artist": "樋奈月みつ　obj:TONO",
+    "heardle_file": "東の国のFLYING PAPARAZZI！_heardle.ogg",
+    "preview_file": "東の国のFLYING PAPARAZZI！_preview.ogg",
+    "metadata": {
+      "genre": "SOARLY TRANCE POP",
+      "bpm": "175",
+      "original_file": "ir-beat9.bme",
+      "mod_time": "2007-03-17 20:24:02"
+    }
+  },
+  "飛燕草": {
+    "display_title": "飛燕草",
+    "artist": "2TORI",
+    "heardle_file": "飛燕草_heardle.ogg",
+    "preview_file": "飛燕草_preview.ogg",
+    "metadata": {
+      "genre": "TRANCE",
+      "bpm": "138",
+      "original_file": "hiensou_another.bms",
+      "mod_time": "2010-05-15 06:00:10"
+    }
   }
 }
