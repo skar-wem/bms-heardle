@@ -107,6 +107,14 @@ body {
     line-height: 1.2;
 }
 
+.insane-levels {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.9em;
+    color: #FFAE00;
+    text-shadow: 0 0 5px rgba(255, 174, 0, 0.5);
+}
+
 /* Make the game info even more compact on mobile */
 @media (max-width: 768px) {
     .game-info {
@@ -344,6 +352,7 @@ body {
 .song-reveal {
     display: block;
     margin-top: 10px;
+    margin-bottom: 0px;
     font-size: 1.1em;
     color: var(--neon-blue);
 }

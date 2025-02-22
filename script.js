@@ -442,15 +442,31 @@ function showModal(message, isSuccess = false) {
     const modalTitle = document.querySelector('.modal-title');
     const modalContent = document.querySelector('.modal-content');
     
+    // Debug log
+    console.log('Current song metadata:', currentSong.metadata);
+    
     // Remove previous classes
     modalContent.classList.remove('win', 'lose');
     
     modalTitle.textContent = isSuccess ? 'Congratulations!' : 'Game Over';
     modalTitle.style.color = isSuccess ? 'var(--neon-pink)' : 'var(--neon-blue)';
     
-    // Split the message at "The song was"
-    const [firstPart, songPart] = message.split('The song was');
-    modalMessage.innerHTML = `${firstPart}The song was:<br><span class="song-reveal">${songPart}</span>`;
+    // Create the message with song info and insane levels
+    let fullMessage = `${message.split('The song was')[0]}`;  // Get the first part
+    fullMessage += `The song was:<br><span class="song-reveal">${currentSong.display_title} - ${currentSong.cleanArtist}</span>`;
+    
+    // Add insane levels if they exist (with debug)
+    if (currentSong.metadata?.insane_levels) {
+        console.log('Found insane levels:', currentSong.metadata.insane_levels);
+        fullMessage += `<span class="insane-levels">${currentSong.metadata.insane_levels.join(', ')}</span>`;
+    } else {
+        console.log('No insane levels found');
+    }
+    
+    // Debug log the final message
+    console.log('Final modal message:', fullMessage);
+    
+    modalMessage.innerHTML = fullMessage;
     
     // Add animation class based on win/lose
     modalContent.classList.add(isSuccess ? 'win' : 'lose');
@@ -459,18 +475,8 @@ function showModal(message, isSuccess = false) {
     isGameOver = true;
     
     if (isSuccess) {
-        createWinParticles(); // Add this line
+        createWinParticles();
     }
-    // Add animation to the final segment
-    const segments = document.querySelectorAll('.progress-segment');
-    const lastSegment = segments[attempts - 1];
-    if (lastSegment) {
-        lastSegment.classList.add('animate');
-        setTimeout(() => lastSegment.classList.remove('animate'), 500);
-    }
-    
-    // Play sound effect (optional)
-    playGameOverSound(isSuccess);
 }
 
 // Add a function to play sound effects (optional)
@@ -754,17 +760,7 @@ async function shareResult() {
     // Create share text
     const shareText = `BMS Heardle\n${squares.join('')}\n${currentSong.display_title} - ${currentSong.cleanArtist}\nhttps://skar-wem.github.io/bms-heardle/`;
 
-    // Try to use share API if available
-    if (navigator.share) {
-        try {
-            await navigator.share({
-                text: shareText
-            });
-            return;
-        } catch (err) {
-            console.log('Error sharing:', err);
-        }
-    }
+
 
     // Fallback to clipboard
     try {
