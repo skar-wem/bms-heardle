@@ -8,16 +8,25 @@
     --text-secondary: #8a8a9a;
 }
 
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevents scrolling */
+    height: 100vh; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
+}
+
 body {
-    max-width: 800px;
+    max-width: 860px;
     margin: 0 auto;
     padding: 20px;
     font-family: 'Outfit', sans-serif;
-    background: transparent; /* Remove background from body */
     color: var(--text-primary);
     position: relative;
-    min-height: 100vh;
     box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .header {
@@ -167,6 +176,7 @@ body {
     position: relative;
     margin-bottom: 0px;
     width: 100%;
+    z-index: 1;
 }
 
 .progress-segments {
@@ -321,6 +331,7 @@ body {
     margin-bottom: 10px;
     width: 100%;
     box-sizing: border-box;
+    z-index: 1002;
 }
 
 .song-reveal {
@@ -346,6 +357,8 @@ body {
     font-size: 1em;
     transition: all 0.3s ease;
     box-sizing: border-box;
+    position: relative;
+    z-index: 1002;
 }
 
 #guess-input:focus {
@@ -376,13 +389,14 @@ body {
     position: relative;
     z-index: 1;
     max-width: 800px;
-    margin: 0 auto;
     width: 100%;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 10px;
+    padding: 40px 10px 0 10px; 
     box-sizing: border-box;
+    flex: 1;
 }
 
 #waveCanvas {
@@ -495,6 +509,9 @@ body {
 
 
 @media (max-width: 768px) {
+    html, body {
+        overflow: auto;
+    }
     body {
         padding: 10px;
     }
@@ -554,15 +571,13 @@ body {
 
 .container {
     width: 100%;
-    max-width: 800px; /* Increased from 600px */
+    max-width: 800px;
     margin: 0 auto;
     padding: 0 20px;
     box-sizing: border-box;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Center vertically */
-    gap: 20px; /* Consistent spacing between sections */
+    gap: 0px;
 }
 
 .guess-item.new {
@@ -577,7 +592,7 @@ body {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.8);
-    z-index: 1000;
+    z-index: 9999;
     backdrop-filter: blur(5px);
 }
 
@@ -594,6 +609,7 @@ body {
     box-shadow: 0 0 30px rgba(0, 243, 255, 0.2);
     max-width: 380px;
     width: 90%;
+    z-index: 10000;
 }
 
 .modal-title {
@@ -642,9 +658,11 @@ body {
     max-height: 200px;
     overflow-y: auto;
     display: none;
-    z-index: 1000;
+    z-index: 1001;
     border: 1px solid rgba(255, 0, 255, 0.2);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    padding: 8px; /* Add padding to the entire suggestion box */
+
 }
 
 @media (max-width: 768px) {
@@ -680,21 +698,37 @@ body {
     }
 
     .suggestion-box {
-        bottom: 100%;
-        top: auto;
-        max-height: 150px;
-        margin-bottom: 5px;
+        position: fixed; /* Change to fixed positioning on mobile */
+        left: 10px; /* Add some margin from edges */
+        right: 10px;
+        max-height: 40vh; /* Limit height to 40% of viewport */
+        bottom: auto; /* Remove bottom positioning */
+        top: 50%; /* Position in middle of screen */
+        transform: translateY(-50%); /* Center vertically */
+        background: #0a0a0f;
+        z-index: 1010; /* Ensure it's above everything */
     }
 
     .input-container {
-        margin-bottom: 10px;
-        position: relative; /* Ensure this stays in normal flow */
+        position: static; /* Change to static on mobile */
     }
 
     #guess-input {
-        padding: 12px;
-        position: relative; /* Ensure this stays in normal flow */
+        position: relative;
+        z-index: 1002;
     }
+
+    .suggestions-active::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1009;
+    }
+}
 
     #guess-history {
         min-height: calc(6 * (0.9em + 20px + 10px)); /* Smaller reserved space for mobile */
@@ -748,12 +782,14 @@ body {
 .song-title {
     color: var(--text-primary);
     font-size: 0.9em;
+    margin-bottom: 0px; 
 }
 
 .song-artist {
     color: var(--text-secondary);
     font-size: 0.8em;
-    margin-top: 4px;
+    margin-top: 0px;
+    margin-bottom: 4px;
 }
 
 .hidden {

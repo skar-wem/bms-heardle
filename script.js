@@ -12,6 +12,7 @@ let analyser;
 let waveCanvas;
 let waveCtx;
 let animationId;
+let isSubmitting = false
 
 function initAudioVisualizer() {
     // Create audio context and analyzer
@@ -187,11 +188,18 @@ function setupAutocomplete() {
 
     let selectedIndex = -1;
 
+    function toggleMobileSuggestions(show) {
+        document.body.classList.toggle('suggestions-active', show);
+        suggestionBox.style.display = show ? 'block' : 'none';
+        if (!show) {
+            selectedIndex = -1;
+        }
+    }
+
     input.addEventListener('input', function() {
         const query = this.value.toLowerCase();
         if (query.length < 2) {
-            suggestionBox.innerHTML = '';
-            suggestionBox.style.display = 'none';
+            toggleMobileSuggestions(false);
             return;
         }
 
@@ -208,11 +216,10 @@ function setupAutocomplete() {
                     <div class="song-artist">${song.artist}</div>
                 </div>`
             ).join('');
-            suggestionBox.style.display = 'block';
+            toggleMobileSuggestions(true);
             selectedIndex = -1;
         } else {
-            suggestionBox.innerHTML = '';
-            suggestionBox.style.display = 'none';
+            toggleMobileSuggestions(false);
         }
     });
 
@@ -222,43 +229,84 @@ function setupAutocomplete() {
         if (e.key === 'ArrowDown') {
             e.preventDefault();
             selectedIndex = Math.min(selectedIndex + 1, suggestions.length - 1);
-            updateSelection();
+            updateSelection(suggestions);
         } else if (e.key === 'ArrowUp') {
             e.preventDefault();
             selectedIndex = Math.max(selectedIndex - 1, -1);
-            updateSelection();
-        } else if (e.key === 'Enter' && selectedIndex >= 0) {
+            updateSelection(suggestions);
+        } else if (e.key === 'Enter') {
             e.preventDefault();
-            if (suggestions[selectedIndex]) {
+            if (selectedIndex >= 0 && suggestions[selectedIndex]) {
                 input.value = suggestions[selectedIndex].dataset.title;
-                suggestionBox.style.display = 'none';
+                toggleMobileSuggestions(false);
+                submitGuess(); // This will be the only submission
+                return; // Add this to prevent further processing
+            } else if (input.value.trim()) {
                 submitGuess();
             }
-        }
-
-        function updateSelection() {
-            Array.from(suggestions).forEach((suggestion, index) => {
-                suggestion.classList.toggle('selected', index === selectedIndex);
-                if (index === selectedIndex) {
-                    input.value = suggestion.dataset.title;
-                }
-            });
+        } else if (e.key === 'Escape') {
+            toggleMobileSuggestions(false);
+            input.blur();
         }
     });
+    
+
+    function updateSelection(suggestions) {
+        Array.from(suggestions).forEach((suggestion, index) => {
+            suggestion.classList.toggle('selected', index === selectedIndex);
+            if (index === selectedIndex) {
+                input.value = suggestion.dataset.title;
+                // Ensure selected item is visible in scroll view
+                suggestion.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        });
+    }
 
     suggestionBox.addEventListener('click', function(e) {
         const item = e.target.closest('.suggestion-item');
         if (item) {
             input.value = item.dataset.title;
-            suggestionBox.style.display = 'none';
+            toggleMobileSuggestions(false);
             submitGuess();
         }
     });
 
+    // Handle touches on mobile
+    suggestionBox.addEventListener('touchend', function(e) {
+        const item = e.target.closest('.suggestion-item');
+        if (item) {
+            e.preventDefault(); // Prevent any ghost clicks
+            input.value = item.dataset.title;
+            toggleMobileSuggestions(false);
+            submitGuess();
+        }
+    });
+
+    // Close suggestions when clicking outside
     document.addEventListener('click', function(e) {
         if (!input.contains(e.target) && !suggestionBox.contains(e.target)) {
-            suggestionBox.style.display = 'none';
+            toggleMobileSuggestions(false);
         }
+    });
+
+    // Handle backdrop clicks on mobile
+    document.addEventListener('touchend', function(e) {
+        if (document.body.classList.contains('suggestions-active') && 
+            !input.contains(e.target) && 
+            !suggestionBox.contains(e.target)) {
+            e.preventDefault();
+            toggleMobileSuggestions(false);
+        }
+    });
+
+    // Close suggestions when input loses focus
+    input.addEventListener('blur', function(e) {
+        // Small delay to allow for suggestion clicks
+        setTimeout(() => {
+            if (!suggestionBox.contains(document.activeElement)) {
+                toggleMobileSuggestions(false);
+            }
+        }, 200);
     });
 }
 
@@ -445,12 +493,17 @@ function updateSubmitButtonState() {
 }
 
 function submitGuess() {
-    if (isGameOver) return;
+    if (isGameOver || isSubmitting) return;
+    
+    isSubmitting = true;
     
     const guessInput = document.getElementById('guess-input');
     const guess = guessInput.value.trim();
     
-    if (!guess) return; // Don't process empty guesses
+    if (!guess) {
+        isSubmitting = false;
+        return; // Don't process empty guesses
+    }
     
     // Check if the guess exactly matches any song title in the list
     const isValidTitle = songList.some(song => 
@@ -462,6 +515,7 @@ function submitGuess() {
         showResult("Please select a valid song title from the suggestions");
         guessInput.value = ''; // Clear the input
         updateSubmitButtonState();
+        isSubmitting = false;
         return;
     }
     
@@ -499,8 +553,17 @@ function submitGuess() {
             updateSkipButtonText();
         }
     }
+    
+    // Clear input and update button state immediately
     guessInput.value = '';
     updateSubmitButtonState();
+    
+    // Reset the submitting flag and ensure input is cleared after a short delay
+    setTimeout(() => {
+        isSubmitting = false;
+        guessInput.value = ''; // Add another clear here to ensure it's cleared
+        updateSubmitButtonState();
+    }, 100);
 }
 
 function setupModalEnterKey() {
