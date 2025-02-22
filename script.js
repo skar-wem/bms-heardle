@@ -167,6 +167,12 @@ function startGame() {
     const player = document.getElementById('audio-player');
     player.src = `game_audio/${currentSong.heardle_file}`; // Use heardle file for gameplay
     
+    // Reset all segments
+    const segments = document.querySelectorAll('.progress-segment');
+    segments.forEach(segment => {
+        segment.classList.remove('played', 'current', 'correct');
+    });
+    
     incorrectGuesses = [];
     updateGuessHistory();
     updateProgressBar();
@@ -256,7 +262,7 @@ function setupAutocomplete() {
     });
 }
 
-// Update playCurrentSegment function
+// Update the playCurrentSegment function
 function playCurrentSegment() {
     if (isGameOver && !isPlaying) return;
 
@@ -266,12 +272,11 @@ function playCurrentSegment() {
 
     if (isPlaying) {
         player.pause();
+        player.currentTime = 0;
         playButton.textContent = 'Play';
         isPlaying = false;
-        progressFill.style.transition = 'none';
         progressFill.style.width = '0%';
         
-        // Cancel animation when stopped
         if (animationId) {
             cancelAnimationFrame(animationId);
             animationId = null;
@@ -283,23 +288,7 @@ function playCurrentSegment() {
 
     // Reset and prepare for playback
     player.currentTime = 0;
-    progressFill.style.transition = 'none';
     progressFill.style.width = '0%';
-    progressFill.offsetHeight;
-
-    // Set audio duration limit
-    player.addEventListener('timeupdate', function stopAtDuration() {
-        if (player.currentTime >= duration) {
-            player.pause();
-            player.removeEventListener('timeupdate', stopAtDuration);
-            playButton.textContent = 'Play';
-            isPlaying = false;
-            if (animationId) {
-                cancelAnimationFrame(animationId);
-                animationId = null;
-            }
-        }
-    });
 
     const playPromise = player.play();
     
@@ -308,28 +297,81 @@ function playCurrentSegment() {
             playButton.textContent = 'Stop';
             isPlaying = true;
 
-            // Start wave animation
             if (!animationId && audioContext) {
                 drawWave();
             }
 
-            requestAnimationFrame(() => {
-                progressFill.style.transition = `width ${duration}s linear`;
-                progressFill.style.width = '100%';
-            });
+            // Remove any transition
+            progressFill.style.transition = 'none';
+            
+            // Set up the timer to stop at the current allowed duration
+            setTimeout(() => {
+                if (isPlaying) {
+                    player.pause();
+                    player.currentTime = 0;
+                    playButton.textContent = 'Play';
+                    isPlaying = false;
+                    if (animationId) {
+                        cancelAnimationFrame(animationId);
+                        animationId = null;
+                    }
+                }
+            }, duration * 1000);
+
+            // Start time for animation
+            const startTime = performance.now();
+            
+            // Animation function
+            function updateProgress(currentTime) {
+                if (!isPlaying) return;
+                
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / (duration * 1000), 1);
+                progressFill.style.width = `${progress * (duration / 16) * 100}%`;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateProgress);
+                }
+            }
+            
+            requestAnimationFrame(updateProgress);
         });
     }
 }
 
-function updateProgressBar() {
+
+function updateProgressBar(currentTime = 0, duration = 0) {
+    const progressFill = document.querySelector('.progress-fill');
     const segments = document.querySelectorAll('.progress-segment');
+    
+    // Get the current allowed duration based on attempts
+    const allowedDuration = progressDurations[attempts];
+    
+    // Calculate the maximum width percentage based on current attempts
+    const maxWidth = (allowedDuration / 16) * 100; // 16 seconds is full song length
+    
+    if (currentTime > 0 && duration > 0) {
+        // During playback
+        let percentage = (currentTime / duration) * 100;
+        // Limit the percentage to the allowed duration
+        percentage = Math.min(percentage, maxWidth);
+        progressFill.style.width = `${percentage}%`;
+    } else {
+        // When not playing
+        progressFill.style.width = '0%';
+    }
+
+    // Clear all segment classes first
+    segments.forEach(segment => {
+        segment.classList.remove('played', 'current', 'correct');
+    });
+
+    // Update segments visual
     segments.forEach((segment, index) => {
         if (index < attempts) {
-            segment.className = 'progress-segment played';
+            segment.classList.add('played');
         } else if (index === attempts) {
-            segment.className = 'progress-segment current';
-        } else {
-            segment.className = 'progress-segment';
+            segment.classList.add('current');
         }
     });
 }
@@ -438,14 +480,15 @@ function submitGuess() {
         
         showModal(`Correct! The song was "${currentSong.display_title}" by ${currentSong.cleanArtist}`, true);
         revealFullSong();
-        // Add a delay before enabling modal Enter key
         setTimeout(() => {
             setupModalEnterKey();
         }, 500);
-
     } else {
+        const segments = document.querySelectorAll('.progress-segment');
+        segments[attempts].classList.add('played'); // Add red color for current segment
         incorrectGuesses.push(guess);
         attempts++;
+        
         if (attempts >= maxAttempts) {
             showModal(`Game Over! The song was "${currentSong.display_title}" by ${currentSong.cleanArtist}`);
             revealFullSong();
@@ -453,7 +496,7 @@ function submitGuess() {
             showResult(`Try again! ${maxAttempts - attempts} attempts remaining`);
             updateProgressBar();
             updateGuessHistory();
-            updateSkipButtonText(); 
+            updateSkipButtonText();
         }
     }
     guessInput.value = '';
@@ -481,16 +524,19 @@ function setupModalEnterKey() {
 function skipGuess() {
     if (isGameOver) return;
     
-    incorrectGuesses.push("⏭️ Skipped"); // Add skip to guess history with an emoji
+    incorrectGuesses.push("⏭️ Skipped");
+    const segments = document.querySelectorAll('.progress-segment');
+    segments[attempts].classList.add('played'); // Add red color for current segment
     attempts++;
+
     if (attempts >= maxAttempts) {
         showModal(`Game Over! The song was "${currentSong.display_title}" by ${currentSong.cleanArtist}`);
         revealFullSong();
     } else {
         showResult(`Skipped! ${maxAttempts - attempts} attempts remaining`);
         updateProgressBar();
-        updateGuessHistory();  
-        updateSkipButtonText(); // Add this line to update the display
+        updateGuessHistory();
+        updateSkipButtonText();
     }
 }
 
@@ -646,6 +692,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 cancelAnimationFrame(animationId);
                 animationId = null;
             }
+        }
+    });
+
+    player.addEventListener('timeupdate', () => {
+        if (isPlaying && !isGameOver) {
+            updateProgressBar(player.currentTime, 16); // Use 16 seconds as total duration
         }
     });
 

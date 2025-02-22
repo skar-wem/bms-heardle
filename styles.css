@@ -28,7 +28,7 @@ body {
 
 .header h1 {
     margin-bottom: 2px;
-    font-size: 3em;
+    font-size: 4em;
     letter-spacing: 2px;
     background: linear-gradient(
         90deg,
@@ -51,7 +51,7 @@ body {
 .header p {
     color: var(--text-secondary);
     margin: 5px 0;
-    font-size: 1.1em;
+    font-size: 1.3em;
 }
 
 .game-stats {
@@ -176,11 +176,30 @@ body {
 }
 
 .progress-segment {
-    flex: 1;
-    height: 8px;
+    height: 12px;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 4px;
     transition: all 0.3s ease;
+}
+
+/* Adjust widths based on actual durations */
+.progress-segment:nth-child(1) { /* 0-1s */
+    flex: 1;
+}
+.progress-segment:nth-child(2) { /* 1-2s */
+    flex: 1;
+}
+.progress-segment:nth-child(3) { /* 2-4s */
+    flex: 2;
+}
+.progress-segment:nth-child(4) { /* 4-8s */
+    flex: 4;
+}
+.progress-segment:nth-child(5) { /* 8-12s */
+    flex: 4;
+}
+.progress-segment:nth-child(6) { /* 12-16s */
+    flex: 4;
 }
 
 .progress-segment.played {
@@ -200,11 +219,12 @@ body {
 
 .progress-bar {
     width: 100%;
-    height: 4px;
+    height: 6px;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 2px;
-    overflow: hidden;
+    overflow: visible;
     margin-top: 15px;
+    position: relative;
 }
 
 .progress-fill {
@@ -215,6 +235,85 @@ body {
     transition: width linear;
     will-change: width;
     transform: translateZ(0);
+    position: relative;
+    z-index: 2;
+}
+
+.progress-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent calc(6.25% - 1px),  /* 1s */
+        rgba(255, 255, 255, 0.3) calc(6.25% - 1px),
+        rgba(255, 255, 255, 0.3) 6.25%,
+        transparent 6.25%,
+        transparent calc(12.5% - 1px),  /* 2s */
+        rgba(255, 255, 255, 0.3) calc(12.5% - 1px),
+        rgba(255, 255, 255, 0.3) 12.5%,
+        transparent 12.5%,
+        transparent calc(25% - 1px),    /* 4s */
+        rgba(255, 255, 255, 0.3) calc(25% - 1px),
+        rgba(255, 255, 255, 0.3) 25%,
+        transparent 25%,
+        transparent calc(50% - 1px),    /* 8s */
+        rgba(255, 255, 255, 0.3) calc(50% - 1px),
+        rgba(255, 255, 255, 0.3) 50%,
+        transparent 50%,
+        transparent calc(75% - 1px),    /* 12s */
+        rgba(255, 255, 255, 0.3) calc(75% - 1px),
+        rgba(255, 255, 255, 0.3) 75%,
+        transparent 75%,
+        transparent calc(100% - 1px),   /* 16s */
+        rgba(255, 255, 255, 0.3) calc(100% - 1px),
+        rgba(255, 255, 255, 0.3) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+
+/* Add segment markers */
+.progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent calc(6.25% - 1px),  /* 1s */
+        rgba(255, 255, 255, 0.3) calc(6.25% - 1px),
+        rgba(255, 255, 255, 0.3) 6.25%,
+        transparent 6.25%,
+        transparent calc(12.5% - 1px),  /* 2s */
+        rgba(255, 255, 255, 0.3) calc(12.5% - 1px),
+        rgba(255, 255, 255, 0.3) 12.5%,
+        transparent 12.5%,
+        transparent calc(25% - 1px),    /* 4s */
+        rgba(255, 255, 255, 0.3) calc(25% - 1px),
+        rgba(255, 255, 255, 0.3) 25%,
+        transparent 25%,
+        transparent calc(50% - 1px),    /* 8s */
+        rgba(255, 255, 255, 0.3) calc(50% - 1px),
+        rgba(255, 255, 255, 0.3) 50%,
+        transparent 50%,
+        transparent calc(75% - 1px),    /* 12s */
+        rgba(255, 255, 255, 0.3) calc(75% - 1px),
+        rgba(255, 255, 255, 0.3) 75%,
+        transparent 75%,
+        transparent calc(100% - 1px),   /* 16s */
+        rgba(255, 255, 255, 0.3) calc(100% - 1px),
+        rgba(255, 255, 255, 0.3) 100%
+    );
+    pointer-events: none;
 }
 
 .input-container {
@@ -371,16 +470,27 @@ body {
 #guess-history {
     width: 100%;
     box-sizing: border-box;
+    min-height: calc(6 * (1.1em + 30px + 16px)); /* Height for 6 guess items (font-size + padding + margins) */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align items to top */
+    margin-bottom: 10px; /* Space for stats */
 }
 
+/* Adjust guess items to fit in the reserved space */
 .guess-item {
-    margin: 5px 0;
-    padding: 10px;
-    background: rgba(30, 30, 40, 0.8); /* Darker, less translucent background */
+    padding: 5px;
+    font-size: 1.1em;
+    margin: 2px 0;
+    background: rgba(30, 30, 40, 0.8);
     border-radius: 6px;
     color: rgba(255, 0, 0, 0.8);
-    font-size: 0.9em;
     text-align: center;
+}
+
+/* Make visible when added */
+.guess-item.new {
+    opacity: 1;
 }
 
 @media (max-width: 768px) {
@@ -418,15 +528,15 @@ body {
 
 @keyframes pulseRed {
     0% {
-        background: rgba(80, 20, 20, 0.9); /* Darker red pulse */
+        background: rgba(80, 20, 20, 0.9);
         transform: scale(1);
     }
     50% {
-        background: rgba(60, 20, 20, 0.8); /* Darker middle state */
+        background: rgba(60, 20, 20, 0.8);
         transform: scale(1.02);
     }
     100% {
-        background: rgba(30, 30, 40, 0.8); /* Match final state with guess-item */
+        background: rgba(30, 30, 40, 0.8);
         transform: scale(1);
     }
 }
@@ -437,10 +547,15 @@ body {
 
 .container {
     width: 100%;
-    max-width: 600px; /* Slightly smaller than body max-width */
+    max-width: 800px; /* Increased from 600px */
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 0 20px;
     box-sizing: border-box;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    gap: 20px; /* Consistent spacing between sections */
 }
 
 .guess-item.new {
@@ -571,6 +686,16 @@ body {
     #guess-input {
         padding: 12px;
         position: relative; /* Ensure this stays in normal flow */
+    }
+
+    #guess-history {
+        min-height: calc(6 * (0.9em + 20px + 10px)); /* Smaller reserved space for mobile */
+    }
+    
+    .guess-item {
+        padding: 10px;
+        font-size: 0.9em;
+        margin: 5px 0;
     }
 
     .button-container {
