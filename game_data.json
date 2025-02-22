@@ -873,6 +873,9 @@
       "original_file": "gengaozoA.bme",
       "mod_time": "2003-08-04 09:11:12",
       "insane_levels": [
+        "★4",
+        "★4",
+        "★12",
         "★14",
         "★24"
       ]
@@ -2531,7 +2534,11 @@
       "genre": "NOCTURNE",
       "bpm": "156",
       "original_file": "AltMirroBell_H.bme",
-      "mod_time": "2009-12-12 23:50:16"
+      "mod_time": "2009-12-12 23:50:16",
+      "insane_levels": [
+        "★1",
+        "★4"
+      ]
     }
   },
   "Armais": {
@@ -2844,7 +2851,11 @@
       "genre": "rapid pop",
       "bpm": "190",
       "original_file": "66_rm_happy.bme",
-      "mod_time": "2001-12-22 03:50:16"
+      "mod_time": "2001-12-22 03:50:16",
+      "insane_levels": [
+        "★1",
+        "★5"
+      ]
     }
   },
   "J219": {
@@ -3010,7 +3021,10 @@
       "genre": "HAPPY HARDCORE",
       "bpm": "170",
       "original_file": "02hyper.bme",
-      "mod_time": "2009-09-26 11:26:16"
+      "mod_time": "2009-09-26 11:26:16",
+      "insane_levels": [
+        "★1"
+      ]
     }
   },
   "Wasabi": {
@@ -3050,7 +3064,12 @@
       "genre": "KIRBY POP",
       "bpm": "172",
       "original_file": "_tsky_5_A.bms",
-      "mod_time": "2003-08-01 11:18:04"
+      "mod_time": "2003-08-01 11:18:04",
+      "insane_levels": [
+        "★1",
+        "★6",
+        "★19"
+      ]
     }
   },
   "エピトゥリカの祀": {
@@ -3221,6 +3240,8 @@
       "original_file": "air7light.bme",
       "mod_time": "2003-12-23 21:48:56",
       "insane_levels": [
+        "★2",
+        "★3",
         "★6",
         "★8",
         "★12",
