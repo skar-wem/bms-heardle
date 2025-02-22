@@ -493,6 +493,7 @@ body {
     opacity: 1;
 }
 
+
 @media (max-width: 768px) {
     body {
         padding: 10px;
@@ -524,7 +525,13 @@ body {
         width: 100%;
         font-size: 0.9em;
     }
+    
+    .container, .content-wrapper {
+        max-width: 100%;
+        padding: 0 5px; /* Reduce side padding */
+    }
 }
+
 
 @keyframes pulseRed {
     0% {
@@ -585,18 +592,19 @@ body {
     text-align: center;
     border: 1px solid var(--neon-blue);
     box-shadow: 0 0 30px rgba(0, 243, 255, 0.2);
-    max-width: 400px;
+    max-width: 380px;
     width: 90%;
 }
 
 .modal-title {
     color: var(--neon-blue);
     margin-bottom: 20px;
-    font-size: 1.5em;
+    font-size: 1.4em;
 }
 
 .modal-text {
     margin-bottom: 25px;
+    font-size: 0.9em; 
     color: var(--text-secondary);
 }
 
@@ -607,7 +615,7 @@ body {
     padding: 12px 30px;
     border-radius: 25px;
     cursor: pointer;
-    font-size: 1em;
+    font-size: 0.9em;
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 1px;
