@@ -78,6 +78,7 @@ body {
     width: 100%;
     box-sizing: border-box;
     margin-bottom: 60px; /* Add space for fixed stats */
+    margin-top: 10px;
 }
 
 
@@ -653,6 +654,8 @@ body {
     position: absolute;
     left: 0;
     right: 0;
+    top: 100%; /* This makes it extend upwards from the input */
+    margin-bottom: 5px;
     background: #0a0a0f;
     border-radius: 10px;
     max-height: 200px;
@@ -661,8 +664,7 @@ body {
     z-index: 1001;
     border: 1px solid rgba(255, 0, 255, 0.2);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-    padding: 8px; /* Add padding to the entire suggestion box */
-
+    padding: 8px;
 }
 
 @media (max-width: 768px) {
@@ -698,37 +700,22 @@ body {
     }
 
     .suggestion-box {
-        position: fixed; /* Change to fixed positioning on mobile */
-        left: 10px; /* Add some margin from edges */
-        right: 10px;
-        max-height: 40vh; /* Limit height to 40% of viewport */
-        bottom: auto; /* Remove bottom positioning */
-        top: 50%; /* Position in middle of screen */
-        transform: translateY(-50%); /* Center vertically */
-        background: #0a0a0f;
-        z-index: 1010; /* Ensure it's above everything */
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        right: 0;
+        max-height: 200px;
+        z-index: 1001;
     }
 
     .input-container {
-        position: static; /* Change to static on mobile */
+        position: relative; /* Reinforce relative positioning */
     }
 
     #guess-input {
         position: relative;
         z-index: 1002;
     }
-
-    .suggestions-active::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 1009;
-    }
-}
 
     #guess-history {
         min-height: calc(6 * (0.9em + 20px + 10px)); /* Smaller reserved space for mobile */
@@ -768,7 +755,7 @@ body {
 }
 
 .suggestion-item {
-    padding: 12px 15px;
+    padding: 4px 8px;
     cursor: pointer;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.2s ease;

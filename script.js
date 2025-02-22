@@ -189,7 +189,8 @@ function setupAutocomplete() {
     let selectedIndex = -1;
 
     function toggleMobileSuggestions(show) {
-        document.body.classList.toggle('suggestions-active', show);
+        // Remove the suggestions-active class handling
+        // document.body.classList.toggle('suggestions-active', show);
         suggestionBox.style.display = show ? 'block' : 'none';
         if (!show) {
             selectedIndex = -1;
