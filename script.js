@@ -170,6 +170,7 @@ function startGame() {
     incorrectGuesses = [];
     updateGuessHistory();
     updateProgressBar();
+    updateSkipButtonText(); 
 }
 
 function setupAutocomplete() {
@@ -383,6 +384,7 @@ function startNewGame() {
     
     updateProgressBar();
     updateGuessHistory();
+    updateSkipButtonText(); 
     startGame();
     
     // Reset submit button state
@@ -451,6 +453,7 @@ function submitGuess() {
             showResult(`Try again! ${maxAttempts - attempts} attempts remaining`);
             updateProgressBar();
             updateGuessHistory();
+            updateSkipButtonText(); 
         }
     }
     guessInput.value = '';
@@ -486,7 +489,8 @@ function skipGuess() {
     } else {
         showResult(`Skipped! ${maxAttempts - attempts} attempts remaining`);
         updateProgressBar();
-        updateGuessHistory();  // Add this line to update the display
+        updateGuessHistory();  
+        updateSkipButtonText(); // Add this line to update the display
     }
 }
 
@@ -505,6 +509,18 @@ function revealFullSong() {
     if (audioContext && !animationId) {
         drawWave();
     }
+}
+
+function updateSkipButtonText() {
+    const skipButton = document.getElementById('skip-button');
+    if (attempts >= maxAttempts - 1) { // Change to maxAttempts - 1
+        skipButton.textContent = 'Skip';
+        return;
+    }
+    const currentDuration = progressDurations[attempts];
+    const nextDuration = progressDurations[attempts + 1];
+    const increase = nextDuration - currentDuration;
+    skipButton.textContent = `Skip (+${increase}s)`;
 }
 
 function showResult(message) {

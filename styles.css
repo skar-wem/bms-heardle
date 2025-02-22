@@ -22,12 +22,12 @@ body {
 
 .header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
     text-shadow: 0 0 10px var(--neon-blue);
 }
 
 .header h1 {
-    margin-bottom: 10px;
+    margin-bottom: 2px;
     font-size: 3em;
     letter-spacing: 2px;
     background: linear-gradient(
