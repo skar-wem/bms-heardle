@@ -581,15 +581,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Mobile keyboard handling
     if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        const guessInput = document.getElementById('guess-input');
+        
         // When input is focused (keyboard appears)
         guessInput.addEventListener('focus', () => {
             document.body.classList.add('keyboard-open');
-            // Scroll the input into view with a delay to ensure keyboard is fully shown
-            setTimeout(() => {
-                guessInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                // Additional scroll adjustment for iOS
-                window.scrollTo(0, window.scrollY + 100);
-            }, 300);
         });
 
         // When input loses focus (keyboard disappears)
@@ -597,19 +593,9 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.remove('keyboard-open');
         });
 
-        // Prevent bounce scrolling on iOS
-        document.addEventListener('touchmove', (e) => {
-            if (!e.target.closest('.suggestion-box') && !e.target.closest('.content-wrapper')) {
-                e.preventDefault();
-            }
-        }, { passive: false });
-
-        // Handle viewport height changes (keyboard appearance)
+        // Remove the scroll adjustments
         window.visualViewport.addEventListener('resize', () => {
-            if (document.activeElement === guessInput) {
-                const gameControls = document.getElementById('game-controls');
-                gameControls.style.bottom = `${window.visualViewport.height - window.innerHeight}px`;
-            }
+            // Don't adjust positioning when keyboard appears
         });
     }
     
