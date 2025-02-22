@@ -605,11 +605,11 @@ body {
 
 .modal-content {
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     background: var(--panel-bg);
-    padding: 30px;
+    padding: 20px;
     border-radius: 15px;
     text-align: center;
     border: 1px solid var(--neon-blue);
@@ -631,10 +631,18 @@ body {
     color: var(--text-secondary);
 }
 
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
 .modal-button {
-    background: var(--neon-pink);
-    color: var(--text-primary);
-    border: none;
+    flex: 1;
+    max-width: 160px;
+    background: transparent;
+    color: var(--neon-pink);
+    border: 2px solid var(--neon-pink);
     padding: 12px 30px;
     border-radius: 25px;
     cursor: pointer;
@@ -645,7 +653,23 @@ body {
 }
 
 .modal-button:hover {
-    box-shadow: 0 0 20px var(--neon-pink);
+    background: rgba(255, 0, 255, 0.1);
+    box-shadow: 0 0 20px var(--neon-pink),
+                inset 0 0 15px rgba(255, 0, 255, 0.3);
+    text-shadow: 0 0 8px rgba(255, 0, 255, 0.7);
+}
+
+.share-button {
+    color: var(--neon-blue) !important;
+    border-color: var(--neon-blue) !important;
+    background: transparent !important;
+}
+
+.share-button:hover {
+    background: rgba(0, 243, 255, 0.1) !important;
+    box-shadow: 0 0 20px var(--neon-blue),
+                inset 0 0 15px rgba(0, 243, 255, 0.3) !important;
+    text-shadow: 0 0 8px rgba(0, 243, 255, 0.7) !important;
 }
 
 .attempts-info {
@@ -785,6 +809,24 @@ body {
     margin-top: 0px;
     margin-bottom: 4px;
 }
+
+.share-success {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--neon-blue);
+    color: var(--darker-bg);
+    padding: 10px 15px;
+    border-radius: 25px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 20000; /* Even higher than modal z-index */
+    pointer-events: none;
+    font-weight: 500;
+    box-shadow: 0 0 20px var(--neon-blue);
+}
+
 
 .hidden {
     display: none;

@@ -13,6 +13,8 @@ let waveCanvas;
 let waveCtx;
 let animationId;
 let isSubmitting = false
+let gameWon = false;
+
 
 function initAudioVisualizer() {
     // Create audio context and analyzer
@@ -454,6 +456,7 @@ function showModal(message, isSuccess = false) {
 }
 
 function startNewGame() {
+    gameWon = false;
     const modal = document.getElementById('gameOverModal');
     modal.style.display = 'none';
     isGameOver = false;
@@ -530,8 +533,10 @@ function submitGuess() {
     );
     
     if (isCorrect) {
+        attempts++; // Increment attempts first
+        gameWon = true;
         const segments = document.querySelectorAll('.progress-segment');
-        segments[attempts].classList.add('correct');
+        segments[attempts - 1].classList.add('correct'); // Use attempts - 1 here
         
         showModal(`Correct! The song was "${currentSong.display_title}" by ${currentSong.cleanArtist}`, true);
         revealFullSong();
@@ -636,6 +641,75 @@ function updateSkipButtonText() {
 function showResult(message) {
     document.getElementById('attempts-info').textContent = message;
 }
+
+async function shareResult() {
+    // Debug logging
+    console.log('Current attempts:', attempts);
+    console.log('Game won:', gameWon);
+
+    // Calculate emoji squares based on attempts
+    const squares = Array(6).fill('⬜'); // Start with all white squares
+    
+    if (gameWon) {
+        console.log('Generating squares for win');
+        // On second attempt: attempts would be 2
+        // We want: 🟥🟩⬜⬜⬜⬜
+        
+        // First, fill in the red squares for wrong guesses
+        for (let i = 0; i < attempts - 1; i++) {
+            console.log('Adding red square at position:', i);
+            squares[i] = '🟥';
+        }
+        
+        // Then add the green square for the winning guess
+        console.log('Adding green square at position:', attempts - 1);
+        squares[attempts - 1] = '🟩';
+    } else {
+        console.log('Generating squares for loss');
+        // Fill all squares up to attempts with red
+        for (let i = 0; i < attempts; i++) {
+            squares[i] = '🟥';
+        }
+    }
+
+    console.log('Final squares array:', squares);
+
+    // Create share text
+    const shareText = `BMS Heardle\n${squares.join('')}\n${currentSong.display_title} - ${currentSong.cleanArtist}\nhttps://skar-wem.github.io/bms-heardle/`;
+
+    // Try to use share API if available
+    if (navigator.share) {
+        try {
+            await navigator.share({
+                text: shareText
+            });
+            return;
+        } catch (err) {
+            console.log('Error sharing:', err);
+        }
+    }
+
+    // Fallback to clipboard
+    try {
+        await navigator.clipboard.writeText(shareText);
+        
+        // Show feedback
+        const feedback = document.createElement('div');
+        feedback.className = 'share-success';
+        feedback.textContent = 'Copied to clipboard!';
+        document.body.appendChild(feedback);
+        
+        // Show and remove feedback
+        setTimeout(() => feedback.style.opacity = '1', 10);
+        setTimeout(() => {
+            feedback.style.opacity = '0';
+            setTimeout(() => feedback.remove(), 300);
+        }, 2000);
+    } catch (err) {
+        console.log('Error copying to clipboard:', err);
+    }
+}
+
 
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {

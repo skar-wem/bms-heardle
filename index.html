@@ -63,10 +63,12 @@
             <div class="modal-content">
                 <h2 class="modal-title">Game Over</h2>
                 <p class="modal-text" id="modalMessage"></p>
-                <button class="modal-button" onclick="startNewGame()">Play Again</button>
+                <div class="modal-buttons">
+                    <button class="modal-button" onclick="startNewGame()">Play Again</button>
+                    <button class="modal-button share-button" onclick="shareResult()">Share</button>
+                </div>
             </div>
         </div>
-    </div>
 
     <script src="script.js"></script>
     <div id="suggestions-backdrop" class="suggestions-backdrop"></div>
