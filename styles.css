@@ -654,8 +654,8 @@ body {
     position: absolute;
     left: 0;
     right: 0;
-    top: 100%; /* This makes it extend upwards from the input */
-    margin-bottom: 5px;
+    top: 100%;
+    margin-top: 5px;
     background: #0a0a0f;
     border-radius: 10px;
     max-height: 200px;
@@ -664,7 +664,7 @@ body {
     z-index: 1001;
     border: 1px solid rgba(255, 0, 255, 0.2);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-    padding: 8px;
+    padding: 4px;
 }
 
 @media (max-width: 768px) {
@@ -701,11 +701,12 @@ body {
 
     .suggestion-box {
         position: absolute;
-        bottom: 100%;
+        bottom: calc(100% + 5px); /* Position above input with 5px gap */
+        top: auto; /* Remove top positioning */
+        max-height: 40vh; /* Allow more height on mobile */
+        width: 100%;
         left: 0;
         right: 0;
-        max-height: 200px;
-        z-index: 1001;
     }
 
     .input-container {
