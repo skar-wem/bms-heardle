@@ -44,24 +44,44 @@ function drawWave() {
     const dataArray = new Uint8Array(bufferLength);
     analyser.getByteTimeDomainData(dataArray);
     
-    // Keep the existing dark background
-    waveCtx.fillStyle = 'rgba(3, 3, 4, 1)';  // Match the dark background color
-    waveCtx.fillRect(0, 0, waveCanvas.width, waveCanvas.height);
+    // Clear the canvas without changing background
+    waveCtx.clearRect(0, 0, waveCanvas.width, waveCanvas.height);
     
-    // Draw wave with glow effect
+    // Create gradient with lower opacity in the center
+    const gradient = waveCtx.createLinearGradient(0, 0, waveCanvas.width, 0);
+    if (isPlaying) {
+        gradient.addColorStop(0, 'rgba(0, 243, 255, 0.8)');
+        gradient.addColorStop(0.2, 'rgba(0, 243, 255, 0.8)');
+        gradient.addColorStop(0.4, 'rgba(0, 243, 255, 0.2)');
+        gradient.addColorStop(0.5, 'rgba(255, 0, 255, 0.2)');
+        gradient.addColorStop(0.6, 'rgba(0, 243, 255, 0.2)');
+        gradient.addColorStop(0.8, 'rgba(0, 243, 255, 0.8)');
+        gradient.addColorStop(1, 'rgba(0, 243, 255, 0.8)');
+    } else {
+        gradient.addColorStop(0, 'rgba(255, 0, 255, 0.5)');
+        gradient.addColorStop(0.2, 'rgba(255, 0, 255, 0.5)');
+        gradient.addColorStop(0.4, 'rgba(255, 0, 255, 0.1)');
+        gradient.addColorStop(0.5, 'rgba(0, 243, 255, 0.1)');
+        gradient.addColorStop(0.6, 'rgba(255, 0, 255, 0.1)');
+        gradient.addColorStop(0.8, 'rgba(255, 0, 255, 0.5)');
+        gradient.addColorStop(1, 'rgba(255, 0, 255, 0.5)');
+    }
+
+    // Draw main wave with glow
     waveCtx.lineWidth = 2;
-    waveCtx.strokeStyle = isPlaying ? 'rgba(0, 243, 255, 0.4)' : 'rgba(255, 0, 255, 0.2)';
+    waveCtx.strokeStyle = gradient;
     waveCtx.shadowBlur = 15;
-    waveCtx.shadowColor = isPlaying ? 'rgba(0, 243, 255, 0.4)' : 'rgba(255, 0, 255, 0.2)';
+    waveCtx.shadowColor = isPlaying ? 'rgba(0, 243, 255, 0.3)' : 'rgba(255, 0, 255, 0.3)';
     
+    // Draw the wave with reduced points and controlled amplitude
     waveCtx.beginPath();
-    
-    const sliceWidth = waveCanvas.width / bufferLength;
+    const skipPoints = 2;
+    const sliceWidth = (waveCanvas.width * skipPoints) / bufferLength;
     let x = 0;
     
-    for (let i = 0; i < bufferLength; i++) {
-        const v = dataArray[i] / 128.0;
-        const y = (v * waveCanvas.height / 4) + (waveCanvas.height / 2);
+    for (let i = 0; i < bufferLength; i += skipPoints) {
+        const v = (dataArray[i] / 128.0 - 1) * 0.5;
+        const y = (v * waveCanvas.height / 4) + (waveCanvas.height / 1.6);
         
         if (i === 0) {
             waveCtx.moveTo(x, y);
@@ -72,7 +92,7 @@ function drawWave() {
         x += sliceWidth;
     }
     
-    waveCtx.lineTo(waveCanvas.width, waveCanvas.height / 2);
+    waveCtx.lineTo(waveCanvas.width, waveCanvas.height / 1.6);
     waveCtx.stroke();
     
     animationId = requestAnimationFrame(drawWave);
@@ -354,6 +374,10 @@ function startNewGame() {
     const playButton = document.querySelector('.play-button');
     playButton.textContent = 'Play';
     
+    // Clear input field
+    const guessInput = document.getElementById('guess-input');
+    guessInput.value = '';
+    
     // Clear result message
     showResult('');
     
@@ -366,12 +390,14 @@ function startNewGame() {
 }
 
 function updateSubmitButtonState() {
-    const submitButton = document.getElementById('submit-button');
     const guessInput = document.getElementById('guess-input');
-    const isEmpty = !guessInput.value.trim();
+    const submitButton = document.getElementById('submit-button');
     
-    submitButton.disabled = isEmpty;
-    submitButton.classList.toggle('button-disabled', isEmpty);
+    // Only update the button's internal disabled state, don't change appearance
+    submitButton.disabled = !guessInput.value.trim();
+    
+    // Remove the button-disabled class if it exists
+    submitButton.classList.remove('button-disabled');
 }
 
 function submitGuess() {
@@ -381,6 +407,19 @@ function submitGuess() {
     const guess = guessInput.value.trim();
     
     if (!guess) return; // Don't process empty guesses
+    
+    // Check if the guess exactly matches any song title in the list
+    const isValidTitle = songList.some(song => 
+        song.title.toLowerCase() === guess.toLowerCase()
+    );
+
+    if (!isValidTitle) {
+        // If it's not a valid title, show a message and don't process the guess
+        showResult("Please select a valid song title from the suggestions");
+        guessInput.value = ''; // Clear the input
+        updateSubmitButtonState();
+        return;
+    }
     
     const currentAliases = processTitle(currentSong.display_title);
     const guessAliases = processTitle(guess);
@@ -392,12 +431,16 @@ function submitGuess() {
     );
     
     if (isCorrect) {
-        // Add this section to highlight the current segment
         const segments = document.querySelectorAll('.progress-segment');
         segments[attempts].classList.add('correct');
         
         showModal(`Correct! The song was "${currentSong.display_title}" by ${currentSong.cleanArtist}`, true);
         revealFullSong();
+        // Add a delay before enabling modal Enter key
+        setTimeout(() => {
+            setupModalEnterKey();
+        }, 500);
+
     } else {
         incorrectGuesses.push(guess);
         attempts++;
@@ -413,6 +456,23 @@ function submitGuess() {
     guessInput.value = '';
     updateSubmitButtonState();
 }
+
+function setupModalEnterKey() {
+    const modalHandler = (e) => {
+        if (e.key === 'Enter') {
+            const modal = document.getElementById('gameOverModal');
+            if (modal.style.display === 'block') {
+                e.preventDefault();
+                e.stopPropagation();
+                startNewGame();
+                // Remove this listener after use
+                document.removeEventListener('keydown', modalHandler);
+            }
+        }
+    };
+    document.addEventListener('keydown', modalHandler);
+}
+
 
 
 function skipGuess() {
@@ -468,25 +528,56 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Submit button listener
     const submitButton = document.getElementById('submit-button');
-    submitButton.addEventListener('click', () => {
-        if (!submitButton.classList.contains('button-disabled')) {
+    submitButton.addEventListener('click', (e) => {
+        const guessInput = document.getElementById('guess-input');
+        if (!guessInput.value.trim()) {  // If input is empty
+            e.preventDefault();
+            submitButton.classList.add('nudge');
+            setTimeout(() => {
+                submitButton.classList.remove('nudge');
+            }, 200);
+        } else {
             submitGuess();
         }
     });
     
-    // Skip button listener
-    document.getElementById('skip-button').addEventListener('click', skipGuess);
-    
-    // Guess input listeners
-    const guessInput = document.getElementById('guess-input');
-    guessInput.addEventListener('input', updateSubmitButtonState);
-    guessInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter' && 
-            !document.querySelector('.suggestion-box').contains(document.activeElement) &&
-            guessInput.value.trim()) {
+// Skip button listener
+document.getElementById('skip-button').addEventListener('click', skipGuess);
+
+// Guess input listeners
+const guessInput = document.getElementById('guess-input');
+guessInput.addEventListener('input', updateSubmitButtonState);
+
+// Input-specific Enter key handler
+guessInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !isGameOver) {
+        e.preventDefault();
+        e.stopPropagation();
+        const guess = this.value.trim();
+        if (!guess) return;
+
+        const suggestionBox = document.querySelector('.suggestion-box');
+        const selectedSuggestion = suggestionBox.querySelector('.selected');
+        
+        if (selectedSuggestion) {
+            this.value = selectedSuggestion.dataset.title;
+            suggestionBox.style.display = 'none';
             submitGuess();
+        } else {
+            const isValidTitle = songList.some(song => 
+                song.title.toLowerCase() === guess.toLowerCase()
+            );
+            
+            if (isValidTitle) {
+                submitGuess();
+            } else {
+                showResult("Please select a valid song title from the suggestions");
+                this.value = '';
+                updateSubmitButtonState();
+            }
         }
-    });
+    }
+});
     
     // Modal listeners
     const modal = document.getElementById('gameOverModal');
@@ -521,7 +612,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
-    
+
+    document.querySelector('.play-button').addEventListener('mousemove', (e) => {
+        const rect = e.target.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        e.target.style.setProperty('--mouse-x', `${x}%`);
+        e.target.style.setProperty('--mouse-y', `${y}%`);
+    });
+
     // Initialize submit button state
     updateSubmitButtonState();
     

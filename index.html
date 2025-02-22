@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BMS Heardle</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -9,56 +10,57 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Add the canvas at the top of body -->
     <canvas id="waveCanvas"></canvas>
 
     <div class="content-wrapper">
-        <div class="header">
-            <h1>BMS Heardle</h1>
-            <p>Guess the BMS song from the audio preview</p>
-        </div>
+        <div class="container">
+            <div class="header w-100">
+                <h1>BMS Heardle</h1>
+                <p>Guess the BMS song from the audio preview</p>
+            </div>
 
-        <div class="game-info">
-            <p>🎵 Listen to the preview and guess the song</p>
-            <p>🎮 Each skip/wrong guess reveals more of the song</p>
-            <p>⏱️ Preview length: 1s → 2s → 4s → 8s → 12s → 16s</p>
-        </div>
+            <div class="game-info w-100">
+                <p>🎵 Listen to the preview and guess the song</p>
+                <p>🎮 Each skip/wrong guess reveals more of the song</p>
+                <p>⏱️ Preview length: 1s → 2s → 4s → 8s → 12s → 16s</p>
+            </div>
 
-        <div id="player-container">
-            <button class="play-button" id="playButton">
-                <span class="button-text">Play</span>
-            </button>
-            <div class="progress-container">
-                <div class="progress-segments">
-                    <div class="progress-segment"></div>
-                    <div class="progress-segment"></div>
-                    <div class="progress-segment"></div>
-                    <div class="progress-segment"></div>
-                    <div class="progress-segment"></div>
-                    <div class="progress-segment"></div>
+            <div id="player-container" class="w-100">
+                <button class="play-button" id="playButton">
+                    <span class="button-text">Play</span>
+                </button>
+                <div class="progress-container">
+                    <div class="progress-segments">
+                        <div class="progress-segment"></div>
+                        <div class="progress-segment"></div>
+                        <div class="progress-segment"></div>
+                        <div class="progress-segment"></div>
+                        <div class="progress-segment"></div>
+                        <div class="progress-segment"></div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
                 </div>
-                <div class="progress-bar">
-                    <div class="progress-fill"></div>
+                <audio id="audio-player" class="hidden"></audio>
+            </div>
+
+            <div id="game-controls" class="w-100">
+                <div class="input-container">
+                    <input type="text" id="guess-input" placeholder="Type your guess...">
+                </div>
+                <div class="button-container">
+                    <button id="submit-button">Submit</button>
+                    <button id="skip-button">Skip</button>
                 </div>
             </div>
-            <audio id="audio-player" class="hidden"></audio>
-        </div>
 
-        <div id="game-controls">
-            <div class="input-container">
-                <input type="text" id="guess-input" placeholder="Type your guess...">
+            <div id="result" class="w-100"></div>
+            <div id="guess-history" class="w-100"></div>
+
+            <div class="game-stats w-100">
+                <p>Total songs: <span id="song-count">0</span></p>
             </div>
-            <div class="button-container">
-                <button id="submit-button">Submit</button>
-                <button id="skip-button">Skip</button>
-            </div>
-        </div>
-
-        <div id="result"></div>
-        <div id="guess-history"></div>
-
-        <div class="game-stats">
-            <p>Total songs: <span id="song-count">0</span></p>
         </div>
 
         <!-- Game Over Modal -->
