@@ -5,7 +5,7 @@
     --darker-bg: #020203;  /* Even darker background */
     --panel-bg: rgba(10, 10, 15, 0.9);  /* Darker panels */
     --text-primary: #ffffff;
-    --text-secondary: #8a8a9a;
+    --text-secondary: #aaaabd;
 }
 
 html, body {
@@ -61,6 +61,12 @@ body {
     color: var(--text-secondary);
     margin: 5px 0;
     font-size: 1.3em;
+}
+
+@media (max-width: 768px) {
+    .header p {
+        font-size: 0.9em; /* Smaller size for mobile */
+    }
 }
 
 .game-stats {
