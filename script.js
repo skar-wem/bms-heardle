@@ -329,7 +329,11 @@ function showModal(message, isSuccess = false) {
     
     modalTitle.textContent = isSuccess ? 'Congratulations!' : 'Game Over';
     modalTitle.style.color = isSuccess ? 'var(--neon-pink)' : 'var(--neon-blue)';
-    modalMessage.textContent = message;
+    
+    // Split the message at "The song was"
+    const [firstPart, songPart] = message.split('The song was');
+    modalMessage.innerHTML = `${firstPart}The song was:<br><span class="song-reveal">${songPart}</span>`;
+    
     modal.style.display = 'block';
     isGameOver = true;
     
@@ -388,6 +392,10 @@ function submitGuess() {
     );
     
     if (isCorrect) {
+        // Add this section to highlight the current segment
+        const segments = document.querySelectorAll('.progress-segment');
+        segments[attempts].classList.add('correct');
+        
         showModal(`Correct! The song was "${currentSong.display_title}" by ${currentSong.cleanArtist}`, true);
         revealFullSong();
     } else {
@@ -403,7 +411,7 @@ function submitGuess() {
         }
     }
     guessInput.value = '';
-    updateSubmitButtonState(); // Update submit button state after clearing input
+    updateSubmitButtonState();
 }
 
 

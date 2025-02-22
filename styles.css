@@ -13,10 +13,11 @@ body {
     margin: 0 auto;
     padding: 20px;
     font-family: 'Outfit', sans-serif;
-    background: linear-gradient(135deg, #030304 0%, #050507 100%);  /* Darker gradient */
+    background: transparent; /* Remove background from body */
     color: var(--text-primary);
     position: relative;
     min-height: 100vh;
+    box-sizing: border-box;
 }
 
 .header {
@@ -37,6 +38,24 @@ body {
     margin: 5px 0;
     font-size: 1.1em;
 }
+
+.game-stats {
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.3); /* Darker gray color */
+    font-size: 0.8em;
+    z-index: 1;
+}
+
+#guess-history {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 60px; /* Add space for fixed stats */
+}
+
 
 .game-info {
     background: var(--panel-bg);
@@ -106,12 +125,18 @@ body {
 }
 
 .progress-segment.played {
-    background-color: var(--neon-pink);
-    box-shadow: 0 0 10px var(--neon-pink);
+    background-color: rgba(255, 0, 0, 0.8); /* Bright red for wrong guesses */
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); /* Red glow */
 }
 
 .progress-segment.current {
-    background-color: rgba(255, 0, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.3); /* Soft white for current */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* Subtle white glow */
+}
+
+.progress-segment.correct {
+    background-color: #00ff66 !important; /* Bright green */
+    box-shadow: 0 0 10px #00ff66 !important;
 }
 
 .progress-bar {
@@ -138,6 +163,13 @@ body {
     margin-bottom: 10px;
     width: 100%;
     box-sizing: border-box;
+}
+
+.song-reveal {
+    display: block;
+    margin-top: 10px;
+    font-size: 1.1em;
+    color: var(--neon-blue);
 }
 
 #game-controls {
@@ -185,6 +217,14 @@ body {
 .content-wrapper {
     position: relative;
     z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 10px;
+    box-sizing: border-box;
 }
 
 #waveCanvas {
@@ -194,9 +234,9 @@ body {
     width: 100%;
     height: 100%;
     z-index: -1;
-    opacity: 1;  /* Set to 1 to maintain background color */
+    opacity: 1;
     pointer-events: none;
-    background: linear-gradient(135deg, #030304 0%, #050507 100%);  /* Match body background */
+    background: linear-gradient(135deg, #030304 0%, #050507 100%);
 }
 
 #submit-button {
@@ -236,26 +276,71 @@ body {
 .guess-item {
     margin: 5px 0;
     padding: 10px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(30, 30, 40, 0.8); /* Darker, less translucent background */
     border-radius: 6px;
     color: rgba(255, 0, 0, 0.8);
     font-size: 0.9em;
-    text-align: center; /* Add this line */
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .header h1 {
+        font-size: 2.5em;
+    }
+
+    .game-info {
+        font-size: 0.8em;
+        padding: 15px;
+    }
+
+    #player-container {
+        padding: 15px;
+    }
+
+    .button-container {
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    .input-container {
+        width: 100%;
+    }
+
+    #guess-input {
+        width: 100%;
+        font-size: 0.9em;
+    }
 }
 
 @keyframes pulseRed {
     0% {
-        background: rgba(255, 0, 0, 0.4);
+        background: rgba(80, 20, 20, 0.9); /* Darker red pulse */
         transform: scale(1);
     }
     50% {
-        background: rgba(255, 0, 0, 0.2);
+        background: rgba(60, 20, 20, 0.8); /* Darker middle state */
         transform: scale(1.02);
     }
     100% {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(30, 30, 40, 0.8); /* Match final state with guess-item */
         transform: scale(1);
     }
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px; /* Slightly smaller than body max-width */
+    margin: 0 auto;
+    padding: 0 15px;
+    box-sizing: border-box;
 }
 
 .guess-item.new {
