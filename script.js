@@ -508,7 +508,7 @@ function revealFullSong() {
 }
 
 function showResult(message) {
-    document.getElementById('result').textContent = message;
+    document.getElementById('attempts-info').textContent = message;
 }
 
 // Event Listeners
@@ -540,44 +540,78 @@ document.addEventListener('DOMContentLoaded', () => {
             submitGuess();
         }
     });
-    
-// Skip button listener
-document.getElementById('skip-button').addEventListener('click', skipGuess);
 
-// Guess input listeners
-const guessInput = document.getElementById('guess-input');
-guessInput.addEventListener('input', updateSubmitButtonState);
+    // Skip button listener
+    document.getElementById('skip-button').addEventListener('click', skipGuess);
 
-// Input-specific Enter key handler
-guessInput.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter' && !isGameOver) {
-        e.preventDefault();
-        e.stopPropagation();
-        const guess = this.value.trim();
-        if (!guess) return;
+    // Guess input listeners
+    const guessInput = document.getElementById('guess-input');
+    guessInput.addEventListener('input', updateSubmitButtonState);
 
-        const suggestionBox = document.querySelector('.suggestion-box');
-        const selectedSuggestion = suggestionBox.querySelector('.selected');
-        
-        if (selectedSuggestion) {
-            this.value = selectedSuggestion.dataset.title;
-            suggestionBox.style.display = 'none';
-            submitGuess();
-        } else {
-            const isValidTitle = songList.some(song => 
-                song.title.toLowerCase() === guess.toLowerCase()
-            );
+    // Input-specific Enter key handler
+    guessInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && !isGameOver) {
+            e.preventDefault();
+            e.stopPropagation();
+            const guess = this.value.trim();
+            if (!guess) return;
+
+            const suggestionBox = document.querySelector('.suggestion-box');
+            const selectedSuggestion = suggestionBox.querySelector('.selected');
             
-            if (isValidTitle) {
+            if (selectedSuggestion) {
+                this.value = selectedSuggestion.dataset.title;
+                suggestionBox.style.display = 'none';
                 submitGuess();
             } else {
-                showResult("Please select a valid song title from the suggestions");
-                this.value = '';
-                updateSubmitButtonState();
+                const isValidTitle = songList.some(song => 
+                    song.title.toLowerCase() === guess.toLowerCase()
+                );
+                
+                if (isValidTitle) {
+                    submitGuess();
+                } else {
+                    showResult("Please select a valid song title from the suggestions");
+                    this.value = '';
+                    updateSubmitButtonState();
+                }
             }
         }
+    });
+
+    // Mobile keyboard handling
+    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        // When input is focused (keyboard appears)
+        guessInput.addEventListener('focus', () => {
+            document.body.classList.add('keyboard-open');
+            // Scroll the input into view with a delay to ensure keyboard is fully shown
+            setTimeout(() => {
+                guessInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // Additional scroll adjustment for iOS
+                window.scrollTo(0, window.scrollY + 100);
+            }, 300);
+        });
+
+        // When input loses focus (keyboard disappears)
+        guessInput.addEventListener('blur', () => {
+            document.body.classList.remove('keyboard-open');
+        });
+
+        // Prevent bounce scrolling on iOS
+        document.addEventListener('touchmove', (e) => {
+            if (!e.target.closest('.suggestion-box') && !e.target.closest('.content-wrapper')) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        // Handle viewport height changes (keyboard appearance)
+        window.visualViewport.addEventListener('resize', () => {
+            if (document.activeElement === guessInput) {
+                const gameControls = document.getElementById('game-controls');
+                gameControls.style.bottom = `${window.visualViewport.height - window.innerHeight}px`;
+            }
+        });
     }
-});
     
     // Modal listeners
     const modal = document.getElementById('gameOverModal');
