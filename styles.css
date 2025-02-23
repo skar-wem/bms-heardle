@@ -3,7 +3,7 @@
     --neon-pink: #ff00ff;
     --dark-bg: #050507;    /* Darker background */
     --darker-bg: #020203;  /* Even darker background */
-    --panel-bg: rgba(10, 10, 15, 0.9);  /* Darker panels */
+    --panel-bg: rgba(0, 0, 0, 0.678);  /* Darker panels */
     --text-primary: #ffffff;
     --text-secondary: #aaaabd;
 }
@@ -129,63 +129,132 @@ body {
 }
 
 #player-container {
-    background: var(--panel-bg);
-    padding: 20px 20px 15px 20px; /* Reduced bottom padding */
-    border-radius: 15px;
+    background: 
+    repeating-linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.3),
+        rgba(0, 0, 0, 0.3) 5px,
+        rgba(0, 0, 0, 0.4) 5px,
+        rgba(0, 0, 0, 0.4) 10px
+    ),
+    rgba(10, 10, 12, 0.3);
+    padding: 20px;
+    border-radius: 20px;
     margin: 15px 0 10px 0;
-    border: 1px solid rgba(255, 0, 255, 0.4);
-    box-shadow: 0 0 20px rgba(255, 0, 255, 0.1);
+    border: 1px solid rgba(100, 100, 100, 0.4);
+    box-shadow: 
+        0 4px 24px rgba(0, 0, 0, 0.1),
+        inset 0 0 0 1px rgba(255, 0, 255, 0.05),
+        0 0 30px rgba(96, 240, 209, 0.03); /* Subtle accent glow */
     width: 100%;
     box-sizing: border-box;
+    backdrop-filter: blur(5px);
 }
 
 .play-button {
-    background: transparent;
-    border: 2px solid var(--neon-blue);
-    color: var(--neon-blue);
+    background: rgba(0, 0, 0, 1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
     padding: 15px 30px;
-    border-radius: 50px;
+    border-radius: 20px;
     cursor: pointer;
-    font-size: 1.2em;
-    font-weight: bolder;
+    font-size: 1.1em;
+    font-weight: 500;
     width: 100%;
     margin-bottom: 20px;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     text-transform: uppercase;
     letter-spacing: 2px;
     position: relative;
-    isolation: isolate;
     overflow: hidden;
 }
 
+/* Gradient background for hover */
 .play-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        rgba(96, 118, 240, 0.8),  /* Turquoise */
+        rgba(111, 225, 255, 0.8),  /* Light blue */
+        rgba(96, 240, 209, 0.8)    /* Back to turquoise */
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.play-button:hover {
+    border-color: transparent;
+    color: #000000;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(96, 240, 209, 0.2);
+}
+
+.play-button:hover::before {
+    opacity: 1;
+}
+
+/* Click animation */
+.play-button:active {
+    transform: scale(0.98) translateY(0);
+    box-shadow: 0 2px 8px rgba(96, 240, 209, 0.1);
+}
+
+/* Add ripple effect on click */
+.play-button::after {
     content: '';
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(
-        circle 80px at var(--mouse-x, 50%) var(--mouse-y, 50%),
-        var(--neon-pink) 0%,
-        transparent 60%
-    );
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
     opacity: 0;
-    transition: opacity 0.3s;
-    mix-blend-mode: soft-light;
-    pointer-events: none;
-    z-index: 1;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
 }
 
-.play-button:hover::before {
-    opacity: 0.8;
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(40, 40);
+        opacity: 0;
+    }
+}
+
+.play-button:active::after {
+    animation: ripple 0.6s ease-out;
+}
+
+/* Optional: Add subtle shine effect */
+@keyframes shine {
+    0% {
+        background-position: 200% center;
+    }
+    100% {
+        background-position: -200% center;
+    }
 }
 
 .play-button:hover {
-    background: var(--neon-blue);
-    color: var(--darker-bg);
-    box-shadow: 0 0 20px var(--neon-blue);
+    background-image: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.2) 25%,
+        rgba(255, 255, 255, 0.2) 75%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% auto;
+    animation: shine 3s linear infinite;
 }
 
 .progress-container {
@@ -301,8 +370,8 @@ body {
 .progress-fill {
     width: 0%;
     height: 100%;
-    background: var(--neon-blue);
-    box-shadow: 0 0 10px var(--neon-blue);
+    background: #00ff66;
+    box-shadow: 0 0 10px  #00ff66;
     transition: width linear;
     will-change: width;
     transform: translateZ(0);
@@ -409,21 +478,35 @@ body {
     width: 100%;
     padding: 15px;
     margin: 10px 0;
-    border: 2px solid rgba(255, 255, 255, 0.6); /* Changed from pink to white */
-    border-radius: 10px;
-    background: rgba(16, 16, 24, 0.8);
+    background: 
+        rgb(0, 0, 0);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 5px;
     color: var(--text-primary);
     font-size: 1em;
     transition: all 0.3s ease;
     box-sizing: border-box;
     position: relative;
     z-index: 1002;
+    box-shadow: 
+        0 4px 24px rgba(0, 0, 0, 0.1),
+        inset 0 0 0 1px rgba(255, 0, 255, 0.05),
+        0 0 30px rgba(96, 240, 209, 0.03);
+    backdrop-filter: blur(5px);
 }
 
 #guess-input:focus {
     outline: none;
-    border-color: rgba(255, 255, 255, 0.9); /* Brighter white on focus */
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4); /* White glow */
+    border-color: rgb(255, 255, 255);
+    box-shadow: 
+        0 4px 24px rgba(0, 0, 0, 0.2),
+        inset 0 0 0 1px rgba(255, 0, 255, 0.08),
+        0 0 30px rgba(96, 240, 209, 0.05);
+}
+
+/* Optional: Style the placeholder text */
+#guess-input::placeholder {
+    color: rgba(255, 255, 255, 0.3);
 }
 
 .button-container {
@@ -467,75 +550,132 @@ body {
     z-index: -1;
     opacity: 1;
     pointer-events: none;
-    background: linear-gradient(135deg, #030304 0%, #050507 100%);
+    background: linear-gradient(
+        to bottom,
+        #000000,
+        #030303,
+        #050505,
+        #030303,
+        #000000
+    );
 }
 
+/* Base styles for both buttons */
 #skip-button, #submit-button {
-    background-color: var(--background-color);
-    border: 2px solid var(--neon-blue);
-    color: var(--neon-blue);
-    padding: 10px 20px;
-    font-size: 1em;
+    background: rgba(0, 0, 0, 1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 12px 20px;
+    border-radius: 16px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    font-size: 1em;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     text-transform: uppercase;
     letter-spacing: 2px;
-    box-shadow: 0 0 10px rgba(0, 243, 255, 0.3),
-                inset 0 0 10px rgba(0, 243, 255, 0.2);
-    text-shadow: 0 0 5px rgba(0, 243, 255, 0.5);
+    position: relative;
+    overflow: hidden;
 }
 
+/* Submit button specific gradient (green/teal) */
+#submit-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        rgba(0, 180, 100, 0.8),
+        rgba(0, 200, 150, 0.8),
+        rgba(0, 180, 120, 0.8)
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+/* Skip button specific gradient (red/orange) */
+#skip-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        rgba(200, 50, 50, 0.8),
+        rgba(220, 80, 50, 0.8),
+        rgba(200, 60, 50, 0.8)
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+/* Hover effects */
 #skip-button:hover, #submit-button:hover {
-    background-color: rgba(0, 243, 255, 0.1);
-    box-shadow: 0 0 20px rgba(0, 243, 255, 0.5),
-                inset 0 0 15px rgba(0, 243, 255, 0.3);
-    text-shadow: 0 0 8px rgba(0, 243, 255, 0.7);
-}
-
-#skip-button:active, #submit-button:active {
-    transform: scale(0.98);
-    box-shadow: 0 0 5px rgba(0, 243, 255, 0.3),
-                inset 0 0 5px rgba(0, 243, 255, 0.2);
-}
-
-#skip-button {
-    text-transform: uppercase;
-}
-
-/* Add this new rule */
-#skip-button span {
-    text-transform: none;
-}
-
-#submit-button {
-    border-color: var(--neon-pink);
-    color: var(--neon-pink);
-    box-shadow: 0 0 10px rgba(255, 0, 255, 0.3),
-                inset 0 0 10px rgba(255, 0, 255, 0.2);
-    text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
+    border-color: transparent;
+    color: #000000;
+    transform: translateY(-1px);
 }
 
 #submit-button:hover {
-    background-color: rgba(255, 0, 255, 0.1);
-    box-shadow: 0 0 20px rgba(255, 0, 255, 0.5),
-                inset 0 0 15px rgba(255, 0, 255, 0.3);
-    text-shadow: 0 0 8px rgba(255, 0, 255, 0.7);
+    box-shadow: 0 5px 15px rgba(0, 180, 100, 0.2);
+}
+
+#skip-button:hover {
+    box-shadow: 0 5px 15px rgba(200, 50, 50, 0.2);
+}
+
+#skip-button:hover::before, #submit-button:hover::before {
+    opacity: 1;
+}
+
+/* Click animation */
+#skip-button:active, #submit-button:active {
+    transform: scale(0.98) translateY(0);
 }
 
 #submit-button:active {
-    box-shadow: 0 0 5px rgba(255, 0, 255, 0.3),
-                inset 0 0 5px rgba(255, 0, 255, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 180, 100, 0.1);
 }
 
-@keyframes nudge {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
-    100% { transform: translateX(0); }
+#skip-button:active {
+    box-shadow: 0 2px 8px rgba(200, 50, 50, 0.1);
 }
 
-.nudge {
-    animation: nudge 0.2s ease-in-out;
+/* Ripple effect */
+#skip-button::after, #submit-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+#skip-button:active::after, #submit-button:active::after {
+    animation: ripple 0.6s ease-out;
+}
+
+/* Shine effect on hover */
+#skip-button:hover, #submit-button:hover {
+    background-image: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.2) 25%,
+        rgba(255, 255, 255, 0.2) 75%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% auto;
+    animation: shine 3s linear infinite;
 }
 
 #result {
@@ -552,27 +692,35 @@ body {
 #guess-history {
     width: 100%;
     box-sizing: border-box;
-    min-height: calc(6 * (1.1em + 30px + 16px)); /* Height for 6 guess items (font-size + padding + margins) */
+    min-height: calc(6 * (1.1em + 30px + 16px));
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Align items to top */
-    margin-bottom: 10px; /* Space for stats */
+    justify-content: flex-start;
+    margin-bottom: 10px;
 }
 
 .guess-item {
     padding: 8px 12px;
     font-size: 1.1em;
     margin: 4px 0;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(100, 100, 100, 0.2); /* More transparent border */
+    border-radius: 20px;
+    color: rgba(255, 255, 255, 0.9); /* Keep text visible */
     text-align: center;
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
-    background: rgba(0, 0, 0, 0.6); /* Add solid background color */
-    backdrop-filter: blur(3px); /* Reduced blur amount */
-    -webkit-backdrop-filter: blur(3px);
-    will-change: transform; /* Optimize for animations */
-    transform: translateZ(0); /* Force GPU acceleration */
+    background: 
+        repeating-linear-gradient(
+            45deg,
+            rgba(0, 0, 0, 0.1),  /* More transparent base */
+            rgba(0, 0, 0, 0.1) 5px,
+            rgba(0, 0, 0, 0.2) 5px,  /* Slightly darker for lines */
+            rgba(0, 0, 0, 0.2) 10px
+        ),
+        rgba(10, 10, 12, 0.1);  /* More transparent background */
+    box-shadow: 
+        0 4px 24px rgba(0, 0, 0, 0.05),
+        inset 0 0 0 1px rgba(255, 0, 255, 0.02),
+        0 0 30px rgba(96, 240, 209, 0.01);
+    backdrop-filter: blur(3px); /* Reduced blur */
 }
 
 /* When a new guess is added */
@@ -582,11 +730,27 @@ body {
 
 @keyframes pulseRed {
     0% {
-        background: rgba(60, 10, 10, 0.8);
+        background: 
+            repeating-linear-gradient(
+                45deg,
+                rgba(0, 0, 0, 0.3),
+                rgba(0, 0, 0, 0.3) 5px,
+                rgba(0, 0, 0, 0.4) 5px,
+                rgba(0, 0, 0, 0.4) 10px
+            ),
+            rgba(60, 10, 10, 0.8);
         transform: scale(1.02);
     }
     100% {
-        background: rgba(20, 20, 30, 0.7); /* This will transition to the inline style */
+        background: 
+            repeating-linear-gradient(
+                45deg,
+                rgba(0, 0, 0, 0.3),
+                rgba(0, 0, 0, 0.3) 5px,
+                rgba(0, 0, 0, 0.4) 5px,
+                rgba(0, 0, 0, 0.4) 10px
+            ),
+            rgba(10, 10, 12, 0.3);
         transform: scale(1);
     }
 }
@@ -721,6 +885,25 @@ body {
     font-weight: bold;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
 }
+
+.modal-button.dimmed {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+    box-shadow: none !important; /* Prevent glow effect */
+}
+
+/* Modify existing modal-button hover to only work when not dimmed */
+.modal-button:not(.dimmed):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+    background: #f0f0f0;
+}
+
+.share-button.dimmed {
+    background: #333333 !important; /* Darker background when dimmed */
+}
+
 
 .modal-button:hover {
     transform: translateY(-2px);
@@ -892,6 +1075,17 @@ body {
 }
 
 
+#particleCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
 
 .attempts-info {
     text-align: center;
@@ -913,7 +1107,7 @@ body {
     overflow-y: auto;
     display: none;
     z-index: 1001;
-    border: 1px solid rgba(255, 0, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
     padding: 4px;
 }
@@ -1052,12 +1246,17 @@ body {
 }
 
 .song-reveal .song-artist {
-    font-family: sans-serif; /* or choose another font */
+    font-family: sans-serif;
     font-size: 1em;
     color: #ddd;
     font-style: normal;
     display: block;
     margin-top: 0px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    transform: translateZ(0);
+    backface-visibility: hidden;
 }
 
 .share-success {
@@ -1145,7 +1344,8 @@ body {
     box-shadow: 0 0 30px rgba(0, 255, 191, 0.6);
 }
 
-.modal-content.win .song-title {
+.modal-content.win .song-title,
+.modal-content.win .song-artist { /* Changed to song-artist */
     text-shadow: 0 0 20px rgba(0, 255, 191, 0.8);
 }
 
@@ -1160,15 +1360,16 @@ body {
 }
 
 .modal-content.lose .modal-button {
-    box-shadow: 0 0 20px rgba(255, 0, 106, 0.4);
+    box-shadow: 0 0 20px rgba(255, 0, 106, 0.6);
 }
 
 .modal-content.lose .modal-button:hover {
     box-shadow: 0 0 30px rgba(255, 0, 106, 0.6);
 }
 
-.modal-content.lose .song-title {
-    text-shadow: 0 0 20px rgba(255, 0, 106, 0.3);
+.modal-content.lose .song-title,
+.modal-content.lose .song-artist { /* Changed to song-artist */
+    text-shadow: 0 0 20px rgba(255, 0, 106, 0.6);
 }
 
 @keyframes segmentWin {
@@ -1221,12 +1422,12 @@ body {
 
 .difficulty-btn {
     background: transparent;
-    border: 2px solid #bcbcde;  /* Slightly purple-tinted silver */
+    border: 2px solid #bcbcde;
     color: #bcbcde;
     padding: 2px 2px;
     border-radius: 10px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.5s ease; /* Standardize the base transition */
     font-size: 1em;
     text-align: center;
     min-width: 20px;
@@ -1237,18 +1438,35 @@ body {
     box-shadow: 0 0 10px rgba(188, 188, 222, 0.4);
 }
 
+/* Correct state */
 .difficulty-btn.correct {
     border-color: #00ff66;
     color: #00ff66;
     background: rgba(0, 255, 102, 0.1);
     box-shadow: 0 0 10px #00ff66;
+    opacity: 1;
+    transition: all 1s ease; /* Match the transition timing */
 }
 
+/* Incorrect state */
 .difficulty-btn.incorrect {
     border-color: #ff0066;
     color: #ff0066;
     background: rgba(255, 0, 102, 0.1);
     box-shadow: 0 0 10px #ff0066;
+    opacity: 1;
+    transition: all 1s ease; /* Match the transition timing */
+}
+
+/* Disabled/unused state */
+.difficulty-btn:disabled:not(.correct):not(.incorrect) {
+    border-color: #4a4a5a;
+    color: #4a4a5a;
+    background: transparent;
+    cursor: not-allowed;
+    opacity: 0.3;
+    box-shadow: none;
+    transition: all 1s ease; /* Match the transition timing */
 }
 
 .difficulty-result {

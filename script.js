@@ -17,9 +17,72 @@ let gameWon = false;
 let currentTimeout = null;
 let difficultyGuessed = false;
 let difficultyGuessResult = false;
+const canvas = document.getElementById('particleCanvas');
+const ctx = canvas.getContext('2d');
 
+// Set canvas size
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
 
+class Particle {
+    constructor() {
+        this.reset();
+        // Create a subtle random color variation
+        const baseHue = 185; // Cyan base
+        this.hue = baseHue + (Math.random() * 20 - 10); // Vary by ±10
+    }
 
+    reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 0.5;
+        this.speedX = Math.random() * 0.30 - 0.15;
+        this.speedY = Math.random() * 0.30 - 0.15;
+        this.opacity = Math.random() * 0.8 + 0.4;
+    }
+
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if (this.x < 0) this.x = canvas.width;
+        if (this.x > canvas.width) this.x = 0;
+        if (this.y < 0) this.y = canvas.height;
+        if (this.y > canvas.height) this.y = 0;
+    }
+
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${this.hue}, 20%, 70%, ${this.opacity})`;
+        ctx.fill();
+    }
+}
+
+const particles = [];
+const particleCount = 200;
+
+for (let i = 0; i < particleCount; i++) {
+    particles.push(new Particle());
+}
+
+function animate() {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+    });
+
+    requestAnimationFrame(animate);
+}
+
+animate();
 
 function initAudioVisualizer() {
     // Create audio context and analyzer
@@ -61,25 +124,25 @@ function drawWave() {
         gradient.addColorStop(0, 'rgba(0, 243, 255, 0.8)');
         gradient.addColorStop(0.2, 'rgba(0, 243, 255, 0.8)');
         gradient.addColorStop(0.4, 'rgba(0, 243, 255, 0.2)');
-        gradient.addColorStop(0.5, 'rgba(255, 0, 255, 0.2)');
+        gradient.addColorStop(0.5, 'rgba(0, 243, 255, 0.2)');
         gradient.addColorStop(0.6, 'rgba(0, 243, 255, 0.2)');
         gradient.addColorStop(0.8, 'rgba(0, 243, 255, 0.8)');
         gradient.addColorStop(1, 'rgba(0, 243, 255, 0.8)');
     } else {
-        gradient.addColorStop(0, 'rgba(255, 0, 255, 0.5)');
-        gradient.addColorStop(0.2, 'rgba(255, 0, 255, 0.5)');
-        gradient.addColorStop(0.4, 'rgba(255, 0, 255, 0.1)');
+        gradient.addColorStop(0, 'rgba(0, 243, 255, 0.5)');
+        gradient.addColorStop(0.2, 'rgba(0, 243, 255, 0.5)');
+        gradient.addColorStop(0.4, 'rgba(0, 243, 255, 0.1)');
         gradient.addColorStop(0.5, 'rgba(0, 243, 255, 0.1)');
-        gradient.addColorStop(0.6, 'rgba(255, 0, 255, 0.1)');
-        gradient.addColorStop(0.8, 'rgba(255, 0, 255, 0.5)');
-        gradient.addColorStop(1, 'rgba(255, 0, 255, 0.5)');
+        gradient.addColorStop(0.6, 'rgba(0, 243, 255, 0.1)');
+        gradient.addColorStop(0.8, 'rgba(0, 243, 255, 0.5)');
+        gradient.addColorStop(1, 'rgba(0, 243, 255, 0.5)');
     }
 
     // Draw main wave with glow
     waveCtx.lineWidth = 2;
     waveCtx.strokeStyle = gradient;
     waveCtx.shadowBlur = 15;
-    waveCtx.shadowColor = isPlaying ? 'rgba(0, 243, 255, 0.3)' : 'rgba(255, 0, 255, 0.3)';
+    waveCtx.shadowColor = 'rgba(0, 243, 255, 0.3)';
     
     // Draw the wave with reduced points and controlled amplitude
     waveCtx.beginPath();
@@ -522,22 +585,40 @@ function updateGuessHistory() {
     const previousCount = historyDiv.childElementCount;
     
     historyDiv.innerHTML = incorrectGuesses.slice().reverse().map((guess, index) => {
-        // Background opacity
-        const bgOpacity = Math.max(0.7 - (index * 0.15), 0.1);
-        // Text opacity - starts higher but fades similarly
+        // Only calculate text opacity, let CSS handle the background
         const textOpacity = Math.max(0.9 - (index * 0.15), 0.2);
         return `<div class="guess-item${index === 0 && previousCount < incorrectGuesses.length ? ' new' : ''}" 
-            style="background: rgba(20, 20, 30, ${bgOpacity}); color: rgba(255, 255, 255, ${textOpacity})">${guess}</div>`;
+            style="color: rgba(255, 255, 255, ${textOpacity})">${guess}</div>`;
     }).join('');
 }
 
 function showModal(message, isWin = false) {
+    document.getElementById('guess-input').blur();
+    document.activeElement?.blur();
+
     const modal = document.getElementById('gameOverModal');
     const modalMessage = document.getElementById('modalMessage');
     const modalTitle = document.querySelector('.modal-title');
     const modalContent = document.querySelector('.modal-content');
     const difficultyContainer = document.getElementById('difficultyGuessContainer');
     
+    // Get the buttons
+    const playAgainButton = document.querySelector('.modal-button:not(.share-button)');
+    const shareButton = document.querySelector('.share-button');
+    
+    // Add dimmed class initially
+    playAgainButton.classList.add('dimmed');
+    shareButton.classList.add('dimmed');
+    
+    // Close any open suggestion box
+    const suggestionBox = document.querySelector('.suggestion-box');
+    if (suggestionBox) {
+        suggestionBox.style.display = 'none';
+    }
+
+    // Remove keyboard-open class if it exists
+    document.body.classList.remove('keyboard-open');
+
     // Remove previous classes
     modalContent.classList.remove('win', 'lose');
     
@@ -586,7 +667,12 @@ function showModal(message, isWin = false) {
 
     // Re-add click listeners to fresh buttons
     document.querySelectorAll('.difficulty-btn').forEach(btn => {
-        btn.addEventListener('click', () => handleDifficultyGuess(btn.dataset.level));
+        btn.addEventListener('click', () => {
+            handleDifficultyGuess(btn.dataset.level);
+            // Enable buttons after difficulty guess
+            playAgainButton.classList.remove('dimmed');
+            shareButton.classList.remove('dimmed');
+        });
     });
 
     // Reset difficulty result
@@ -649,6 +735,15 @@ function startNewGame() {
     const playButton = document.querySelector('.play-button');
     playButton.textContent = 'Play';
     
+    // Clear the wave canvas
+    waveCtx.clearRect(0, 0, waveCanvas.width, waveCanvas.height);
+    
+    // Cancel any ongoing animation
+    if (animationId) {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+    }
+
     // Clear input field
     const guessInput = document.getElementById('guess-input');
     guessInput.value = '';
