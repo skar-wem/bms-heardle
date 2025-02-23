@@ -400,6 +400,48 @@ function playCurrentSegment() {
 }
 
 
+function showSongList() {
+    const modal = document.getElementById('songListModal');
+    const container = modal.querySelector('.song-list-container');
+    
+    // Sort songs alphabetically by title
+    const sortedSongs = Object.values(gameData).sort((a, b) => 
+        a.display_title.localeCompare(b.display_title)
+    );
+    
+    // Create the song list HTML
+    container.innerHTML = sortedSongs.map(song => {
+        // Get insane levels and format them
+        const levels = song.metadata?.insane_levels || [];
+        const levelsHtml = levels.length > 0 
+            ? `<span class="song-list-levels">${levels.join(', ')}</span>`
+            : '';
+            
+        return `
+            <div class="song-list-item">
+                <div class="song-list-details">
+                    <span class="song-list-title">${song.display_title}</span>
+                    ${levelsHtml}
+                </div>
+            </div>
+        `;
+    }).join('');
+    
+    modal.style.display = 'block';
+}
+
+function closeSongList() {
+    document.getElementById('songListModal').style.display = 'none';
+}
+
+// Add this to your DOMContentLoaded event listener
+document.addEventListener('DOMContentLoaded', () => {
+    // ... other event listeners ...
+    
+    // Song list button listener
+    document.getElementById('songListButton').addEventListener('click', showSongList);
+});
+
 function updateProgressBar(currentTime = 0, duration = 0) {
     const progressFill = document.querySelector('.progress-fill');
     const segments = document.querySelectorAll('.progress-segment');
@@ -411,15 +453,15 @@ function updateProgressBar(currentTime = 0, duration = 0) {
     const maxWidth = (allowedDuration / 16) * 100; // 16 seconds is full song length
     
     if (currentTime > 0 && duration > 0) {
-        // During playback
         let percentage = (currentTime / duration) * 100;
-        // Limit the percentage to the allowed duration
         percentage = Math.min(percentage, maxWidth);
         progressFill.style.width = `${percentage}%`;
     } else {
-        // When not playing
         progressFill.style.width = '0%';
     }
+
+    // Don't update segments if game is won
+    if (gameWon) return;
 
     // Clear all segment classes first
     segments.forEach(segment => {
@@ -440,53 +482,71 @@ function updateGuessHistory() {
     const historyDiv = document.getElementById('guess-history');
     const previousCount = historyDiv.childElementCount;
     
-    historyDiv.innerHTML = incorrectGuesses.map((guess, index) => 
-        `<div class="guess-item${index === previousCount ? ' new' : ''}">${guess}</div>`
-    ).join('');
+    historyDiv.innerHTML = incorrectGuesses.slice().reverse().map((guess, index) => {
+        // Background opacity
+        const bgOpacity = Math.max(0.7 - (index * 0.15), 0.1);
+        // Text opacity - starts higher but fades similarly
+        const textOpacity = Math.max(0.9 - (index * 0.15), 0.2);
+        return `<div class="guess-item${index === 0 && previousCount < incorrectGuesses.length ? ' new' : ''}" 
+            style="background: rgba(20, 20, 30, ${bgOpacity}); color: rgba(255, 255, 255, ${textOpacity})">${guess}</div>`;
+    }).join('');
 }
 
-function showModal(message, isSuccess = false) {
+function showModal(message, isWin = false) {
     const modal = document.getElementById('gameOverModal');
     const modalMessage = document.getElementById('modalMessage');
     const modalTitle = document.querySelector('.modal-title');
     const modalContent = document.querySelector('.modal-content');
     
-    // Debug log
-    console.log('Current song metadata:', currentSong.metadata);
-    
     // Remove previous classes
     modalContent.classList.remove('win', 'lose');
     
-    modalTitle.textContent = isSuccess ? 'Congratulations!' : 'Game Over';
-    modalTitle.style.color = isSuccess ? 'var(--neon-pink)' : 'var(--neon-blue)';
+    // Force win state if gameWon is true
+    isWin = isWin || gameWon;
     
-    // Create the message with song info and insane levels
-    let fullMessage = `${message.split('The song was')[0]}`;  // Get the first part
-    fullMessage += `The song was:<br><span class="song-reveal">
-        <span class="song-title">${currentSong.display_title}</span>
-        <span class="song-artist">${currentSong.cleanArtist}</span>
-    </span>`;
-    
-    // Add insane levels if they exist (with debug)
-    if (currentSong.metadata?.insane_levels) {
-        console.log('Found insane levels:', currentSong.metadata.insane_levels);
-        fullMessage += `<span class="insane-levels">${currentSong.metadata.insane_levels.join(', ')}</span>`;
+    if (isWin) {
+        modalTitle.textContent = 'Congratulations!';
+        modalTitle.style.color = 'var(--neon-pink)';
+        modalContent.classList.add('win');
+        
+        // Ensure the correct segment is marked
+        const segments = document.querySelectorAll('.progress-segment');
+        segments[attempts - 1].classList.add('correct');
+
+        // Win message - without "The song was:"
+        let fullMessage = `You guessed correctly in <b>${attempts}</b> attempt${attempts === 1 ? '' : 's'}!`;
+        fullMessage += `<br><span class="song-reveal">
+            <span class="song-title">${currentSong.display_title}</span><br>
+            <span class="song-artist">${currentSong.cleanArtist}</span>
+        </span>`;
+
+        if (currentSong.metadata?.insane_levels) {
+            fullMessage += `<span class="insane-levels">${currentSong.metadata.insane_levels.join(', ')}</span>`;
+        }
+        
+        modalMessage.innerHTML = fullMessage;
     } else {
-        console.log('No insane levels found');
+        modalTitle.textContent = 'Game Over';
+        modalTitle.style.color = 'var(--neon-blue)';
+        modalContent.classList.add('lose');
+        
+        // Loss message - keeps "The song was:"
+        let fullMessage = `The song was:<br><span class="song-reveal">
+            <span class="song-title">${currentSong.display_title}</span><br>
+            <span class="song-artist">${currentSong.cleanArtist}</span>
+        </span>`;
+
+        if (currentSong.metadata?.insane_levels) {
+            fullMessage += `<span class="insane-levels">${currentSong.metadata.insane_levels.join(', ')}</span>`;
+        }
+        
+        modalMessage.innerHTML = fullMessage;
     }
-    
-    // Debug log the final message
-    console.log('Final modal message:', fullMessage);
-    
-    modalMessage.innerHTML = fullMessage;
-    
-    // Add animation class based on win/lose
-    modalContent.classList.add(isSuccess ? 'win' : 'lose');
     
     modal.style.display = 'block';
     isGameOver = true;
     
-    if (isSuccess) {
+    if (isWin) {
         createWinParticles();
     }
 }
@@ -569,18 +629,16 @@ function submitGuess() {
     
     if (!guess) {
         isSubmitting = false;
-        return; // Don't process empty guesses
+        return;
     }
     
-    // Check if the guess exactly matches any song title in the list
     const isValidTitle = songList.some(song => 
         song.title.toLowerCase() === guess.toLowerCase()
     );
 
     if (!isValidTitle) {
-        // If it's not a valid title, show a message and don't process the guess
         showResult("Please select a valid song title from the suggestions");
-        guessInput.value = ''; // Clear the input
+        guessInput.value = '';
         updateSubmitButtonState();
         isSubmitting = false;
         return;
@@ -596,25 +654,32 @@ function submitGuess() {
     );
     
     if (isCorrect) {
-        attempts++; // Increment attempts first
+        attempts++;
         gameWon = true;
-        const segments = document.querySelectorAll('.progress-segment');
-        segments[attempts - 1].classList.add('correct'); // Use attempts - 1 here
         
-        showModal(`The song was "${currentSong.display_title}" by ${currentSong.cleanArtist}`, true);
+        // Clear all segment classes first
+        const segments = document.querySelectorAll('.progress-segment');
+        segments.forEach(segment => {
+            segment.classList.remove('played', 'current');
+        });
+        
+        // Add correct class to the winning attempt segment
+        segments[attempts - 1].classList.add('correct');
+        
+        showModal('', true);
         revealFullSong();
         setTimeout(() => {
             setupModalEnterKey();
         }, 500);
     } else {
         const segments = document.querySelectorAll('.progress-segment');
-        segments[attempts].classList.add('played'); // Add red color for current segment
+        segments[attempts].classList.add('played');
         incorrectGuesses.push(guess);
         attempts++;
         
         if (attempts >= maxAttempts) {
-            updateProgressBar(); // Add this line to update the visual state
-            updateGuessHistory(); // Add this line to update history
+            updateProgressBar();
+            updateGuessHistory();
             showModal(`The song was "${currentSong.display_title}" by ${currentSong.cleanArtist}`);
             revealFullSong();
         } else {
@@ -625,14 +690,12 @@ function submitGuess() {
         }
     }
     
-    // Clear input and update button state immediately
     guessInput.value = '';
     updateSubmitButtonState();
     
-    // Reset the submitting flag and ensure input is cleared after a short delay
     setTimeout(() => {
         isSubmitting = false;
-        guessInput.value = ''; // Add another clear here to ensure it's cleared
+        guessInput.value = '';
         updateSubmitButtonState();
     }, 100);
 }
@@ -660,16 +723,18 @@ function skipGuess() {
     
     incorrectGuesses.push("▶▶");
     const segments = document.querySelectorAll('.progress-segment');
-    segments[attempts].classList.add('played'); // Add red color for current segment
+    segments[attempts].classList.add('played');
     attempts++;
 
     if (attempts >= maxAttempts) {
-        updateProgressBar(); // Add this line to update the visual state
+        updateProgressBar();
         updateGuessHistory();
         showModal(`The song was "${currentSong.display_title}" by ${currentSong.cleanArtist}`);
         revealFullSong();
     } else {
-        showResult(`Skipped! ${maxAttempts - attempts} attempts remaining`);
+        const remainingAttempts = maxAttempts - attempts;
+        const attemptsWord = remainingAttempts === 1 ? 'attempt' : 'attempts';
+        showResult(`Skipped! ${remainingAttempts} ${attemptsWord} remaining`);
         updateProgressBar();
         updateGuessHistory();
         updateSkipButtonText();
@@ -747,12 +812,27 @@ function createWinParticles() {
         particle.style.borderRadius = '50%';
         particle.style.left = Math.random() * 100 + '%';
         particle.style.top = Math.random() * 100 + '%';
-        particle.style.animation = `particle ${Math.random() * 2 + 1}s ease-out`;
+        
+        // Give each particle a random duration and delay
+        const duration = Math.random() * 1.5 + 1.5; // 1.5 to 3 seconds duration
+        particle.style.animation = `particle ${duration}s ease-out`;
+        
+        // Remove each particle individually after its animation
+        particle.addEventListener('animationend', () => {
+            particle.remove();
+        });
+        
         container.appendChild(particle);
     }
     
     document.body.appendChild(container);
-    setTimeout(() => container.remove(), 3000);
+    
+    // Remove container only after all particles are definitely gone
+    setTimeout(() => {
+        if (container.parentElement) {
+            container.remove();
+        }
+    }, 4000);
 }
 
 async function shareResult() {

@@ -509,7 +509,6 @@ body {
     padding: 8px 12px;
     font-size: 1.1em;
     margin: 4px 0;
-    background: rgba(20, 0, 0, 0.7); /* Very subtle red tint in base color */
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
     color: rgba(255, 255, 255, 0.9);
@@ -530,7 +529,7 @@ body {
         transform: scale(1.02);
     }
     100% {
-        background: rgba(20, 0, 0, 0.7);
+        background: rgba(20, 20, 30, 0.7); /* This will transition to the inline style */
         transform: scale(1);
     }
 }
@@ -678,6 +677,115 @@ body {
     text-shadow: 0 0 8px rgba(0, 243, 255, 0.7) !important;
 }
 
+.song-list-icon {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: transparent;
+    border: 2px solid var(--neon-blue);
+    color: var(--neon-blue);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    padding: 0;
+}
+
+.song-list-icon:hover {
+    background: rgba(0, 243, 255, 0.1);
+    box-shadow: 0 0 10px var(--neon-blue),
+                inset 0 0 5px rgba(0, 243, 255, 0.3);
+}
+
+.song-list-modal {
+    max-width: 600px !important;
+    max-height: 80vh;
+}
+
+.song-list-container {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 10px;
+    margin: 15px 0;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+/* Scrollbar styles for Webkit browsers */
+.song-list-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.song-list-container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.song-list-container::-webkit-scrollbar-thumb {
+    background: var(--neon-blue);
+    border-radius: 5px;
+    box-shadow: 0 0 5px var(--neon-blue);
+}
+
+.song-list-container::-webkit-scrollbar-thumb:hover {
+    background: var(--neon-pink);
+    box-shadow: 0 0 10px var(--neon-pink);
+}
+
+/* Firefox scrollbar */
+.song-list-container {
+    scrollbar-width: thin;
+    scrollbar-color: var(--neon-blue) rgba(0, 0, 0, 0.2);
+}
+
+.song-list-item {
+    padding: 12px;
+    margin: 5px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.song-list-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.song-list-title {
+    color: var(--text-primary);
+    font-size: 1em;
+}
+
+.song-list-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.song-list-levels {
+    color: #FFAE00;
+    text-shadow: 0 0 5px rgba(255, 174, 0, 0.5);
+    font-size: 0.9em;
+    margin-left: 10px;
+}
+
+.song-list-item:last-child {
+    border-bottom: none;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .song-list-icon {
+        top: 10px;
+        right: 10px;
+        width: 35px;
+        height: 35px;
+    }
+}
+
 .attempts-info {
     text-align: center;
     color: var(--text-secondary);
@@ -818,6 +926,8 @@ body {
     letter-spacing: 0.03em; /* Slightly increased for Zen Maru Gothic */
     transform: translateZ(0); /* Force GPU acceleration */
     backface-visibility: hidden; /* Can help with text rendering */
+    margin-bottom: 0px;
+    margin-top: 12px;
 }
 
 .song-reveal .song-artist {
@@ -826,7 +936,7 @@ body {
     color: #ddd;
     font-style: normal;
     display: block;
-    margin-top: 2px;
+    margin-top: 0px;
 }
 
 .share-success {
@@ -883,6 +993,9 @@ body {
 @keyframes particle {
     0% {
         transform: translate(0, 0) scale(0);
+        opacity: 1;
+    }
+    50% {
         opacity: 1;
     }
     100% {
