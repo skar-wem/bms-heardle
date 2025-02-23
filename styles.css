@@ -658,14 +658,16 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.9); /* Darker background instead of blur */
     z-index: 9999;
-    backdrop-filter: blur(3px);
+    contain: strict;
+    transform: translateZ(0);
+    /* Remove backdrop-filter for better performance */
 }
 
 .modal-content {
-    position: absolute;
-    top: 40%;
+    position: fixed; /* Change to fixed */
+    top: 40%; /* Center vertically */
     left: 50%;
     transform: translate(-50%, -50%);
     background: var(--panel-bg);
@@ -673,12 +675,14 @@ body {
     border-radius: 15px;
     text-align: center;
     border: 1px solid var(--neon-blue);
-    box-shadow: 0 0 30px rgba(0, 243, 255, 0.2);
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.15); /* Reduced shadow */
     max-width: 600px;
     width: 90%;
     z-index: 10000;
-    margin: 0 auto; /* Add this */
-    right: auto; /* Add this */
+    contain: content;
+    will-change: transform;
+    max-height: 90vh; /* Prevent overflow on small screens */
+    overflow-y: auto;
 }
 
 .modal-title {
@@ -852,9 +856,11 @@ body {
     .modal-content {
         top: 45%;
         width: 85%;
-        margin: 0 auto; /* Add this */
-        left: 50%; /* Ensure this is here */
-        transform: translate(-50%, -50%); /* Ensure this is here */
+        margin: 0 auto;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 8px 12px;
+        box-shadow: 0 0 10px rgba(0, 243, 255, 0.1);
     }
 
     .song-list-container {
@@ -1058,7 +1064,7 @@ body {
 
 .share-success {
     position: fixed;
-    top: 20%;
+    top: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
     background: var(--neon-blue);
