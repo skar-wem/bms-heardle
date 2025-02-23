@@ -205,7 +205,7 @@ body {
     height: 12px;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 4px;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease-out;
 }
 
 /* Adjust widths based on actual durations */
@@ -229,18 +229,63 @@ body {
 }
 
 .progress-segment.played {
-    background-color: rgba(255, 0, 0, 0.8); /* Bright red for wrong guesses */
+    animation: segmentPlayed 0.3s ease-out forwards;
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); /* Red glow */
 }
 
 .progress-segment.current {
-    background-color: rgba(255, 255, 255, 0.3); /* Soft white for current */
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* Subtle white glow */
+    background-color: rgba(255, 255, 255, 0.6); /* Brighter white */
+    animation: glowPulse 1s ease-in-out infinite; /* Reduced from 2s to 1s */
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.6),
+                0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes glowPulse {
+    0% {
+        box-shadow: 0 0 2px rgba(200, 200, 200, 0.6),
+                    0 0 5px rgba(255, 255, 255, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 5px rgba(200, 200, 200, 0.8),
+                    0 0 8px rgba(255, 255, 255, 0.4);
+    }
+    100% {
+        box-shadow: 0 0 2px rgba(200, 200, 200, 0.6),
+                    0 0 5px rgba(255, 255, 255, 0.3);
+    }
 }
 
 .progress-segment.correct {
-    background-color: #00ff66 !important; /* Bright green */
+    animation: segmentCorrect 0.3s ease-out forwards;
     box-shadow: 0 0 10px #00ff66 !important;
+}
+
+@keyframes segmentPlayed {
+    0% {
+        transform: scale(1);
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+        background-color: rgba(255, 0, 0, 0.8);
+    }
+}
+
+@keyframes segmentCorrect {
+    0% {
+        transform: scale(1);
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+        background-color: #00ff66;
+    }
 }
 
 .progress-bar {
@@ -612,7 +657,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     background: var(--panel-bg);
-    padding: 20px;
+    padding: 10px 15px;
     border-radius: 15px;
     text-align: center;
     border: 1px solid var(--neon-blue);
@@ -640,6 +685,7 @@ body {
     display: flex;
     gap: 10px;
     justify-content: center;
+    margin-bottom: 10px;
 }
 
 .modal-button {
@@ -704,14 +750,14 @@ body {
 
 .song-list-modal {
     max-width: 600px !important;
-    max-height: 80vh;
+    max-height: 85vh;
 }
 
 .song-list-container {
-    max-height: 60vh;
+    max-height: 65vh;
     overflow-y: auto;
-    padding: 10px;
-    margin: 15px 0;
+    padding: 3px;
+    margin: 8px 0;
     background: rgba(0, 0, 0, 0.2);
     border-radius: 10px;
 }
@@ -744,8 +790,8 @@ body {
 }
 
 .song-list-item {
-    padding: 12px;
-    margin: 5px 0;
+    padding: 6px;
+    margin: 2px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     transition: background-color 0.3s ease;
 }
@@ -776,7 +822,6 @@ body {
     border-bottom: none;
 }
 
-/* Mobile adjustments */
 @media (max-width: 768px) {
     .song-list-icon {
         top: 10px;
@@ -784,7 +829,47 @@ body {
         width: 35px;
         height: 35px;
     }
+
+    .song-list-modal {
+        max-height: 85vh; /* Increased for more space */
+        margin: 10px;
+    }
+
+    .modal-content {
+        top: 45%;
+    }
+
+    .song-list-container {
+        max-height: 65vh; /* Increased for taller list */
+        padding: 3px;
+        margin: 8px 0;
+    }
+
+    .song-list-item {
+        padding: 6px;
+        margin: 2px 0;
+    }
+
+    .song-list-title {
+        font-size: 0.9em;
+    }
+
+    .song-list-levels {
+        font-size: 0.8em;
+    }
+
+    .modal-title {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .modal-text {
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
 }
+
+
 
 .attempts-info {
     text-align: center;

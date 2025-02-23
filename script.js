@@ -171,7 +171,9 @@ function startGame() {
     
     const player = document.getElementById('audio-player');
     // Encode the filename to handle special characters
-    const encodedFilename = encodeURIComponent(currentSong.heardle_file);
+    const encodedFilename = encodeURIComponent(currentSong.heardle_file)
+        .replace(/%23/g, '%2523'); // Specifically handle # character
+
     player.src = `game_audio/${encodedFilename}`;
     
     // Reset all segments
@@ -193,10 +195,10 @@ function setupAutocomplete() {
     input.parentNode.appendChild(suggestionBox);
 
     let selectedIndex = -1;
+    let touchStartY = 0;
+    let isSwiping = false;
 
     function toggleMobileSuggestions(show) {
-        // Remove the suggestions-active class handling
-        // document.body.classList.toggle('suggestions-active', show);
         suggestionBox.style.display = show ? 'block' : 'none';
         if (!show) {
             selectedIndex = -1;
@@ -246,8 +248,8 @@ function setupAutocomplete() {
             if (selectedIndex >= 0 && suggestions[selectedIndex]) {
                 input.value = suggestions[selectedIndex].dataset.title;
                 toggleMobileSuggestions(false);
-                submitGuess(); // This will be the only submission
-                return; // Add this to prevent further processing
+                submitGuess();
+                return;
             } else if (input.value.trim()) {
                 submitGuess();
             }
@@ -256,33 +258,50 @@ function setupAutocomplete() {
             input.blur();
         }
     });
-    
 
     function updateSelection(suggestions) {
         Array.from(suggestions).forEach((suggestion, index) => {
             suggestion.classList.toggle('selected', index === selectedIndex);
             if (index === selectedIndex) {
                 input.value = suggestion.dataset.title;
-                // Ensure selected item is visible in scroll view
                 suggestion.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
         });
     }
 
-    suggestionBox.addEventListener('click', function(e) {
+    // Touch event handlers
+    suggestionBox.addEventListener('touchstart', function(e) {
+        touchStartY = e.touches[0].clientY;
+        isSwiping = false;
+    }, { passive: true });
+
+    suggestionBox.addEventListener('touchmove', function(e) {
+        const touchCurrentY = e.touches[0].clientY;
+        const deltaY = Math.abs(touchCurrentY - touchStartY);
+        
+        if (deltaY > 10) {
+            isSwiping = true;
+        }
+    }, { passive: true });
+
+    suggestionBox.addEventListener('touchend', function(e) {
+        if (isSwiping) {
+            return;
+        }
+
         const item = e.target.closest('.suggestion-item');
         if (item) {
+            e.preventDefault();
             input.value = item.dataset.title;
             toggleMobileSuggestions(false);
             submitGuess();
         }
     });
 
-    // Handle touches on mobile
-    suggestionBox.addEventListener('touchend', function(e) {
+    // Click handler
+    suggestionBox.addEventListener('click', function(e) {
         const item = e.target.closest('.suggestion-item');
         if (item) {
-            e.preventDefault(); // Prevent any ghost clicks
             input.value = item.dataset.title;
             toggleMobileSuggestions(false);
             submitGuess();
@@ -298,17 +317,13 @@ function setupAutocomplete() {
 
     // Handle backdrop clicks on mobile
     document.addEventListener('touchend', function(e) {
-        if (document.body.classList.contains('suggestions-active') && 
-            !input.contains(e.target) && 
-            !suggestionBox.contains(e.target)) {
-            e.preventDefault();
+        if (!input.contains(e.target) && !suggestionBox.contains(e.target)) {
             toggleMobileSuggestions(false);
         }
     });
 
     // Close suggestions when input loses focus
     input.addEventListener('blur', function(e) {
-        // Small delay to allow for suggestion clicks
         setTimeout(() => {
             if (!suggestionBox.contains(document.activeElement)) {
                 toggleMobileSuggestions(false);
@@ -754,7 +769,9 @@ function revealFullSong() {
     console.log('Starting reveal with file:', currentSong.preview_file);
     console.log('Audio duration:', player.duration); // Add this
     
-    const encodedFilename = encodeURIComponent(currentSong.preview_file);
+    const encodedFilename = encodeURIComponent(currentSong.preview_file)
+        .replace(/%23/g, '%2523');
+        
     player.src = `game_audio/${encodedFilename}`;
     
     player.currentTime = 0;
