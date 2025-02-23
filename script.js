@@ -214,7 +214,7 @@ function setupAutocomplete() {
             song.title.toLowerCase().includes(query) || 
             song.artist.toLowerCase().includes(query) ||
             song.aliases.some(alias => alias.includes(query))
-        ).slice(0, 5);
+        ).slice(0, 20);
 
         if (suggestions.length > 0) {
             suggestionBox.innerHTML = suggestions.map(song => 
@@ -462,7 +462,10 @@ function showModal(message, isSuccess = false) {
     
     // Create the message with song info and insane levels
     let fullMessage = `${message.split('The song was')[0]}`;  // Get the first part
-    fullMessage += `The song was:<br><span class="song-reveal">${currentSong.display_title} - ${currentSong.cleanArtist}</span>`;
+    fullMessage += `The song was:<br><span class="song-reveal">
+        <span class="song-title">${currentSong.display_title}</span>
+        <span class="song-artist">${currentSong.cleanArtist}</span>
+    </span>`;
     
     // Add insane levels if they exist (with debug)
     if (currentSong.metadata?.insane_levels) {
@@ -598,7 +601,7 @@ function submitGuess() {
         const segments = document.querySelectorAll('.progress-segment');
         segments[attempts - 1].classList.add('correct'); // Use attempts - 1 here
         
-        showModal(`Correct! The song was "${currentSong.display_title}" by ${currentSong.cleanArtist}`, true);
+        showModal(`The song was "${currentSong.display_title}" by ${currentSong.cleanArtist}`, true);
         revealFullSong();
         setTimeout(() => {
             setupModalEnterKey();
@@ -612,7 +615,7 @@ function submitGuess() {
         if (attempts >= maxAttempts) {
             updateProgressBar(); // Add this line to update the visual state
             updateGuessHistory(); // Add this line to update history
-            showModal(`Game Over! The song was "${currentSong.display_title}" by ${currentSong.cleanArtist}`);
+            showModal(`The song was "${currentSong.display_title}" by ${currentSong.cleanArtist}`);
             revealFullSong();
         } else {
             showResult(`Try again! ${maxAttempts - attempts} attempts remaining`);
@@ -655,7 +658,7 @@ function setupModalEnterKey() {
 function skipGuess() {
     if (isGameOver) return;
     
-    incorrectGuesses.push("⏭️ Skipped");
+    incorrectGuesses.push("▶▶");
     const segments = document.querySelectorAll('.progress-segment');
     segments[attempts].classList.add('played'); // Add red color for current segment
     attempts++;
@@ -663,7 +666,7 @@ function skipGuess() {
     if (attempts >= maxAttempts) {
         updateProgressBar(); // Add this line to update the visual state
         updateGuessHistory();
-        showModal(`Game Over! The song was "${currentSong.display_title}" by ${currentSong.cleanArtist}`);
+        showModal(`The song was "${currentSong.display_title}" by ${currentSong.cleanArtist}`);
         revealFullSong();
     } else {
         showResult(`Skipped! ${maxAttempts - attempts} attempts remaining`);
