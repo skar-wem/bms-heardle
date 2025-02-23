@@ -837,6 +837,7 @@ body {
 
     .modal-content {
         top: 45%;
+        width: 85%; 
     }
 
     .song-list-container {
@@ -887,7 +888,7 @@ body {
     margin-top: 5px;
     background: #0a0a0f;
     border-radius: 10px;
-    max-height: 200px;
+    max-height: 200px; /* Desktop height */
     overflow-y: auto;
     display: none;
     z-index: 1001;
@@ -932,10 +933,13 @@ body {
         position: absolute;
         bottom: calc(100% + 5px); /* Position above input with 5px gap */
         top: auto; /* Remove top positioning */
-        max-height: 40vh; /* Allow more height on mobile */
+        max-height: 30vh; /* Reduced from 40vh to prevent overflow */
         width: 100%;
         left: 0;
         right: 0;
+        background: #0a0a0f; /* Ensure background is solid */
+        border: 1px solid rgba(255, 0, 255, 0.2);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     }
 
     .input-container {
