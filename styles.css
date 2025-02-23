@@ -568,8 +568,11 @@ body {
     color: rgba(255, 255, 255, 0.9);
     text-align: center;
     box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.6); /* Add solid background color */
+    backdrop-filter: blur(3px); /* Reduced blur amount */
+    -webkit-backdrop-filter: blur(3px);
+    will-change: transform; /* Optimize for animations */
+    transform: translateZ(0); /* Force GPU acceleration */
 }
 
 /* When a new guess is added */
@@ -657,7 +660,7 @@ body {
     height: 100%;
     background: rgba(0, 0, 0, 0.8);
     z-index: 9999;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(3px);
 }
 
 .modal-content {
@@ -671,7 +674,7 @@ body {
     text-align: center;
     border: 1px solid var(--neon-blue);
     box-shadow: 0 0 30px rgba(0, 243, 255, 0.2);
-    max-width: 380px;
+    max-width: 600px;
     width: 90%;
     z-index: 10000;
     margin: 0 auto; /* Add this */
@@ -1027,12 +1030,12 @@ body {
 
 .song-reveal .song-title {
     font-family: 'Zen Maru Gothic', sans-serif;
-    font-size: 1.55em;
+    font-size: 1.7em;
     color: #fff;
     font-weight: 500; /* Zen Maru Gothic might look smoother at 500 */
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.9),
-                 0 0 10px rgba(0, 0, 0, 0.8),
-                 0 0 15px rgba(0, 0, 0, 0.7);
+                 0 0 10px rgba(255, 255, 255, 0.8),
+                 0 0 15px rgba(255, 255, 255, 0.7);
     display: block;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -1041,7 +1044,7 @@ body {
     transform: translateZ(0); /* Force GPU acceleration */
     backface-visibility: hidden; /* Can help with text rendering */
     margin-bottom: 0px;
-    margin-top: 12px;
+    margin-top: 30px;
 }
 
 .song-reveal .song-artist {
@@ -1154,6 +1157,86 @@ body {
     animation: segmentLose 0.5s ease;
 }
 
+.difficulty-guess-container {
+    margin: 15px auto;
+    padding: 15px;
+    background: #1a1a1a00;
+    border-radius: 10px;
+    contain: content;
+    max-width: 400px;
+    width: 90%; /* Add this to ensure proper scaling on mobile */
+}
+
+.difficulty-prompt {
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+.difficulty-buttons {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4px;
+    contain: layout style;
+    margin: 0 auto; /* Center the grid */
+    width: 100%; /* Ensure full width within container */
+}
+
+.difficulty-btn {
+    background: transparent;
+    border: 2px solid var(--neon-blue);
+    color: var(--neon-blue);
+    padding: 2px 2px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1em;
+    text-align: center;
+    min-width: 20px;
+}
+
+.difficulty-btn:hover {
+    background: rgba(0, 243, 255, 0.1);
+    box-shadow: 0 0 10px var(--neon-blue);
+}
+
+.difficulty-btn.correct {
+    border-color: #00ff66;
+    color: #00ff66;
+    background: rgba(0, 255, 102, 0.1);
+    box-shadow: 0 0 10px #00ff66;
+}
+
+.difficulty-btn.incorrect {
+    border-color: #ff0066;
+    color: #ff0066;
+    background: rgba(255, 0, 102, 0.1);
+    box-shadow: 0 0 10px #ff0066;
+}
+
+.difficulty-result {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .difficulty-buttons {
+        gap: 4px;
+        max-width: 300px;
+    }
+
+    .difficulty-btn {
+        padding: 4px 6px;
+        font-size: 0.8em;
+        min-width: 30px;
+    }
+}
 
 .hidden {
     display: none;

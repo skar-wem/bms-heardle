@@ -15,6 +15,9 @@ let animationId;
 let isSubmitting = false
 let gameWon = false;
 let currentTimeout = null;
+let difficultyGuessed = false;
+let difficultyGuessResult = false;
+
 
 
 
@@ -234,14 +237,32 @@ function setupAutocomplete() {
 
     input.addEventListener('keydown', function(e) {
         const suggestions = suggestionBox.getElementsByClassName('suggestion-item');
+        const isExtendedUpward = suggestionBox.getBoundingClientRect().top < input.getBoundingClientRect().top;
         
-        if (e.key === 'ArrowDown') {
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
             e.preventDefault();
-            selectedIndex = Math.min(selectedIndex + 1, suggestions.length - 1);
-            updateSelection(suggestions);
-        } else if (e.key === 'ArrowUp') {
-            e.preventDefault();
-            selectedIndex = Math.max(selectedIndex - 1, -1);
+            
+            if (suggestions.length === 0) return;
+    
+            // If no selection yet, select first or last item based on direction and layout
+            if (selectedIndex === -1) {
+                if (e.key === 'ArrowDown') {
+                    selectedIndex = 0;
+                } else { // ArrowUp
+                    selectedIndex = isExtendedUpward ? suggestions.length - 1 : -1;
+                }
+            } else {
+                if (e.key === 'ArrowDown') {
+                    selectedIndex = Math.min(selectedIndex + 1, suggestions.length - 1);
+                } else { // ArrowUp
+                    selectedIndex = Math.max(selectedIndex - 1, 0);
+                    // Allow deselection when suggestions are below the input
+                    if (selectedIndex === 0 && !isExtendedUpward) {
+                        selectedIndex = -1;
+                    }
+                }
+            }
+    
             updateSelection(suggestions);
         } else if (e.key === 'Enter') {
             e.preventDefault();
@@ -258,13 +279,16 @@ function setupAutocomplete() {
             input.blur();
         }
     });
-
+    
     function updateSelection(suggestions) {
         Array.from(suggestions).forEach((suggestion, index) => {
             suggestion.classList.toggle('selected', index === selectedIndex);
             if (index === selectedIndex) {
                 input.value = suggestion.dataset.title;
-                suggestion.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                suggestion.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'nearest'
+                });
             }
         });
     }
@@ -512,6 +536,7 @@ function showModal(message, isWin = false) {
     const modalMessage = document.getElementById('modalMessage');
     const modalTitle = document.querySelector('.modal-title');
     const modalContent = document.querySelector('.modal-content');
+    const difficultyContainer = document.getElementById('difficultyGuessContainer');
     
     // Remove previous classes
     modalContent.classList.remove('win', 'lose');
@@ -534,10 +559,6 @@ function showModal(message, isWin = false) {
             <span class="song-title">${currentSong.display_title}</span><br>
             <span class="song-artist">${currentSong.cleanArtist}</span>
         </span>`;
-
-        if (currentSong.metadata?.insane_levels) {
-            fullMessage += `<span class="insane-levels">${currentSong.metadata.insane_levels.join(', ')}</span>`;
-        }
         
         modalMessage.innerHTML = fullMessage;
     } else {
@@ -550,13 +571,32 @@ function showModal(message, isWin = false) {
             <span class="song-title">${currentSong.display_title}</span><br>
             <span class="song-artist">${currentSong.cleanArtist}</span>
         </span>`;
-
-        if (currentSong.metadata?.insane_levels) {
-            fullMessage += `<span class="insane-levels">${currentSong.metadata.insane_levels.join(', ')}</span>`;
-        }
         
         modalMessage.innerHTML = fullMessage;
     }
+
+    // Reset and show difficulty guessing section
+    const buttons = document.querySelectorAll('.difficulty-btn');
+    buttons.forEach(btn => {
+        btn.disabled = false;
+        btn.classList.remove('correct', 'incorrect');
+        // Remove any existing click listeners
+        btn.replaceWith(btn.cloneNode(true));
+    });
+
+    // Re-add click listeners to fresh buttons
+    document.querySelectorAll('.difficulty-btn').forEach(btn => {
+        btn.addEventListener('click', () => handleDifficultyGuess(btn.dataset.level));
+    });
+
+    // Reset difficulty result
+    const resultDiv = document.querySelector('.difficulty-result');
+    resultDiv.classList.add('hidden');
+    resultDiv.textContent = '';
+
+    // Show difficulty container
+    difficultyContainer.classList.remove('hidden');
+    difficultyGuessed = false;
     
     modal.style.display = 'block';
     isGameOver = true;
@@ -595,6 +635,8 @@ function playGameOverSound(isSuccess) {
 
 function startNewGame() {
     gameWon = false;
+    difficultyGuessed = false; // Reset difficulty guess state
+    difficultyGuessResult = false
     const modal = document.getElementById('gameOverModal');
     modal.style.display = 'none';
     isGameOver = false;
@@ -613,6 +655,24 @@ function startNewGame() {
     
     // Clear result message
     showResult('');
+    
+    // Reset difficulty guessing interface
+    const difficultyContainer = document.getElementById('difficultyGuessContainer');
+    const difficultyButtons = document.querySelectorAll('.difficulty-btn');
+    const difficultyResult = document.querySelector('.difficulty-result');
+    
+    // Reset buttons
+    difficultyButtons.forEach(btn => {
+        btn.disabled = false;
+        btn.classList.remove('correct', 'incorrect');
+    });
+    
+    // Hide difficulty result
+    difficultyResult.classList.add('hidden');
+    difficultyResult.textContent = '';
+    
+    // Hide difficulty container
+    difficultyContainer.classList.add('hidden');
     
     updateProgressBar();
     updateGuessHistory();
@@ -810,6 +870,31 @@ function showResult(message) {
 }
 
 
+function handleDifficultyGuess(guessedLevel) {
+    const actualLevels = currentSong.metadata?.insane_levels || [];
+    const isCorrect = actualLevels.includes(guessedLevel);
+    
+    const buttons = document.querySelectorAll('.difficulty-btn');
+    
+    // Disable all buttons
+    buttons.forEach(btn => {
+        btn.disabled = true;
+        if (btn.dataset.level === guessedLevel) {
+            btn.classList.add(isCorrect ? 'correct' : 'incorrect');
+        }
+        if (actualLevels.includes(btn.dataset.level)) {
+            setTimeout(() => {
+                btn.classList.add('correct');
+            }, 500);
+        }
+    });
+
+    difficultyGuessResult = isCorrect;  // This stores whether the guess was correct
+    difficultyGuessed = true;  // This tracks that a guess was made
+}
+
+
+
 function createWinParticles() {
     const container = document.createElement('div');
     container.style.position = 'fixed';
@@ -862,9 +947,6 @@ async function shareResult() {
     
     if (gameWon) {
         console.log('Generating squares for win');
-        // On second attempt: attempts would be 2
-        // We want: 🟥🟩⬜⬜⬜⬜
-        
         // First, fill in the red squares for wrong guesses
         for (let i = 0; i < attempts - 1; i++) {
             console.log('Adding red square at position:', i);
@@ -884,10 +966,10 @@ async function shareResult() {
 
     console.log('Final squares array:', squares);
 
-    // Create share text
-    const shareText = `BMS Heardle\n${squares.join('')}\n${currentSong.display_title} - ${currentSong.cleanArtist}\nhttps://skar-wem.github.io/bms-heardle/`;
-
-
+    // Create share text with correct difficulty guess symbol
+    const shareText = `BMS Heardle\n${squares.join('')}${
+        difficultyGuessed ? '\nDifficulty Guess: ' + (difficultyGuessResult ? '✅' : '❌') : ''
+    }\n${currentSong.display_title} - ${currentSong.cleanArtist}\nhttps://skar-wem.github.io/bms-heardle/`;
 
     // Fallback to clipboard
     try {
