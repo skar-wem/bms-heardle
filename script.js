@@ -771,7 +771,7 @@ function revealFullSong() {
     
     const encodedFilename = encodeURIComponent(currentSong.preview_file)
         .replace(/%23/g, '%2523');
-        
+
     player.src = `game_audio/${encodedFilename}`;
     
     player.currentTime = 0;
@@ -795,14 +795,14 @@ function revealFullSong() {
 
 function updateSkipButtonText() {
     const skipButton = document.getElementById('skip-button');
-    if (attempts >= maxAttempts - 1) { // Change to maxAttempts - 1
+    if (attempts >= maxAttempts - 1) {
         skipButton.textContent = 'Skip';
         return;
     }
     const currentDuration = progressDurations[attempts];
     const nextDuration = progressDurations[attempts + 1];
     const increase = nextDuration - currentDuration;
-    skipButton.textContent = `Skip (+${increase}s)`;
+    skipButton.innerHTML = `SKIP (<span>+${increase}s</span>)`; // Modified this line
 }
 
 function showResult(message) {

@@ -132,7 +132,7 @@ body {
     background: var(--panel-bg);
     padding: 20px 20px 15px 20px; /* Reduced bottom padding */
     border-radius: 15px;
-    margin: 15px 0;
+    margin: 15px 0 10px 0;
     border: 1px solid rgba(255, 0, 255, 0.4);
     box-shadow: 0 0 20px rgba(255, 0, 255, 0.1);
     width: 100%;
@@ -498,6 +498,15 @@ body {
                 inset 0 0 5px rgba(0, 243, 255, 0.2);
 }
 
+#skip-button {
+    text-transform: uppercase;
+}
+
+/* Add this new rule */
+#skip-button span {
+    text-transform: none;
+}
+
 #submit-button {
     border-color: var(--neon-pink);
     color: var(--neon-pink);
@@ -665,6 +674,8 @@ body {
     max-width: 380px;
     width: 90%;
     z-index: 10000;
+    margin: 0 auto; /* Add this */
+    right: auto; /* Add this */
 }
 
 .modal-title {
@@ -754,7 +765,7 @@ body {
 }
 
 .song-list-container {
-    max-height: 65vh;
+    max-height: 64vh;
     overflow-y: auto;
     padding: 3px;
     margin: 8px 0;
@@ -837,7 +848,10 @@ body {
 
     .modal-content {
         top: 45%;
-        width: 85%; 
+        width: 85%;
+        margin: 0 auto; /* Add this */
+        left: 50%; /* Ensure this is here */
+        transform: translate(-50%, -50%); /* Ensure this is here */
     }
 
     .song-list-container {
@@ -888,7 +902,7 @@ body {
     margin-top: 5px;
     background: #0a0a0f;
     border-radius: 10px;
-    max-height: 200px; /* Desktop height */
+    max-height: 374px; /* Desktop height */
     overflow-y: auto;
     display: none;
     z-index: 1001;
@@ -933,7 +947,7 @@ body {
         position: absolute;
         bottom: calc(100% + 5px); /* Position above input with 5px gap */
         top: auto; /* Remove top positioning */
-        max-height: 30vh; /* Reduced from 40vh to prevent overflow */
+        max-height: 27vh; /* Reduced from 40vh to prevent overflow */
         width: 100%;
         left: 0;
         right: 0;
@@ -995,9 +1009,20 @@ body {
     transition: all 0.2s ease;
 }
 
+.suggestion-item .song-title {
+    color: var(--text-primary);
+    font-size: 1em;
+}
+
+.suggestion-item .song-artist {
+    color: #888;
+    font-size: 0.8em;
+    margin-top: 2px;
+}
+
 .suggestion-item:hover,
 .suggestion-item.selected {
-    background: #151520;  /* Solid color instead of transparent */
+    background: #00363477;
 }
 
 .song-reveal .song-title {
