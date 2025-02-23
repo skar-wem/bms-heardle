@@ -90,23 +90,6 @@
       ]
     }
   },
-  "5.1.1": {
-    "display_title": "5.1.1",
-    "artist": "dj nagureo",
-    "heardle_file": "5.1.1_heardle.mp3",
-    "preview_file": "5.1.1_preview.mp3",
-    "metadata": {
-      "genre": "PIANO AMBIENT",
-      "bpm": "101",
-      "original_file": "511_n.bms",
-      "mod_time": "2019-06-09 00:29:54",
-      "insane_levels": [
-        "★6",
-        "★8",
-        "★16"
-      ]
-    }
-  },
   "5.1.1(ReMix)": {
     "display_title": "5.1.1(ReMix)",
     "artist": "猫蟹丸",

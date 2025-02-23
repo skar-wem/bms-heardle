@@ -14,6 +14,8 @@ let waveCtx;
 let animationId;
 let isSubmitting = false
 let gameWon = false;
+let currentTimeout = null;
+
 
 
 function initAudioVisualizer() {
@@ -168,7 +170,9 @@ function startGame() {
     currentSong.cleanArtist = cleanupText(currentSong.artist);
     
     const player = document.getElementById('audio-player');
-    player.src = `game_audio/${currentSong.heardle_file}`; // Use heardle file for gameplay
+    // Encode the filename to handle special characters
+    const encodedFilename = encodeURIComponent(currentSong.heardle_file);
+    player.src = `game_audio/${encodedFilename}`;
     
     // Reset all segments
     const segments = document.querySelectorAll('.progress-segment');
@@ -352,22 +356,27 @@ function playCurrentSegment() {
                 drawWave();
             }
 
-            // Remove any transition
-            progressFill.style.transition = 'none';
-            
-            // Set up the timer to stop at the current allowed duration
-            setTimeout(() => {
-                if (isPlaying) {
-                    player.pause();
-                    player.currentTime = 0;
-                    playButton.textContent = 'Play';
-                    isPlaying = false;
-                    if (animationId) {
-                        cancelAnimationFrame(animationId);
-                        animationId = null;
+            // Clear any existing timeout
+            if (currentTimeout) {
+                clearTimeout(currentTimeout);
+                currentTimeout = null;
+            }
+
+            // Only set up the timer if not in reveal mode
+            if (!isGameOver) {
+                currentTimeout = setTimeout(() => {
+                    if (isPlaying) {
+                        player.pause();
+                        player.currentTime = 0;
+                        playButton.textContent = 'Play';
+                        isPlaying = false;
+                        if (animationId) {
+                            cancelAnimationFrame(animationId);
+                            animationId = null;
+                        }
                     }
-                }
-            }, duration * 1000);
+                }, duration * 1000);
+            }
 
             // Start time for animation
             const startTime = performance.now();
@@ -665,17 +674,35 @@ function skipGuess() {
 }
 
 function revealFullSong() {
+    // Clear any existing timeout first
+    if (currentTimeout) {
+        clearTimeout(currentTimeout);
+        currentTimeout = null;
+    }
+    
     const player = document.getElementById('audio-player');
     const playButton = document.querySelector('.play-button');
     
-    // Switch to preview file for reveal
-    player.src = `game_audio/${currentSong.preview_file}`;  // Use preview file for reveal
+    console.log('Starting reveal with file:', currentSong.preview_file);
+    console.log('Audio duration:', player.duration); // Add this
+    
+    const encodedFilename = encodeURIComponent(currentSong.preview_file);
+    player.src = `game_audio/${encodedFilename}`;
+    
     player.currentTime = 0;
-    player.play();
+    
+    // Add more detailed promise handling
+    const playPromise = player.play();
+    playPromise.then(() => {
+        console.log('Preview playback started');
+        console.log('New duration:', player.duration);
+    }).catch(error => {
+        console.error('Error playing preview:', error);
+    });
+    
     playButton.textContent = 'Stop';
     isPlaying = true;
 
-    // Start wave animation for reveal if it exists
     if (audioContext && !animationId) {
         drawWave();
     }
@@ -894,7 +921,17 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize audio player
     const player = document.getElementById('audio-player');
+
+    player.addEventListener('loadedmetadata', () => {
+        console.log('Audio metadata loaded, duration:', player.duration);
+    });
+    
+    player.addEventListener('durationchange', () => {
+        console.log('Duration changed to:', player.duration);
+    });
+    
     player.addEventListener('ended', () => {
+        console.log('Audio ended naturally at time:', player.currentTime);
         if (!isGameOver) {
             const playButton = document.querySelector('.play-button');
             playButton.textContent = 'Play';
@@ -905,11 +942,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
-
+    
     player.addEventListener('timeupdate', () => {
-        if (isPlaying && !isGameOver) {
-            updateProgressBar(player.currentTime, 16); // Use 16 seconds as total duration
+        if (isPlaying) {  // Remove the !isGameOver check
+            console.log('Current time:', player.currentTime);
+            updateProgressBar(player.currentTime, player.duration);
         }
+    });
+    
+    player.addEventListener('pause', () => {
+        console.log('Audio paused at:', player.currentTime);
+    });
+    
+    player.addEventListener('error', (e) => {
+        console.error('Audio error:', e);
+        console.log('Audio error details:', player.error);
     });
 
     document.querySelector('.play-button').addEventListener('mousemove', (e) => {
