@@ -874,6 +874,9 @@ function handleDifficultyGuess(guessedLevel) {
     const actualLevels = currentSong.metadata?.insane_levels || [];
     const isCorrect = actualLevels.includes(guessedLevel);
     
+    // Play the appropriate sound
+    playDifficultySound(isCorrect);
+    
     const buttons = document.querySelectorAll('.difficulty-btn');
     
     // Disable all buttons
@@ -889,11 +892,35 @@ function handleDifficultyGuess(guessedLevel) {
         }
     });
 
-    difficultyGuessResult = isCorrect;  // This stores whether the guess was correct
-    difficultyGuessed = true;  // This tracks that a guess was made
+    difficultyGuessResult = isCorrect;
+    difficultyGuessed = true;
 }
 
-
+function playDifficultySound(isCorrect) {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    if (isCorrect) {
+        // Correct guess sound: higher pitched, pleasant ding
+        oscillator.frequency.setValueAtTime(1046.50, audioContext.currentTime); // C6
+        oscillator.frequency.setValueAtTime(1318.51, audioContext.currentTime + 0.1); // E6
+        gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+    } else {
+        // Wrong guess sound: lower pitched, descending tone
+        oscillator.frequency.setValueAtTime(466.16, audioContext.currentTime); // A#4
+        oscillator.frequency.setValueAtTime(369.99, audioContext.currentTime + 0.1); // F#4
+        gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+    }
+    
+    oscillator.start();
+    oscillator.stop(audioContext.currentTime + 0.3);
+}
 
 function createWinParticles() {
     const container = document.createElement('div');
@@ -966,9 +993,9 @@ async function shareResult() {
 
     console.log('Final squares array:', squares);
 
-    // Create share text with correct difficulty guess symbol
-    const shareText = `BMS Heardle\n${squares.join('')}${
-        difficultyGuessed ? '\nDifficulty Guess: ' + (difficultyGuessResult ? '✅' : '❌') : ''
+    // Create share text with minimalist format
+    const shareText = `▸ BMS Heardle #\n${squares.join('')} | ${
+        difficultyGuessed ? (difficultyGuessResult ? '⭐' : '❌') : ''
     }\n${currentSong.display_title} - ${currentSong.cleanArtist}\nhttps://skar-wem.github.io/bms-heardle/`;
 
     // Fallback to clipboard
@@ -991,7 +1018,6 @@ async function shareResult() {
         console.log('Error copying to clipboard:', err);
     }
 }
-
 
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
