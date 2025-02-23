@@ -167,75 +167,90 @@ body {
     letter-spacing: 2px;
     position: relative;
     overflow: hidden;
+    --mouse-x: 50%;
+    --mouse-y: 50%;
 }
 
-/* Gradient background for hover */
+/* Gradient glow effect that follows mouse */
 .play-button::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        45deg,
-        rgba(96, 118, 240, 0.8),  /* Turquoise */
-        rgba(111, 225, 255, 0.8),  /* Light blue */
-        rgba(96, 240, 209, 0.8)    /* Back to turquoise */
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        circle 160px at var(--mouse-x) var(--mouse-y),
+        rgba(0, 243, 255, 0.4),
+        rgba(255, 0, 255, 0.2),
+        transparent 100%
     );
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s;
+    z-index: -1;
+}
+
+/* Bright spot that follows mouse */
+.play-button::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: radial-gradient(
+        circle 40px at var(--mouse-x) var(--mouse-y),
+        rgba(255, 255, 255, 0.4),
+        transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s;
     z-index: -1;
 }
 
 .play-button:hover {
-    border-color: transparent;
-    color: #000000;
-    transform: translateY(-1px);
-    box-shadow: 0 5px 15px rgba(96, 240, 209, 0.2);
+    transform: translateY(-2px);
+    border-color: rgba(0, 243, 255, 0.5);
+    box-shadow: 
+        0 0 20px rgba(0, 243, 255, 0.3),
+        0 0 40px rgba(255, 0, 255, 0.1);
+    background-image: linear-gradient(
+        45deg,
+        rgba(0, 243, 255, 0.05) 0%,
+        rgba(255, 0, 255, 0.05) 25%,
+        rgba(0, 243, 255, 0.1) 50%,
+        rgba(255, 0, 255, 0.05) 75%,
+        rgba(0, 243, 255, 0.05) 100%
+    );
+    background-size: 400% 400%;
+    animation: gradientPulse 4s ease infinite;
 }
 
-.play-button:hover::before {
+@keyframes gradientPulse {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+.play-button:hover::before,
+.play-button:hover::after {
     opacity: 1;
 }
 
-/* Click animation */
+/* Active state */
 .play-button:active {
-    transform: scale(0.98) translateY(0);
-    box-shadow: 0 2px 8px rgba(96, 240, 209, 0.1);
+    transform: scale(0.98);
+    box-shadow: 
+        0 0 10px rgba(0, 243, 255, 0.2),
+        0 0 20px rgba(255, 0, 255, 0.1);
 }
 
-/* Add ripple effect on click */
-.play-button::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 5px;
-    height: 5px;
-    background: rgba(255, 255, 255, 0.5);
-    opacity: 0;
-    border-radius: 100%;
-    transform: scale(1, 1) translate(-50%);
-    transform-origin: 50% 50%;
-}
-
-@keyframes ripple {
-    0% {
-        transform: scale(0, 0);
-        opacity: 0.5;
-    }
-    100% {
-        transform: scale(40, 40);
-        opacity: 0;
-    }
-}
-
-.play-button:active::after {
-    animation: ripple 0.6s ease-out;
-}
-
-/* Optional: Add subtle shine effect */
 @keyframes shine {
     0% {
         background-position: 200% center;
@@ -243,18 +258,6 @@ body {
     100% {
         background-position: -200% center;
     }
-}
-
-.play-button:hover {
-    background-image: linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.2) 25%,
-        rgba(255, 255, 255, 0.2) 75%,
-        rgba(255, 255, 255, 0) 100%
-    );
-    background-size: 200% auto;
-    animation: shine 3s linear infinite;
 }
 
 .progress-container {
@@ -574,108 +577,143 @@ body {
     letter-spacing: 2px;
     position: relative;
     overflow: hidden;
+    --mouse-x: 50%;
+    --mouse-y: 50%;
 }
 
-/* Submit button specific gradient (green/teal) */
+/* Submit button glow effect (green/teal) */
 #submit-button::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        45deg,
-        rgba(0, 180, 100, 0.8),
-        rgba(0, 200, 150, 0.8),
-        rgba(0, 180, 120, 0.8)
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        circle 160px at var(--mouse-x) var(--mouse-y),
+        rgba(0, 255, 136, 0.4),
+        rgba(0, 180, 120, 0.2),
+        transparent 100%
     );
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s;
     z-index: -1;
 }
 
-/* Skip button specific gradient (red/orange) */
+/* Submit button bright spot */
+#submit-button::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: radial-gradient(
+        circle 40px at var(--mouse-x) var(--mouse-y),
+        rgba(255, 255, 255, 0.4),
+        transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: -1;
+}
+
+/* Skip button glow effect (red/orange) */
 #skip-button::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        45deg,
-        rgba(200, 50, 50, 0.8),
-        rgba(220, 80, 50, 0.8),
-        rgba(200, 60, 50, 0.8)
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        circle 160px at var(--mouse-x) var(--mouse-y),
+        rgba(255, 80, 80, 0.4),
+        rgba(255, 100, 50, 0.2),
+        transparent 100%
     );
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s;
     z-index: -1;
 }
 
-/* Hover effects */
-#skip-button:hover, #submit-button:hover {
-    border-color: transparent;
-    color: #000000;
-    transform: translateY(-1px);
+/* Skip button bright spot */
+#skip-button::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: radial-gradient(
+        circle 40px at var(--mouse-x) var(--mouse-y),
+        rgba(255, 255, 255, 0.4),
+        transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: -1;
 }
 
-#submit-button:hover {
-    box-shadow: 0 5px 15px rgba(0, 180, 100, 0.2);
-}
-
-#skip-button:hover {
-    box-shadow: 0 5px 15px rgba(200, 50, 50, 0.2);
-}
-
-#skip-button:hover::before, #submit-button:hover::before {
+/* Show effects on hover */
+#submit-button:hover::before,
+#submit-button:hover::after,
+#skip-button:hover::before,
+#skip-button:hover::after {
     opacity: 1;
 }
 
-/* Click animation */
-#skip-button:active, #submit-button:active {
-    transform: scale(0.98) translateY(0);
+/* Submit button hover state */
+#submit-button:hover {
+    transform: translateY(-2px);
+    border-color: rgba(0, 255, 136, 0.5);
+    box-shadow: 
+        0 0 20px rgba(0, 255, 136, 0.3),
+        0 0 40px rgba(0, 180, 120, 0.1);
+    background-image: linear-gradient(
+        45deg,
+        rgba(0, 255, 136, 0.05) 0%,
+        rgba(0, 180, 120, 0.05) 25%,
+        rgba(0, 255, 136, 0.1) 50%,
+        rgba(0, 180, 120, 0.05) 75%,
+        rgba(0, 255, 136, 0.05) 100%
+    );
+    background-size: 400% 400%;
+    animation: gradientPulse 4s ease infinite;
 }
 
+/* Skip button hover state */
+#skip-button:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 80, 80, 0.5);
+    box-shadow: 
+        0 0 20px rgba(255, 80, 80, 0.3),
+        0 0 40px rgba(255, 100, 50, 0.1);
+    background-image: linear-gradient(
+        45deg,
+        rgba(255, 80, 80, 0.05) 0%,
+        rgba(255, 100, 50, 0.05) 25%,
+        rgba(255, 80, 80, 0.1) 50%,
+        rgba(255, 100, 50, 0.05) 75%,
+        rgba(255, 80, 80, 0.05) 100%
+    );
+    background-size: 400% 400%;
+    animation: gradientPulse 4s ease infinite;
+}
+
+/* Active states */
 #submit-button:active {
-    box-shadow: 0 2px 8px rgba(0, 180, 100, 0.1);
+    transform: scale(0.98);
+    box-shadow: 
+        0 0 10px rgba(0, 255, 136, 0.2),
+        0 0 20px rgba(0, 180, 120, 0.1);
 }
 
 #skip-button:active {
-    box-shadow: 0 2px 8px rgba(200, 50, 50, 0.1);
-}
-
-/* Ripple effect */
-#skip-button::after, #submit-button::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 5px;
-    height: 5px;
-    background: rgba(255, 255, 255, 0.5);
-    opacity: 0;
-    border-radius: 100%;
-    transform: scale(1, 1) translate(-50%);
-    transform-origin: 50% 50%;
-}
-
-#skip-button:active::after, #submit-button:active::after {
-    animation: ripple 0.6s ease-out;
-}
-
-/* Shine effect on hover */
-#skip-button:hover, #submit-button:hover {
-    background-image: linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.2) 25%,
-        rgba(255, 255, 255, 0.2) 75%,
-        rgba(255, 255, 255, 0) 100%
-    );
-    background-size: 200% auto;
-    animation: shine 3s linear infinite;
+    transform: scale(0.98);
+    box-shadow: 
+        0 0 10px rgba(255, 80, 80, 0.2),
+        0 0 20px rgba(255, 100, 50, 0.1);
 }
 
 #result {

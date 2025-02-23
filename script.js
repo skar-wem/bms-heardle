@@ -1097,18 +1097,19 @@ async function shareResult() {
     try {
         await navigator.clipboard.writeText(shareText);
         
-        // Show feedback
-        const feedback = document.createElement('div');
-        feedback.className = 'share-success';
-        feedback.textContent = 'Copied to clipboard!';
-        document.body.appendChild(feedback);
-        
-        // Show and remove feedback
-        setTimeout(() => feedback.style.opacity = '1', 10);
-        setTimeout(() => {
-            feedback.style.opacity = '0';
-            setTimeout(() => feedback.remove(), 300);
-        }, 2000);
+        // Only show custom popup on desktop
+        if (!/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+            const feedback = document.createElement('div');
+            feedback.className = 'share-success';
+            feedback.textContent = 'Copied to clipboard!';
+            document.body.appendChild(feedback);
+            
+            setTimeout(() => feedback.style.opacity = '1', 10);
+            setTimeout(() => {
+                feedback.style.opacity = '0';
+                setTimeout(() => feedback.remove(), 300);
+            }, 2000);
+        }
     } catch (err) {
         console.log('Error copying to clipboard:', err);
     }
@@ -1260,6 +1261,23 @@ document.addEventListener('DOMContentLoaded', () => {
     player.addEventListener('error', (e) => {
         console.error('Audio error:', e);
         console.log('Audio error details:', player.error);
+    });
+
+    // Add mouse tracking to submit and skip buttons
+    document.querySelector('#submit-button').addEventListener('mousemove', (e) => {
+        const rect = e.target.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        e.target.style.setProperty('--mouse-x', `${x}%`);
+        e.target.style.setProperty('--mouse-y', `${y}%`);
+    });
+
+    document.querySelector('#skip-button').addEventListener('mousemove', (e) => {
+        const rect = e.target.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        e.target.style.setProperty('--mouse-x', `${x}%`);
+        e.target.style.setProperty('--mouse-y', `${y}%`);
     });
 
     document.querySelector('.play-button').addEventListener('mousemove', (e) => {
