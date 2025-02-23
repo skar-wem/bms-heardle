@@ -968,8 +968,8 @@ body {
     height: 40px;
     border-radius: 50%;
     background: transparent;
-    border: 2px solid var(--neon-blue);
-    color: var(--neon-blue);
+    border: 2px solid #f0f0f0;
+    color:#f0f0f0;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -988,6 +988,11 @@ body {
 .song-list-modal {
     max-width: 600px !important;
     max-height: 85vh;
+}
+
+.song-list-modal .modal-title {
+    color: #ffffff !important;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
 .song-list-container {
