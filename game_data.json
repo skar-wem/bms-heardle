@@ -216,7 +216,7 @@
     }
   },
   "3.14": {
-    "display_title": "3.14",
+    "display_title": "3.14 (TT mix)",
     "artist": "ルゼ",
     "heardle_file": "3.14_heardle.mp3",
     "preview_file": "3.14_preview.mp3",
@@ -702,7 +702,7 @@
     }
   },
   "Angel Wing[uma]": {
-    "display_title": "Angel Wing[uma]",
+    "display_title": "Angel Wing",
     "artist": "uma",
     "heardle_file": "Angel Wing[uma]_heardle.mp3",
     "preview_file": "Angel Wing[uma]_preview.mp3",
@@ -3258,18 +3258,18 @@
       ]
     }
   },
-  "Flowers (801 edit)": {
-    "display_title": "Flowers (801 edit)",
+  "Flowers (802 edit)": {
+    "display_title": "Flowers (802 edit)",
     "artist": "daiji+lobsak remix aki",
-    "heardle_file": "Flowers (801 edit)_heardle.mp3",
-    "preview_file": "Flowers (801 edit)_preview.mp3",
+    "heardle_file": "Flowers (802 edit)_heardle.mp3",
+    "preview_file": "Flowers (802 edit)_preview.mp3",
     "metadata": {
       "genre": "tance pop",
       "bpm": "144",
       "original_file": "_14ka.bme",
       "mod_time": "2009-05-06 17:21:54",
       "insane_levels": [
-        "★16"
+        "★10"
       ]
     }
   },
