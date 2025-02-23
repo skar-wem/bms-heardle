@@ -1,4 +1,159 @@
 {
+  "F": {
+    "display_title": "F",
+    "artist": "bubbles",
+    "heardle_file": "F_heardle.ogg",
+    "preview_file": "F_preview.ogg",
+    "metadata": {
+      "genre": "RAVE",
+      "bpm": "153",
+      "original_file": "F.bme",
+      "mod_time": "2006-08-27 22:39:38",
+      "insane_levels": [
+        "★3"
+      ]
+    }
+  },
+  "G.N": {
+    "display_title": "G.N",
+    "artist": "keyc",
+    "heardle_file": "G.N_heardle.ogg",
+    "preview_file": "G.N_preview.ogg",
+    "metadata": {
+      "genre": "Nu Style Gabba",
+      "bpm": "177",
+      "original_file": "_gn1[7N].bms",
+      "mod_time": "2009-04-10 01:08:14",
+      "insane_levels": [
+        "★2",
+        "★6",
+        "★17",
+        "★24"
+      ]
+    }
+  },
+  "Q": {
+    "display_title": "Q",
+    "artist": "tanacoro/obj:Re:gats&",
+    "heardle_file": "Q_heardle.ogg",
+    "preview_file": "Q_preview.ogg",
+    "metadata": {
+      "genre": "electro trance",
+      "bpm": "145",
+      "original_file": "q_R.bms",
+      "mod_time": "2015-06-01 22:19:38",
+      "insane_levels": [
+        "★12"
+      ]
+    }
+  },
+  "S": {
+    "display_title": "S",
+    "artist": "D.J.Nero",
+    "heardle_file": "S_heardle.ogg",
+    "preview_file": "S_preview.ogg",
+    "metadata": {
+      "genre": "RENAISSANCE",
+      "bpm": "155",
+      "original_file": "S[NORMAL].bme",
+      "mod_time": "2013-05-19 07:54:02",
+      "insane_levels": [
+        "★9"
+      ]
+    }
+  },
+  "X": {
+    "display_title": "X",
+    "artist": "sasakure.UK",
+    "heardle_file": "X_heardle.ogg",
+    "preview_file": "X_preview.ogg",
+    "metadata": {
+      "genre": "UNIVERSE",
+      "bpm": "184",
+      "original_file": "X.bme",
+      "mod_time": "2003-05-16 17:32:26",
+      "insane_levels": [
+        "★3",
+        "★8"
+      ]
+    }
+  },
+  "Y": {
+    "display_title": "Y",
+    "artist": "ヲルバ＝田中・ヴァニラ",
+    "heardle_file": "Y_heardle.ogg",
+    "preview_file": "Y_preview.ogg",
+    "metadata": {
+      "genre": "IRREGULAR HI-BREAK",
+      "bpm": "170",
+      "original_file": "01_Y_SPN.bms",
+      "mod_time": "2014-10-19 05:52:40",
+      "insane_levels": [
+        "★12"
+      ]
+    }
+  },
+  "Yakumo ＞＞JOINT STRUGGLE": {
+    "display_title": "Yakumo ＞＞JOINT STRUGGLE",
+    "artist": "くっちー vs あっきー / obj:おーた",
+    "heardle_file": "Yakumo ＞＞JOINT STRUGGLE_heardle.ogg",
+    "preview_file": "Yakumo ＞＞JOINT STRUGGLE_preview.ogg",
+    "metadata": {
+      "genre": "SUKIMA TOUR",
+      "bpm": "187",
+      "original_file": "yakumo_SPA_ohta.bms",
+      "mod_time": "2009-09-23 11:42:48",
+      "insane_levels": [
+        "★16",
+        "★20"
+      ]
+    }
+  },
+  "天": {
+    "display_title": "天",
+    "artist": "Aglaia(Re:gats& vs. Nego_tiator)",
+    "heardle_file": "天_heardle.ogg",
+    "preview_file": "天_preview.ogg",
+    "metadata": {
+      "genre": "Artcore",
+      "bpm": "185",
+      "original_file": "天N.bms",
+      "mod_time": "2016-07-31 23:45:18",
+      "insane_levels": [
+        "★15"
+      ]
+    }
+  },
+  "斬": {
+    "display_title": "斬",
+    "artist": "腋亦",
+    "heardle_file": "斬_heardle.ogg",
+    "preview_file": "斬_preview.ogg",
+    "metadata": {
+      "genre": "大和金属",
+      "bpm": "182",
+      "original_file": "zan_7.bme",
+      "mod_time": "2006-02-07 14:22:52",
+      "insane_levels": [
+        "★11"
+      ]
+    }
+  },
+  "黯": {
+    "display_title": "黯",
+    "artist": "紅蓮月影",
+    "heardle_file": "黯_heardle.ogg",
+    "preview_file": "黯_preview.ogg",
+    "metadata": {
+      "genre": "ミネルバ",
+      "bpm": "200",
+      "original_file": "master7n.bme",
+      "mod_time": "2007-07-01 11:15:52",
+      "insane_levels": [
+        "★13"
+      ]
+    }
+  },
   "#74": {
     "display_title": "#74",
     "artist": "naotyu-",
@@ -1095,9 +1250,7 @@
       "original_file": "bs_7.bme",
       "mod_time": "2005-08-05 20:33:44",
       "insane_levels": [
-        "★1",
-        "★3",
-        "★8"
+        "★12"
       ]
     }
   },
