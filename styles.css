@@ -720,27 +720,6 @@ body {
         0 0 20px rgba(255, 100, 50, 0.1);
 }
 
-@media (max-width: 768px) {
-    #submit-button, #skip-button {
-        -webkit-tap-highlight-color: transparent;
-        touch-action: manipulation;
-    }
-
-    #submit-button:active, #skip-button:active {
-        transform: scale(0.95);
-        transition: transform 0.1s ease;
-    }
-
-    #submit-button.clicked, #skip-button.clicked {
-        transform: scale(0.95);
-    }
-
-    #submit-button.reset, #skip-button.reset {
-        transform: scale(1);
-        transition: transform 0.2s ease;
-    }
-}
-
 #result {
     margin-top: 20px;
     padding: 20px;
