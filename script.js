@@ -18,6 +18,7 @@ let gameWon = false;
 let currentTimeout = null;
 let difficultyGuessed = false;
 let difficultyGuessResult = false;
+let isSelectingFromSuggestions = false;
 const canvas = document.getElementById('particleCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -180,11 +181,24 @@ function drawWave() {
 function processTitle(title) {
     let aliases = [title.toLowerCase()];
     
+    // Create a direct mapping for special characters
+    const specialCharMap = {
+        'Δ': 'delta',
+        'ΔΔ': 'deltadelta',
+        '△': 'triangle',
+        '○': 'circle',
+        '□': 'square',
+        'ω': 'omega'
+    };
+
     // Special handling for specific titles
     if (title === "-+") {
         aliases.push("minus plus", "minusplus", "-plus", "minus+");
     }
-    if (title.startsWith("#")) {
+    else if (title === "ΔΔ") {
+        aliases.push("deltadelta", "aa", "triangles");
+    }
+    else if (title.startsWith("#")) {
         // Handle titles starting with #
         const numberPart = title.substring(1);
         aliases.push(numberPart);
@@ -192,27 +206,41 @@ function processTitle(title) {
         aliases.push("no " + numberPart);
         aliases.push("no" + numberPart);
     }
-    if (title.includes("Act #")) {
+    else if (title.includes("Act #")) {
         // Handle "Act #" format
         const numberPart = title.split("#")[1];
         aliases.push("act" + numberPart);
         aliases.push("act " + numberPart);
     }
 
+    // Handle special character replacement
+    let normalizedTitle = title;
+    Object.entries(specialCharMap).forEach(([special, normal]) => {
+        if (title.includes(special)) {
+            normalizedTitle = title.replace(new RegExp(special, 'g'), normal);
+            aliases.push(normalizedTitle.toLowerCase());
+        }
+    });
+
     // Remove spaces
     aliases.push(title.toLowerCase().replace(/\s+/g, ''));
     
-    // Remove special characters
-    aliases.push(title.toLowerCase().replace(/[^a-z0-9]/g, ''));
+    // Remove special characters (but keep letters and numbers)
+    const alphanumeric = title.toLowerCase().replace(/[^a-z0-9]/g, '');
+    if (alphanumeric) {
+        aliases.push(alphanumeric);
+    }
     
     // Handle spaced letters (e.g., "g e n g a o z o" -> "gengaozo")
     if (title.includes(' ')) {
         let spacedVersion = title.toLowerCase().replace(/\s+/g, '');
-        aliases.push(spacedVersion);
+        if (spacedVersion) {
+            aliases.push(spacedVersion);
+        }
     }
     
-    // Remove duplicates
-    return [...new Set(aliases)];
+    // Remove duplicates and empty strings
+    return [...new Set(aliases)].filter(alias => alias && alias.trim());
 }
 
 // When handling file paths, modify the encoding:
@@ -231,8 +259,15 @@ function cleanupText(text) {
             text = decodeURIComponent(escape(text));
         }
         
-        // Remove any remaining strange characters
-        text = text.replace(/[^\x00-\x7F\u3000-\u9FFF]/g, '');
+        // Define allowed special characters
+        const allowedChars = ['○', '△', '□', 'ω'];
+        const allowedCharsRegex = new RegExp(`[^\\x00-\\x7F\\u3000-\\u9FFF${allowedChars.join('')}]`, 'g');
+        
+        // Remove any characters except:
+        // - Basic ASCII (\x00-\x7F)
+        // - Japanese characters (\u3000-\u9FFF)
+        // - Specifically allowed characters
+        text = text.replace(allowedCharsRegex, '');
         
         // Remove any "#ARTIST" prefix
         text = text.replace(/#ARTIST\s*/, '');
@@ -409,11 +444,15 @@ function setupAutocomplete() {
         } else if (e.key === 'Enter') {
             e.preventDefault();
             if (selectedIndex >= 0 && suggestions[selectedIndex]) {
+                isSelectingFromSuggestions = true;
                 input.value = suggestions[selectedIndex].dataset.title;
                 toggleMobileSuggestions(false);
-                submitGuess();
+                // Reset the flag after a short delay
+                setTimeout(() => {
+                    isSelectingFromSuggestions = false;
+                }, 100);
                 return;
-            } else if (input.value.trim()) {
+            } else if (input.value.trim() && !isSelectingFromSuggestions) {
                 submitGuess();
             }
         } else if (e.key === 'Escape') {
@@ -470,7 +509,8 @@ function setupAutocomplete() {
         if (item) {
             input.value = item.dataset.title;
             toggleMobileSuggestions(false);
-            submitGuess();
+            input.focus(); // Keep focus on input
+            updateSubmitButtonState(); // Update submit button state
         }
     });
 
@@ -580,63 +620,136 @@ function playCurrentSegment() {
     }
 }
 
-
 function showSongList() {
     const modal = document.getElementById('songListModal');
     const container = modal.querySelector('.song-list-container');
-    
+    const searchInput = document.getElementById('songSearchInput');
+    const difficultyFilter = document.getElementById('difficultyFilter');
+
     // Create a new audio element for previews if it doesn't exist
     if (!previewPlayer) {
         previewPlayer = new Audio();
     }
-    
-    // Sort songs alphabetically by title
-    const sortedSongs = Object.values(gameData).sort((a, b) => 
-        a.display_title.localeCompare(b.display_title)
-    );
-    
-    container.innerHTML = sortedSongs.map(song => {
-        const levels = song.metadata?.insane_levels || [];
-        const levelsHtml = levels.length > 0 
-            ? `<span class="song-list-levels">${levels.join(', ')}</span>`
-            : '';
-            
-        return `
-            <div class="song-list-item" data-preview="${song.preview_file}">
-                <div class="song-list-details">
-                    <span class="song-list-title">${song.display_title}</span>
-                    ${levelsHtml}
-                </div>
-            </div>
-        `;
-    }).join('');
 
-    // Add click event listeners to all song items
-    container.querySelectorAll('.song-list-item').forEach(item => {
-        item.addEventListener('click', () => {
-            // Stop any currently playing preview
-            if (!previewPlayer.paused) {
-                previewPlayer.pause();
-                previewPlayer.currentTime = 0;
-                
-                // If clicking the same song that's playing, just stop it
-                if (previewPlayer.dataset.currentSong === item.dataset.preview) {
-                    previewPlayer.dataset.currentSong = '';
-                    return;
-                }
-            }
-
-            // Play new preview
-            const encodedFilename = encodeURIComponent(item.dataset.preview)
-                .replace(/%23/g, '%2523');
-            
-            previewPlayer.src = `game_audio/${encodedFilename}`;
-            previewPlayer.dataset.currentSong = item.dataset.preview;
-            previewPlayer.play();
+    function handleSongItemClick(item) {
+        // Remove playing class from all items
+        container.querySelectorAll('.song-list-item').forEach(i => {
+            i.classList.remove('playing');
         });
-    });
+
+        // Stop any currently playing preview
+        if (!previewPlayer.paused) {
+            previewPlayer.pause();
+            previewPlayer.currentTime = 0;
+            
+            // If clicking the same song that's playing, just stop it
+            if (previewPlayer.dataset.currentSong === item.dataset.preview) {
+                previewPlayer.dataset.currentSong = '';
+                return;
+            }
+        }
+
+        // Add playing class to clicked item
+        item.classList.add('playing');
+
+        // Play new preview
+        const encodedFilename = encodeURIComponent(item.dataset.preview)
+            .replace(/%23/g, '%2523');
+        
+        previewPlayer.src = `game_audio/${encodedFilename}`;
+        previewPlayer.dataset.currentSong = item.dataset.preview;
+
+        // Remove playing class when audio ends
+        previewPlayer.onended = () => {
+            item.classList.remove('playing');
+            previewPlayer.dataset.currentSong = '';
+        };
+
+        // Also remove playing class if audio is stopped
+        previewPlayer.onpause = () => {
+            item.classList.remove('playing');
+        };
+
+        previewPlayer.play();
+    }
+
+    function filterSongs() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const difficultyLevel = difficultyFilter.value;
     
+        return Object.values(gameData).filter(song => {
+            const matchesSearch = 
+                song.display_title.toLowerCase().includes(searchTerm) ||
+                (song.artist && song.artist.toLowerCase().includes(searchTerm)) ||
+                (song.alias && song.alias.some(alias => 
+                    alias.toLowerCase().includes(searchTerm)
+                ));
+    
+            if (!difficultyLevel || !song.metadata?.insane_levels) {
+                return matchesSearch;
+            }
+    
+            return matchesSearch && song.metadata.insane_levels.includes(difficultyLevel);
+        });
+    }
+
+    function updateSongList() {
+        // Store currently playing song info
+        const currentlyPlaying = previewPlayer?.dataset.currentSong;
+
+        const filteredSongs = filterSongs().sort((a, b) => 
+            a.display_title.localeCompare(b.display_title));
+
+        container.innerHTML = filteredSongs.map(song => {
+            const levels = song.metadata?.insane_levels || [];
+            const levelsHtml = levels.length > 0 
+                ? `<span class="song-list-levels">${levels.join(', ')}</span>`
+                : '';
+            
+            // Add playing class if this song is currently playing
+            const isPlaying = song.preview_file === currentlyPlaying;
+            const playingClass = isPlaying ? 'playing' : '';
+                
+            return `
+                <div class="song-list-item ${playingClass}" data-preview="${song.preview_file}">
+                    <div class="song-list-details">
+                        <span class="song-list-title">${song.display_title}</span>
+                        ${levelsHtml}
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        // Add click event listeners to all song items
+        container.querySelectorAll('.song-list-item').forEach(item => {
+            item.addEventListener('click', () => handleSongItemClick(item));
+        });
+    }
+
+    // Add event listeners for filters
+    searchInput.addEventListener('input', updateSongList);
+    difficultyFilter.addEventListener('change', updateSongList);
+
+    // Clear any existing filter values
+    searchInput.value = '';
+    difficultyFilter.value = '';
+
+    // Initial song list display
+    updateSongList();
     modal.style.display = 'block';
+
+    // Stop preview playback when closing modal
+    const closeButton = modal.querySelector('.modal-button');
+    closeButton.addEventListener('click', () => {
+        if (previewPlayer && !previewPlayer.paused) {
+            previewPlayer.pause();
+            previewPlayer.currentTime = 0;
+            previewPlayer.dataset.currentSong = '';
+            container.querySelectorAll('.song-list-item').forEach(i => {
+                i.classList.remove('playing');
+            });
+        }
+    });
 }
 
 function closeSongList() {
@@ -650,13 +763,6 @@ function closeSongList() {
     }
 }
 
-// Add this to your DOMContentLoaded event listener
-document.addEventListener('DOMContentLoaded', () => {
-    // ... other event listeners ...
-    
-    // Song list button listener
-    document.getElementById('songListButton').addEventListener('click', showSongList);
-});
 
 function updateProgressBar(currentTime = 0, duration = 0) {
     const progressFill = document.querySelector('.progress-fill');
@@ -721,8 +827,8 @@ function showModal(message, isWin = false) {
     const shareButton = document.querySelector('.share-button');
     
     // Add dimmed class initially
-    playAgainButton.classList.add('dimmed');
-    shareButton.classList.add('dimmed');
+  //  playAgainButton.classList.add('dimmed');
+  //  shareButton.classList.add('dimmed');
     
     // Close any open suggestion box
     const suggestionBox = document.querySelector('.suggestion-box');
@@ -784,8 +890,8 @@ function showModal(message, isWin = false) {
         btn.addEventListener('click', () => {
             handleDifficultyGuess(btn.dataset.level);
             // Enable buttons after difficulty guess
-            playAgainButton.classList.remove('dimmed');
-            shareButton.classList.remove('dimmed');
+        //    playAgainButton.classList.remove('dimmed');
+        //   shareButton.classList.remove('dimmed');
         });
     });
 
@@ -834,23 +940,33 @@ function playGameOverSound(isSuccess) {
 }
 
 function startNewGame() {
+    // Reset all game state variables
     gameWon = false;
-    difficultyGuessed = false; // Reset difficulty guess state
-    difficultyGuessResult = false
-    const modal = document.getElementById('gameOverModal');
-    modal.style.display = 'none';
+    difficultyGuessed = false;
+    difficultyGuessResult = false;
     isGameOver = false;
     attempts = 0;
     incorrectGuesses = [];
     isPlaying = false;
+    isSubmitting = false; // Add this to reset submission state
     
+    // Reset audio player
     const player = document.getElementById('audio-player');
     player.pause();
+    player.currentTime = 0;
     const playButton = document.querySelector('.play-button');
     playButton.textContent = 'Play';
     
+    // Clear any ongoing timeouts
+    if (currentTimeout) {
+        clearTimeout(currentTimeout);
+        currentTimeout = null;
+    }
+    
     // Clear the wave canvas
-    waveCtx.clearRect(0, 0, waveCanvas.width, waveCanvas.height);
+    if (waveCtx) {
+        waveCtx.clearRect(0, 0, waveCanvas.width, waveCanvas.height);
+    }
     
     // Cancel any ongoing animation
     if (animationId) {
@@ -858,9 +974,13 @@ function startNewGame() {
         animationId = null;
     }
 
-    // Clear input field
+    // Reset input and suggestions
     const guessInput = document.getElementById('guess-input');
     guessInput.value = '';
+    const suggestionBox = document.querySelector('.suggestion-box');
+    if (suggestionBox) {
+        suggestionBox.style.display = 'none';
+    }
     
     // Clear result message
     showResult('');
@@ -877,19 +997,44 @@ function startNewGame() {
     });
     
     // Hide difficulty result
-    difficultyResult.classList.add('hidden');
-    difficultyResult.textContent = '';
+    if (difficultyResult) {
+        difficultyResult.classList.add('hidden');
+        difficultyResult.textContent = '';
+    }
     
     // Hide difficulty container
-    difficultyContainer.classList.add('hidden');
+    if (difficultyContainer) {
+        difficultyContainer.classList.add('hidden');
+    }
     
-    updateProgressBar();
+    // Reset progress segments
+    const segments = document.querySelectorAll('.progress-segment');
+    segments.forEach(segment => {
+        segment.classList.remove('played', 'current', 'correct');
+    });
+    
+    // Reset progress bar
+    const progressFill = document.querySelector('.progress-fill');
+    if (progressFill) {
+        progressFill.style.width = '0%';
+    }
+    
+    // Reset modal
+    const modal = document.getElementById('gameOverModal');
+    modal.style.display = 'none';
+    
+    // Reset guess history
     updateGuessHistory();
-    updateSkipButtonText(); 
-    startGame();
+    
+    // Reset progress bar and skip button
+    updateProgressBar();
+    updateSkipButtonText();
     
     // Reset submit button state
     updateSubmitButtonState();
+    
+    // Start new game
+    startGame();
 }
 
 function updateSubmitButtonState() {
@@ -916,9 +1061,25 @@ function submitGuess() {
         return;
     }
     
-    const isValidTitle = songList.some(song => 
-        song.title.toLowerCase() === guess.toLowerCase()
-    );
+    const isValidTitle = songList.some(song => {
+        // Check against the main title
+        if (song.title.toLowerCase() === guess.toLowerCase()) {
+            return true;
+        }
+        
+        // Check against aliases if they exist in the song data
+        const songData = Object.values(gameData).find(data => 
+            data.display_title.toLowerCase() === song.title.toLowerCase()
+        );
+        
+        if (songData?.alias) {
+            return songData.alias.some(alias => 
+                alias.toLowerCase() === guess.toLowerCase()
+            );
+        }
+        
+        return false;
+    });
 
     if (!isValidTitle) {
         showResult("Please select a valid song title from the suggestions");
@@ -928,12 +1089,25 @@ function submitGuess() {
         return;
     }
     
-    const currentAliases = processTitle(currentSong.display_title);
+    const currentAliases = [
+        ...processTitle(currentSong.display_title),
+        ...(currentSong.alias || []).map(alias => alias.toLowerCase())
+    ];
     const guessAliases = processTitle(guess);
+    
+    // Debug logging
+    console.log('Current song:', currentSong.display_title);
+    console.log('Current aliases:', currentAliases);
+    console.log('Guess:', guess);
+    console.log('Guess aliases:', guessAliases);
     
     const isCorrect = guessAliases.some(guessAlias => 
         currentAliases.some(currentAlias => 
-            currentAlias === guessAlias
+            currentAlias === guessAlias ||
+            (currentSong.alias && 
+             currentSong.alias.some(alias => 
+                 alias.toLowerCase() === guessAlias
+             ))
         )
     );
     
@@ -1200,9 +1374,9 @@ async function shareResult() {
     console.log('Final squares array:', squares);
 
     // Create share text with minimalist format
-    const shareText = `▸ BMS Heardle #\n${squares.join('')} | ${
-        difficultyGuessed ? (difficultyGuessResult ? '⭐' : '❌') : ''
-    }\n${currentSong.display_title} - ${currentSong.cleanArtist}\nhttps://skar-wem.github.io/bms-heardle/`;
+    // Only add divider and difficulty result if difficulty was guessed
+    const difficultyPart = difficultyGuessed ? ` | ${difficultyGuessResult ? '⭐' : '❌'}` : '';
+    const shareText = `▸ BMS Heardle #\n${squares.join('')}${difficultyPart}\n${currentSong.display_title} - ${currentSong.cleanArtist}\nhttps://skar-wem.github.io/bms-heardle/`;
 
     // Fallback to clipboard
     try {
@@ -1264,6 +1438,9 @@ document.addEventListener('DOMContentLoaded', () => {
         updateVolume(volumeSlider.value);
     }
 
+    // Song list button listener
+    document.getElementById('songListButton').addEventListener('click', showSongList);
+
     // Play button listener with audio context initialization
     document.getElementById('playButton').addEventListener('click', async () => {
         if (!audioContext) {
@@ -1309,22 +1486,24 @@ document.addEventListener('DOMContentLoaded', () => {
             const suggestionBox = document.querySelector('.suggestion-box');
             const selectedSuggestion = suggestionBox.querySelector('.selected');
             
-            if (selectedSuggestion) {
+            // If we're actively selecting a suggestion
+            if (selectedSuggestion && suggestionBox.style.display !== 'none') {
                 this.value = selectedSuggestion.dataset.title;
                 suggestionBox.style.display = 'none';
+                return;
+            }
+            
+            // For any other Enter press, check if the current value is valid
+            const isValidTitle = songList.some(song => 
+                song.title.toLowerCase() === guess.toLowerCase()
+            );
+            
+            if (isValidTitle) {
                 submitGuess();
             } else {
-                const isValidTitle = songList.some(song => 
-                    song.title.toLowerCase() === guess.toLowerCase()
-                );
-                
-                if (isValidTitle) {
-                    submitGuess();
-                } else {
-                    showResult("Please select a valid song title from the suggestions");
-                    this.value = '';
-                    updateSubmitButtonState();
-                }
+                showResult("Please select a valid song title from the suggestions");
+                this.value = '';
+                updateSubmitButtonState();
             }
         }
     });
@@ -1419,7 +1598,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize submit button state
     updateSubmitButtonState();
+
+
+    document.querySelectorAll('.modal-button').forEach(button => {
+        button.addEventListener('mouseenter', () => {
+            if (!difficultyGuessed) {
+                document.querySelectorAll('.difficulty-btn:not(.correct):not(.incorrect)').forEach(btn => {
+                    btn.style.borderColor = '#FFFFFF';
+                    btn.style.color = '#FFFFFF';
+                    btn.style.boxShadow = '0 0 5px rgba(255, 255, 255, 0.3)';
+                });
+            }
+        });
     
+        button.addEventListener('mouseleave', () => {
+            if (!difficultyGuessed) {
+                document.querySelectorAll('.difficulty-btn:not(.correct):not(.incorrect)').forEach(btn => {
+                    btn.style.removeProperty('border-color');
+                    btn.style.removeProperty('color');
+                    btn.style.removeProperty('box-shadow');
+                });
+            }
+        });
+    });
+
+    // Add auto-focus for desktop
+    if (window.innerWidth > 768) {
+        document.getElementById('guess-input').focus();
+        document.getElementById('guess-input').classList.add('auto-focus');
+    }
     // Load game data
     loadGameData();
 });
