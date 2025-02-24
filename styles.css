@@ -1095,7 +1095,7 @@ body {
     }
 
     .modal-content {
-        top: 45%;
+        top: 50%;
         width: 85%;
         margin: 0 auto;
         left: 50%;
@@ -1105,7 +1105,7 @@ body {
     }
 
     .song-list-container {
-        max-height: 65vh; /* Increased for taller list */
+        max-height: 60vh; /* Increased for taller list */
         padding: 3px;
         margin: 8px 0;
     }
