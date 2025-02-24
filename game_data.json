@@ -112,6 +112,10 @@
   "天": {
     "display_title": "天",
     "artist": "Aglaia(Re:gats& vs. Nego_tiator)",
+    "alias": [
+      "Heaven",
+      "Ten"
+    ],
     "heardle_file": "天_heardle.mp3",
     "preview_file": "天_preview.mp3",
     "metadata": {
@@ -127,6 +131,10 @@
   "斬": {
     "display_title": "斬",
     "artist": "腋亦",
+    "alias": [
+      "Slash",
+      "Zan"
+    ],
     "heardle_file": "斬_heardle.mp3",
     "preview_file": "斬_preview.mp3",
     "metadata": {
@@ -142,6 +150,10 @@
   "黯": {
     "display_title": "黯",
     "artist": "紅蓮月影",
+    "alias": [
+      "Mushroom",
+      "An"
+    ],
     "heardle_file": "黯_heardle.mp3",
     "preview_file": "黯_preview.mp3",
     "metadata": {
@@ -1472,6 +1484,14 @@
   "BRILLIANT STAR ～煌星の雫～": {
     "display_title": "BRILLIANT STAR ～煌星の雫～",
     "artist": "shimizushi",
+    "alias": [
+      "Brilliant",
+      "Star",
+      "~the",
+      "Drop",
+      "Stars~",
+      "Brilliant star  ~ kousei no shizuku ~"
+    ],
     "heardle_file": "BRILLIANT STAR ～煌星の雫～_heardle.mp3",
     "preview_file": "BRILLIANT STAR ～煌星の雫～_preview.mp3",
     "metadata": {
@@ -1758,6 +1778,14 @@
   "CHRONO TRIGGER ～世界変革の時～": {
     "display_title": "CHRONO TRIGGER ～世界変革の時～",
     "artist": "mattaku",
+    "alias": [
+      "Chrono",
+      "Trigger",
+      "Time",
+      "Global",
+      "Change",
+      "Chrono trigger  ~ sekai henkaku no toki ~"
+    ],
     "heardle_file": "CHRONO TRIGGER ～世界変革の時～_heardle.mp3",
     "preview_file": "CHRONO TRIGGER ～世界変革の時～_preview.mp3",
     "metadata": {
@@ -2944,6 +2972,11 @@
   "eth剣": {
     "display_title": "eth剣",
     "artist": "BOKKEN PINK",
+    "alias": [
+      "Eth",
+      "Sword",
+      "Eth tsurugi"
+    ],
     "heardle_file": "eth剣_heardle.mp3",
     "preview_file": "eth剣_preview.mp3",
     "metadata": {
@@ -5741,6 +5774,12 @@
   "P-ChicK-ParK(・◇・)": {
     "display_title": "P-ChicK-ParK(・◇・)",
     "artist": "ピヨスケ",
+    "alias": [
+      "P",
+      "Chick",
+      "Park(・◇・)",
+      "P-chick-park( ・ ◇ ・ )"
+    ],
     "heardle_file": "P-ChicK-ParK(・◇・)_heardle.mp3",
     "preview_file": "P-ChicK-ParK(・◇・)_preview.mp3",
     "metadata": {
@@ -6304,6 +6343,12 @@
   "Remilia ～吸血鬼の為の協奏曲": {
     "display_title": "Remilia ～吸血鬼の為の協奏曲",
     "artist": "くっちー / あっきー",
+    "alias": [
+      "Remilia",
+      "Concerto",
+      "Vampires",
+      "Remilia  ~ kyuuketsuki no tameno kyousoukyoku"
+    ],
     "heardle_file": "Remilia ～吸血鬼の為の協奏曲_heardle.mp3",
     "preview_file": "Remilia ～吸血鬼の為の協奏曲_preview.mp3",
     "metadata": {
@@ -7663,6 +7708,14 @@
   "U.N.Owen ～戯れしは狂妹か？": {
     "display_title": "U.N.Owen ～戯れしは狂妹か？",
     "artist": "team TRIAD",
+    "alias": [
+      "U.n.owen",
+      "~is",
+      "Playful",
+      "Crazy",
+      "Sister?",
+      "U . n . owen  ~ tawamure shiha kyou imouto ka ？"
+    ],
     "heardle_file": "U.N.Owen ～戯れしは狂妹か？_heardle.mp3",
     "preview_file": "U.N.Owen ～戯れしは狂妹か？_preview.mp3",
     "metadata": {
@@ -8343,6 +8396,15 @@
   "☆ さくらなみきのかぜ ☆": {
     "display_title": "☆ さくらなみきのかぜ ☆",
     "artist": "#ねここ14歳(obj:ねこみみ魔法使い)",
+    "alias": [
+      "☆",
+      "Sakurana",
+      "Miki",
+      "No",
+      "Kaze",
+      "☆",
+      "☆   sakuranamikinokaze   ☆"
+    ],
     "heardle_file": "☆ さくらなみきのかぜ ☆_heardle.mp3",
     "preview_file": "☆ さくらなみきのかぜ ☆_preview.mp3",
     "metadata": {
@@ -8359,6 +8421,10 @@
   "あなた": {
     "display_title": "あなた",
     "artist": "mitssi feat. SeeU",
+    "alias": [
+      "You",
+      "Anata"
+    ],
     "heardle_file": "あなた_heardle.mp3",
     "preview_file": "あなた_preview.mp3",
     "metadata": {
@@ -8374,6 +8440,11 @@
   "あめふりこねこ": {
     "display_title": "あめふりこねこ",
     "artist": "ねこみみ魔法使い/obj:nobody",
+    "alias": [
+      "Candy",
+      "Furiko",
+      "Amefurikoneko"
+    ],
     "heardle_file": "あめふりこねこ_heardle.mp3",
     "preview_file": "あめふりこねこ_preview.mp3",
     "metadata": {
@@ -8390,6 +8461,13 @@
   "うみいろ、そらいろ。": {
     "display_title": "うみいろ、そらいろ。",
     "artist": "ねこみみ魔法使い",
+    "alias": [
+      "Umiiro",
+      "It's",
+      "Not",
+      "Right.",
+      "Umiiro , sorairo ."
+    ],
     "heardle_file": "うみいろ、そらいろ。_heardle.mp3",
     "preview_file": "うみいろ、そらいろ。_preview.mp3",
     "metadata": {
@@ -8405,6 +8483,13 @@
   "おでんぱ☆ラヴガール -BMS EDIT-": {
     "display_title": "おでんぱ☆ラヴガール -BMS EDIT-",
     "artist": "ねこみりん feat.みゆ / むらしん",
+    "alias": [
+      "Odenpa☆love",
+      "Girl",
+      "Bms",
+      "Edit",
+      "Odenpa ☆ ravugaaru  -bms edit-"
+    ],
     "heardle_file": "おでんぱ☆ラヴガール -BMS EDIT-_heardle.mp3",
     "preview_file": "おでんぱ☆ラヴガール -BMS EDIT-_preview.mp3",
     "metadata": {
@@ -8420,6 +8505,12 @@
   "おどれフルファイアー": {
     "display_title": "おどれフルファイアー",
     "artist": "kagerow",
+    "alias": [
+      "Which",
+      "Full",
+      "Fire",
+      "Odore furufaiaa"
+    ],
     "heardle_file": "おどれフルファイアー_heardle.mp3",
     "preview_file": "おどれフルファイアー_preview.mp3",
     "metadata": {
@@ -8435,6 +8526,11 @@
   "おにコア": {
     "display_title": "おにコア",
     "artist": "sampling minor SUICA /obj.いとこん",
+    "alias": [
+      "Oni",
+      "Core",
+      "Oni koa"
+    ],
     "heardle_file": "おにコア_heardle.mp3",
     "preview_file": "おにコア_preview.mp3",
     "metadata": {
@@ -8451,6 +8547,14 @@
   "その斯くも美しき紅に": {
     "display_title": "その斯くも美しき紅に",
     "artist": "天音",
+    "alias": [
+      "That",
+      "Is",
+      "So",
+      "Beautiful",
+      "Red",
+      "Sono kaku mo utsukushiki kurenai ni"
+    ],
     "heardle_file": "その斯くも美しき紅に_heardle.mp3",
     "preview_file": "その斯くも美しき紅に_preview.mp3",
     "metadata": {
@@ -8467,6 +8571,12 @@
   "ちんこ音頭2012": {
     "display_title": "ちんこ音頭2012",
     "artist": "くっちー",
+    "alias": [
+      "Chinko",
+      "Ondo",
+      "2012",
+      "Chinko ondo 2012"
+    ],
     "heardle_file": "ちんこ音頭2012_heardle.mp3",
     "preview_file": "ちんこ音頭2012_preview.mp3",
     "metadata": {
@@ -8482,6 +8592,12 @@
   "どうか私を殺して下さい": {
     "display_title": "どうか私を殺して下さい",
     "artist": "LUNEの右手と悠里おねぇちゃんの左脚",
+    "alias": [
+      "Please",
+      "Kill",
+      "Me",
+      "Douka watashi wo koroshi te kudasai"
+    ],
     "heardle_file": "どうか私を殺して下さい_heardle.mp3",
     "preview_file": "どうか私を殺して下さい_preview.mp3",
     "metadata": {
@@ -8498,6 +8614,17 @@
   "ねぇ？メイドさんはみんな忠実だと思う？": {
     "display_title": "ねぇ？メイドさんはみんな忠実だと思う？",
     "artist": "かおみりん feat.こもも×みゆ",
+    "alias": [
+      "Hey?",
+      "Do",
+      "You",
+      "Think",
+      "All",
+      "Maids",
+      "Are",
+      "Faithful?",
+      "Nee ？ meido sanhaminna chuujitsu dato omou ？"
+    ],
     "heardle_file": "ねぇ？メイドさんはみんな忠実だと思う？_heardle.mp3",
     "preview_file": "ねぇ？メイドさんはみんな忠実だと思う？_preview.mp3",
     "metadata": {
@@ -8513,6 +8640,12 @@
   "ひつぎとふたご": {
     "display_title": "ひつぎとふたご",
     "artist": "plastic feat.サキト",
+    "alias": [
+      "Cock",
+      "And",
+      "Twin",
+      "Hitsugitofutago"
+    ],
     "heardle_file": "ひつぎとふたご_heardle.mp3",
     "preview_file": "ひつぎとふたご_preview.mp3",
     "metadata": {
@@ -8529,6 +8662,10 @@
   "りりくろ！": {
     "display_title": "りりくろ！",
     "artist": "ねここうもり",
+    "alias": [
+      "Ririkuro!",
+      "Ririkuro !"
+    ],
     "heardle_file": "りりくろ！_heardle.mp3",
     "preview_file": "りりくろ！_preview.mp3",
     "metadata": {
@@ -8544,6 +8681,11 @@
   "わがままプリンセス": {
     "display_title": "わがままプリンセス",
     "artist": "er",
+    "alias": [
+      "Selfish",
+      "Princess",
+      "Wagamama purinsesu"
+    ],
     "heardle_file": "わがままプリンセス_heardle.mp3",
     "preview_file": "わがままプリンセス_preview.mp3",
     "metadata": {
@@ -8560,6 +8702,13 @@
   "アイーシャの剣-Forcing breakthrough-": {
     "display_title": "アイーシャの剣-Forcing breakthrough-",
     "artist": "Alicia*",
+    "alias": [
+      "Aisha's",
+      "Sword",
+      "Forcing",
+      "Breakthrough",
+      "Aiisha no tsurugi -forcing breakthrough-"
+    ],
     "heardle_file": "アイーシャの剣-Forcing breakthrough-_heardle.mp3",
     "preview_file": "アイーシャの剣-Forcing breakthrough-_preview.mp3",
     "metadata": {
@@ -8575,6 +8724,11 @@
   "アナログ横丁": {
     "display_title": "アナログ横丁",
     "artist": "牧野",
+    "alias": [
+      "Analog",
+      "Alley",
+      "Anarogu yokochou"
+    ],
     "heardle_file": "アナログ横丁_heardle.mp3",
     "preview_file": "アナログ横丁_preview.mp3",
     "metadata": {
@@ -8590,6 +8744,16 @@
   "ウィリアム・テル第4部「スイス軍隊の行進」": {
     "display_title": "ウィリアム・テル第4部「スイス軍隊の行進」",
     "artist": "○△□",
+    "alias": [
+      "William",
+      "Tell",
+      "Part",
+      "4:",
+      "\"marching",
+      "Swiss",
+      "Army\"",
+      "Uiriamu・teru dai 4 bu ( suisu guntai no koushin )"
+    ],
     "heardle_file": "ウィリアム・テル第4部「スイス軍隊の行進」_heardle.mp3",
     "preview_file": "ウィリアム・テル第4部「スイス軍隊の行進」_preview.mp3",
     "metadata": {
@@ -8605,6 +8769,14 @@
   "エストポリス伝記II ～バトル#2～": {
     "display_title": "エストポリス伝記II ～バトル#2～",
     "artist": "mattaku",
+    "alias": [
+      "Estpolis",
+      "Biography",
+      "Ii",
+      "~battle",
+      "#2~",
+      "Esutoporisu denki ii  ~ batoru #2 ~"
+    ],
     "heardle_file": "エストポリス伝記II ～バトル#2～_heardle.mp3",
     "preview_file": "エストポリス伝記II ～バトル#2～_preview.mp3",
     "metadata": {
@@ -8620,6 +8792,14 @@
   "エナジーストリーム(Never Understand Remix)": {
     "display_title": "エナジーストリーム(Never Understand Remix)",
     "artist": "キュアプラネット Remixed by ETIA.",
+    "alias": [
+      "Energy",
+      "Stream",
+      "(never",
+      "Understand",
+      "Remix)",
+      "Enajiisutoriimu (never understand remix )"
+    ],
     "heardle_file": "エナジーストリーム(Never Understand Remix)_heardle.mp3",
     "preview_file": "エナジーストリーム(Never Understand Remix)_preview.mp3",
     "metadata": {
@@ -8635,6 +8815,11 @@
   "エピトゥリカの祀": {
     "display_title": "エピトゥリカの祀",
     "artist": "Team:SASAKURATION",
+    "alias": [
+      "Epiturica",
+      "Worship",
+      "Epitourika no shi"
+    ],
     "heardle_file": "エピトゥリカの祀_heardle.mp3",
     "preview_file": "エピトゥリカの祀_preview.mp3",
     "metadata": {
@@ -8651,6 +8836,10 @@
   "エーデルワイス": {
     "display_title": "エーデルワイス",
     "artist": "黄泉路テヂーモ",
+    "alias": [
+      "Edelweiss",
+      "Eederuwaisu"
+    ],
     "heardle_file": "エーデルワイス_heardle.mp3",
     "preview_file": "エーデルワイス_preview.mp3",
     "metadata": {
@@ -8666,6 +8855,12 @@
   "カラフル・サウンズ・カッター": {
     "display_title": "カラフル・サウンズ・カッター",
     "artist": "カラフル・サウンズ・ポート",
+    "alias": [
+      "Colorful",
+      "Sounds",
+      "Cutter",
+      "Karafuru・saunzu・kattaa"
+    ],
     "heardle_file": "カラフル・サウンズ・カッター_heardle.mp3",
     "preview_file": "カラフル・サウンズ・カッター_preview.mp3",
     "metadata": {
@@ -8681,6 +8876,11 @@
   "カーテンコール": {
     "display_title": "カーテンコール",
     "artist": "パンダ18号",
+    "alias": [
+      "Curtain",
+      "Call",
+      "Kaatenkooru"
+    ],
     "heardle_file": "カーテンコール_heardle.mp3",
     "preview_file": "カーテンコール_preview.mp3",
     "metadata": {
@@ -8696,6 +8896,14 @@
   "キミとボクへの葬送歌": {
     "display_title": "キミとボクへの葬送歌",
     "artist": "ROKINA",
+    "alias": [
+      "Funeral",
+      "Song",
+      "You",
+      "And",
+      "Me",
+      "Kimi to boku heno sousou uta"
+    ],
     "heardle_file": "キミとボクへの葬送歌_heardle.mp3",
     "preview_file": "キミとボクへの葬送歌_preview.mp3",
     "metadata": {
@@ -8711,6 +8919,10 @@
   "キメラ": {
     "display_title": "キメラ",
     "artist": "BACO",
+    "alias": [
+      "Chimera",
+      "Kimera"
+    ],
     "heardle_file": "キメラ_heardle.mp3",
     "preview_file": "キメラ_preview.mp3",
     "metadata": {
@@ -8726,6 +8938,13 @@
   "クロートーと星の観測者": {
     "display_title": "クロートーと星の観測者",
     "artist": "しーけー",
+    "alias": [
+      "Croto",
+      "And",
+      "Star",
+      "Observer",
+      "Kurootoo to hoshi no kansokusha"
+    ],
     "heardle_file": "クロートーと星の観測者_heardle.mp3",
     "preview_file": "クロートーと星の観測者_preview.mp3",
     "metadata": {
@@ -8741,6 +8960,11 @@
   "ゲルニカの壁": {
     "display_title": "ゲルニカの壁",
     "artist": "LOKI",
+    "alias": [
+      "Guernica",
+      "Wall",
+      "Gerunika no kabe"
+    ],
     "heardle_file": "ゲルニカの壁_heardle.mp3",
     "preview_file": "ゲルニカの壁_preview.mp3",
     "metadata": {
@@ -8756,6 +8980,10 @@
   "コケシネコ☆クライシス": {
     "display_title": "コケシネコ☆クライシス",
     "artist": "Ino",
+    "alias": [
+      "Kokeshineko☆crisis",
+      "Kokeshineko ☆ kuraishisu"
+    ],
     "heardle_file": "コケシネコ☆クライシス_heardle.mp3",
     "preview_file": "コケシネコ☆クライシス_preview.mp3",
     "metadata": {
@@ -8771,6 +8999,10 @@
   "サンバランド": {
     "display_title": "サンバランド",
     "artist": "SAMBA MASTER 佐藤 -SATOH-",
+    "alias": [
+      "Sambaland",
+      "Sanbarando"
+    ],
     "heardle_file": "サンバランド_heardle.mp3",
     "preview_file": "サンバランド_preview.mp3",
     "metadata": {
@@ -8787,6 +9019,11 @@
   "サーカス・ギャロップ": {
     "display_title": "サーカス・ギャロップ",
     "artist": "Marc-Andre' Hamelin",
+    "alias": [
+      "Circus",
+      "Gallop",
+      "Saakasu・gyaroppu"
+    ],
     "heardle_file": "サーカス・ギャロップ_heardle.mp3",
     "preview_file": "サーカス・ギャロップ_preview.mp3",
     "metadata": {
@@ -8802,6 +9039,10 @@
   "スペクトラム": {
     "display_title": "スペクトラム",
     "artist": "エルリ鳥 obj. かたやきそば",
+    "alias": [
+      "Spectrum",
+      "Supekutoramu"
+    ],
     "heardle_file": "スペクトラム_heardle.mp3",
     "preview_file": "スペクトラム_preview.mp3",
     "metadata": {
@@ -8817,6 +9058,12 @@
   "スーパーイザナギオブジェクト": {
     "display_title": "スーパーイザナギオブジェクト",
     "artist": "er",
+    "alias": [
+      "Super",
+      "Izanagi",
+      "Object",
+      "Suupaaizanagiobujiekuto"
+    ],
     "heardle_file": "スーパーイザナギオブジェクト_heardle.mp3",
     "preview_file": "スーパーイザナギオブジェクト_preview.mp3",
     "metadata": {
@@ -8832,6 +9079,16 @@
   "タイヨウパラダイス(Lemon beads J-core bootleg)": {
     "display_title": "タイヨウパラダイス(Lemon beads J-core bootleg)",
     "artist": "nao/雪仁/水城新人 remixed by Lemon beads",
+    "alias": [
+      "Taiyo",
+      "Paradise",
+      "(lemon",
+      "Beads",
+      "J",
+      "Core",
+      "Bootleg)",
+      "Taiyouparadaisu (lemon beads j-core bootleg )"
+    ],
     "heardle_file": "タイヨウパラダイス(Lemon beads J-core bootleg)_heardle.mp3",
     "preview_file": "タイヨウパラダイス(Lemon beads J-core bootleg)_preview.mp3",
     "metadata": {
@@ -8848,6 +9105,12 @@
   "ダークサンバランド": {
     "display_title": "ダークサンバランド",
     "artist": "ダークサンバマスター佐藤 -SATOH-",
+    "alias": [
+      "Dark",
+      "Samba",
+      "Land",
+      "Daakusanbarando"
+    ],
     "heardle_file": "ダークサンバランド_heardle.mp3",
     "preview_file": "ダークサンバランド_preview.mp3",
     "metadata": {
@@ -8863,6 +9126,11 @@
   "チョウの標本": {
     "display_title": "チョウの標本",
     "artist": "Process 2.3.1.",
+    "alias": [
+      "Butterfly",
+      "Specimen",
+      "Chou no hyouhon"
+    ],
     "heardle_file": "チョウの標本_heardle.mp3",
     "preview_file": "チョウの標本_preview.mp3",
     "metadata": {
@@ -8878,6 +9146,10 @@
   "ティアオイエツォン": {
     "display_title": "ティアオイエツォン",
     "artist": "sun3 / BGA:Johnny",
+    "alias": [
+      "Tiaoyetzon",
+      "Teiaoietsuon"
+    ],
     "heardle_file": "ティアオイエツォン_heardle.mp3",
     "preview_file": "ティアオイエツォン_preview.mp3",
     "metadata": {
@@ -8893,6 +9165,11 @@
   "トココ21": {
     "display_title": "トココ21",
     "artist": "妻コロッケ / obj:あーさん",
+    "alias": [
+      "Tococo",
+      "21",
+      "Tokoko 21"
+    ],
     "heardle_file": "トココ21_heardle.mp3",
     "preview_file": "トココ21_preview.mp3",
     "metadata": {
@@ -8908,6 +9185,11 @@
   "ナイト・オブ・ナイツ": {
     "display_title": "ナイト・オブ・ナイツ",
     "artist": "Izayoi",
+    "alias": [
+      "Night",
+      "Nights",
+      "Naito・obu・naitsu"
+    ],
     "heardle_file": "ナイト・オブ・ナイツ_heardle.mp3",
     "preview_file": "ナイト・オブ・ナイツ_preview.mp3",
     "metadata": {
@@ -8923,6 +9205,13 @@
   "ハイパーミラクルシューティングスター": {
     "display_title": "ハイパーミラクルシューティングスター",
     "artist": "er",
+    "alias": [
+      "Hyper",
+      "Miracle",
+      "Shooting",
+      "Star",
+      "Haipaamirakurushuuteingusutaa"
+    ],
     "heardle_file": "ハイパーミラクルシューティングスター_heardle.mp3",
     "preview_file": "ハイパーミラクルシューティングスター_preview.mp3",
     "metadata": {
@@ -8939,6 +9228,15 @@
   "ハルトマンの妖怪少女～VirusV": {
     "display_title": "ハルトマンの妖怪少女～VirusV",
     "artist": "ZUN RMX By 44teru-k",
+    "alias": [
+      "Hartmann's",
+      "Monster",
+      "Girl",
+      "~",
+      "Virus",
+      "V",
+      "Harutoman no youkai shoujo ~ virusv"
+    ],
     "heardle_file": "ハルトマンの妖怪少女～VirusV_heardle.mp3",
     "preview_file": "ハルトマンの妖怪少女～VirusV_preview.mp3",
     "metadata": {
@@ -8954,6 +9252,11 @@
   "ヒメタイプ": {
     "display_title": "ヒメタイプ",
     "artist": "ノクティス・江口・チェラム",
+    "alias": [
+      "Hime",
+      "Type",
+      "Himetaipu"
+    ],
     "heardle_file": "ヒメタイプ_heardle.mp3",
     "preview_file": "ヒメタイプ_preview.mp3",
     "metadata": {
@@ -8969,6 +9272,13 @@
   "ビッグブリッヂの死闘": {
     "display_title": "ビッグブリッヂの死闘",
     "artist": "shammy",
+    "alias": [
+      "Big",
+      "Bridge's",
+      "Death",
+      "Battle",
+      "Bigguburijji no shitou"
+    ],
     "heardle_file": "ビッグブリッヂの死闘_heardle.mp3",
     "preview_file": "ビッグブリッヂの死闘_preview.mp3",
     "metadata": {
@@ -8984,6 +9294,15 @@
   "ピアノ協奏曲第1番 月光条例": {
     "display_title": "ピアノ協奏曲第1番 月光条例",
     "artist": "ルナ・ヴィオーラ / iimode-do",
+    "alias": [
+      "Piano",
+      "Concerto",
+      "No.",
+      "1:",
+      "Moonlight",
+      "Ordination",
+      "Piano kyousoukyoku dai 1 ban   gekkou jourei"
+    ],
     "heardle_file": "ピアノ協奏曲第1番 月光条例_heardle.mp3",
     "preview_file": "ピアノ協奏曲第1番 月光条例_preview.mp3",
     "metadata": {
@@ -8999,6 +9318,16 @@
   "ピアノ狂騒曲第壱番「滅宴」": {
     "display_title": "ピアノ狂騒曲第壱番「滅宴」",
     "artist": "にんにくマニア",
+    "alias": [
+      "Piano",
+      "Rhapsody",
+      "No.",
+      "1",
+      "\"the",
+      "Demon",
+      "Feast\"",
+      "Piano kyousou kyoku daiichi ban ( metsu utage )"
+    ],
     "heardle_file": "ピアノ狂騒曲第壱番「滅宴」_heardle.mp3",
     "preview_file": "ピアノ狂騒曲第壱番「滅宴」_preview.mp3",
     "metadata": {
@@ -9015,6 +9344,11 @@
   "ブクレシュティの人形師": {
     "display_title": "ブクレシュティの人形師",
     "artist": "Project Necro Fantasia",
+    "alias": [
+      "Bucresti's",
+      "Puppetist",
+      "Bukureshutei no ningyoushi"
+    ],
     "heardle_file": "ブクレシュティの人形師_heardle.mp3",
     "preview_file": "ブクレシュティの人形師_preview.mp3",
     "metadata": {
@@ -9032,6 +9366,12 @@
   "ホーリーサンバランド": {
     "display_title": "ホーリーサンバランド",
     "artist": "HOLY SAMBA MASTER 佐藤 -SATOH-",
+    "alias": [
+      "Holy",
+      "Samba",
+      "Land",
+      "Hooriisanbarando"
+    ],
     "heardle_file": "ホーリーサンバランド_heardle.mp3",
     "preview_file": "ホーリーサンバランド_preview.mp3",
     "metadata": {
@@ -9047,6 +9387,15 @@
   "ポケットモンスター ブラック・ホワイト 四天王戦": {
     "display_title": "ポケットモンスター ブラック・ホワイト 四天王戦",
     "artist": "Arranged by Y.W",
+    "alias": [
+      "Pokémon",
+      "Black/white",
+      "Four",
+      "Heavenly",
+      "Kings",
+      "Battle",
+      "Pokettomonsutaa   burakku・howaito   shitennou sen"
+    ],
     "heardle_file": "ポケットモンスター ブラック・ホワイト 四天王戦_heardle.mp3",
     "preview_file": "ポケットモンスター ブラック・ホワイト 四天王戦_preview.mp3",
     "metadata": {
@@ -9062,6 +9411,14 @@
   "マジョリテへの憧れとミノリテの矜持": {
     "display_title": "マジョリテへの憧れとミノリテの矜持",
     "artist": "dawn-system（黎明紀行）",
+    "alias": [
+      "Aspiration",
+      "Majorite",
+      "And",
+      "Minorite's",
+      "Pride",
+      "Majorite heno akogare to minorite no kyouji"
+    ],
     "heardle_file": "マジョリテへの憧れとミノリテの矜持_heardle.mp3",
     "preview_file": "マジョリテへの憧れとミノリテの矜持_preview.mp3",
     "metadata": {
@@ -9077,6 +9434,13 @@
   "ミルキーベリー・スウィートタイム": {
     "display_title": "ミルキーベリー・スウィートタイム",
     "artist": "ぽんきち",
+    "alias": [
+      "Milky",
+      "Berry",
+      "Sweet",
+      "Time",
+      "Mirukiiberii・suuiitotaimu"
+    ],
     "heardle_file": "ミルキーベリー・スウィートタイム_heardle.mp3",
     "preview_file": "ミルキーベリー・スウィートタイム_preview.mp3",
     "metadata": {
@@ -9092,6 +9456,14 @@
   "メイドと血の懐中時計": {
     "display_title": "メイドと血の懐中時計",
     "artist": "zun",
+    "alias": [
+      "Maid",
+      "And",
+      "Blood",
+      "Pocket",
+      "Watch",
+      "Meido to chi no kaichuudokei"
+    ],
     "heardle_file": "メイドと血の懐中時計_heardle.mp3",
     "preview_file": "メイドと血の懐中時計_preview.mp3",
     "metadata": {
@@ -9107,6 +9479,11 @@
   "モノリスの園": {
     "display_title": "モノリスの園",
     "artist": "LOKI",
+    "alias": [
+      "Garden",
+      "Monoliths",
+      "Monorisu no sono"
+    ],
     "heardle_file": "モノリスの園_heardle.mp3",
     "preview_file": "モノリスの園_preview.mp3",
     "metadata": {
@@ -9123,6 +9500,11 @@
   "モリオンの姫": {
     "display_title": "モリオンの姫",
     "artist": "wa.",
+    "alias": [
+      "Princess",
+      "Morion",
+      "Morion no hime"
+    ],
     "heardle_file": "モリオンの姫_heardle.mp3",
     "preview_file": "モリオンの姫_preview.mp3",
     "metadata": {
@@ -9139,6 +9521,12 @@
   "ヨッシーアイランド 「クッパ」": {
     "display_title": "ヨッシーアイランド 「クッパ」",
     "artist": "近藤浩治",
+    "alias": [
+      "Yoshi",
+      "Island",
+      "\"bowser\"",
+      "Yosshiiairando   ( kuppa )"
+    ],
     "heardle_file": "ヨッシーアイランド 「クッパ」_heardle.mp3",
     "preview_file": "ヨッシーアイランド 「クッパ」_preview.mp3",
     "metadata": {
@@ -9154,6 +9542,11 @@
   "ラス・リグ": {
     "display_title": "ラス・リグ",
     "artist": "sun3",
+    "alias": [
+      "Las",
+      "Rig",
+      "Rasu・rigu"
+    ],
     "heardle_file": "ラス・リグ_heardle.mp3",
     "preview_file": "ラス・リグ_preview.mp3",
     "metadata": {
@@ -9169,6 +9562,10 @@
   "ロッカー": {
     "display_title": "ロッカー",
     "artist": "ATEMAK",
+    "alias": [
+      "Locker",
+      "Rokkaa"
+    ],
     "heardle_file": "ロッカー_heardle.mp3",
     "preview_file": "ロッカー_preview.mp3",
     "metadata": {
@@ -9184,6 +9581,10 @@
   "ロリキート": {
     "display_title": "ロリキート",
     "artist": "黄泉路テヂーモ / 出前×篠乃ちよ",
+    "alias": [
+      "Lolikito",
+      "Rorikiito"
+    ],
     "heardle_file": "ロリキート_heardle.mp3",
     "preview_file": "ロリキート_preview.mp3",
     "metadata": {
@@ -9199,6 +9600,12 @@
   "上海紅茶館": {
     "display_title": "上海紅茶館",
     "artist": "NEKI←T + Est",
+    "alias": [
+      "Shanghai",
+      "Tea",
+      "Museum",
+      "Shanhai koucha kan"
+    ],
     "heardle_file": "上海紅茶館_heardle.mp3",
     "preview_file": "上海紅茶館_preview.mp3",
     "metadata": {
@@ -9214,6 +9621,12 @@
   "世界殺戮ブラッドローズ": {
     "display_title": "世界殺戮ブラッドローズ",
     "artist": "LiA",
+    "alias": [
+      "World",
+      "Slaughter",
+      "Bloodrose",
+      "Sekai satsuriku buraddoroozu"
+    ],
     "heardle_file": "世界殺戮ブラッドローズ_heardle.mp3",
     "preview_file": "世界殺戮ブラッドローズ_preview.mp3",
     "metadata": {
@@ -9229,6 +9642,11 @@
   "事象の地平": {
     "display_title": "事象の地平",
     "artist": "wa.",
+    "alias": [
+      "Horizon",
+      "Events",
+      "Jishou no chihei"
+    ],
     "heardle_file": "事象の地平_heardle.mp3",
     "preview_file": "事象の地平_preview.mp3",
     "metadata": {
@@ -9245,6 +9663,12 @@
   "亡き皇女の為のセプテット": {
     "display_title": "亡き皇女の為のセプテット",
     "artist": "チャチャ",
+    "alias": [
+      "Scepter",
+      "Late",
+      "Princess",
+      "Naki oujo no tameno seputetto"
+    ],
     "heardle_file": "亡き皇女の為のセプテット_heardle.mp3",
     "preview_file": "亡き皇女の為のセプテット_preview.mp3",
     "metadata": {
@@ -9262,6 +9686,13 @@
   "僕たちの旅とエピローグ。": {
     "display_title": "僕たちの旅とエピローグ。",
     "artist": "ああああ",
+    "alias": [
+      "Our",
+      "Journey",
+      "And",
+      "Epilogue.",
+      "Boku tachino tabi to epiroogu ."
+    ],
     "heardle_file": "僕たちの旅とエピローグ。_heardle.mp3",
     "preview_file": "僕たちの旅とエピローグ。_preview.mp3",
     "metadata": {
@@ -9277,6 +9708,13 @@
   "先天性エゴサ依存症候群": {
     "display_title": "先天性エゴサ依存症候群",
     "artist": "ねこみりん feat.みゆ",
+    "alias": [
+      "Congenital",
+      "Egosa",
+      "Addiction",
+      "Syndrome",
+      "Sentensei egosa izonshou sourou gun"
+    ],
     "heardle_file": "先天性エゴサ依存症候群_heardle.mp3",
     "preview_file": "先天性エゴサ依存症候群_preview.mp3",
     "metadata": {
@@ -9292,6 +9730,14 @@
   "先手必勝戦闘機 鳳": {
     "display_title": "先手必勝戦闘機 鳳",
     "artist": "Dr.A (BGA:八嶋 OBJ:331)",
+    "alias": [
+      "First",
+      "Hand",
+      "Win",
+      "Fighter",
+      "Hou",
+      "Sentehisshou sentouki   ootori"
+    ],
     "heardle_file": "先手必勝戦闘機 鳳_heardle.mp3",
     "preview_file": "先手必勝戦闘機 鳳_preview.mp3",
     "metadata": {
@@ -9307,6 +9753,12 @@
   "兎は舞い降りた": {
     "display_title": "兎は舞い降りた",
     "artist": "ZUN bms:乙UИ",
+    "alias": [
+      "Rabbit",
+      "Flew",
+      "Down",
+      "Usagi ha mai ori ta"
+    ],
     "heardle_file": "兎は舞い降りた_heardle.mp3",
     "preview_file": "兎は舞い降りた_preview.mp3",
     "metadata": {
@@ -9322,6 +9774,12 @@
   "千年女王": {
     "display_title": "千年女王",
     "artist": "しらいし",
+    "alias": [
+      "Thousand",
+      "Year",
+      "Queen",
+      "Sennen joou"
+    ],
     "heardle_file": "千年女王_heardle.mp3",
     "preview_file": "千年女王_preview.mp3",
     "metadata": {
@@ -9338,6 +9796,12 @@
   "午後のこいしちゃん": {
     "display_title": "午後のこいしちゃん",
     "artist": "er",
+    "alias": [
+      "Afternoon",
+      "Koishi",
+      "Chan",
+      "Gogo nokoishichan"
+    ],
     "heardle_file": "午後のこいしちゃん_heardle.mp3",
     "preview_file": "午後のこいしちゃん_preview.mp3",
     "metadata": {
@@ -9353,6 +9817,14 @@
   "四十五年ノ雪桜": {
     "display_title": "四十五年ノ雪桜",
     "artist": "kozato",
+    "alias": [
+      "45",
+      "Years",
+      "Snow",
+      "Cherry",
+      "Blossom",
+      "Shijuu gonen no yuki sakura"
+    ],
     "heardle_file": "四十五年ノ雪桜_heardle.mp3",
     "preview_file": "四十五年ノ雪桜_preview.mp3",
     "metadata": {
@@ -9369,7 +9841,11 @@
   "図書室のエルザ": {
     "display_title": "図書室のエルザ",
     "artist": "橘花音 かなえゆめ composed by nmk",
-    "alias": ["Elsa", "Library"],
+    "alias": [
+      "Elsa",
+      "Library",
+      "Toshoshitsu no eruza"
+    ],
     "heardle_file": "図書室のエルザ_heardle.mp3",
     "preview_file": "図書室のエルザ_preview.mp3",
     "metadata": {
@@ -9385,6 +9861,12 @@
   "地球塔デヴォーション": {
     "display_title": "地球塔デヴォーション",
     "artist": "tarolabo × 月雫",
+    "alias": [
+      "Earth",
+      "Tower",
+      "Devotion",
+      "Chikyuu tou devooshon"
+    ],
     "heardle_file": "地球塔デヴォーション_heardle.mp3",
     "preview_file": "地球塔デヴォーション_preview.mp3",
     "metadata": {
@@ -9400,6 +9882,12 @@
   "堕楽の園": {
     "display_title": "堕楽の園",
     "artist": "witch's slave",
+    "alias": [
+      "Garden",
+      "Fallen",
+      "Religion",
+      "Da raku no sono"
+    ],
     "heardle_file": "堕楽の園_heardle.mp3",
     "preview_file": "堕楽の園_preview.mp3",
     "metadata": {
@@ -9415,6 +9903,12 @@
   "夏夜のノスタルジア": {
     "display_title": "夏夜のノスタルジア",
     "artist": "MASA",
+    "alias": [
+      "Summer",
+      "Night",
+      "Nostalgia",
+      "Natsu yoru no nosutarujia"
+    ],
     "heardle_file": "夏夜のノスタルジア_heardle.mp3",
     "preview_file": "夏夜のノスタルジア_preview.mp3",
     "metadata": {
@@ -9430,6 +9924,14 @@
   "夏影-summer lights- [HI-Speed Edition]": {
     "display_title": "夏影-summer lights- [HI-Speed Edition]",
     "artist": "beatMARIO",
+    "alias": [
+      "Summer",
+      "Lights",
+      "[hi",
+      "Speed",
+      "​​edition]",
+      "Natsu kage -summer lights- [hi-speed edition ]"
+    ],
     "heardle_file": "夏影-summer lights- [HI-Speed Edition]_heardle.mp3",
     "preview_file": "夏影-summer lights- [HI-Speed Edition]_preview.mp3",
     "metadata": {
@@ -9445,6 +9947,12 @@
   "夕凪の丘": {
     "display_title": "夕凪の丘",
     "artist": "美月 正",
+    "alias": [
+      "Unagi",
+      "No",
+      "Oka",
+      "Yuunagi no oka"
+    ],
     "heardle_file": "夕凪の丘_heardle.mp3",
     "preview_file": "夕凪の丘_preview.mp3",
     "metadata": {
@@ -9460,6 +9968,11 @@
   "多重極展開": {
     "display_title": "多重極展開",
     "artist": "Rocky",
+    "alias": [
+      "Multipole",
+      "Expansion",
+      "Tajuu kyoku tenkai"
+    ],
     "heardle_file": "多重極展開_heardle.mp3",
     "preview_file": "多重極展開_preview.mp3",
     "metadata": {
@@ -9475,6 +9988,11 @@
   "夜明けの少女たち": {
     "display_title": "夜明けの少女たち",
     "artist": "Lubinn",
+    "alias": [
+      "Girls",
+      "Dawn",
+      "Yoake no shoujo tachi"
+    ],
     "heardle_file": "夜明けの少女たち_heardle.mp3",
     "preview_file": "夜明けの少女たち_preview.mp3",
     "metadata": {
@@ -9490,6 +10008,12 @@
   "夜桜": {
     "display_title": "夜桜",
     "artist": "彩音 / 小宮真央",
+    "alias": [
+      "Cherry",
+      "Blossoms",
+      "Night",
+      "Yozakura"
+    ],
     "heardle_file": "夜桜_heardle.mp3",
     "preview_file": "夜桜_preview.mp3",
     "metadata": {
@@ -9506,6 +10030,11 @@
   "夢、幻。": {
     "display_title": "夢、幻。",
     "artist": "NIKITA / misokabocha",
+    "alias": [
+      "Dreams",
+      "Illusions.",
+      "Yume , maboroshi ."
+    ],
     "heardle_file": "夢、幻。_heardle.mp3",
     "preview_file": "夢、幻。_preview.mp3",
     "metadata": {
@@ -9521,6 +10050,11 @@
   "夢人形": {
     "display_title": "夢人形",
     "artist": "-45",
+    "alias": [
+      "Dream",
+      "Doll",
+      "Yumeto katachi"
+    ],
     "heardle_file": "夢人形_heardle.mp3",
     "preview_file": "夢人形_preview.mp3",
     "metadata": {
@@ -9537,6 +10071,12 @@
   "天上のポリスルイン": {
     "display_title": "天上のポリスルイン",
     "artist": "daisan",
+    "alias": [
+      "Police",
+      "Ruin",
+      "Heavens",
+      "Tenjou no porisuruin"
+    ],
     "heardle_file": "天上のポリスルイン_heardle.mp3",
     "preview_file": "天上のポリスルイン_preview.mp3",
     "metadata": {
@@ -9552,6 +10092,11 @@
   "天叢雲剣": {
     "display_title": "天叢雲剣",
     "artist": "obj:瑠璃天",
+    "alias": [
+      "Amamurakumo",
+      "Sword",
+      "Ten murakumo tsurugi"
+    ],
     "heardle_file": "天叢雲剣_heardle.mp3",
     "preview_file": "天叢雲剣_preview.mp3",
     "metadata": {
@@ -9567,6 +10112,12 @@
   "天空の城ヴェリエル": {
     "display_title": "天空の城ヴェリエル",
     "artist": "うえつ氏",
+    "alias": [
+      "Castle",
+      "Sky",
+      "Veriel",
+      "Tenkuu no shiro verieru"
+    ],
     "heardle_file": "天空の城ヴェリエル_heardle.mp3",
     "preview_file": "天空の城ヴェリエル_preview.mp3",
     "metadata": {
@@ -9583,6 +10134,11 @@
   "失望Choco": {
     "display_title": "失望Choco",
     "artist": "LeaF",
+    "alias": [
+      "Disappointing",
+      "Choco",
+      "Shitsubou choco"
+    ],
     "heardle_file": "失望Choco_heardle.mp3",
     "preview_file": "失望Choco_preview.mp3",
     "metadata": {
@@ -9598,6 +10154,11 @@
   "奏龍ピアソラ": {
     "display_title": "奏龍ピアソラ",
     "artist": "daisan",
+    "alias": [
+      "Songryu",
+      "Piazzolla",
+      "Sou ryuu piasora"
+    ],
     "heardle_file": "奏龍ピアソラ_heardle.mp3",
     "preview_file": "奏龍ピアソラ_preview.mp3",
     "metadata": {
@@ -9613,6 +10174,12 @@
   "妖晶零弐": {
     "display_title": "妖晶零弐",
     "artist": "tarolabo BGA:140",
+    "alias": [
+      "Eiken",
+      "Zero",
+      "2",
+      "You aki rei ni"
+    ],
     "heardle_file": "妖晶零弐_heardle.mp3",
     "preview_file": "妖晶零弐_preview.mp3",
     "metadata": {
@@ -9629,6 +10196,14 @@
   "妹様は彼女なのだっ！": {
     "display_title": "妹様は彼女なのだっ！",
     "artist": "otokaz",
+    "alias": [
+      "Your",
+      "Little",
+      "Sister",
+      "Is",
+      "Her!",
+      "Imouto sama ha kanojo nanodatsu !"
+    ],
     "heardle_file": "妹様は彼女なのだっ！_heardle.mp3",
     "preview_file": "妹様は彼女なのだっ！_preview.mp3",
     "metadata": {
@@ -9644,6 +10219,11 @@
   "子午線の祀り": {
     "display_title": "子午線の祀り",
     "artist": "金ラメタキシード",
+    "alias": [
+      "Meridian",
+      "Worship",
+      "Shigosen no matsuri"
+    ],
     "heardle_file": "子午線の祀り_heardle.mp3",
     "preview_file": "子午線の祀り_preview.mp3",
     "metadata": {
@@ -9659,6 +10239,12 @@
   "宇宙のMI'Sキッチン": {
     "display_title": "宇宙のMI'Sキッチン",
     "artist": "ねこみりん feat.みゆ",
+    "alias": [
+      "Mi's",
+      "Kitchen",
+      "Space",
+      "Uchuu no mi's kitchin"
+    ],
     "heardle_file": "宇宙のMI'Sキッチン_heardle.mp3",
     "preview_file": "宇宙のMI'Sキッチン_preview.mp3",
     "metadata": {
@@ -9674,6 +10260,11 @@
   "少女の舞葬": {
     "display_title": "少女の舞葬",
     "artist": "ぷらすちっくと女の子",
+    "alias": [
+      "Girl's",
+      "Funeral",
+      "Shoujo no mai sou"
+    ],
     "heardle_file": "少女の舞葬_heardle.mp3",
     "preview_file": "少女の舞葬_preview.mp3",
     "metadata": {
@@ -9689,6 +10280,11 @@
   "平衡世界": {
     "display_title": "平衡世界",
     "artist": "daisan",
+    "alias": [
+      "Equilibrium",
+      "World",
+      "Heikou sekai"
+    ],
     "heardle_file": "平衡世界_heardle.mp3",
     "preview_file": "平衡世界_preview.mp3",
     "metadata": {
@@ -9704,6 +10300,16 @@
   "年中夢中な好奇心": {
     "display_title": "年中夢中な好奇心",
     "artist": "er",
+    "alias": [
+      "Curiosity",
+      "That",
+      "Is",
+      "Obsessed",
+      "All",
+      "Year",
+      "Round",
+      "Nenjuu muchuu na koukishin"
+    ],
     "heardle_file": "年中夢中な好奇心_heardle.mp3",
     "preview_file": "年中夢中な好奇心_preview.mp3",
     "metadata": {
@@ -9719,6 +10325,14 @@
   "幸せなマリアへ -ベアトランスMix-": {
     "display_title": "幸せなマリアへ -ベアトランスMix-",
     "artist": "remixed by which's slave gmtn. (obj : silkch)",
+    "alias": [
+      "Happy",
+      "Maria",
+      "Bear",
+      "Trans",
+      "Mix",
+      "Shiawase na maria he  - beatoransu mix-"
+    ],
     "heardle_file": "幸せなマリアへ -ベアトランスMix-_heardle.mp3",
     "preview_file": "幸せなマリアへ -ベアトランスMix-_preview.mp3",
     "metadata": {
@@ -9734,6 +10348,11 @@
   "幸なる旋律 -the solitary melody-": {
     "display_title": "幸なる旋律 -the solitary melody-",
     "artist": "xenothium remixed by gmtn.",
+    "alias": [
+      "Solitary",
+      "Melody",
+      "Sachi naru senritsu  -the solitary melody-"
+    ],
     "heardle_file": "幸なる旋律 -the solitary melody-_heardle.mp3",
     "preview_file": "幸なる旋律 -the solitary melody-_preview.mp3",
     "metadata": {
@@ -9749,6 +10368,12 @@
   "弦月の猫": {
     "display_title": "弦月の猫",
     "artist": "ねこみみ魔法使い for 御庭つみき",
+    "alias": [
+      "Cat",
+      "Ruin",
+      "Moon",
+      "Gengetsu no neko"
+    ],
     "heardle_file": "弦月の猫_heardle.mp3",
     "preview_file": "弦月の猫_preview.mp3",
     "metadata": {
@@ -9764,6 +10389,11 @@
   "彼女の言い分": {
     "display_title": "彼女の言い分",
     "artist": "ねこみみ魔法使い",
+    "alias": [
+      "Her",
+      "Words",
+      "Kanojo no iibun"
+    ],
     "heardle_file": "彼女の言い分_heardle.mp3",
     "preview_file": "彼女の言い分_preview.mp3",
     "metadata": {
@@ -9780,6 +10410,13 @@
   "彼岸帰航-idling mix-": {
     "display_title": "彼岸帰航-idling mix-",
     "artist": "ZUN(Arr.sun3)",
+    "alias": [
+      "Return",
+      "Higan",
+      "Idling",
+      "Mix",
+      "Higan kikou -idling mix-"
+    ],
     "heardle_file": "彼岸帰航-idling mix-_heardle.mp3",
     "preview_file": "彼岸帰航-idling mix-_preview.mp3",
     "metadata": {
@@ -9796,6 +10433,11 @@
   "心壊のアガルマトフィリア": {
     "display_title": "心壊のアガルマトフィリア",
     "artist": "SioN / 篠乃ちよ",
+    "alias": [
+      "Heartbreaking",
+      "Agarmatophilia",
+      "Kokoro kai no agarumatofiria"
+    ],
     "heardle_file": "心壊のアガルマトフィリア_heardle.mp3",
     "preview_file": "心壊のアガルマトフィリア_preview.mp3",
     "metadata": {
@@ -9811,6 +10453,13 @@
   "性的猟奇的無意味": {
     "display_title": "性的猟奇的無意味",
     "artist": "tarolabo / OK@GE",
+    "alias": [
+      "Sexual",
+      "And",
+      "Bizarre",
+      "Meaningless",
+      "Seiteki ryoukiteki muimi"
+    ],
     "heardle_file": "性的猟奇的無意味_heardle.mp3",
     "preview_file": "性的猟奇的無意味_preview.mp3",
     "metadata": {
@@ -9826,6 +10475,13 @@
   "恋の2-4-11": {
     "display_title": "恋の2-4-11",
     "artist": "Gun-SEKI feat.那珂",
+    "alias": [
+      "Love",
+      "2",
+      "4",
+      "11",
+      "Koi no 2-4-11"
+    ],
     "heardle_file": "恋の2-4-11_heardle.mp3",
     "preview_file": "恋の2-4-11_preview.mp3",
     "metadata": {
@@ -9842,6 +10498,15 @@
   "恋わずらい -shiny party floor-": {
     "display_title": "恋わずらい -shiny party floor-",
     "artist": "ねこみみ魔法使い",
+    "alias": [
+      "Love",
+      "Is",
+      "Hard",
+      "Shiny",
+      "Party",
+      "Floor",
+      "Koi wazurai  -shiny party floor-"
+    ],
     "heardle_file": "恋わずらい -shiny party floor-_heardle.mp3",
     "preview_file": "恋わずらい -shiny party floor-_preview.mp3",
     "metadata": {
@@ -9858,6 +10523,11 @@
   "恋愛シンドローム": {
     "display_title": "恋愛シンドローム",
     "artist": "佐久間まゆ / 星輝子",
+    "alias": [
+      "Love",
+      "Syndrome",
+      "Ren'ai shindoroomu"
+    ],
     "heardle_file": "恋愛シンドローム_heardle.mp3",
     "preview_file": "恋愛シンドローム_preview.mp3",
     "metadata": {
@@ -9873,6 +10543,11 @@
   "恐鳥": {
     "display_title": "恐鳥",
     "artist": "主人公",
+    "alias": [
+      "Bird",
+      "Terror",
+      "Kyou tori"
+    ],
     "heardle_file": "恐鳥_heardle.mp3",
     "preview_file": "恐鳥_preview.mp3",
     "metadata": {
@@ -9888,6 +10563,18 @@
   "愛と煩悩と輪廻と常識の極彩世界": {
     "display_title": "愛と煩悩と輪廻と常識の極彩世界",
     "artist": "sound piercer feat.Ritsu",
+    "alias": [
+      "Colorful",
+      "World",
+      "Love",
+      "Worldly",
+      "Desires",
+      "Reincarnation",
+      "And",
+      "Common",
+      "Sense",
+      "Ai to bonnou to rinne to joushiki no gokusai sekai"
+    ],
     "heardle_file": "愛と煩悩と輪廻と常識の極彩世界_heardle.mp3",
     "preview_file": "愛と煩悩と輪廻と常識の極彩世界_preview.mp3",
     "metadata": {
@@ -9903,6 +10590,13 @@
   "感情の摩天楼～PandoraBox": {
     "display_title": "感情の摩天楼～PandoraBox",
     "artist": "ZUN remix by 44teru-k",
+    "alias": [
+      "Skyscraper",
+      "Emotions",
+      "~",
+      "Pandorabox",
+      "Kanjou no matenrou ~ pandorabox"
+    ],
     "heardle_file": "感情の摩天楼～PandoraBox_heardle.mp3",
     "preview_file": "感情の摩天楼～PandoraBox_preview.mp3",
     "metadata": {
@@ -9918,6 +10612,13 @@
   "撃墜-HELL AIR FORCE-": {
     "display_title": "撃墜-HELL AIR FORCE-",
     "artist": "bj.HaLo",
+    "alias": [
+      "Shootdown",
+      "Hell",
+      "Air",
+      "Force",
+      "Gekitsui -hell air force-"
+    ],
     "heardle_file": "撃墜-HELL AIR FORCE-_heardle.mp3",
     "preview_file": "撃墜-HELL AIR FORCE-_preview.mp3",
     "metadata": {
@@ -9933,6 +10634,12 @@
   "斧と盾": {
     "display_title": "斧と盾",
     "artist": "tarolabo BGA:MiRA vo:小宮真央",
+    "alias": [
+      "Axe",
+      "And",
+      "Shield",
+      "Ono to tate"
+    ],
     "heardle_file": "斧と盾_heardle.mp3",
     "preview_file": "斧と盾_preview.mp3",
     "metadata": {
@@ -9948,6 +10655,16 @@
   "旧地獄街道を行く ～反逆のパルスィ～": {
     "display_title": "旧地獄街道を行く ～反逆のパルスィ～",
     "artist": "上杉うた",
+    "alias": [
+      "Going",
+      "Along",
+      "Old",
+      "Hell",
+      "Road",
+      "Pulsy",
+      "Rebellion",
+      "Kyuuchi goku kaidou wo iku   ~ hangyaku no parusui ~"
+    ],
     "heardle_file": "旧地獄街道を行く ～反逆のパルスィ～_heardle.mp3",
     "preview_file": "旧地獄街道を行く ～反逆のパルスィ～_preview.mp3",
     "metadata": {
@@ -9964,6 +10681,13 @@
   "星の器～STAR OF ANDROMEDA": {
     "display_title": "星の器～STAR OF ANDROMEDA",
     "artist": "ZUN (Arr.sun3)",
+    "alias": [
+      "Star",
+      "Vessels",
+      "~star",
+      "Andromeda",
+      "Hoshi no utsuwa ~ star of andromeda"
+    ],
     "heardle_file": "星の器～STAR OF ANDROMEDA_heardle.mp3",
     "preview_file": "星の器～STAR OF ANDROMEDA_preview.mp3",
     "metadata": {
@@ -9980,6 +10704,11 @@
   "景色の境界": {
     "display_title": "景色の境界",
     "artist": "A.I.TOYS",
+    "alias": [
+      "Boundary",
+      "Scenery",
+      "Keshiki no kyoukai"
+    ],
     "heardle_file": "景色の境界_heardle.mp3",
     "preview_file": "景色の境界_preview.mp3",
     "metadata": {
@@ -9995,6 +10724,14 @@
   "暁月～蒼い夢 夢うつつ": {
     "display_title": "暁月～蒼い夢 夢うつつ",
     "artist": "myu",
+    "alias": [
+      "Akatsuki",
+      "~",
+      "Blue",
+      "Dreams",
+      "Throbbing",
+      "Akatsuki ~ aoi yume   yume utsutsu"
+    ],
     "heardle_file": "暁月～蒼い夢 夢うつつ_heardle.mp3",
     "preview_file": "暁月～蒼い夢 夢うつつ_preview.mp3",
     "metadata": {
@@ -10010,6 +10747,14 @@
   "月と狼と砂糖菓子": {
     "display_title": "月と狼と砂糖菓子",
     "artist": "campanellina",
+    "alias": [
+      "Moon",
+      "Wolf",
+      "And",
+      "Sugar",
+      "Candy",
+      "Gatsu to ookami to satou kashi"
+    ],
     "heardle_file": "月と狼と砂糖菓子_heardle.mp3",
     "preview_file": "月と狼と砂糖菓子_preview.mp3",
     "metadata": {
@@ -10026,6 +10771,13 @@
   "月時計 Last・Dial": {
     "display_title": "月時計 Last・Dial",
     "artist": "ZUN(Arr.sun3)",
+    "alias": [
+      "Lune",
+      "Clock",
+      "Last",
+      "Dial",
+      "Gatsu tokei  last ・ dial"
+    ],
     "heardle_file": "月時計 Last・Dial_heardle.mp3",
     "preview_file": "月時計 Last・Dial_preview.mp3",
     "metadata": {
@@ -10041,6 +10793,12 @@
   "月童 - Awaking!!神奈": {
     "display_title": "月童 - Awaking!!神奈",
     "artist": "celas",
+    "alias": [
+      "Tsukido",
+      "Awaking!!",
+      "Kanna",
+      "Gatsu warabe  - awaking ! ! kanna"
+    ],
     "heardle_file": "月童 - Awaking!!神奈_heardle.mp3",
     "preview_file": "月童 - Awaking!!神奈_preview.mp3",
     "metadata": {
@@ -10056,6 +10814,12 @@
   "東の国のFLYING PAPARAZZI！": {
     "display_title": "東の国のFLYING PAPARAZZI！",
     "artist": "樋奈月みつ　obj:TONO",
+    "alias": [
+      "Flying",
+      "Paparazzi",
+      "East!",
+      "Higashi no kuni no flying paparazzi !"
+    ],
     "heardle_file": "東の国のFLYING PAPARAZZI！_heardle.mp3",
     "preview_file": "東の国のFLYING PAPARAZZI！_preview.mp3",
     "metadata": {
@@ -10074,6 +10838,11 @@
   "架空ユリカゴ": {
     "display_title": "架空ユリカゴ",
     "artist": "Hate × Ritsu × Salita",
+    "alias": [
+      "Fictional",
+      "Yurikago",
+      "Kakuu yurikago"
+    ],
     "heardle_file": "架空ユリカゴ_heardle.mp3",
     "preview_file": "架空ユリカゴ_preview.mp3",
     "metadata": {
@@ -10089,6 +10858,11 @@
   "桜花撩乱": {
     "display_title": "桜花撩乱",
     "artist": "悠然 / bunta",
+    "alias": [
+      "Sakura",
+      "Karaku",
+      "Ouka ryouran"
+    ],
     "heardle_file": "桜花撩乱_heardle.mp3",
     "preview_file": "桜花撩乱_preview.mp3",
     "metadata": {
@@ -10104,6 +10878,11 @@
   "桜華月": {
     "display_title": "桜華月",
     "artist": "AKITO",
+    "alias": [
+      "Sakura",
+      "Moon",
+      "Ouka gatsu"
+    ],
     "heardle_file": "桜華月_heardle.mp3",
     "preview_file": "桜華月_preview.mp3",
     "metadata": {
@@ -10121,6 +10900,11 @@
   "樟葉 (remix)": {
     "display_title": "樟葉 (remix)",
     "artist": "-45 remixed by SABREMISSILE / akusil(mov)",
+    "alias": [
+      "Kusatsuha",
+      "(remix)",
+      "Kusunoha  (remix )"
+    ],
     "heardle_file": "樟葉 (remix)_heardle.mp3",
     "preview_file": "樟葉 (remix)_preview.mp3",
     "metadata": {
@@ -10136,6 +10920,11 @@
   "歪んだ神": {
     "display_title": "歪んだ神",
     "artist": "次元大介 (obj by Tetsu)",
+    "alias": [
+      "Distorted",
+      "God",
+      "Hizun da kami"
+    ],
     "heardle_file": "歪んだ神_heardle.mp3",
     "preview_file": "歪んだ神_preview.mp3",
     "metadata": {
@@ -10151,6 +10940,17 @@
   "死腐乃美「彼岸花」第二～空虚偽心～赤紅": {
     "display_title": "死腐乃美「彼岸花」第二～空虚偽心～赤紅",
     "artist": "44teru-k",
+    "alias": [
+      "Deep",
+      "Funomi's",
+      "\"higashibana\"",
+      "Second",
+      "False",
+      "Heart",
+      "Red",
+      "Red",
+      "Shi fu nomi ( higan hana ) daini ~ kuukyo nise kokoro ~ aka kurenai"
+    ],
     "heardle_file": "死腐乃美「彼岸花」第二～空虚偽心～赤紅_heardle.mp3",
     "preview_file": "死腐乃美「彼岸花」第二～空虚偽心～赤紅_preview.mp3",
     "metadata": {
@@ -10166,6 +10966,12 @@
   "水晶世界 ～Fracture～": {
     "display_title": "水晶世界 ～Fracture～",
     "artist": "秋山 澪",
+    "alias": [
+      "Crystal",
+      "World",
+      "~fracture~",
+      "Suishou sekai   ~ fracture ~"
+    ],
     "heardle_file": "水晶世界 ～Fracture～_heardle.mp3",
     "preview_file": "水晶世界 ～Fracture～_preview.mp3",
     "metadata": {
@@ -10182,6 +10988,11 @@
   "永劫の沙漏": {
     "display_title": "永劫の沙漏",
     "artist": "ATEMAK",
+    "alias": [
+      "Eternally",
+      "Silence",
+      "Eigou no sa rou"
+    ],
     "heardle_file": "永劫の沙漏_heardle.mp3",
     "preview_file": "永劫の沙漏_preview.mp3",
     "metadata": {
@@ -10197,6 +11008,13 @@
   "滝行Lv28": {
     "display_title": "滝行Lv28",
     "artist": "sentire",
+    "alias": [
+      "Waterfall",
+      "Hiking",
+      "Level",
+      "28",
+      "Takigyou lv28"
+    ],
     "heardle_file": "滝行Lv28_heardle.mp3",
     "preview_file": "滝行Lv28_preview.mp3",
     "metadata": {
@@ -10212,6 +11030,15 @@
   "点、線、面、立体": {
     "display_title": "点、線、面、立体",
     "artist": "sound piercer / mov : kkkfff2",
+    "alias": [
+      "Points",
+      "Lines",
+      "Surfaces",
+      "Three",
+      "Dimensional",
+      "Figures",
+      "Ten , sen , men , rittai"
+    ],
     "heardle_file": "点、線、面、立体_heardle.mp3",
     "preview_file": "点、線、面、立体_preview.mp3",
     "metadata": {
@@ -10228,6 +11055,10 @@
   "煉獄-Purgatorium-": {
     "display_title": "煉獄-Purgatorium-",
     "artist": "incinerate",
+    "alias": [
+      "Purgatorium",
+      "Rengoku -purgatorium-"
+    ],
     "heardle_file": "煉獄-Purgatorium-_heardle.mp3",
     "preview_file": "煉獄-Purgatorium-_preview.mp3",
     "metadata": {
@@ -10244,6 +11075,11 @@
   "煌舞姫ベアトリクス": {
     "display_title": "煌舞姫ベアトリクス",
     "artist": "Alicia* / BGA:Fleeting Lovely",
+    "alias": [
+      "Kiramaihime",
+      "Beatrix",
+      "Kou maihime beatorikusu"
+    ],
     "heardle_file": "煌舞姫ベアトリクス_heardle.mp3",
     "preview_file": "煌舞姫ベアトリクス_preview.mp3",
     "metadata": {
@@ -10259,6 +11095,17 @@
   "爆走中年 ～ENDLESS RUN～": {
     "display_title": "爆走中年 ～ENDLESS RUN～",
     "artist": "クロウ＆ヤイバ",
+    "alias": [
+      "Middle",
+      "Aged",
+      "Man",
+      "Huge",
+      "Throbbing",
+      "Experience",
+      "~endless",
+      "Run~",
+      "Bakusou chuunen   ~ endless run ~"
+    ],
     "heardle_file": "爆走中年 ～ENDLESS RUN～_heardle.mp3",
     "preview_file": "爆走中年 ～ENDLESS RUN～_preview.mp3",
     "metadata": {
@@ -10274,6 +11121,11 @@
   "物怪舞踏": {
     "display_title": "物怪舞踏",
     "artist": "篠螺悠那",
+    "alias": [
+      "Monster",
+      "Dance",
+      "Mokke butou"
+    ],
     "heardle_file": "物怪舞踏_heardle.mp3",
     "preview_file": "物怪舞踏_preview.mp3",
     "metadata": {
@@ -10289,6 +11141,12 @@
   "特効薬はカニピラフ": {
     "display_title": "特効薬はカニピラフ",
     "artist": "セナ",
+    "alias": [
+      "Kanipilaf",
+      "Is",
+      "Cure",
+      "Tokkouyaku ha kanipirafu"
+    ],
     "heardle_file": "特効薬はカニピラフ_heardle.mp3",
     "preview_file": "特効薬はカニピラフ_preview.mp3",
     "metadata": {
@@ -10305,6 +11163,14 @@
   "現実をカットアップしてみた": {
     "display_title": "現実をカットアップしてみた",
     "artist": "Yu^ta",
+    "alias": [
+      "I",
+      "Tried",
+      "Cut",
+      "Up",
+      "Reality",
+      "Genjitsu wo kattoappu shitemita"
+    ],
     "heardle_file": "現実をカットアップしてみた_heardle.mp3",
     "preview_file": "現実をカットアップしてみた_preview.mp3",
     "metadata": {
@@ -10320,6 +11186,13 @@
   "白と臙脂のオモチャバコ": {
     "display_title": "白と臙脂のオモチャバコ",
     "artist": "BACO feat. るぜ",
+    "alias": [
+      "White",
+      "And",
+      "Slurping",
+      "Toys",
+      "Shiro to enji no omochabako"
+    ],
     "heardle_file": "白と臙脂のオモチャバコ_heardle.mp3",
     "preview_file": "白と臙脂のオモチャバコ_preview.mp3",
     "metadata": {
@@ -10335,6 +11208,12 @@
   "白の魔法の光": {
     "display_title": "白の魔法の光",
     "artist": "こどものなみだ",
+    "alias": [
+      "White",
+      "Magic",
+      "Light",
+      "Shiro no mahou no hikari"
+    ],
     "heardle_file": "白の魔法の光_heardle.mp3",
     "preview_file": "白の魔法の光_preview.mp3",
     "metadata": {
@@ -10351,6 +11230,11 @@
   "白狼": {
     "display_title": "白狼",
     "artist": "うまるつふり",
+    "alias": [
+      "White",
+      "Wolf",
+      "Shiro ookami"
+    ],
     "heardle_file": "白狼_heardle.mp3",
     "preview_file": "白狼_preview.mp3",
     "metadata": {
@@ -10366,6 +11250,13 @@
   "真・千年女王": {
     "display_title": "真・千年女王",
     "artist": "Shiraishi",
+    "alias": [
+      "True",
+      "Thousand",
+      "Year",
+      "Queen",
+      "Makoto ・ sennen joou"
+    ],
     "heardle_file": "真・千年女王_heardle.mp3",
     "preview_file": "真・千年女王_preview.mp3",
     "metadata": {
@@ -10381,6 +11272,12 @@
   "硬核機動": {
     "display_title": "硬核機動",
     "artist": "しらいし",
+    "alias": [
+      "Hard",
+      "Nuclear",
+      "Maneuvering",
+      "Kou kaku kidou"
+    ],
     "heardle_file": "硬核機動_heardle.mp3",
     "preview_file": "硬核機動_preview.mp3",
     "metadata": {
@@ -10396,6 +11293,11 @@
   "私のヒトミ": {
     "display_title": "私のヒトミ",
     "artist": "nmk feat.橘花音",
+    "alias": [
+      "My",
+      "Hitomi",
+      "Watashi no hitomi"
+    ],
     "heardle_file": "私のヒトミ_heardle.mp3",
     "preview_file": "私のヒトミ_preview.mp3",
     "metadata": {
@@ -10411,6 +11313,14 @@
   "稲田姫様に叱られるから": {
     "display_title": "稲田姫様に叱られるから",
     "artist": "BMS：Ｆ／Ａ１８　MIDI：ロウファ　BGA:LZH",
+    "alias": [
+      "Because",
+      "I'll",
+      "Be",
+      "Scolded",
+      "Inadahime",
+      "Ineda himesama ni shikara rerukara"
+    ],
     "heardle_file": "稲田姫様に叱られるから_heardle.mp3",
     "preview_file": "稲田姫様に叱られるから_preview.mp3",
     "metadata": {
@@ -10426,6 +11336,12 @@
   "竹取はっぴー": {
     "display_title": "竹取はっぴー",
     "artist": "ZUN (Arr.sun3)",
+    "alias": [
+      "Bamboo",
+      "Cutlery",
+      "Happy",
+      "Taketori happii"
+    ],
     "heardle_file": "竹取はっぴー_heardle.mp3",
     "preview_file": "竹取はっぴー_preview.mp3",
     "metadata": {
@@ -10441,6 +11357,11 @@
   "約束 -HappyHyperStarmiX-": {
     "display_title": "約束 -HappyHyperStarmiX-",
     "artist": "beatMARIO",
+    "alias": [
+      "Promise",
+      "Happyhyperstarmix",
+      "Yakusoku  -happyhyperstarmix-"
+    ],
     "heardle_file": "約束 -HappyHyperStarmiX-_heardle.mp3",
     "preview_file": "約束 -HappyHyperStarmiX-_preview.mp3",
     "metadata": {
@@ -10458,6 +11379,14 @@
   "紅染十三番街道": {
     "display_title": "紅染十三番街道",
     "artist": "L_Z",
+    "alias": [
+      "Red",
+      "Son",
+      "13th",
+      "Avenue",
+      "Road",
+      "Benizome juusan bangai michi"
+    ],
     "heardle_file": "紅染十三番街道_heardle.mp3",
     "preview_file": "紅染十三番街道_preview.mp3",
     "metadata": {
@@ -10475,6 +11404,12 @@
   "紫陽花の忘れ物": {
     "display_title": "紫陽花の忘れ物",
     "artist": "ルゼ",
+    "alias": [
+      "Hydrangea",
+      "Forgotten",
+      "Things",
+      "Ajisai no wasuremono"
+    ],
     "heardle_file": "紫陽花の忘れ物_heardle.mp3",
     "preview_file": "紫陽花の忘れ物_preview.mp3",
     "metadata": {
@@ -10490,6 +11425,14 @@
   "絵空事の世界と私": {
     "display_title": "絵空事の世界と私",
     "artist": "イヴ",
+    "alias": [
+      "World",
+      "Illustrative",
+      "Ecstasy",
+      "And",
+      "Me",
+      "Esoragoto no sekai to watashi"
+    ],
     "heardle_file": "絵空事の世界と私_heardle.mp3",
     "preview_file": "絵空事の世界と私_preview.mp3",
     "metadata": {
@@ -10505,6 +11448,12 @@
   "絶対チェックメイト領域": {
     "display_title": "絶対チェックメイト領域",
     "artist": "LiA",
+    "alias": [
+      "Absolute",
+      "Checkmate",
+      "Area",
+      "Zettai chekkumeito ryouiki"
+    ],
     "heardle_file": "絶対チェックメイト領域_heardle.mp3",
     "preview_file": "絶対チェックメイト領域_preview.mp3",
     "metadata": {
@@ -10520,6 +11469,11 @@
   "絶対的共依存": {
     "display_title": "絶対的共依存",
     "artist": "Hope obj.notebook",
+    "alias": [
+      "Absolute",
+      "Codependent",
+      "Zettaiteki tomo izon"
+    ],
     "heardle_file": "絶対的共依存_heardle.mp3",
     "preview_file": "絶対的共依存_preview.mp3",
     "metadata": {
@@ -10535,6 +11489,9 @@
   "織姫": {
     "display_title": "織姫",
     "artist": "DJ TAKUAN 及び 佐倉アヤキ",
+    "alias": [
+      "Orihime"
+    ],
     "heardle_file": "織姫_heardle.mp3",
     "preview_file": "織姫_preview.mp3",
     "metadata": {
@@ -10550,6 +11507,16 @@
   "織姫(Independent from God, Everlasting love remix)": {
     "display_title": "織姫(Independent from God, Everlasting love remix)",
     "artist": "DJ TAKUAN 及び 佐倉アヤキ remixed by uet",
+    "alias": [
+      "Orihime",
+      "(independent",
+      "From",
+      "God",
+      "Everlasting",
+      "Love",
+      "Remix)",
+      "Orihime (independent from god ,  everlasting love remix )"
+    ],
     "heardle_file": "織姫(Independent from God, Everlasting love remix)_heardle.mp3",
     "preview_file": "織姫(Independent from God, Everlasting love remix)_preview.mp3",
     "metadata": {
@@ -10565,6 +11532,11 @@
   "自強號": {
     "display_title": "自強號",
     "artist": "痛男次郎",
+    "alias": [
+      "Self",
+      "Support",
+      "Jikyou gou"
+    ],
     "heardle_file": "自強號_heardle.mp3",
     "preview_file": "自強號_preview.mp3",
     "metadata": {
@@ -10580,6 +11552,11 @@
   "舞姫 ～buki～": {
     "display_title": "舞姫 ～buki～",
     "artist": "HOUJIROU",
+    "alias": [
+      "Maihime",
+      "~buki~",
+      "Maihime   ~ buki ~"
+    ],
     "heardle_file": "舞姫 ～buki～_heardle.mp3",
     "preview_file": "舞姫 ～buki～_preview.mp3",
     "metadata": {
@@ -10595,6 +11572,14 @@
   "芥川龍之介の河童 ～Candid Friend": {
     "display_title": "芥川龍之介の河童 ～Candid Friend",
     "artist": "zun bms:乙UN",
+    "alias": [
+      "Akutagawa",
+      "Ryunosuke's",
+      "Kappa",
+      "~candid",
+      "Friend",
+      "Akutagawaryuunosuke no kappa   ~ candid friend"
+    ],
     "heardle_file": "芥川龍之介の河童 ～Candid Friend_heardle.mp3",
     "preview_file": "芥川龍之介の河童 ～Candid Friend_preview.mp3",
     "metadata": {
@@ -10610,6 +11595,14 @@
   "花鳥風月": {
     "display_title": "花鳥風月",
     "artist": "Phorni",
+    "alias": [
+      "Flowers",
+      "Birds",
+      "Wind",
+      "And",
+      "Moon",
+      "Kachoufuugetsu"
+    ],
     "heardle_file": "花鳥風月_heardle.mp3",
     "preview_file": "花鳥風月_preview.mp3",
     "metadata": {
@@ -10625,6 +11618,13 @@
   "英雄 ～氷の妖精のお話～": {
     "display_title": "英雄 ～氷の妖精のお話～",
     "artist": "Yu^ta",
+    "alias": [
+      "Hero:",
+      "Story",
+      "Ice",
+      "Fairy",
+      "Eiyuu   ~ koori no yousei noo hanashi ~"
+    ],
     "heardle_file": "英雄 ～氷の妖精のお話～_heardle.mp3",
     "preview_file": "英雄 ～氷の妖精のお話～_preview.mp3",
     "metadata": {
@@ -10640,6 +11640,12 @@
   "蓄積×フラストレーション": {
     "display_title": "蓄積×フラストレーション",
     "artist": "q/stol ft. rebecca",
+    "alias": [
+      "Accumulation",
+      "X",
+      "Frustration",
+      "Chikuseki x furasutoreeshon"
+    ],
     "heardle_file": "蓄積×フラストレーション_heardle.mp3",
     "preview_file": "蓄積×フラストレーション_preview.mp3",
     "metadata": {
@@ -10655,6 +11661,11 @@
   "藍煉の人形": {
     "display_title": "藍煉の人形",
     "artist": "-45",
+    "alias": [
+      "Airen's",
+      "Doll",
+      "Ai ren no ningyou"
+    ],
     "heardle_file": "藍煉の人形_heardle.mp3",
     "preview_file": "藍煉の人形_preview.mp3",
     "metadata": {
@@ -10670,6 +11681,11 @@
   "覚醒フィールド": {
     "display_title": "覚醒フィールド",
     "artist": "cosMo / nmk / 奈那樹",
+    "alias": [
+      "Awakening",
+      "Field",
+      "Kakusei fiirudo"
+    ],
     "heardle_file": "覚醒フィールド_heardle.mp3",
     "preview_file": "覚醒フィールド_preview.mp3",
     "metadata": {
@@ -10685,6 +11701,10 @@
   "迦具土": {
     "display_title": "迦具土",
     "artist": "narve",
+    "alias": [
+      "Kaguso",
+      "Kagutsuchi"
+    ],
     "heardle_file": "迦具土_heardle.mp3",
     "preview_file": "迦具土_preview.mp3",
     "metadata": {
@@ -10700,6 +11720,12 @@
   "退屈シンクアロング": {
     "display_title": "退屈シンクアロング",
     "artist": "Hate × tarolabo",
+    "alias": [
+      "Bored",
+      "Sink",
+      "Long",
+      "Taikutsu shinkuarongu"
+    ],
     "heardle_file": "退屈シンクアロング_heardle.mp3",
     "preview_file": "退屈シンクアロング_preview.mp3",
     "metadata": {
@@ -10715,6 +11741,10 @@
   "道しるべ": {
     "display_title": "道しるべ",
     "artist": "pastel white",
+    "alias": [
+      "Guide",
+      "Michi shirube"
+    ],
     "heardle_file": "道しるべ_heardle.mp3",
     "preview_file": "道しるべ_preview.mp3",
     "metadata": {
@@ -10730,6 +11760,16 @@
   "遠い春を告げるあの娘の足音": {
     "display_title": "遠い春を告げるあの娘の足音",
     "artist": "RYO-K",
+    "alias": [
+      "Sound",
+      "That",
+      "Girl's",
+      "Footsteps",
+      "Announce",
+      "Distant",
+      "Spring",
+      "Tooi haru wo tsuge ruano musume no ashioto"
+    ],
     "heardle_file": "遠い春を告げるあの娘の足音_heardle.mp3",
     "preview_file": "遠い春を告げるあの娘の足音_preview.mp3",
     "metadata": {
@@ -10745,6 +11785,11 @@
   "銀の風": {
     "display_title": "銀の風",
     "artist": "wa. remixed celas",
+    "alias": [
+      "Silver",
+      "Wind",
+      "Gin no kaze"
+    ],
     "heardle_file": "銀の風_heardle.mp3",
     "preview_file": "銀の風_preview.mp3",
     "metadata": {
@@ -10761,6 +11806,12 @@
   "雪月夜鐘": {
     "display_title": "雪月夜鐘",
     "artist": "guna",
+    "alias": [
+      "Snowy",
+      "Night",
+      "Bell",
+      "Yuki tsukiyo kane"
+    ],
     "heardle_file": "雪月夜鐘_heardle.mp3",
     "preview_file": "雪月夜鐘_preview.mp3",
     "metadata": {
@@ -10776,6 +11827,12 @@
   "雪解け色フラワーズ": {
     "display_title": "雪解け色フラワーズ",
     "artist": "daisan / zue-row",
+    "alias": [
+      "Snow",
+      "Thawed",
+      "Flowers",
+      "Yukidoke iro furawaazu"
+    ],
     "heardle_file": "雪解け色フラワーズ_heardle.mp3",
     "preview_file": "雪解け色フラワーズ_preview.mp3",
     "metadata": {
@@ -10791,6 +11848,12 @@
   "風仁雷仁": {
     "display_title": "風仁雷仁",
     "artist": "カラフル・サウンズ・ポート",
+    "alias": [
+      "Wind",
+      "And",
+      "Raijin",
+      "Kaze hitoshi kaminari hitoshi"
+    ],
     "heardle_file": "風仁雷仁_heardle.mp3",
     "preview_file": "風仁雷仁_preview.mp3",
     "metadata": {
@@ -10806,6 +11869,11 @@
   "飛燕草": {
     "display_title": "飛燕草",
     "artist": "2TORI",
+    "alias": [
+      "Hien",
+      "Grass",
+      "Hien kusa"
+    ],
     "heardle_file": "飛燕草_heardle.mp3",
     "preview_file": "飛燕草_preview.mp3",
     "metadata": {
@@ -10821,6 +11889,13 @@
   "黒猫円舞曲": {
     "display_title": "黒猫円舞曲",
     "artist": "tarolabo",
+    "alias": [
+      "Black",
+      "Cat",
+      "Round",
+      "Dance",
+      "Kuroneko enbukyoku"
+    ],
     "heardle_file": "黒猫円舞曲_heardle.mp3",
     "preview_file": "黒猫円舞曲_preview.mp3",
     "metadata": {
@@ -11372,6 +12447,14 @@
   "Romancing Sa・Ga3 ラストバトル RockArrange": {
     "display_title": "Romancing Sa・Ga3 ラストバトル RockArrange",
     "artist": "BMS:金ラメタキシード/MIDI:YNG-MK＆ヴァイス君",
+    "alias": [
+      "Romancing",
+      "Sa・ga3",
+      "Last",
+      "Battle",
+      "Rockarrange",
+      "Romancing sa ・ ga3  rasutobatoru  rockarrange"
+    ],
     "heardle_file": "Romancing Sa・Ga3 ラストバトル RockArrange_heardle.mp3",
     "preview_file": "Romancing Sa・Ga3 ラストバトル RockArrange_preview.mp3",
     "metadata": {
@@ -11449,6 +12532,13 @@
   "おジャ魔女でBANBAN!(Pop-mix)": {
     "display_title": "おジャ魔女でBANBAN!(Pop-mix)",
     "artist": "猫蟹丸",
+    "alias": [
+      "Banban",
+      "Ojamajo!",
+      "(pop",
+      "Mix)",
+      "O ja majo de banban ! (pop-mix )"
+    ],
     "heardle_file": "おジャ魔女でBANBAN!(Pop-mix)_heardle.mp3",
     "preview_file": "おジャ魔女でBANBAN!(Pop-mix)_preview.mp3",
     "metadata": {
@@ -11465,6 +12555,14 @@
   "にゃ (My Little Sweet Kitty)": {
     "display_title": "にゃ (My Little Sweet Kitty)",
     "artist": "Yu^ta",
+    "alias": [
+      "Nya",
+      "(my",
+      "Little",
+      "Sweet",
+      "Kitty)",
+      "Nya  (my little sweet kitty )"
+    ],
     "heardle_file": "にゃ (My Little Sweet Kitty)_heardle.mp3",
     "preview_file": "にゃ (My Little Sweet Kitty)_preview.mp3",
     "metadata": {
@@ -11480,6 +12578,10 @@
   "りりりくろ!!": {
     "display_title": "りりりくろ!!",
     "artist": "まもののむれ",
+    "alias": [
+      "Ririkuro!!",
+      "Riririkuro ! !"
+    ],
     "heardle_file": "りりりくろ!!_heardle.mp3",
     "preview_file": "りりりくろ!!_preview.mp3",
     "metadata": {
@@ -11495,6 +12597,10 @@
   "アズール": {
     "display_title": "アズール",
     "artist": "メスクラ (エヴァたん＆メコたん)",
+    "alias": [
+      "Azur",
+      "Azuuru"
+    ],
     "heardle_file": "アズール_heardle.mp3",
     "preview_file": "アズール_preview.mp3",
     "metadata": {
@@ -11514,6 +12620,11 @@
   "オトゲラヴ!": {
     "display_title": "オトゲラヴ!",
     "artist": "ねこみりん feat.小宮真央×みゆ×えみゅう。",
+    "alias": [
+      "Otoge",
+      "Love!",
+      "Otogeravu !"
+    ],
     "heardle_file": "オトゲラヴ!_heardle.mp3",
     "preview_file": "オトゲラヴ!_preview.mp3",
     "metadata": {
@@ -11529,6 +12640,12 @@
   "スプラッシュコード-06": {
     "display_title": "スプラッシュコード-06",
     "artist": "ねこひめたん",
+    "alias": [
+      "Splash",
+      "Code",
+      "06",
+      "Supurasshukoodo -06"
+    ],
     "heardle_file": "スプラッシュコード-06_heardle.mp3",
     "preview_file": "スプラッシュコード-06_preview.mp3",
     "metadata": {
@@ -11545,6 +12662,12 @@
   "パネルでポン／フレアのテーマ": {
     "display_title": "パネルでポン／フレアのテーマ",
     "artist": "tarolabo",
+    "alias": [
+      "Pon/flare",
+      "Theme",
+      "Panel",
+      "Paneru de pon / furea no teema"
+    ],
     "heardle_file": "パネルでポン／フレアのテーマ_heardle.mp3",
     "preview_file": "パネルでポン／フレアのテーマ_preview.mp3",
     "metadata": {
@@ -11560,6 +12683,21 @@
   "ピアノ協奏曲第１番蠍火（なんでも吸い込むピンク色のための）": {
     "display_title": "ピアノ協奏曲第１番蠍火（なんでも吸い込むピンク色のための）",
     "artist": "fether / 85",
+    "alias": [
+      "Piano",
+      "Concerto",
+      "No.",
+      "1",
+      "Scorpio",
+      "Fire",
+      "(for",
+      "Pink",
+      "Colour",
+      "That",
+      "Sucks",
+      "Anything)",
+      "Piano kyousoukyoku daiichi ban sasori hi ( nandemo suikomu pinku iro notameno )"
+    ],
     "heardle_file": "ピアノ協奏曲第１番蠍火（なんでも吸い込むピンク色のための）_heardle.mp3",
     "preview_file": "ピアノ協奏曲第１番蠍火（なんでも吸い込むピンク色のための）_preview.mp3",
     "metadata": {
@@ -11575,6 +12713,11 @@
   "ベストフレンド": {
     "display_title": "ベストフレンド",
     "artist": "渋谷凛",
+    "alias": [
+      "Best",
+      "Friends",
+      "Besutofurendo"
+    ],
     "heardle_file": "ベストフレンド_heardle.mp3",
     "preview_file": "ベストフレンド_preview.mp3",
     "metadata": {
@@ -11590,6 +12733,11 @@
   "乙女ノススメ!": {
     "display_title": "乙女ノススメ!",
     "artist": "悠然",
+    "alias": [
+      "Maiden's",
+      "Recommendation!",
+      "Otome nosusume !"
+    ],
     "heardle_file": "乙女ノススメ!_heardle.mp3",
     "preview_file": "乙女ノススメ!_preview.mp3",
     "metadata": {
@@ -11606,6 +12754,15 @@
   "少女の檻 ＂Last Night, Last Dancing.＂": {
     "display_title": "少女の檻 ＂Last Night, Last Dancing.＂",
     "artist": "beatMARIO",
+    "alias": [
+      "Girl's",
+      "Cage",
+      "\"last",
+      "Night",
+      "Last",
+      "Dancing.\"",
+      "Shoujo no ran   \" last night ,  last dancing . \""
+    ],
     "heardle_file": "少女の檻 ＂Last Night, Last Dancing.＂_heardle.mp3",
     "preview_file": "少女の檻 ＂Last Night, Last Dancing.＂_preview.mp3",
     "metadata": {
@@ -11622,6 +12779,15 @@
   "幽雅に咲かせ、,墨染の桜": {
     "display_title": "幽雅に咲かせ、,墨染の桜",
     "artist": "zun",
+    "alias": [
+      "Blooms",
+      "Elegantly",
+      "Ink",
+      "Dyed",
+      "Cherry",
+      "Blossoms",
+      "Yuuga ni saka se , , sumizome no sakura"
+    ],
     "heardle_file": "幽雅に咲かせ、,墨染の桜_heardle.mp3",
     "preview_file": "幽雅に咲かせ、,墨染の桜_preview.mp3",
     "metadata": {
@@ -11640,6 +12806,12 @@
   "日溜りの街－あ！－": {
     "display_title": "日溜りの街－あ！－",
     "artist": "猫蟹丸",
+    "alias": [
+      "City",
+      "Full",
+      "Sunshine!",
+      "Nichi tamari no machi - a ! -"
+    ],
     "heardle_file": "日溜りの街－あ！－_heardle.mp3",
     "preview_file": "日溜りの街－あ！－_preview.mp3",
     "metadata": {

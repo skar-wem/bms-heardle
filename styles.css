@@ -1039,11 +1039,16 @@ body {
     padding: 6px;
     margin: 2px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .song-list-item:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 243, 255, 0.1);
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.1);
+}
+
+.song-list-item:active {
+    transform: translateX(5px) scale(0.98);
 }
 
 .song-list-title {

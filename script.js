@@ -1,5 +1,6 @@
 let gameData = null;
 let currentSong = null;
+let previewPlayer = null;
 let attempts = 0;
 let songList = [];
 const maxAttempts = 6;
@@ -547,21 +548,24 @@ function showSongList() {
     const modal = document.getElementById('songListModal');
     const container = modal.querySelector('.song-list-container');
     
+    // Create a new audio element for previews if it doesn't exist
+    if (!previewPlayer) {
+        previewPlayer = new Audio();
+    }
+    
     // Sort songs alphabetically by title
     const sortedSongs = Object.values(gameData).sort((a, b) => 
         a.display_title.localeCompare(b.display_title)
     );
     
-    // Create the song list HTML
     container.innerHTML = sortedSongs.map(song => {
-        // Get insane levels and format them
         const levels = song.metadata?.insane_levels || [];
         const levelsHtml = levels.length > 0 
             ? `<span class="song-list-levels">${levels.join(', ')}</span>`
             : '';
             
         return `
-            <div class="song-list-item">
+            <div class="song-list-item" data-preview="${song.preview_file}">
                 <div class="song-list-details">
                     <span class="song-list-title">${song.display_title}</span>
                     ${levelsHtml}
@@ -569,12 +573,44 @@ function showSongList() {
             </div>
         `;
     }).join('');
+
+    // Add click event listeners to all song items
+    container.querySelectorAll('.song-list-item').forEach(item => {
+        item.addEventListener('click', () => {
+            // Stop any currently playing preview
+            if (!previewPlayer.paused) {
+                previewPlayer.pause();
+                previewPlayer.currentTime = 0;
+                
+                // If clicking the same song that's playing, just stop it
+                if (previewPlayer.dataset.currentSong === item.dataset.preview) {
+                    previewPlayer.dataset.currentSong = '';
+                    return;
+                }
+            }
+
+            // Play new preview
+            const encodedFilename = encodeURIComponent(item.dataset.preview)
+                .replace(/%23/g, '%2523');
+            
+            previewPlayer.src = `game_audio/${encodedFilename}`;
+            previewPlayer.dataset.currentSong = item.dataset.preview;
+            previewPlayer.play();
+        });
+    });
     
     modal.style.display = 'block';
 }
 
 function closeSongList() {
     document.getElementById('songListModal').style.display = 'none';
+    
+    // Stop preview playback
+    if (previewPlayer && !previewPlayer.paused) {
+        previewPlayer.pause();
+        previewPlayer.currentTime = 0;
+        previewPlayer.dataset.currentSong = '';
+    }
 }
 
 // Add this to your DOMContentLoaded event listener
@@ -1158,9 +1194,44 @@ async function shareResult() {
 
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize volume control
+    const volumeIcon = document.querySelector('.volume-control i');
+    const volumeSlider = document.querySelector('.volume-slider');
+    const previewPlayer = document.querySelector('#previewPlayer');
+    
+    function updateVolume(value) {
+        if (previewPlayer) previewPlayer.volume = value / 100;
+        
+        if (value === 0) {
+            volumeIcon.className = 'fas fa-volume-mute';
+        } else if (value < 50) {
+            volumeIcon.className = 'fas fa-volume-down';
+        } else {
+            volumeIcon.className = 'fas fa-volume-up';
+        }
+    }
+
+    if (volumeSlider) {
+        volumeSlider.addEventListener('input', (e) => {
+            updateVolume(e.target.value);
+        });
+
+        let previousVolume = 100;
+        volumeIcon.addEventListener('click', () => {
+            if (volumeSlider.value > 0) {
+                previousVolume = volumeSlider.value;
+                volumeSlider.value = 0;
+            } else {
+                volumeSlider.value = previousVolume;
+            }
+            updateVolume(volumeSlider.value);
+        });
+
+        updateVolume(volumeSlider.value);
+    }
+
     // Play button listener with audio context initialization
     document.getElementById('playButton').addEventListener('click', async () => {
-        // Initialize audio context on first play
         if (!audioContext) {
             try {
                 await initAudioVisualizer();
@@ -1228,17 +1299,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
         const guessInput = document.getElementById('guess-input');
         
-        // When input is focused (keyboard appears)
         guessInput.addEventListener('focus', () => {
             document.body.classList.add('keyboard-open');
         });
 
-        // When input loses focus (keyboard disappears)
         guessInput.addEventListener('blur', () => {
             document.body.classList.remove('keyboard-open');
         });
 
-        // Remove the scroll adjustments
         window.visualViewport.addEventListener('resize', () => {
             // Don't adjust positioning when keyboard appears
         });
@@ -1249,7 +1317,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalButton = document.querySelector('.modal-button');
     modalButton.addEventListener('click', startNewGame);
     
-    // Prevent modal close on click outside
     modal.addEventListener('click', function(e) {
         if (e.target === modal && !isGameOver) {
             modal.style.display = 'none';
@@ -1289,7 +1356,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     player.addEventListener('timeupdate', () => {
-        if (isPlaying) {  // Remove the !isGameOver check
+        if (isPlaying) {
             console.log('Current time:', player.currentTime);
             updateProgressBar(player.currentTime, player.duration);
         }
@@ -1304,29 +1371,16 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Audio error details:', player.error);
     });
 
-    // Add mouse tracking to submit and skip buttons
-    document.querySelector('#submit-button').addEventListener('mousemove', (e) => {
-        const rect = e.target.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        e.target.style.setProperty('--mouse-x', `${x}%`);
-        e.target.style.setProperty('--mouse-y', `${y}%`);
-    });
-
-    document.querySelector('#skip-button').addEventListener('mousemove', (e) => {
-        const rect = e.target.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        e.target.style.setProperty('--mouse-x', `${x}%`);
-        e.target.style.setProperty('--mouse-y', `${y}%`);
-    });
-
-    document.querySelector('.play-button').addEventListener('mousemove', (e) => {
-        const rect = e.target.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        e.target.style.setProperty('--mouse-x', `${x}%`);
-        e.target.style.setProperty('--mouse-y', `${y}%`);
+    // Add mouse tracking to buttons
+    const buttons = ['#submit-button', '#skip-button', '.play-button'];
+    buttons.forEach(buttonSelector => {
+        document.querySelector(buttonSelector).addEventListener('mousemove', (e) => {
+            const rect = e.target.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            e.target.style.setProperty('--mouse-x', `${x}%`);
+            e.target.style.setProperty('--mouse-y', `${y}%`);
+        });
     });
 
     // Initialize submit button state
