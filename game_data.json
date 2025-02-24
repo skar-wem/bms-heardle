@@ -11929,8 +11929,8 @@
   ".357 Magnum": {
     "display_title": ".357 Magnum",
     "artist": "xi",
-    "heardle_file": ".357 Magnum_heardle.mp3",
-    "preview_file": ".357 Magnum_preview.mp3",
+    "heardle_file": "357 Magnum_heardle.mp3",
+    "preview_file": "357 Magnum_preview.mp3",
     "metadata": {
       "genre": "JAZZ FUSION",
       "bpm": "357",
