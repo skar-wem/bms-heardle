@@ -9369,6 +9369,7 @@
   "図書室のエルザ": {
     "display_title": "図書室のエルザ",
     "artist": "橘花音 かなえゆめ composed by nmk",
+    "alias": ["Elsa", "Library"],
     "heardle_file": "図書室のエルザ_heardle.mp3",
     "preview_file": "図書室のエルザ_preview.mp3",
     "metadata": {

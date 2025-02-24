@@ -302,28 +302,32 @@ body {
 
 .progress-segment.played {
     animation: segmentPlayed 0.3s ease-out forwards;
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); /* Red glow */
+    box-shadow: 0 0 4px rgba(255, 0, 0, 0.5); /* Red glow */
 }
 
 .progress-segment.current {
-    background-color: rgba(255, 255, 255, 0.6); /* Brighter white */
-    animation: glowPulse 1s ease-in-out infinite; /* Reduced from 2s to 1s */
+    background-color: rgba(255, 255, 255, 0.1); /* Same as non-played segments */
+    animation: glowPulse 1s ease-in-out infinite;
     box-shadow: 0 0 5px rgba(255, 255, 255, 0.6),
                 0 0 8px rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.6); /* Add stroke */
 }
 
 @keyframes glowPulse {
     0% {
-        box-shadow: 0 0 2px rgba(200, 200, 200, 0.6),
+        box-shadow: 0 0 2px rgba(255, 255, 255, 0.6),
                     0 0 5px rgba(255, 255, 255, 0.3);
+        border-color: rgba(255, 255, 255, 0.4);
     }
     50% {
-        box-shadow: 0 0 5px rgba(200, 200, 200, 0.8),
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.8),
                     0 0 8px rgba(255, 255, 255, 0.4);
+        border-color: rgba(255, 255, 255, 0.8);
     }
     100% {
-        box-shadow: 0 0 2px rgba(200, 200, 200, 0.6),
+        box-shadow: 0 0 2px rgba(255, 255, 255, 0.6),
                     0 0 5px rgba(255, 255, 255, 0.3);
+        border-color: rgba(255, 255, 255, 0.4);
     }
 }
 
@@ -742,7 +746,7 @@ body {
     font-size: 1.1em;
     margin: 4px 0;
     border: 1px solid rgba(100, 100, 100, 0.2); /* More transparent border */
-    border-radius: 20px;
+    border-radius: 15px;
     color: rgba(255, 255, 255, 0.9); /* Keep text visible */
     text-align: center;
     background: 
@@ -1155,6 +1159,32 @@ body {
     padding: 4px;
 }
 
+.suggestion-box::-webkit-scrollbar {
+    width: 10px;
+}
+
+.suggestion-box::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.suggestion-box::-webkit-scrollbar-thumb {
+    background: var(--neon-blue);
+    border-radius: 5px;
+    box-shadow: 0 0 5px var(--neon-blue);
+}
+
+.suggestion-box::-webkit-scrollbar-thumb:hover {
+    background: var(--neon-pink);
+    box-shadow: 0 0 10px var(--neon-pink);
+}
+
+/* Firefox scrollbar */
+.suggestion-box {
+    scrollbar-width: thin;
+    scrollbar-color: var(--neon-blue) rgba(0, 0, 0, 0.2);
+}
+
 @media (max-width: 768px) {
     body {
         padding-bottom: 0;
@@ -1192,11 +1222,11 @@ body {
         bottom: calc(100% + 5px); /* Position above input with 5px gap */
         top: auto; /* Remove top positioning */
         max-height: 27vh; /* Reduced from 40vh to prevent overflow */
-        width: 100%;
+        width: 98%;
         left: 0;
         right: 0;
         background: #0a0a0f; /* Ensure background is solid */
-        border: 1px solid rgba(255, 0, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     }
 

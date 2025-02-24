@@ -31,23 +31,30 @@ window.addEventListener('resize', resizeCanvas);
 class Particle {
     constructor() {
         this.reset();
-        // Create a subtle random color variation
-        const baseHue = 185; // Cyan base
-        this.hue = baseHue + (Math.random() * 20 - 10); // Vary by ±10
+        // Initialize with a random hue
+        this.hue = Math.random() * 10;
+        this.hueChange = (Math.random() * 2 - 1) * 0.2; // Subtle color change speed
     }
 
     reset() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 3 + 0.5;
+        this.size = Math.random() * 1 + 0.5; // Keeping your original size
         this.speedX = Math.random() * 0.30 - 0.15;
         this.speedY = Math.random() * 0.30 - 0.15;
-        this.opacity = Math.random() * 0.8 + 0.4;
+        this.opacity = Math.random() * 1 + 0.8; // Keeping your original opacity
+        this.saturation = Math.random() * 30 + 50; // 50-80% saturation
+        this.lightness = Math.random() * 20 + 60; // 60-80% lightness
     }
 
     update() {
         this.x += this.speedX;
         this.y += this.speedY;
+
+        // Update the hue for color changing effect
+        this.hue += this.hueChange;
+        if (this.hue > 360) this.hue = 0;
+        if (this.hue < 0) this.hue = 360;
 
         if (this.x < 0) this.x = canvas.width;
         if (this.x > canvas.width) this.x = 0;
@@ -58,20 +65,20 @@ class Particle {
     draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${this.hue}, 20%, 70%, ${this.opacity})`;
+        ctx.fillStyle = `hsla(${this.hue}, ${this.saturation}%, ${this.lightness}%, ${this.opacity})`;
         ctx.fill();
     }
 }
 
 const particles = [];
-const particleCount = 200;
+const particleCount = 300; // Keeping your particle count
 
 for (let i = 0; i < particleCount; i++) {
     particles.push(new Particle());
 }
 
 function animate() {
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.3)'; // Keeping your background fade
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     particles.forEach(particle => {
@@ -217,7 +224,10 @@ async function loadGameData() {
         songList = Object.values(gameData).map(song => ({
             title: song.display_title,
             artist: cleanupText(song.artist),
-            aliases: processTitle(song.display_title)
+            aliases: [
+                ...processTitle(song.display_title),
+                ...(song.alias || []).flatMap(alias => processTitle(alias))
+            ]
         }));
         
         document.getElementById('song-count').textContent = Object.keys(gameData).length;
@@ -273,17 +283,48 @@ function setupAutocomplete() {
 
     input.addEventListener('input', function() {
         const query = this.value.toLowerCase();
-        if (query.length < 2) {
+        
+        // No suggestions for empty input
+        if (!query) {
             toggleMobileSuggestions(false);
             return;
         }
-
-        const suggestions = songList.filter(song => 
-            song.title.toLowerCase().includes(query) || 
-            song.artist.toLowerCase().includes(query) ||
-            song.aliases.some(alias => alias.includes(query))
-        ).slice(0, 20);
-
+    
+        let suggestions;
+        
+        // Special handling for single character input
+        if (query.length === 1) {
+            // Check for exact single-character matches first
+            const exactMatches = songList.filter(song => 
+                song.title.toLowerCase() === query ||   // For Latin characters like "Q"
+                song.title === this.value              // For exact kanji matches like "天"
+            );
+            
+            if (exactMatches.length > 0) {
+                suggestions = exactMatches;
+            } else if (query.length < 2) {
+                toggleMobileSuggestions(false);
+                return;
+            } else {
+                // Regular filtering for non-exact matches
+                suggestions = songList.filter(song => 
+                    song.title.toLowerCase().includes(query) || 
+                    song.artist.toLowerCase().includes(query) ||
+                    song.aliases.some(alias => alias.includes(query))
+                );
+            }
+        } else {
+            // Regular behavior for 2+ characters
+            suggestions = songList.filter(song => 
+                song.title.toLowerCase().includes(query) || 
+                song.artist.toLowerCase().includes(query) ||
+                song.aliases.some(alias => alias.includes(query))
+            );
+        }
+    
+        // Limit suggestions and update display
+        suggestions = suggestions.slice(0, 20);
+    
         if (suggestions.length > 0) {
             suggestionBox.innerHTML = suggestions.map(song => 
                 `<div class="suggestion-item" data-title="${song.title}">
