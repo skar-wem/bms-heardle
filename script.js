@@ -179,17 +179,50 @@ function drawWave() {
 
 function processTitle(title) {
     let aliases = [title.toLowerCase()];
+    
+    // Special handling for specific titles
+    if (title === "-+") {
+        aliases.push("minus plus", "minusplus", "-plus", "minus+");
+    }
+    if (title.startsWith("#")) {
+        // Handle titles starting with #
+        const numberPart = title.substring(1);
+        aliases.push(numberPart);
+        aliases.push("number " + numberPart);
+        aliases.push("no " + numberPart);
+        aliases.push("no" + numberPart);
+    }
+    if (title.includes("Act #")) {
+        // Handle "Act #" format
+        const numberPart = title.split("#")[1];
+        aliases.push("act" + numberPart);
+        aliases.push("act " + numberPart);
+    }
+
     // Remove spaces
     aliases.push(title.toLowerCase().replace(/\s+/g, ''));
+    
     // Remove special characters
     aliases.push(title.toLowerCase().replace(/[^a-z0-9]/g, ''));
+    
     // Handle spaced letters (e.g., "g e n g a o z o" -> "gengaozo")
     if (title.includes(' ')) {
         let spacedVersion = title.toLowerCase().replace(/\s+/g, '');
         aliases.push(spacedVersion);
     }
+    
+    // Remove duplicates
     return [...new Set(aliases)];
 }
+
+// When handling file paths, modify the encoding:
+function encodeFilename(filename) {
+    return encodeURIComponent(filename)
+        .replace(/%23/g, '%2523') // Handle # character
+        .replace(/\+/g, '%2B')    // Handle + character
+        .replace(/\-/g, '%2D');   // Handle - character
+}
+
 
 function cleanupText(text) {
     try {
@@ -247,11 +280,8 @@ function startGame() {
     currentSong.cleanArtist = cleanupText(currentSong.artist);
     
     const player = document.getElementById('audio-player');
-    // Encode the filename to handle special characters
-    const encodedFilename = encodeURIComponent(currentSong.heardle_file)
-        .replace(/%23/g, '%2523'); // Specifically handle # character
-
-    player.src = `game_audio/${encodedFilename}`;
+    // Use the new encodeFilename function
+    player.src = `game_audio/${encodeFilename(currentSong.heardle_file)}`;
     
     // Reset all segments
     const segments = document.querySelectorAll('.progress-segment');
@@ -263,6 +293,13 @@ function startGame() {
     updateGuessHistory();
     updateProgressBar();
     updateSkipButtonText(); 
+}
+
+function encodeFilename(filename) {
+    return encodeURIComponent(filename)
+        .replace(/%23/g, '%2523') // Handle # character
+        .replace(/\+/g, '%2B')    // Handle + character
+        .replace(/\-/g, '%2D');   // Handle - character
 }
 
 function setupAutocomplete() {
@@ -999,12 +1036,9 @@ function revealFullSong() {
     const playButton = document.querySelector('.play-button');
     
     console.log('Starting reveal with file:', currentSong.preview_file);
-    console.log('Audio duration:', player.duration); // Add this
+    console.log('Audio duration:', player.duration);
     
-    const encodedFilename = encodeURIComponent(currentSong.preview_file)
-        .replace(/%23/g, '%2523');
-
-    player.src = `game_audio/${encodedFilename}`;
+    player.src = `game_audio/${encodeFilename(currentSong.preview_file)}`;
     
     player.currentTime = 0;
     

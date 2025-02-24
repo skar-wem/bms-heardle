@@ -2,8 +2,8 @@
   "F": {
     "display_title": "F",
     "artist": "bubbles",
-    "heardle_file": "F_heardle.ogg",
-    "preview_file": "F_preview.ogg",
+    "heardle_file": "F_heardle.mp3",
+    "preview_file": "F_preview.mp3",
     "metadata": {
       "genre": "RAVE",
       "bpm": "153",
@@ -128,12 +128,15 @@
       ]
     }
   },
-  "斬": {
-    "display_title": "斬",
+  "斬 -名刀斗璃流": {
+    "display_title": "斬 -名刀斗璃流",
     "artist": "腋亦",
     "alias": [
       "Slash",
-      "Zan"
+      "Famous",
+      "Sword",
+      "Zan",
+      "Meito Tori ryu"
     ],
     "heardle_file": "斬_heardle.mp3",
     "preview_file": "斬_preview.mp3",
@@ -169,8 +172,8 @@
   "#74": {
     "display_title": "#74",
     "artist": "naotyu-",
-    "heardle_file": "#74_heardle.mp3",
-    "preview_file": "#74_preview.mp3",
+    "heardle_file": "74_heardle.mp3",
+    "preview_file": "74_preview.mp3",
     "metadata": {
       "genre": "2step",
       "bpm": "268",
@@ -388,8 +391,8 @@
   "Act #000000": {
     "display_title": "Act #000000",
     "artist": "Saz",
-    "heardle_file": "Act #000000_heardle.mp3",
-    "preview_file": "Act #000000_preview.mp3",
+    "heardle_file": "Act 000000_heardle.mp3",
+    "preview_file": "Act 000000_preview.mp3",
     "metadata": {
       "genre": "trance/hardstyle",
       "bpm": "150",
@@ -3304,7 +3307,7 @@
       "original_file": "_14ka.bme",
       "mod_time": "2009-05-06 17:21:54",
       "insane_levels": [
-        "★16"
+        "★10"
       ]
     }
   },
@@ -4688,8 +4691,8 @@
       ]
     }
   },
-  "Liberte": {
-    "display_title": "Liberte",
+  "Liberte-SuperSaw Epic mix-": {
+    "display_title": "Liberte-SuperSaw Epic mix-",
     "artist": "源屋",
     "heardle_file": "Liberte_heardle.mp3",
     "preview_file": "Liberte_preview.mp3",
@@ -5221,8 +5224,8 @@
       ]
     }
   },
-  "Midnight Driving": {
-    "display_title": "Midnight Driving",
+  "Midnight Driving -air mix-": {
+    "display_title": "Midnight Driving -air mix-",
     "artist": "yassu / 小宮真央 (obj:MiiA)",
     "heardle_file": "Midnight Driving_heardle.mp3",
     "preview_file": "Midnight Driving_preview.mp3",
@@ -6377,8 +6380,8 @@
       ]
     }
   },
-  "REspEcT": {
-    "display_title": "REspEcT",
+  "REspEcT-B.A.U MIX": {
+    "display_title": "REspEcT-B.A.U MIX",
     "artist": "はむ＆kyuu",
     "heardle_file": "REspEcT_heardle.mp3",
     "preview_file": "REspEcT_preview.mp3",
@@ -6591,8 +6594,8 @@
       ]
     }
   },
-  "Satori ～3rd EyEs (bms edit)": {
-    "display_title": "Satori ～3rd EyEs (bms edit)",
+  "Satori ～3rd EyEs": {
+    "display_title": "Satori ～3rd EyEs",
     "artist": "BMS:くっちー / BGA:あっきー",
     "heardle_file": "Satori ～3rd EyEs (bms edit)_heardle.mp3",
     "preview_file": "Satori ～3rd EyEs (bms edit)_preview.mp3",
@@ -7477,7 +7480,7 @@
       ]
     }
   },
-  "The SunLight[-45]": {
+  "The SunLight": {
     "display_title": "The SunLight[-45]",
     "artist": "Unknown Artist",
     "heardle_file": "The SunLight[-45]_heardle.mp3",
@@ -8777,8 +8780,8 @@
       "#2~",
       "Esutoporisu denki ii  ~ batoru #2 ~"
     ],
-    "heardle_file": "エストポリス伝記II ～バトル#2～_heardle.mp3",
-    "preview_file": "エストポリス伝記II ～バトル#2～_preview.mp3",
+    "heardle_file": "エストポリス伝記_heardle.mp3",
+    "preview_file": "エストポリス伝記_preview.mp3",
     "metadata": {
       "genre": "game music",
       "bpm": "175",
@@ -10386,8 +10389,8 @@
       ]
     }
   },
-  "彼女の言い分": {
-    "display_title": "彼女の言い分",
+  "彼女の言い分 -ﾋﾟｺﾋﾟｺedit-": {
+    "display_title": "彼女の言い分 -ﾋﾟｺﾋﾟｺedit-",
     "artist": "ねこみみ魔法使い",
     "alias": [
       "Her",
@@ -12285,8 +12288,7 @@
       "original_file": "月光３.bme",
       "mod_time": "2001-09-21 12:58:32",
       "insane_levels": [
-        "★12",
-        "★23"
+        "★6"
       ]
     }
   },
@@ -12363,7 +12365,8 @@
       "original_file": "07-rr10.bms",
       "mod_time": "2004-08-10 19:10:44",
       "insane_levels": [
-        "★5"
+        "★5",
+        "★8"
       ]
     }
   },
