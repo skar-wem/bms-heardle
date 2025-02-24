@@ -674,17 +674,26 @@ function showSongList() {
     }
 
     function filterSongs() {
-        const searchTerm = searchInput.value.toLowerCase();
+        const searchTerm = searchInput.value;
         const difficultyLevel = difficultyFilter.value;
     
-        return Object.values(gameData).filter(song => {
-            const matchesSearch = 
-                song.display_title.toLowerCase().includes(searchTerm) ||
-                (song.artist && song.artist.toLowerCase().includes(searchTerm)) ||
-                (song.alias && song.alias.some(alias => 
-                    alias.toLowerCase().includes(searchTerm)
-                ));
+        // Only process search term if it exists
+        const searchAliases = searchTerm ? processTitle(searchTerm) : [''];
     
+        return Object.values(gameData).filter(song => {
+            // Get all possible matches for the song title and aliases
+            const titleAliases = processTitle(song.display_title);
+            const songAliases = song.alias ? song.alias.flatMap(alias => processTitle(alias)) : [];
+            const artistAliases = song.artist ? processTitle(song.artist) : [];
+            
+            // Check if any search term matches any of the song's variations
+            const matchesSearch = searchAliases.some(searchAlias =>
+                titleAliases.some(titleAlias => titleAlias.includes(searchAlias)) ||
+                songAliases.some(songAlias => songAlias.includes(searchAlias)) ||
+                artistAliases.some(artistAlias => artistAlias.includes(searchAlias))
+            );
+    
+            // Apply difficulty filter if selected
             if (!difficultyLevel || !song.metadata?.insane_levels) {
                 return matchesSearch;
             }
