@@ -1052,12 +1052,27 @@ function submitGuess() {
     if (isGameOver || isSubmitting) return;
     
     isSubmitting = true;
-    
+    const submitButton = document.getElementById('submit-button');
     const guessInput = document.getElementById('guess-input');
     const guess = guessInput.value.trim();
     
+    // Handle button animation state
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (isMobile) {
+        submitButton.classList.add('clicked');
+    }
+    
     if (!guess) {
         isSubmitting = false;
+        if (isMobile) {
+            setTimeout(() => {
+                submitButton.classList.remove('clicked');
+                submitButton.classList.add('reset');
+                setTimeout(() => {
+                    submitButton.classList.remove('reset');
+                }, 200);
+            }, 100);
+        }
         return;
     }
     
@@ -1086,6 +1101,16 @@ function submitGuess() {
         guessInput.value = '';
         updateSubmitButtonState();
         isSubmitting = false;
+        
+        if (isMobile) {
+            setTimeout(() => {
+                submitButton.classList.remove('clicked');
+                submitButton.classList.add('reset');
+                setTimeout(() => {
+                    submitButton.classList.remove('reset');
+                }, 200);
+            }, 100);
+        }
         return;
     }
     
@@ -1151,11 +1176,24 @@ function submitGuess() {
     guessInput.value = '';
     updateSubmitButtonState();
     
+    // Reset button state and submission flag
     setTimeout(() => {
         isSubmitting = false;
+        if (isMobile) {
+            submitButton.classList.remove('clicked');
+            submitButton.classList.add('reset');
+            setTimeout(() => {
+                submitButton.classList.remove('reset');
+            }, 200);
+        }
         guessInput.value = '';
         updateSubmitButtonState();
     }, 100);
+
+    // Blur input on mobile to hide keyboard
+    if (isMobile) {
+        guessInput.blur();
+    }
 }
 
 function setupModalEnterKey() {
@@ -1179,6 +1217,31 @@ function setupModalEnterKey() {
 function skipGuess() {
     if (isGameOver) return;
     
+    const skipButton = document.getElementById('skip-button');
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    
+    // Handle button animation state
+    if (isMobile) {
+        skipButton.classList.add('clicked');
+    }
+    
+    // Prevent double skips
+    if (skipButton.disabled) {
+        if (isMobile) {
+            setTimeout(() => {
+                skipButton.classList.remove('clicked');
+                skipButton.classList.add('reset');
+                setTimeout(() => {
+                    skipButton.classList.remove('reset');
+                }, 200);
+            }, 100);
+        }
+        return;
+    }
+    
+    // Temporarily disable the skip button
+    skipButton.disabled = true;
+    
     incorrectGuesses.push("▶▶");
     const segments = document.querySelectorAll('.progress-segment');
     segments[attempts].classList.add('played');
@@ -1196,6 +1259,25 @@ function skipGuess() {
         updateProgressBar();
         updateGuessHistory();
         updateSkipButtonText();
+    }
+
+    // Reset button state after animation
+    setTimeout(() => {
+        if (isMobile) {
+            skipButton.classList.remove('clicked');
+            skipButton.classList.add('reset');
+            setTimeout(() => {
+                skipButton.classList.remove('reset');
+            }, 200);
+        }
+        
+        // Re-enable the skip button
+        skipButton.disabled = false;
+    }, 100);
+
+    // Hide keyboard if it's open on mobile
+    if (isMobile) {
+        document.activeElement?.blur();
     }
 }
 
@@ -1400,6 +1482,22 @@ async function shareResult() {
     }
 }
 
+function handleButtonPress(button) {
+    button.classList.add('clicked');
+    
+    // Remove clicked state and add reset state after the press
+    setTimeout(() => {
+        button.classList.remove('clicked');
+        button.classList.add('reset');
+        
+        // Remove reset class after animation completes
+        setTimeout(() => {
+            button.classList.remove('reset');
+        }, 200);
+    }, 100);
+}
+
+
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize volume control
@@ -1453,25 +1551,77 @@ document.addEventListener('DOMContentLoaded', () => {
         playCurrentSegment();
     });
     
-    // Submit button listener
-    const submitButton = document.getElementById('submit-button');
-    submitButton.addEventListener('click', (e) => {
-        const guessInput = document.getElementById('guess-input');
-        if (!guessInput.value.trim()) {  // If input is empty
-            e.preventDefault();
-            submitButton.classList.add('nudge');
+    // Button press handler function
+    function handleButtonPress(button) {
+        button.classList.add('clicked');
+        
+        setTimeout(() => {
+            button.classList.remove('clicked');
+            button.classList.add('reset');
+            
             setTimeout(() => {
-                submitButton.classList.remove('nudge');
+                button.classList.remove('reset');
             }, 200);
-        } else {
-            submitGuess();
-        }
-    });
+        }, 100);
+    }
 
-    // Skip button listener
-    document.getElementById('skip-button').addEventListener('click', skipGuess);
+    // Submit button listeners
+    const submitButton = document.getElementById('submit-button');
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-    // Guess input listeners
+    if (isMobile) {
+        submitButton.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const guessInput = document.getElementById('guess-input');
+            if (!submitButton.disabled && guessInput.value.trim()) {
+                handleButtonPress(submitButton);
+                submitGuess();
+            }
+        });
+    } else {
+        submitButton.addEventListener('click', (e) => {
+            const guessInput = document.getElementById('guess-input');
+            if (!guessInput.value.trim()) {
+                e.preventDefault();
+                submitButton.classList.add('nudge');
+                setTimeout(() => {
+                    submitButton.classList.remove('nudge');
+                }, 200);
+            } else {
+                submitGuess();
+            }
+        });
+    }
+
+    // Skip button listeners
+    const skipButton = document.getElementById('skip-button');
+    
+    if (isMobile) {
+        skipButton.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            handleButtonPress(skipButton);
+            skipGuess();
+        });
+    } else {
+        skipButton.addEventListener('click', skipGuess);
+    }
+
+    // Prevent ghost clicks on mobile
+    if (isMobile) {
+        submitButton.addEventListener('click', (e) => {
+            if (e.pointerType === 'touch') {
+                e.preventDefault();
+            }
+        });
+
+        skipButton.addEventListener('click', (e) => {
+            if (e.pointerType === 'touch') {
+                e.preventDefault();
+            }
+        });
+    }
+
+    // Rest of your existing event listeners...
     const guessInput = document.getElementById('guess-input');
     guessInput.addEventListener('input', updateSubmitButtonState);
 
@@ -1486,14 +1636,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const suggestionBox = document.querySelector('.suggestion-box');
             const selectedSuggestion = suggestionBox.querySelector('.selected');
             
-            // If we're actively selecting a suggestion
             if (selectedSuggestion && suggestionBox.style.display !== 'none') {
                 this.value = selectedSuggestion.dataset.title;
                 suggestionBox.style.display = 'none';
                 return;
             }
             
-            // For any other Enter press, check if the current value is valid
             const isValidTitle = songList.some(song => 
                 song.title.toLowerCase() === guess.toLowerCase()
             );
