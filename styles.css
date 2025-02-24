@@ -49,7 +49,7 @@ body {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    animation: shine 3s linear infinite;
+    animation: shine 24s linear infinite;
     text-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
 }
 
@@ -306,11 +306,11 @@ body {
 }
 
 .progress-segment.current {
-    background-color: rgba(255, 255, 255, 0.1); /* Same as non-played segments */
+    background-color: rgba(255, 255, 255, 0.1);
     animation: glowPulse 1s ease-in-out infinite;
     box-shadow: 0 0 5px rgba(255, 255, 255, 0.6),
                 0 0 8px rgba(255, 255, 255, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.6); /* Add stroke */
+    outline: 2px solid rgba(255, 255, 255, 0.6);
 }
 
 @keyframes glowPulse {
