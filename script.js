@@ -1479,6 +1479,10 @@ function handleDifficultyGuess(guessedLevel) {
     const actualLevels = currentSong.metadata?.insane_levels || [];
     const isCorrect = actualLevels.includes(guessedLevel);
     
+    if (isDaily) {
+        localStorage.setItem('difficultyGuessResult_' + dailySeed, isCorrect.toString());
+    }
+
     // Play the appropriate sound
     playDifficultySound(isCorrect);
     
@@ -1537,27 +1541,16 @@ function showDailyResultModal() {
     const didPeek = localStorage.getItem('peekedAtSongList_' + dailySeed) === 'true';
     peekedAtSongList = didPeek;
 
+    // Get the difficulty guess result if it exists
+    const difficultyResult = localStorage.getItem('difficultyGuessResult_' + dailySeed);
+    if (difficultyResult) {
+        difficultyGuessed = true;
+        difficultyGuessResult = difficultyResult === 'true';
+    }
+
     // Store the attempt count globally for sharing
     attempts = attemptCount; // Set the global attempts variable directly
     gameWon = isWin; // Set the global gameWon variable
-    
-    // Calculate squares for sharing
-    const squares = Array(6).fill('⬜');
-    
-    if (isWin) {
-        // First, fill in the red squares for wrong guesses
-        for (let i = 0; i < attemptCount - 1; i++) {
-            squares[i] = '🟥';
-        }
-        
-        // Then add the green square for the winning guess
-        squares[attemptCount - 1] = '🟩';
-    } else {
-        // Fill all squares with red for a loss
-        for (let i = 0; i < 6; i++) {
-            squares[i] = '🟥';
-        }
-    }
     
     // Get the daily song information
     const dailySongKey = localStorage.getItem('dailySongKey');
@@ -1571,9 +1564,6 @@ function showDailyResultModal() {
     // Set up the current song for the modal to use
     currentSong = dailySong;
     currentSong.cleanArtist = cleanupText(currentSong.artist);
-    
-    // Set game state for the modal
-    gameWon = isWin;
     
     // Display the modal with the previous result
     const modal = document.getElementById('gameOverModal');
@@ -1599,6 +1589,10 @@ function showDailyResultModal() {
     const startDate = new Date('2025-03-06');
     const currentDate = new Date(dailySeed);
     const dayDiff = Math.floor((currentDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
+    
+    // Store the day number in the global dailySeed variable
+    // This ensures shareResult() will use the correct day number
+    dailySeed = currentDate.toISOString().slice(0, 10);
     
     const dailyHeader = `<div class="daily-header">Daily Challenge #${dayDiff}</div>`;
     
@@ -1677,18 +1671,17 @@ function showDailyResultModal() {
     playAgainButton.textContent = "Play Unlimited";
     playAgainButton.onclick = function() {
         isDaily = false;
-        completedDailyAttempts = 0; // Reset this value
         document.getElementById('dailyModeBtn').classList.remove('active');
         document.getElementById('unlimitedModeBtn').classList.add('active');
         startNewGame();
     };
     
+    // Set up the share button
+    shareButton.onclick = shareResult;
+    
     // Display the modal
     modal.style.display = 'block';
     isGameOver = true;
-
-    // Explicitly set up the share button click handler
-    document.querySelector('.share-button').onclick = shareResult;
 }
 
 
@@ -1861,7 +1854,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const lastPlayed = localStorage.getItem('lastDailyPlayed');
             
             if (lastPlayed === today) {
-                // Instead of an alert, show their previous result
+                // Set daily mode flag to true
+                isDaily = true;
+                
+                // Set the dailySeed to today's date
+                dailySeed = today;
+                
+                // Set dailyAttempted to true
+                dailyAttempted = true;
+                
+                // Update the UI to show daily mode as active
+                document.getElementById('dailyModeBtn').classList.add('active');
+                document.getElementById('unlimitedModeBtn').classList.remove('active');
+                
+                // Show their previous result
                 showDailyResultModal();
             } else {
                 // Switch to daily mode as usual
