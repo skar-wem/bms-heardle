@@ -367,7 +367,7 @@ function startGame() {
                 localStorage.setItem('dailySongDate', dailySeed);
             }
         }
-        
+
     } else {
         // In unlimited mode, always generate a new random song
         const songs = Object.keys(gameData);
@@ -1058,6 +1058,9 @@ function updateGuessHistory() {
                 document.getElementById('unlimitedModeBtn').classList.add('active');
                 startNewGame();
             };
+            
+            // Add this line right here
+            shareButton.onclick = shareResult;
         } else {
             playAgainButton.textContent = "Play Again";
             playAgainButton.onclick = startNewGame;
@@ -1528,19 +1531,27 @@ function showDailyResultModal() {
     // Get the stored result
     const result = localStorage.getItem('dailyResult');
     const isWin = result && result !== 'X';
-    const attempts = isWin ? parseInt(result) : 6; // X means they lost, so use max attempts
+    const attemptCount = isWin ? parseInt(result) : 6; // X means they lost, so use max attempts
+    
+    // Check if the user peeked at song list during their play
+    const didPeek = localStorage.getItem('peekedAtSongList_' + dailySeed) === 'true';
+    peekedAtSongList = didPeek;
+
+    // Store the attempt count globally for sharing
+    attempts = attemptCount; // Set the global attempts variable directly
+    gameWon = isWin; // Set the global gameWon variable
     
     // Calculate squares for sharing
     const squares = Array(6).fill('⬜');
     
     if (isWin) {
         // First, fill in the red squares for wrong guesses
-        for (let i = 0; i < attempts - 1; i++) {
+        for (let i = 0; i < attemptCount - 1; i++) {
             squares[i] = '🟥';
         }
         
         // Then add the green square for the winning guess
-        squares[attempts - 1] = '🟩';
+        squares[attemptCount - 1] = '🟩';
     } else {
         // Fill all squares with red for a loss
         for (let i = 0; i < 6; i++) {
@@ -1666,6 +1677,7 @@ function showDailyResultModal() {
     playAgainButton.textContent = "Play Unlimited";
     playAgainButton.onclick = function() {
         isDaily = false;
+        completedDailyAttempts = 0; // Reset this value
         document.getElementById('dailyModeBtn').classList.remove('active');
         document.getElementById('unlimitedModeBtn').classList.add('active');
         startNewGame();
@@ -1674,6 +1686,9 @@ function showDailyResultModal() {
     // Display the modal
     modal.style.display = 'block';
     isGameOver = true;
+
+    // Explicitly set up the share button click handler
+    document.querySelector('.share-button').onclick = shareResult;
 }
 
 
@@ -1724,6 +1739,11 @@ async function shareResult() {
     console.log('Current attempts:', attempts);
     console.log('Game won:', gameWon);
 
+    // Store the peeking state if this is a daily challenge
+    if (isDaily && peekedAtSongList) {
+        localStorage.setItem('peekedAtSongList_' + dailySeed, 'true');
+    }
+
     // Calculate emoji squares based on attempts
     const squares = Array(6).fill('⬜'); // Start with all white squares
     
@@ -1761,7 +1781,7 @@ async function shareResult() {
     // Only add divider and difficulty result if difficulty was guessed
     const difficultyPart = difficultyGuessed ? ` | ${difficultyGuessResult ? '⭐' : '❌'}` : '';
     const peekedEmoji = (isDaily && peekedAtSongList) ? '🤓 ' : '';
-    const shareText = `${peekedEmoji}▸ BMS Heardle #${dailyNumber}\n${squares.join('')}${difficultyPart}\n${currentSong.display_title} - ${currentSong.cleanArtist}\nhttps://skar.fun/bms/`;
+    const shareText = `▸ BMS Heardle #${dailyNumber}\n${squares.join('')}${difficultyPart} ${peekedEmoji}\n${currentSong.display_title} - ${currentSong.cleanArtist}\nhttps://skar.fun/bms/`;
 
     // Fallback to clipboard
     try {
