@@ -34,6 +34,8 @@ function getDailySong() {
       hash = ((hash << 5) - hash) + dateStr.charCodeAt(i);
       hash |= 0; // Convert to 32bit integer
     }
+
+    hash -= 287;
     
     // Use the hash to select a song
     const songs = Object.keys(gameData);
