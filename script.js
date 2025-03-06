@@ -21,6 +21,44 @@ let difficultyGuessResult = false;
 let isSelectingFromSuggestions = false;
 const canvas = document.getElementById('particleCanvas');
 const ctx = canvas.getContext('2d');
+let isDaily = true; // Default to daily mode
+let dailySeed = new Date().toISOString().slice(0, 10); // YYYY-MM-DD format
+let dailyAttempted = false;
+
+function getDailySong() {
+  // Create a deterministic random number based on the date
+  const dateStr = dailySeed;
+  let hash = 0;
+  for (let i = 0; i < dateStr.length; i++) {
+    hash = ((hash << 5) - hash) + dateStr.charCodeAt(i);
+    hash |= 0; // Convert to 32bit integer
+  }
+  
+  // Use the hash to select a song
+  const songs = Object.keys(gameData);
+  const index = Math.abs(hash) % songs.length;
+  return songs[index];
+}
+
+function startGame() {
+  if (isDaily) {
+    // Check if already played today
+    const lastPlayed = localStorage.getItem('lastDailyPlayed');
+    dailyAttempted = lastPlayed === dailySeed;
+    
+    // Get the daily song
+    const dailySongKey = getDailySong();
+    currentSong = gameData[dailySongKey];
+  } else {
+    // Existing random selection for unlimited mode
+    const songs = Object.keys(gameData);
+    const randomSong = songs[Math.floor(Math.random() * songs.length)];
+    currentSong = gameData[randomSong];
+  }
+  
+  currentSong.cleanArtist = cleanupText(currentSong.artist);
+
+
 
 // Set canvas size
 function resizeCanvas() {
@@ -821,105 +859,246 @@ function updateGuessHistory() {
     }).join('');
 }
 
-function showModal(message, isWin = false) {
-    document.getElementById('guess-input').blur();
-    document.activeElement?.blur();
+    function showModal(message, isWin = false) {
+        document.getElementById('guess-input').blur();
+        document.activeElement?.blur();
 
-    const modal = document.getElementById('gameOverModal');
-    const modalMessage = document.getElementById('modalMessage');
-    const modalTitle = document.querySelector('.modal-title');
-    const modalContent = document.querySelector('.modal-content');
-    const difficultyContainer = document.getElementById('difficultyGuessContainer');
-    
-    // Get the buttons
-    const playAgainButton = document.querySelector('.modal-button:not(.share-button)');
-    const shareButton = document.querySelector('.share-button');
-    
-    // Add dimmed class initially
-  //  playAgainButton.classList.add('dimmed');
-  //  shareButton.classList.add('dimmed');
-    
-    // Close any open suggestion box
-    const suggestionBox = document.querySelector('.suggestion-box');
-    if (suggestionBox) {
-        suggestionBox.style.display = 'none';
-    }
-
-    // Remove keyboard-open class if it exists
-    document.body.classList.remove('keyboard-open');
-
-    // Remove previous classes
-    modalContent.classList.remove('win', 'lose');
-    
-    // Force win state if gameWon is true
-    isWin = isWin || gameWon;
-    
-    if (isWin) {
-        modalTitle.textContent = 'Congratulations!';
-        modalTitle.style.color = 'var(--neon-pink)';
-        modalContent.classList.add('win');
+        const modal = document.getElementById('gameOverModal');
+        const modalMessage = document.getElementById('modalMessage');
+        const modalTitle = document.querySelector('.modal-title');
+        const modalContent = document.querySelector('.modal-content');
+        const difficultyContainer = document.getElementById('difficultyGuessContainer');
         
-        // Ensure the correct segment is marked
-        const segments = document.querySelectorAll('.progress-segment');
-        segments[attempts - 1].classList.add('correct');
-
-        // Win message - without "The song was:"
-        let fullMessage = `You guessed correctly in <b>${attempts}</b> attempt${attempts === 1 ? '' : 's'}!`;
-        fullMessage += `<br><span class="song-reveal">
-            <span class="song-title">${currentSong.display_title}</span><br>
-            <span class="song-artist">${currentSong.cleanArtist}</span>
-        </span>`;
+        // Get the buttons
+        const playAgainButton = document.querySelector('.modal-button:not(.share-button)');
+        const shareButton = document.querySelector('.share-button');
         
-        modalMessage.innerHTML = fullMessage;
-    } else {
-        modalTitle.textContent = 'Game Over';
-        modalTitle.style.color = 'var(--neon-blue)';
-        modalContent.classList.add('lose');
-        
-        // Loss message - keeps "The song was:"
-        let fullMessage = `The song was:<br><span class="song-reveal">
-            <span class="song-title">${currentSong.display_title}</span><br>
-            <span class="song-artist">${currentSong.cleanArtist}</span>
-        </span>`;
-        
-        modalMessage.innerHTML = fullMessage;
-    }
+        // Close any open suggestion box
+        const suggestionBox = document.querySelector('.suggestion-box');
+        if (suggestionBox) {
+            suggestionBox.style.display = 'none';
+        }
 
-    // Reset and show difficulty guessing section
-    const buttons = document.querySelectorAll('.difficulty-btn');
-    buttons.forEach(btn => {
-        btn.disabled = false;
-        btn.classList.remove('correct', 'incorrect');
-        // Remove any existing click listeners
-        btn.replaceWith(btn.cloneNode(true));
-    });
+        // Remove keyboard-open class if it exists
+        document.body.classList.remove('keyboard-open');
 
-    // Re-add click listeners to fresh buttons
-    document.querySelectorAll('.difficulty-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            handleDifficultyGuess(btn.dataset.level);
-            // Enable buttons after difficulty guess
-        //    playAgainButton.classList.remove('dimmed');
-        //   shareButton.classList.remove('dimmed');
+        // Remove previous classes
+        modalContent.classList.remove('win', 'lose');
+        
+        // Force win state if gameWon is true
+        isWin = isWin || gameWon;
+        
+        // Calculate daily challenge number if in daily mode
+        let dailyHeader = '';
+        if (isDaily) {
+            // Record daily play if this is the first attempt today
+            if (!dailyAttempted) {
+                localStorage.setItem('lastDailyPlayed', dailySeed);
+                localStorage.setItem('dailyResult', isWin ? attempts : 'X');
+                dailyAttempted = true;
+            }
+            
+            // Calculate the challenge number
+            const startDate = new Date('2023-10-15'); // Adjust this to your actual start date
+            const currentDate = new Date(dailySeed);
+            const dayDiff = Math.floor((currentDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
+            
+            dailyHeader = `<div class="daily-header">Daily Challenge #${dayDiff}</div>`;
+        }
+        
+        if (isWin) {
+            modalTitle.textContent = 'Congratulations!';
+            modalTitle.style.color = 'var(--neon-pink)';
+            modalContent.classList.add('win');
+            
+            // Ensure the correct segment is marked
+            const segments = document.querySelectorAll('.progress-segment');
+            segments[attempts - 1].classList.add('correct');
+
+            // Win message - without "The song was:"
+            let fullMessage = `${dailyHeader}You guessed correctly in <b>${attempts}</b> attempt${attempts === 1 ? '' : 's'}!`;
+            fullMessage += `<br><span class="song-reveal">
+                <span class="song-title">${currentSong.display_title}</span><br>
+                <span class="song-artist">${currentSong.cleanArtist}</span>
+            </span>`;
+            
+            // Add stats if in daily mode
+            if (isDaily) {
+                const stats = getDailyStats();
+                fullMessage += `<div class="daily-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Played</span>
+                        <span class="stat-value">${stats.played}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Win %</span>
+                        <span class="stat-value">${stats.winPercentage}%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Streak</span>
+                        <span class="stat-value">${stats.currentStreak}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Max Streak</span>
+                        <span class="stat-value">${stats.maxStreak}</span>
+                    </div>
+                </div>`;
+            }
+            
+            modalMessage.innerHTML = fullMessage;
+        } else {
+            modalTitle.textContent = 'Game Over';
+            modalTitle.style.color = 'var(--neon-blue)';
+            modalContent.classList.add('lose');
+            
+            // Loss message - keeps "The song was:"
+            let fullMessage = `${dailyHeader}The song was:<br><span class="song-reveal">
+                <span class="song-title">${currentSong.display_title}</span><br>
+                <span class="song-artist">${currentSong.cleanArtist}</span>
+            </span>`;
+            
+            // Add stats if in daily mode
+            if (isDaily) {
+                const stats = getDailyStats();
+                fullMessage += `<div class="daily-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Played</span>
+                        <span class="stat-value">${stats.played}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Win %</span>
+                        <span class="stat-value">${stats.winPercentage}%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Streak</span>
+                        <span class="stat-value">${stats.currentStreak}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Max Streak</span>
+                        <span class="stat-value">${stats.maxStreak}</span>
+                    </div>
+                </div>`;
+            }
+            
+            modalMessage.innerHTML = fullMessage;
+        }
+
+        // Reset and show difficulty guessing section
+        const buttons = document.querySelectorAll('.difficulty-btn');
+        buttons.forEach(btn => {
+            btn.disabled = false;
+            btn.classList.remove('correct', 'incorrect');
+            // Remove any existing click listeners
+            btn.replaceWith(btn.cloneNode(true));
         });
-    });
 
-    // Reset difficulty result
-    const resultDiv = document.querySelector('.difficulty-result');
-    resultDiv.classList.add('hidden');
-    resultDiv.textContent = '';
+        // Re-add click listeners to fresh buttons
+        document.querySelectorAll('.difficulty-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                handleDifficultyGuess(btn.dataset.level);
+            });
+        });
 
-    // Show difficulty container
-    difficultyContainer.classList.remove('hidden');
-    difficultyGuessed = false;
-    
-    modal.style.display = 'block';
-    isGameOver = true;
-    
-    if (isWin) {
-        createWinParticles();
+        // Reset difficulty result
+        const resultDiv = document.querySelector('.difficulty-result');
+        resultDiv.classList.add('hidden');
+        resultDiv.textContent = '';
+
+        // Show difficulty container
+        difficultyContainer.classList.remove('hidden');
+        difficultyGuessed = false;
+        
+        modal.style.display = 'block';
+        isGameOver = true;
+        
+        if (isWin) {
+            createWinParticles();
+        }
+        
+        // If in daily mode, update the Play Again button text to reflect mode
+        if (isDaily) {
+            playAgainButton.textContent = "Play Unlimited";
+            playAgainButton.onclick = function() {
+                isDaily = false;
+                document.getElementById('dailyModeBtn').classList.remove('active');
+                document.getElementById('unlimitedModeBtn').classList.add('active');
+                startNewGame();
+            };
+        } else {
+            playAgainButton.textContent = "Play Again";
+            playAgainButton.onclick = startNewGame;
+        }
     }
-}
+
+    // Add this helper function to calculate and update daily stats
+    function getDailyStats() {
+        // Get stored stats or initialize defaults
+        const statsJson = localStorage.getItem('dailyStats') || '{}';
+        let stats = JSON.parse(statsJson);
+        
+        if (!stats.played) {
+            stats = {
+                played: 0,
+                wins: 0,
+                currentStreak: 0,
+                maxStreak: 0,
+                lastPlayed: null,
+                history: []
+            };
+        }
+        
+        // Get today's result
+        const todayResult = localStorage.getItem('dailyResult');
+        const isWin = todayResult && todayResult !== 'X';
+        
+        // Only update stats if this is a new play (not just viewing results again)
+        if (dailySeed !== stats.lastPlayed) {
+            stats.played++;
+            stats.lastPlayed = dailySeed;
+            
+            // Check if consecutive day
+            const yesterday = new Date(dailySeed);
+            yesterday.setDate(yesterday.getDate() - 1);
+            const yesterdayStr = yesterday.toISOString().slice(0, 10);
+            const isConsecutiveDay = stats.lastPlayed === yesterdayStr;
+            
+            if (isWin) {
+                stats.wins++;
+                if (isConsecutiveDay || stats.currentStreak === 0) {
+                    stats.currentStreak++;
+                } else {
+                    stats.currentStreak = 1; // Reset streak if not consecutive
+                }
+                
+                stats.maxStreak = Math.max(stats.maxStreak, stats.currentStreak);
+            } else {
+                stats.currentStreak = 0; // Reset streak on loss
+            }
+            
+            // Add to history
+            stats.history.push({
+                date: dailySeed,
+                result: todayResult
+            });
+            
+            // Save updated stats
+            localStorage.setItem('dailyStats', JSON.stringify(stats));
+        }
+        
+        // Calculate win percentage
+        const winPercentage = stats.played > 0 
+            ? Math.round((stats.wins / stats.played) * 100) 
+            : 0;
+        
+        return {
+            played: stats.played,
+            wins: stats.wins,
+            winPercentage: winPercentage,
+            currentStreak: stats.currentStreak,
+            maxStreak: stats.maxStreak,
+            history: stats.history
+        };
+    }
 
 // Add a function to play sound effects (optional)
 function playGameOverSound(isSuccess) {
@@ -1385,7 +1564,7 @@ async function shareResult() {
     // Create share text with minimalist format
     // Only add divider and difficulty result if difficulty was guessed
     const difficultyPart = difficultyGuessed ? ` | ${difficultyGuessResult ? '⭐' : '❌'}` : '';
-    const shareText = `▸ BMS Heardle #\n${squares.join('')}${difficultyPart}\n${currentSong.display_title} - ${currentSong.cleanArtist}\nhttps://skar-wem.github.io/bms-heardle/`;
+    const shareText = `▸ BMS Heardle #\n${squares.join('')}${difficultyPart}\n${currentSong.display_title} - ${currentSong.cleanArtist}\nhttps://skar.fun/bms/`;
 
     // Fallback to clipboard
     try {
@@ -1447,8 +1626,33 @@ document.addEventListener('DOMContentLoaded', () => {
         updateVolume(volumeSlider.value);
     }
 
-    // Song list button listener
-    document.getElementById('songListButton').addEventListener('click', showSongList);
+    // Game mode toggle listeners
+    document.getElementById('dailyModeBtn').addEventListener('click', () => {
+        if (!isDaily) {
+            isDaily = true;
+            document.getElementById('dailyModeBtn').classList.add('active');
+            document.getElementById('unlimitedModeBtn').classList.remove('active');
+            startNewGame();
+        }
+    });
+
+    document.getElementById('unlimitedModeBtn').addEventListener('click', () => {
+        if (isDaily) {
+            isDaily = false;
+            document.getElementById('dailyModeBtn').classList.remove('active');
+            document.getElementById('unlimitedModeBtn').classList.add('active');
+            startNewGame();
+        }
+    });
+
+    // Song list button listener - modified for daily mode
+    document.getElementById('songListButton').addEventListener('click', () => {
+        if (isDaily && !isGameOver) {
+            alert("Song list will be available after you complete today's challenge.");
+        } else {
+            showSongList();
+        }
+    });
 
     // Play button listener with audio context initialization
     document.getElementById('playButton').addEventListener('click', async () => {
