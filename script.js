@@ -40,24 +40,6 @@ function getDailySong() {
   return songs[index];
 }
 
-function startGame() {
-  if (isDaily) {
-    // Check if already played today
-    const lastPlayed = localStorage.getItem('lastDailyPlayed');
-    dailyAttempted = lastPlayed === dailySeed;
-    
-    // Get the daily song
-    const dailySongKey = getDailySong();
-    currentSong = gameData[dailySongKey];
-  } else {
-    // Existing random selection for unlimited mode
-    const songs = Object.keys(gameData);
-    const randomSong = songs[Math.floor(Math.random() * songs.length)];
-    currentSong = gameData[randomSong];
-  }
-  
-  currentSong.cleanArtist = cleanupText(currentSong.artist);
-
 
 
 // Set canvas size
