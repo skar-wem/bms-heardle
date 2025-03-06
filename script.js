@@ -43,6 +43,52 @@ function getDailySong() {
     return songs[index];
   }
   
+// Add this function to save the current game state
+function saveGameState() {
+    if (!isGameOver) {
+        const gameState = {
+            attempts: attempts,
+            incorrectGuesses: incorrectGuesses,
+            isDaily: isDaily,
+            dailySeed: dailySeed,
+            dailyAttempted: dailyAttempted,
+            peekedAtSongList: peekedAtSongList
+        };
+        
+        // For daily mode, save to a specific key
+        if (isDaily) {
+            localStorage.setItem('dailyGameState', JSON.stringify(gameState));
+        } else {
+            // For unlimited mode, save to a different key
+            localStorage.setItem('unlimitedGameState', JSON.stringify(gameState));
+        }
+    }
+}
+
+// Add this function to load saved game state
+function loadGameState() {
+    // Determine which state to load based on current mode
+    const savedStateKey = isDaily ? 'dailyGameState' : 'unlimitedGameState';
+    const savedState = localStorage.getItem(savedStateKey);
+    
+    if (savedState) {
+        const gameState = JSON.parse(savedState);
+        
+        // Only restore state if it matches the current game mode
+        if (gameState.isDaily === isDaily) {
+            attempts = gameState.attempts;
+            incorrectGuesses = gameState.incorrectGuesses;
+            dailySeed = gameState.dailySeed;
+            dailyAttempted = gameState.dailyAttempted;
+            peekedAtSongList = gameState.peekedAtSongList;
+            
+            // Update UI to reflect loaded state
+            updateGuessHistory();
+            updateProgressBar();
+            updateSkipButtonText();
+        }
+    }
+}
 
 
 
@@ -332,7 +378,7 @@ async function loadGameData() {
     }
 }
 
-// Modify the startGame function to handle completed daily challenges
+// Modify startGame function to load saved state
 function startGame() {
     // First, check if we're in daily mode
     if (isDaily) {
@@ -369,12 +415,21 @@ function startGame() {
                 localStorage.setItem('dailySongDate', dailySeed);
             }
         }
-
     } else {
-        // In unlimited mode, always generate a new random song
-        const songs = Object.keys(gameData);
-        const randomSong = songs[Math.floor(Math.random() * songs.length)];
-        currentSong = gameData[randomSong];
+        // In unlimited mode, check if we have a saved song
+        const unlimitedSongKey = localStorage.getItem('unlimitedSongKey');
+        
+        if (unlimitedSongKey && gameData[unlimitedSongKey]) {
+            currentSong = gameData[unlimitedSongKey];
+        } else {
+            // Generate a new random song
+            const songs = Object.keys(gameData);
+            const randomSong = songs[Math.floor(Math.random() * songs.length)];
+            currentSong = gameData[randomSong];
+            
+            // Save the new song key
+            localStorage.setItem('unlimitedSongKey', randomSong);
+        }
     }
     
     // Set the clean artist name
@@ -390,8 +445,10 @@ function startGame() {
         segment.classList.remove('played', 'current', 'correct');
     });
     
-    // Reset game state
-    incorrectGuesses = [];
+    // Load saved game state
+    loadGameState();
+    
+    // Update the UI
     updateGuessHistory();
     updateProgressBar();
     updateSkipButtonText();
@@ -1260,6 +1317,14 @@ function startNewGame() {
     // Reset submit button state
     updateSubmitButtonState();
     
+    // Clear saved game state
+    if (isDaily) {
+        localStorage.removeItem('dailyGameState');
+    } else {
+        localStorage.removeItem('unlimitedGameState');
+        localStorage.removeItem('unlimitedSongKey');
+    }
+    
     // Start new game
     startGame();
 }
@@ -1351,6 +1416,13 @@ function submitGuess() {
         // Add correct class to the winning attempt segment
         segments[attempts - 1].classList.add('correct');
         
+        // Clear saved game state since game is over
+        if (isDaily) {
+            localStorage.removeItem('dailyGameState');
+        } else {
+            localStorage.removeItem('unlimitedGameState');
+        }
+        
         showModal('', true);
         revealFullSong();
         setTimeout(() => {
@@ -1365,6 +1437,14 @@ function submitGuess() {
         if (attempts >= maxAttempts) {
             updateProgressBar();
             updateGuessHistory();
+            
+            // Clear saved game state since game is over
+            if (isDaily) {
+                localStorage.removeItem('dailyGameState');
+            } else {
+                localStorage.removeItem('unlimitedGameState');
+            }
+            
             showModal(`The song was "${currentSong.display_title}" by ${currentSong.cleanArtist}`);
             revealFullSong();
         } else {
@@ -1372,6 +1452,9 @@ function submitGuess() {
             updateProgressBar();
             updateGuessHistory();
             updateSkipButtonText();
+            
+            // Save game state after changes
+            saveGameState();
         }
     }
     
@@ -1414,6 +1497,14 @@ function skipGuess() {
     if (attempts >= maxAttempts) {
         updateProgressBar();
         updateGuessHistory();
+        
+        // Clear saved game state since game is over
+        if (isDaily) {
+            localStorage.removeItem('dailyGameState');
+        } else {
+            localStorage.removeItem('unlimitedGameState');
+        }
+        
         showModal(`The song was "${currentSong.display_title}" by ${currentSong.cleanArtist}`);
         revealFullSong();
     } else {
@@ -1423,6 +1514,9 @@ function skipGuess() {
         updateProgressBar();
         updateGuessHistory();
         updateSkipButtonText();
+        
+        // Save game state after changes
+        saveGameState();
     }
 }
 
@@ -1776,7 +1870,7 @@ async function shareResult() {
     // Only add divider and difficulty result if difficulty was guessed
     const difficultyPart = difficultyGuessed ? ` | ${difficultyGuessResult ? '⭐' : '❌'}` : '';
     const peekedEmoji = (isDaily && peekedAtSongList) ? '🤓 ' : '';
-    const shareText = `▸ BMS Heardle #${dailyNumber}\n${squares.join('')}${difficultyPart} ${peekedEmoji}\n${currentSong.display_title} - ${currentSong.cleanArtist}\nhttps://skar.fun/bms/`;
+    const shareText = `▸ BMS Heardle #${dailyNumber}\n${squares.join('')}${difficultyPart} ${peekedEmoji}\nhttps://skar.fun/bms/`;
 
     // Fallback to clipboard
     try {
@@ -1881,8 +1975,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Add event listener for beforeunload to save state when closing/refreshing
+    window.addEventListener('beforeunload', () => {
+        if (!isGameOver) {
+            saveGameState();
+        }
+    });
+
+    // Add event listeners for the game mode buttons to handle mode switching
+    document.getElementById('dailyModeBtn').addEventListener('click', () => {
+        if (!isDaily) {
+            // Save the current unlimited mode state if not completed
+            if (!isGameOver) {
+                saveGameState();
+            }
+            
+            // Switch to daily mode
+            isDaily = true;
+            document.getElementById('dailyModeBtn').classList.add('active');
+            document.getElementById('unlimitedModeBtn').classList.remove('active');
+            startNewGame();
+        }
+    });
+
     document.getElementById('unlimitedModeBtn').addEventListener('click', () => {
         if (isDaily) {
+            // Save the current daily mode state if not completed
+            if (!isGameOver) {
+                saveGameState();
+            }
+            
+            // Switch to unlimited mode
             isDaily = false;
             document.getElementById('dailyModeBtn').classList.remove('active');
             document.getElementById('unlimitedModeBtn').classList.add('active');
