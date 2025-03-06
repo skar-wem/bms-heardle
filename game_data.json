@@ -1056,6 +1056,21 @@
       ]
     }
   },
+  "aballava": {
+    "display_title": "aballava",
+    "artist": "Team:SASAKURATION / Goten",
+    "heardle_file": "aballava_heardle.mp3",
+    "preview_file": "aballava_preview.mp3",
+    "metadata": {
+      "genre": "fgWood",
+      "bpm": "2008",
+      "original_file": "",
+      "mod_time": "",
+      "insane_levels": [
+        "★20"
+      ]
+    }
+  },
   "AXION": {
     "display_title": "AXION",
     "artist": "Magic Mash Man / New Genuine Magicial Girl",
