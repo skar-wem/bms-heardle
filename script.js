@@ -24,21 +24,23 @@ const ctx = canvas.getContext('2d');
 let isDaily = true; // Default to daily mode
 let dailySeed = new Date().toISOString().slice(0, 10); // YYYY-MM-DD format
 let dailyAttempted = false;
+let peekedAtSongList = false;
 
 function getDailySong() {
-  // Create a deterministic random number based on the date
-  const dateStr = dailySeed;
-  let hash = 0;
-  for (let i = 0; i < dateStr.length; i++) {
-    hash = ((hash << 5) - hash) + dateStr.charCodeAt(i);
-    hash |= 0; // Convert to 32bit integer
+    // Create a deterministic random number based on the date
+    const dateStr = dailySeed;
+    let hash = 0;
+    for (let i = 0; i < dateStr.length; i++) {
+      hash = ((hash << 5) - hash) + dateStr.charCodeAt(i);
+      hash |= 0; // Convert to 32bit integer
+    }
+    
+    // Use the hash to select a song
+    const songs = Object.keys(gameData);
+    const index = Math.abs(hash) % songs.length;
+    return songs[index];
   }
   
-  // Use the hash to select a song
-  const songs = Object.keys(gameData);
-  const index = Math.abs(hash) % songs.length;
-  return songs[index];
-}
 
 
 
@@ -328,14 +330,64 @@ async function loadGameData() {
     }
 }
 
+// Modify the startGame function to handle completed daily challenges
 function startGame() {
-    const songs = Object.keys(gameData);
-    const randomSong = songs[Math.floor(Math.random() * songs.length)];
-    currentSong = gameData[randomSong];
+    // First, check if we're in daily mode
+    if (isDaily) {
+        // Get today's date in YYYY-MM-DD format
+        const today = new Date().toISOString().slice(0, 10);
+        
+        // Set the dailySeed to today's date
+        dailySeed = today;
+        
+        // Check if user has played today's challenge
+        const lastPlayed = localStorage.getItem('lastDailyPlayed');
+        dailyAttempted = lastPlayed === dailySeed;
+        
+        // If they've already completed today's challenge, show message and switch to unlimited mode
+        if (dailyAttempted) {
+            // Show a message that they've already completed today's challenge
+            alert("You've already completed today's challenge! Switching to unlimited mode.");
+            
+            // Switch to unlimited mode
+            isDaily = false;
+            document.getElementById('dailyModeBtn').classList.remove('active');
+            document.getElementById('unlimitedModeBtn').classList.add('active');
+            
+            // Start a new game in unlimited mode instead
+            const songs = Object.keys(gameData);
+            const randomSong = songs[Math.floor(Math.random() * songs.length)];
+            currentSong = gameData[randomSong];
+        } else {
+            // Check if we have a saved state for today's game
+            const savedSongKey = localStorage.getItem('dailySongKey');
+            const savedDate = localStorage.getItem('dailySongDate');
+            
+            // If we have a saved song for today, use it
+            if (savedSongKey && savedDate === dailySeed) {
+                currentSong = gameData[savedSongKey];
+            } else {
+                // Otherwise, get today's song and save it
+                const dailySongKey = getDailySong();
+                currentSong = gameData[dailySongKey];
+                
+                // Save today's song key and date
+                localStorage.setItem('dailySongKey', dailySongKey);
+                localStorage.setItem('dailySongDate', dailySeed);
+            }
+        }
+    } else {
+        // In unlimited mode, always generate a new random song
+        const songs = Object.keys(gameData);
+        const randomSong = songs[Math.floor(Math.random() * songs.length)];
+        currentSong = gameData[randomSong];
+    }
+    
+    // Set the clean artist name
     currentSong.cleanArtist = cleanupText(currentSong.artist);
     
+    // Set up the audio player
     const player = document.getElementById('audio-player');
-    // Use the new encodeFilename function
     player.src = `game_audio/${encodeFilename(currentSong.heardle_file)}`;
     
     // Reset all segments
@@ -344,18 +396,13 @@ function startGame() {
         segment.classList.remove('played', 'current', 'correct');
     });
     
+    // Reset game state
     incorrectGuesses = [];
     updateGuessHistory();
     updateProgressBar();
-    updateSkipButtonText(); 
+    updateSkipButtonText();
 }
 
-function encodeFilename(filename) {
-    return encodeURIComponent(filename)
-        .replace(/%23/g, '%2523') // Handle # character
-        .replace(/\+/g, '%2B')    // Handle + character
-        .replace(/\-/g, '%2D');   // Handle - character
-}
 
 function setupAutocomplete() {
     const input = document.getElementById('guess-input');
@@ -640,16 +687,22 @@ function playCurrentSegment() {
     }
 }
 
-function showSongList() {
-    const modal = document.getElementById('songListModal');
-    const container = modal.querySelector('.song-list-container');
-    const searchInput = document.getElementById('songSearchInput');
-    const difficultyFilter = document.getElementById('difficultyFilter');
+    function showSongList() {
+        // Set the peeked flag if in daily mode and game is not over
+        if (isDaily && !isGameOver) {
+            peekedAtSongList = true;
+            console.log('User peeked at song list during daily challenge');
+        }
+        
+        const modal = document.getElementById('songListModal');
+        const container = modal.querySelector('.song-list-container');
+        const searchInput = document.getElementById('songSearchInput');
+        const difficultyFilter = document.getElementById('difficultyFilter');
 
-    // Create a new audio element for previews if it doesn't exist
-    if (!previewPlayer) {
-        previewPlayer = new Audio();
-    }
+        // Create a new audio element for previews if it doesn't exist
+        if (!previewPlayer) {
+            previewPlayer = new Audio();
+        }
 
     function handleSongItemClick(item) {
         // Remove playing class from all items
@@ -855,6 +908,13 @@ function updateGuessHistory() {
         const playAgainButton = document.querySelector('.modal-button:not(.share-button)');
         const shareButton = document.querySelector('.share-button');
         
+        // Show or hide share button based on game mode
+        if (isDaily) {
+            shareButton.style.display = 'inline-block'; // Show for daily mode
+        } else {
+            shareButton.style.display = 'none'; // Hide for unlimited mode
+        }
+        
         // Close any open suggestion box
         const suggestionBox = document.querySelector('.suggestion-box');
         if (suggestionBox) {
@@ -881,7 +941,7 @@ function updateGuessHistory() {
             }
             
             // Calculate the challenge number
-            const startDate = new Date('2023-10-15'); // Adjust this to your actual start date
+            const startDate = new Date('2025-03-06'); // Adjust this to your actual start date
             const currentDate = new Date(dailySeed);
             const dayDiff = Math.floor((currentDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
             
@@ -1543,10 +1603,20 @@ async function shareResult() {
 
     console.log('Final squares array:', squares);
 
+    // Calculate daily challenge number if in daily mode
+    let dailyNumber = '';
+    if (isDaily) {
+        const startDate = new Date('2025-03-06'); // Use the same start date as in showModal
+        const currentDate = new Date(dailySeed);
+        const dayDiff = Math.floor((currentDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
+        dailyNumber = dayDiff.toString();
+    }
+
     // Create share text with minimalist format
     // Only add divider and difficulty result if difficulty was guessed
     const difficultyPart = difficultyGuessed ? ` | ${difficultyGuessResult ? '⭐' : '❌'}` : '';
-    const shareText = `▸ BMS Heardle #\n${squares.join('')}${difficultyPart}\n${currentSong.display_title} - ${currentSong.cleanArtist}\nhttps://skar.fun/bms/`;
+    const peekedEmoji = (isDaily && peekedAtSongList) ? '🤓 ' : '';
+    const shareText = `${peekedEmoji}▸ BMS Heardle #${dailyNumber}\n${squares.join('')}${difficultyPart}\n${currentSong.display_title} - ${currentSong.cleanArtist}\nhttps://skar.fun/bms/`;
 
     // Fallback to clipboard
     try {
@@ -1608,9 +1678,28 @@ document.addEventListener('DOMContentLoaded', () => {
         updateVolume(volumeSlider.value);
     }
 
+    // DEVELOPMENT ONLY - Remove before production
+    document.getElementById('devResetBtn')?.addEventListener('click', () => {
+        localStorage.removeItem('lastDailyPlayed');
+        localStorage.removeItem('dailyResult');
+        localStorage.removeItem('dailySongKey');
+        localStorage.removeItem('dailySongDate');
+        alert("Daily challenge reset");
+        location.reload();
+    });
+
     // Game mode toggle listeners
     document.getElementById('dailyModeBtn').addEventListener('click', () => {
         if (!isDaily) {
+            // Check if they've already completed today's challenge
+            const today = new Date().toISOString().slice(0, 10);
+            const lastPlayed = localStorage.getItem('lastDailyPlayed');
+            
+            if (lastPlayed === today) {
+                alert("You've already completed today's challenge. Please come back tomorrow for a new challenge!");
+                return;
+            }
+            
             isDaily = true;
             document.getElementById('dailyModeBtn').classList.add('active');
             document.getElementById('unlimitedModeBtn').classList.remove('active');
@@ -1627,14 +1716,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Song list button listener - modified for daily mode
-    document.getElementById('songListButton').addEventListener('click', () => {
-        if (isDaily && !isGameOver) {
-            alert("Song list will be available after you complete today's challenge.");
-        } else {
-            showSongList();
-        }
-    });
+    document.getElementById('songListButton').addEventListener('click', showSongList);
+
+
 
     // Play button listener with audio context initialization
     document.getElementById('playButton').addEventListener('click', async () => {

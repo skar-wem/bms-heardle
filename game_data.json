@@ -14,6 +14,52 @@
       ]
     }
   },
+  "Messier 333": {
+    "display_title": "Messier 333",
+    "artist": "sun3",
+    "heardle_file": "Messier 333_heardle.mp3",
+    "preview_file": "Messier 333_preview.mp3",
+    "metadata": {
+      "genre": "HARD TECHNO",
+      "bpm": "170",
+      "original_file": "",
+      "mod_time": "",
+      "insane_levels": [
+        "★7",
+        "★20"
+      ]
+    }
+  },
+  "Synth Stream": {
+    "display_title": "Synth Stream",
+    "artist": "sun3",
+    "heardle_file": "Synth Stream-heardle.mp3",
+    "preview_file": "Synth Stream-preview.mp3",
+    "metadata": {
+      "genre": "CLUB MIX",
+      "bpm": "185",
+      "original_file": "",
+      "mod_time": "",
+      "insane_levels": [
+        "★13"
+      ]
+    }
+  },
+  "Cross Breed": {
+    "display_title": "Cross Breed",
+    "artist": "sun3 vs EXCALIpUR",
+    "heardle_file": "Cross Breed-heardle.mp3",
+    "preview_file": "Cross Breed-preview.mp3",
+    "metadata": {
+      "genre": "RAVE",
+      "bpm": "170",
+      "original_file": "",
+      "mod_time": "",
+      "insane_levels": [
+        "★14"
+      ]
+    }
+  },
   "G.N": {
     "display_title": "G.N",
     "artist": "keyc",
@@ -4557,7 +4603,7 @@
   },
   "Lasting Dream": {
     "display_title": "Lasting Dream",
-    "artist": "ω",
+    "artist": "w",
     "heardle_file": "Lasting Dream_heardle.mp3",
     "preview_file": "Lasting Dream_preview.mp3",
     "metadata": {
@@ -7481,8 +7527,8 @@
     }
   },
   "The SunLight": {
-    "display_title": "The SunLight[-45]",
-    "artist": "Unknown Artist",
+    "display_title": "The SunLight",
+    "artist": "-45",
     "heardle_file": "The SunLight[-45]_heardle.mp3",
     "preview_file": "The SunLight[-45]_preview.mp3",
     "metadata": {
@@ -8302,6 +8348,10 @@
   "ΔΔ": {
     "display_title": "ΔΔ",
     "artist": "KA-KU",
+    "alias": [
+      "AA",
+      "Triangles"
+    ],
     "heardle_file": "ΔΔ_heardle.mp3",
     "preview_file": "ΔΔ_preview.mp3",
     "metadata": {
