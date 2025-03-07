@@ -1180,7 +1180,7 @@
   },
   "BB BLOW": {
     "display_title": "BB BLOW",
-    "artist": "onoken/ crossfade feat. TAKA",
+    "artist": "onoken",
     "heardle_file": "BB BLOW_heardle.mp3",
     "preview_file": "BB BLOW_preview.mp3",
     "metadata": {
@@ -4216,8 +4216,8 @@
       ]
     }
   },
-  "J2U": {
-    "display_title": "J2U",
+  "J2U(crazy remix)": {
+    "display_title": "J2U(crazy remix)",
     "artist": "しろ",
     "heardle_file": "J2U_heardle.mp3",
     "preview_file": "J2U_preview.mp3",
@@ -5376,14 +5376,14 @@
       ]
     }
   },
-  "MirroR": {
-    "display_title": "MirroR",
+  "MirroR -Miracle version-": {
+    "display_title": "MirroR -Miracle version-",
     "artist": "dj-B",
     "heardle_file": "MirroR_heardle.mp3",
     "preview_file": "MirroR_preview.mp3",
     "metadata": {
       "genre": "Progressive Rock",
-      "bpm": "135",
+      "bpm": "1989",
       "original_file": "7h.bme",
       "mod_time": "2007-10-13 23:46:38",
       "insane_levels": [
@@ -7360,7 +7360,7 @@
   },
   "The Beautiful Sunset of That Day(Radio Edit)": {
     "display_title": "The Beautiful Sunset of That Day(Radio Edit)",
-    "artist": "Wirel : Yourl  / sept",
+    "artist": "Wirel : Yourl",
     "heardle_file": "The Beautiful Sunset of That Day(Radio Edit)_heardle.mp3",
     "preview_file": "The Beautiful Sunset of That Day(Radio Edit)_preview.mp3",
     "metadata": {
@@ -8429,7 +8429,7 @@
   },
   "★SweeT DiscoverY★": {
     "display_title": "★SweeT DiscoverY★",
-    "artist": "sasakure.UK / sept",
+    "artist": "sasakure.UK",
     "heardle_file": "★SweeT DiscoverY★_heardle.mp3",
     "preview_file": "★SweeT DiscoverY★_preview.mp3",
     "metadata": {
@@ -10440,7 +10440,7 @@
       "Cat",
       "Ruin",
       "Moon",
-      "Gengetsu no neko"
+      "Yumihari no neko"
     ],
     "heardle_file": "弦月の猫_heardle.mp3",
     "preview_file": "弦月の猫_preview.mp3",
