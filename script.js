@@ -806,7 +806,7 @@ function handleChallenge(songKey) {
         }
         
         // Replace mode buttons with challenge banner
-        centerControls.innerHTML = '<div class="challenge-banner"><span>👑 Friend Challenge Mode 👑</span></div>';
+        centerControls.innerHTML = '<div class="challenge-banner"><span>👑 Challenge Mode 👑</span></div>';
     }
     
     // Override the normal song selection and load the challenge song
