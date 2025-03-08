@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 <html style="background: #000000;">
 <head>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKLC2YX0YW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-EKLC2YX0YW');
-</script>
-
-    <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKLC2YX0YW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EKLC2YX0YW');
+    </script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>発狂BMS Heardle</title>
@@ -44,9 +41,9 @@
             </div>
 
             <!-- 
-           <button id="devResetBtn" style="position:fixed; bottom:10px; right:10px; z-index:1000; font-size:10px; opacity:0.3;">
+            <button id="devResetBtn" style="position:fixed; bottom:10px; right:10px; z-index:1000; font-size:10px; opacity:0.3;">
                 DEV: Reset Daily
-              </button>
+            </button>
             -->
 
             <div id="player-container" class="w-100">
@@ -130,11 +127,12 @@
                     </div>
                     <div class="difficulty-result hidden"></div>
                 </div>
-        
+
                 <div class="modal-buttons">
                     <button class="modal-button" onclick="startNewGame()">Play Again</button>
                     <button class="modal-button share-button" onclick="shareResult()">Share</button>
                 </div>
+                <input type="text" id="challengeLink" class="hidden">
             </div>
         </div>
 
@@ -180,7 +178,12 @@
             </div>
         </div>
 
+        <!-- Challenge Banner (will be shown when receiving a challenge) -->
+        <div id="challengeBanner" class="challenge-banner hidden">
+            <span>👑 Friend Challenge Mode 👑</span>
+        </div>
     </div>
+
     <script src="script.js"></script>
     <div id="suggestions-backdrop" class="suggestions-backdrop"></div>
 </body>

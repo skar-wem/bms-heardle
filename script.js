@@ -25,6 +25,7 @@ let isDaily = true; // Default to daily mode
 let dailySeed = new Date().toISOString().slice(0, 10); // YYYY-MM-DD format
 let dailyAttempted = false;
 let peekedAtSongList = false;
+let pendingChallenge = null;
 
 function getDailySong() {
     // Create a deterministic random number based on the date
@@ -263,6 +264,102 @@ function drawWave() {
     animationId = requestAnimationFrame(drawWave);
 }
 
+
+function generateChallengeLink(songKey) {
+    try {
+        // Create a base64-encoded string with timestamp to prevent guessing
+        const timestamp = Date.now();
+        const challengeData = {
+            songKey: songKey,
+            timestamp: timestamp
+        };
+        
+        // Encode the data - use encodeURIComponent first for safety
+        const jsonString = JSON.stringify(challengeData);
+        const encodedData = btoa(encodeURIComponent(jsonString));
+        
+        // Generate the full URL
+        const baseUrl = window.location.origin + window.location.pathname;
+        return `${baseUrl}?challenge=${encodedData}`;
+    } catch (error) {
+        console.error('Error generating challenge link:', error);
+        throw new Error('Failed to generate challenge link');
+    }
+}
+
+// Function to handle incoming challenge
+function handleChallenge(songKey) {
+    console.log("Handling challenge for song key:", songKey);
+    
+    // Switch to challenge mode
+    isDaily = false;
+    document.getElementById('dailyModeBtn').classList.remove('active');
+    document.getElementById('unlimitedModeBtn').classList.add('active');
+    
+    // Remove any existing challenge banner first
+    const existingBanner = document.querySelector('.challenge-banner');
+    if (existingBanner) {
+        existingBanner.remove();
+    }
+    
+    // Show a special message
+    const challengeBanner = document.createElement('div');
+    challengeBanner.className = 'challenge-banner';
+    challengeBanner.innerHTML = '<span>👑 Friend Challenge Mode 👑</span>';
+    document.querySelector('.header').appendChild(challengeBanner);
+    
+    // Override the normal song selection and load the challenge song
+    if (gameData[songKey]) {
+        console.log("Setting current song to:", gameData[songKey].display_title);
+        currentSong = gameData[songKey];
+        currentSong.cleanArtist = cleanupText(currentSong.artist);
+        
+        // Set up the audio player
+        const player = document.getElementById('audio-player');
+        player.src = `game_audio/${encodeFilename(currentSong.heardle_file)}`;
+        
+        // Reset game state
+        attempts = 0;
+        incorrectGuesses = [];
+        isGameOver = false;
+        gameWon = false;
+        
+        // Update UI
+        updateGuessHistory();
+        updateProgressBar();
+        updateSkipButtonText();
+        
+        // Show confirmation message in the attempts info area instead of a popup
+        showResult("Challenge loaded: Can you guess this song?");
+    } else {
+        console.error('Challenge song not found:', songKey);
+        showResult("Challenge song not found. Starting a random game instead.");
+        startNewGame();
+    }
+}
+  
+// Helper function to show messages
+function showMessage(message) {
+    console.log("Showing message:", message);
+    
+    // Remove any existing messages first
+    const existingMessages = document.querySelectorAll('.game-message');
+    existingMessages.forEach(msg => msg.remove());
+    
+    const messageEl = document.createElement('div');
+    messageEl.className = 'game-message';
+    messageEl.textContent = message;
+    document.querySelector('.container').prepend(messageEl);
+    
+    // Make sure the message is visible
+    messageEl.style.opacity = '1';
+    
+    setTimeout(() => {
+        messageEl.style.opacity = '0';
+        setTimeout(() => messageEl.remove(), 500);
+    }, 3000);
+}
+
 function processTitle(title) {
     let aliases = [title.toLowerCase()];
     
@@ -386,6 +483,56 @@ async function loadGameData() {
         
         document.getElementById('song-count').textContent = Object.keys(gameData).length;
         setupAutocomplete();
+        
+        // Process any pending challenge after game data is loaded
+        if (pendingChallenge) {
+            console.log("Processing pending challenge...");
+            try {
+                // Now it's safe to decode and process the challenge
+                // Use a try-catch block specifically for the decoding step
+                let decodedData;
+                try {
+                    // First try regular decoding
+                    decodedData = atob(pendingChallenge);
+                    // If successful, try to parse JSON
+                    JSON.parse(decodedData);
+                } catch (decodeError) {
+                    // If regular decoding fails, try with URI decoding
+                    console.log("Standard decoding failed, trying URI decoding");
+                    decodedData = decodeURIComponent(atob(pendingChallenge));
+                }
+                
+                // Now parse the JSON data
+                const challengeData = JSON.parse(decodedData);
+                console.log("Challenge data:", challengeData);
+                
+                // Validate timestamp
+                const now = Date.now();
+                const challengeTime = challengeData.timestamp;
+                const expirationTime = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
+                
+                if (now - challengeTime > expirationTime) {
+                    showResult("This challenge has expired. Try a new one!");
+                } else if (gameData[challengeData.songKey]) {
+                    console.log("Found challenge song:", gameData[challengeData.songKey].display_title);
+                    // Now it's safe to handle the challenge
+                    handleChallenge(challengeData.songKey);
+                    pendingChallenge = null; // Clear the challenge after handling it
+                    return; // Don't start a normal game if we're handling a challenge
+                } else {
+                    console.error("Challenge song not found for key:", challengeData.songKey);
+                    showResult("Challenge song not found. Starting a new game.");
+                }
+            } catch (error) {
+                console.error('Invalid challenge link:', error);
+                showResult("Invalid challenge link. Starting a new game.");
+            }
+            
+            // Clear the pending challenge
+            pendingChallenge = null;
+        }
+        
+        // Only start a normal game if we're not handling a challenge
         startGame();
     } catch (error) {
         console.error('Error loading game data:', error);
@@ -794,153 +941,269 @@ function playCurrentSegment() {
     }
 }
 
-    function showSongList() {
-        // Set the peeked flag if in daily mode and game is not over
-        if (isDaily && !isGameOver) {
-            peekedAtSongList = true;
-            console.log('User peeked at song list during daily challenge');
-        }
+// Handle song item click in the song list
+function handleSongItemClick(item) {
+    const container = document.querySelector('.song-list-container');
+    
+    // Remove playing class from all items
+    container.querySelectorAll('.song-list-item').forEach(i => {
+        i.classList.remove('playing');
+    });
+
+    // Stop any currently playing preview
+    if (!previewPlayer.paused) {
+        previewPlayer.pause();
+        previewPlayer.currentTime = 0;
         
-        const modal = document.getElementById('songListModal');
-        const container = modal.querySelector('.song-list-container');
-        const searchInput = document.getElementById('songSearchInput');
-        const difficultyFilter = document.getElementById('difficultyFilter');
-
-        // Create a new audio element for previews if it doesn't exist
-        if (!previewPlayer) {
-            previewPlayer = new Audio();
-        }
-
-    function handleSongItemClick(item) {
-        // Remove playing class from all items
-        container.querySelectorAll('.song-list-item').forEach(i => {
-            i.classList.remove('playing');
-        });
-
-        // Stop any currently playing preview
-        if (!previewPlayer.paused) {
-            previewPlayer.pause();
-            previewPlayer.currentTime = 0;
-            
-            // If clicking the same song that's playing, just stop it
-            if (previewPlayer.dataset.currentSong === item.dataset.preview) {
-                previewPlayer.dataset.currentSong = '';
-                return;
-            }
-        }
-
-        // Add playing class to clicked item
-        item.classList.add('playing');
-
-        // Play new preview
-        const encodedFilename = encodeURIComponent(item.dataset.preview)
-            .replace(/%23/g, '%2523');
-        
-        previewPlayer.src = `game_audio/${encodedFilename}`;
-        previewPlayer.dataset.currentSong = item.dataset.preview;
-
-        // Remove playing class when audio ends
-        previewPlayer.onended = () => {
-            item.classList.remove('playing');
+        // If clicking the same song that's playing, just stop it
+        if (previewPlayer.dataset.currentSong === item.dataset.preview) {
             previewPlayer.dataset.currentSong = '';
-        };
-
-        // Also remove playing class if audio is stopped
-        previewPlayer.onpause = () => {
-            item.classList.remove('playing');
-        };
-
-        previewPlayer.play();
+            return;
+        }
     }
 
-    function filterSongs() {
-        const searchTerm = searchInput.value;
-        const difficultyLevel = difficultyFilter.value;
+    // Add playing class to clicked item
+    item.classList.add('playing');
+
+    // Play new preview
+    const encodedFilename = encodeURIComponent(item.dataset.preview)
+        .replace(/%23/g, '%2523');
     
-        // Only process search term if it exists
-        const searchAliases = searchTerm ? processTitle(searchTerm) : [''];
-    
-        return Object.values(gameData).filter(song => {
-            // Get all possible matches for the song title and aliases
-            const titleAliases = processTitle(song.display_title);
-            const songAliases = song.alias ? song.alias.flatMap(alias => processTitle(alias)) : [];
-            const artistAliases = song.artist ? processTitle(song.artist) : [];
+    previewPlayer.src = `game_audio/${encodedFilename}`;
+    previewPlayer.dataset.currentSong = item.dataset.preview;
+
+    // Remove playing class when audio ends
+    previewPlayer.onended = () => {
+        item.classList.remove('playing');
+        previewPlayer.dataset.currentSong = '';
+    };
+
+    // Also remove playing class if audio is stopped
+    previewPlayer.onpause = () => {
+        item.classList.remove('playing');
+    };
+
+    previewPlayer.play();
+}
+
+// Filter songs based on search and difficulty inputs
+function filterSongs() {
+    const searchInput = document.getElementById('songSearchInput');
+    const difficultyFilter = document.getElementById('difficultyFilter');
+    const searchTerm = searchInput.value;
+    const difficultyLevel = difficultyFilter.value;
+
+    // Only process search term if it exists
+    const searchAliases = searchTerm ? processTitle(searchTerm) : [''];
+
+    return Object.values(gameData).filter(song => {
+        // Get all possible matches for the song title and aliases
+        const titleAliases = processTitle(song.display_title);
+        const songAliases = song.alias ? song.alias.flatMap(alias => processTitle(alias)) : [];
+        const artistAliases = song.artist ? processTitle(song.artist) : [];
+        
+        // Check if any search term matches any of the song's variations
+        const matchesSearch = searchAliases.some(searchAlias =>
+            titleAliases.some(titleAlias => titleAlias.includes(searchAlias)) ||
+            songAliases.some(songAlias => songAlias.includes(searchAlias)) ||
+            artistAliases.some(artistAlias => artistAlias.includes(searchAlias))
+        );
+
+        // Apply difficulty filter if selected
+        if (!difficultyLevel || !song.metadata?.insane_levels) {
+            return matchesSearch;
+        }
+
+        return matchesSearch && song.metadata.insane_levels.includes(difficultyLevel);
+    });
+}
+
+// Update the song list display based on filters
+function updateSongList() {
+    const container = document.querySelector('.song-list-container');
+    // Store currently playing song info
+    const currentlyPlaying = previewPlayer?.dataset.currentSong;
+
+    const filteredSongs = filterSongs().sort((a, b) => 
+        a.display_title.localeCompare(b.display_title));
+
+    container.innerHTML = filteredSongs.map(song => {
+        const levels = song.metadata?.insane_levels || [];
+        const levelsHtml = levels.length > 0 
+            ? `<span class="song-list-levels">${levels.join(', ')}</span>`
+            : '';
+        
+        // Add playing class if this song is currently playing
+        const isPlaying = song.preview_file === currentlyPlaying;
+        const playingClass = isPlaying ? 'playing' : '';
+        
+        // Find song key for challenge link generation
+        const songKey = Object.keys(gameData).find(key => gameData[key].display_title === song.display_title);
             
-            // Check if any search term matches any of the song's variations
-            const matchesSearch = searchAliases.some(searchAlias =>
-                titleAliases.some(titleAlias => titleAlias.includes(searchAlias)) ||
-                songAliases.some(songAlias => songAlias.includes(searchAlias)) ||
-                artistAliases.some(artistAlias => artistAlias.includes(searchAlias))
-            );
-    
-            // Apply difficulty filter if selected
-            if (!difficultyLevel || !song.metadata?.insane_levels) {
-                return matchesSearch;
-            }
-    
-            return matchesSearch && song.metadata.insane_levels.includes(difficultyLevel);
-        });
-    }
-
-    function updateSongList() {
-        // Store currently playing song info
-        const currentlyPlaying = previewPlayer?.dataset.currentSong;
-
-        const filteredSongs = filterSongs().sort((a, b) => 
-            a.display_title.localeCompare(b.display_title));
-
-        container.innerHTML = filteredSongs.map(song => {
-            const levels = song.metadata?.insane_levels || [];
-            const levelsHtml = levels.length > 0 
-                ? `<span class="song-list-levels">${levels.join(', ')}</span>`
-                : '';
-            
-            // Add playing class if this song is currently playing
-            const isPlaying = song.preview_file === currentlyPlaying;
-            const playingClass = isPlaying ? 'playing' : '';
-                
-            return `
-                <div class="song-list-item ${playingClass}" data-preview="${song.preview_file}">
-                    <div class="song-list-details">
-                        <span class="song-list-title">${song.display_title}</span>
-                        ${levelsHtml}
-                    </div>
+        return `
+            <div class="song-list-item ${playingClass}" data-preview="${song.preview_file}">
+                <div class="song-list-details">
+                    <span class="song-list-title">${song.display_title}</span>
+                    ${levelsHtml}
                 </div>
-            `;
-        }).join('');
+                <div class="song-list-actions">
+                    <button class="challenge-icon" data-song-key="${songKey}" title="Challenge a friend with this song">
+                        <i class="fas fa-crown"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+    }).join('');
 
-        // Add click event listeners to all song items
-        container.querySelectorAll('.song-list-item').forEach(item => {
-            item.addEventListener('click', () => handleSongItemClick(item));
-        });
-    }
-
-    // Add event listeners for filters
-    searchInput.addEventListener('input', updateSongList);
-    difficultyFilter.addEventListener('change', updateSongList);
-
-    // Clear any existing filter values
-    searchInput.value = '';
-    difficultyFilter.value = '';
-
-    // Initial song list display
-    updateSongList();
-    modal.style.display = 'block';
-
-    // Stop preview playback when closing modal
-    const closeButton = modal.querySelector('.modal-button');
-    closeButton.addEventListener('click', () => {
-        if (previewPlayer && !previewPlayer.paused) {
-            previewPlayer.pause();
-            previewPlayer.currentTime = 0;
-            previewPlayer.dataset.currentSong = '';
-            container.querySelectorAll('.song-list-item').forEach(i => {
-                i.classList.remove('playing');
+    // Add click event listeners to all song items
+    container.querySelectorAll('.song-list-item').forEach(item => {
+        // Play song preview when clicking on the song details
+        const detailsEl = item.querySelector('.song-list-details');
+        detailsEl.addEventListener('click', () => handleSongItemClick(item));
+        
+        // Handle challenge button click
+        const challengeBtn = item.querySelector('.challenge-icon');
+        if (challengeBtn) {
+            challengeBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent triggering the song play
+                const songKey = challengeBtn.dataset.songKey;
+                if (songKey) {
+                    createSongChallenge(songKey);
+                }
             });
         }
     });
 }
 
+// Create a challenge from a selected song
+function createSongChallenge(songKey) {
+    if (!songKey || !gameData[songKey]) {
+        console.error('Invalid song key for challenge:', songKey);
+        return;
+    }
+    
+    try {
+        // Generate the challenge link
+        const challengeLink = generateChallengeLink(songKey);
+        
+        // Get song title and safely encode it for display
+        const songTitle = gameData[songKey].display_title;
+        const safeTitle = document.createElement('div');
+        safeTitle.textContent = songTitle; // This safely encodes HTML entities
+        
+        // Create a mini modal to show the challenge options
+        const challengeModal = document.createElement('div');
+        challengeModal.className = 'challenge-mini-modal';
+        challengeModal.innerHTML = `
+            <div class="challenge-mini-content">
+                <h3>Challenge a Friend</h3>
+                <p>Send this link to challenge someone to guess this song:</p>
+                <div class="song-title-preview">${safeTitle.innerHTML}</div>
+                <div class="challenge-link-container">
+                    <input type="text" class="challenge-link-input" value="${challengeLink}" readonly>
+                    <button class="copy-link-btn"><i class="fas fa-copy"></i> Copy</button>
+                </div>
+                <div class="share-options">
+                    <button class="share-btn" title="Share"><i class="fas fa-share-alt"></i> Share</button>
+                </div>
+                <button class="close-mini-modal"><i class="fas fa-times"></i></button>
+            </div>
+        `;
+        
+        document.body.appendChild(challengeModal);
+        
+        // Select the link input for easy copying
+        const linkInput = challengeModal.querySelector('.challenge-link-input');
+        linkInput.select();
+        
+        // Add event listeners
+        challengeModal.querySelector('.copy-link-btn').addEventListener('click', () => {
+            linkInput.select();
+            document.execCommand('copy');
+            
+            // Show success message
+            const copyBtn = challengeModal.querySelector('.copy-link-btn');
+            const originalText = copyBtn.innerHTML;
+            copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            setTimeout(() => {
+                copyBtn.innerHTML = originalText;
+            }, 2000);
+        });
+        
+        // Share button (use Web Share API if available)
+        challengeModal.querySelector('.share-btn').addEventListener('click', () => {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'BMS Heardle Challenge',
+                    text: `Can you guess this BMS song? I challenge you!`,
+                    url: challengeLink
+                }).catch(error => {
+                    console.log('Error sharing:', error);
+                    // Fallback to clipboard
+                    linkInput.select();
+                    document.execCommand('copy');
+                    showResult("Challenge link copied to clipboard!");
+                });
+            } else {
+                // If Web Share API is not available, just copy to clipboard
+                linkInput.select();
+                document.execCommand('copy');
+                showResult("Challenge link copied to clipboard!");
+            }
+        });
+        
+        // Close button
+        challengeModal.querySelector('.close-mini-modal').addEventListener('click', () => {
+            challengeModal.remove();
+        });
+        
+        // Close when clicking outside
+        challengeModal.addEventListener('click', (e) => {
+            if (e.target === challengeModal) {
+                challengeModal.remove();
+            }
+        });
+    } catch (error) {
+        console.error('Error creating challenge:', error);
+        showResult("Couldn't create challenge. Please try another song.");
+    }
+}
+
+// Main function to show the song list modal
+function showSongList() {
+    // Set the peeked flag if in daily mode and game is not over
+    if (isDaily && !isGameOver) {
+        peekedAtSongList = true;
+        console.log('User peeked at song list during daily challenge');
+    }
+    
+    const modal = document.getElementById('songListModal');
+    const searchInput = document.getElementById('songSearchInput');
+    const difficultyFilter = document.getElementById('difficultyFilter');
+
+    // Create a new audio element for previews if it doesn't exist
+    if (!previewPlayer) {
+        previewPlayer = new Audio();
+    }
+    
+    // Add event listeners for filters
+    searchInput.addEventListener('input', updateSongList);
+    difficultyFilter.addEventListener('change', updateSongList);
+    
+    // Clear any existing filter values
+    searchInput.value = '';
+    difficultyFilter.value = '';
+    
+    // Initial song list display
+    updateSongList();
+    modal.style.display = 'block';
+    
+    // Stop preview playback when closing modal
+    const closeButton = modal.querySelector('.modal-button');
+    closeButton.addEventListener('click', closeSongList);
+}
+
+// Close the song list modal
 function closeSongList() {
     document.getElementById('songListModal').style.display = 'none';
     
@@ -949,6 +1212,14 @@ function closeSongList() {
         previewPlayer.pause();
         previewPlayer.currentTime = 0;
         previewPlayer.dataset.currentSong = '';
+        
+        // Remove playing class from all items
+        const container = document.querySelector('.song-list-container');
+        if (container) {
+            container.querySelectorAll('.song-list-item').forEach(i => {
+                i.classList.remove('playing');
+            });
+        }
     }
 }
 
@@ -1561,8 +1832,6 @@ function setupModalEnterKey() {
     document.addEventListener('keydown', modalHandler);
 }
 
-
-
 function skipGuess() {
     if (isGameOver) return;
     
@@ -2004,7 +2273,20 @@ async function shareResult() {
 
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize volume control
+    // Check for challenge parameter in URL - Store it for processing after data loads
+    const urlParams = new URLSearchParams(window.location.search);
+    const challengeParam = urlParams.get('challenge');
+    
+    if (challengeParam) {
+        // Store the challenge parameter in a global variable for later processing
+        pendingChallenge = challengeParam;
+        
+        // Clean up the URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+        
+    }
+    
+    // Initialize volume control - YOUR EXISTING CODE STARTS HERE
     const volumeIcon = document.querySelector('.volume-control i');
     const volumeSlider = document.querySelector('.volume-slider');
     const previewPlayer = document.querySelector('#previewPlayer');
@@ -2049,6 +2331,7 @@ document.addEventListener('DOMContentLoaded', () => {
         alert("Daily challenge reset");
         location.reload();
     });
+
 
     // Game mode toggle listeners
 // Replace the daily mode button click handler with this
