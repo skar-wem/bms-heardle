@@ -267,20 +267,28 @@ function drawWave() {
 
 function generateChallengeLink(songKey) {
     try {
-        // Create a base64-encoded string with timestamp to prevent guessing
+        // Find the index of the song in the gameData object
+        const songKeys = Object.keys(gameData);
+        const songIndex = songKeys.indexOf(songKey);
+        
+        if (songIndex === -1) {
+            throw new Error('Song not found');
+        }
+        
+        // Create data with the index instead of the full key
         const timestamp = Date.now();
         const challengeData = {
-            songKey: songKey,
-            timestamp: timestamp
+            i: songIndex, // Using 'i' instead of 'songKey' - much shorter
+            t: timestamp  // Using 't' instead of 'timestamp' - shorter
         };
         
-        // Encode the data - use encodeURIComponent first for safety
+        // Encode the data
         const jsonString = JSON.stringify(challengeData);
-        const encodedData = btoa(encodeURIComponent(jsonString));
+        const encodedData = btoa(jsonString);
         
         // Generate the full URL
         const baseUrl = window.location.origin + window.location.pathname;
-        return `${baseUrl}?challenge=${encodedData}`;
+        return `${baseUrl}?c=${encodedData}`; // Using 'c' instead of 'challenge'
     } catch (error) {
         console.error('Error generating challenge link:', error);
         throw new Error('Failed to generate challenge link');
@@ -506,21 +514,42 @@ async function loadGameData() {
                 const challengeData = JSON.parse(decodedData);
                 console.log("Challenge data:", challengeData);
                 
+                // Check if this is the new format (with index) or old format (with songKey)
+                let songKey;
+                
+                if ('i' in challengeData) {
+                    // New format with song index
+                    const songKeys = Object.keys(gameData);
+                    songKey = songKeys[challengeData.i];
+                    console.log("Using new format challenge with index:", challengeData.i);
+                } else if ('songKey' in challengeData) {
+                    // Old format with explicit song key
+                    songKey = challengeData.songKey;
+                    console.log("Using old format challenge with songKey");
+                } else {
+                    throw new Error('Challenge data missing song information');
+                }
+                
+                // Get timestamp (supports both t and timestamp fields)
+                const challengeTime = challengeData.t || challengeData.timestamp;
+                if (!challengeTime) {
+                    throw new Error('Challenge data missing timestamp');
+                }
+                
                 // Validate timestamp
                 const now = Date.now();
-                const challengeTime = challengeData.timestamp;
                 const expirationTime = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
                 
                 if (now - challengeTime > expirationTime) {
                     showResult("This challenge has expired. Try a new one!");
-                } else if (gameData[challengeData.songKey]) {
-                    console.log("Found challenge song:", gameData[challengeData.songKey].display_title);
+                } else if (songKey && gameData[songKey]) {
+                    console.log("Found challenge song:", gameData[songKey].display_title);
                     // Now it's safe to handle the challenge
-                    handleChallenge(challengeData.songKey);
+                    handleChallenge(songKey);
                     pendingChallenge = null; // Clear the challenge after handling it
                     return; // Don't start a normal game if we're handling a challenge
                 } else {
-                    console.error("Challenge song not found for key:", challengeData.songKey);
+                    console.error("Challenge song not found for key:", songKey);
                     showResult("Challenge song not found. Starting a new game.");
                 }
             } catch (error) {
@@ -2275,7 +2304,7 @@ async function shareResult() {
 document.addEventListener('DOMContentLoaded', () => {
     // Check for challenge parameter in URL - Store it for processing after data loads
     const urlParams = new URLSearchParams(window.location.search);
-    const challengeParam = urlParams.get('challenge');
+    const challengeParam = urlParams.get('c'); // Changed from 'challenge' to 'c'
     
     if (challengeParam) {
         // Store the challenge parameter in a global variable for later processing
