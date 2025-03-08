@@ -1171,6 +1171,7 @@ async function loadGameData() {
 }
 
 // Modify startGame function to load saved state
+// Modify startGame function to load saved state
 function startGame() {
     // First, check if we're in daily mode
     if (isDaily) {
@@ -2856,6 +2857,8 @@ function playDifficultySound(isCorrect) {
 }
 
 function showDailyResultModal() {
+    console.log("Showing daily result modal");
+    
     // Get the stored result
     const result = localStorage.getItem('dailyResult');
     const isWin = result && result !== 'X';
@@ -2887,10 +2890,8 @@ function showDailyResultModal() {
         return;
     }
     
-    const dailySong = gameData[dailySongKey];
-    
     // Set up the current song for the modal to use
-    currentSong = dailySong;
+    currentSong = gameData[dailySongKey];
     currentSong.cleanArtist = cleanupText(currentSong.artist);
     
     // Display the modal with the previous result
@@ -3029,7 +3030,6 @@ function showDailyResultModal() {
     modal.style.display = 'block';
     isGameOver = true;
     
-    
     // Make sure share button is visible
     if (shareButton) {
         shareButton.style.display = 'inline-block';
@@ -3051,7 +3051,15 @@ function showDailyResultModal() {
             isDaily = false;
             document.getElementById('dailyModeBtn').classList.remove('active');
             document.getElementById('unlimitedModeBtn').classList.add('active');
-            updateFilterVisibility();
+            
+            // Make sure to enable and update the filter button
+            const filterBtn = document.getElementById('filterButton');
+            if (filterBtn) {
+                filterBtn.classList.remove('disabled');
+                filterBtn.classList.add('active');
+                updateFilterButtonAppearance();
+            }
+            
             startNewGame();
         });
         
@@ -3073,7 +3081,15 @@ function showDailyResultModal() {
                 isDaily = false;
                 document.getElementById('dailyModeBtn').classList.remove('active');
                 document.getElementById('unlimitedModeBtn').classList.add('active');
-                updateFilterVisibility();
+                
+                // Make sure to enable and update the filter button
+                const filterBtn = document.getElementById('filterButton');
+                if (filterBtn) {
+                    filterBtn.classList.remove('disabled');
+                    filterBtn.classList.add('active');
+                    updateFilterButtonAppearance();
+                }
+                
                 startNewGame();
             });
             
@@ -3387,119 +3403,120 @@ document.addEventListener('DOMContentLoaded', () => {
         location.reload();
     });
 
-    // Game mode toggle listeners
-    document.getElementById('dailyModeBtn').addEventListener('click', () => {
-        if (!isDaily) {
-            // Stop any currently playing audio
-            const player = document.getElementById('audio-player');
-            const playButton = document.querySelector('.play-button');
+
+// Game mode toggle listeners
+document.getElementById('dailyModeBtn').addEventListener('click', () => {
+    if (!isDaily) {
+        // Stop any currently playing audio
+        const player = document.getElementById('audio-player');
+        const playButton = document.querySelector('.play-button');
+        
+        if (isPlaying) {
+            player.pause();
+            player.currentTime = 0;
+            playButton.textContent = 'Play';
+            isPlaying = false;
             
-            if (isPlaying) {
-                player.pause();
-                player.currentTime = 0;
-                playButton.textContent = 'Play';
-                isPlaying = false;
+            // Reset progress bar
+            const progressFill = document.querySelector('.progress-fill');
+            progressFill.style.width = '0%';
+                            
+            // Stop wave animation if it's running
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+            }
+        }
+        
+        const filterBtn = document.getElementById('filterButton');
+        if (filterBtn) {
+            filterBtn.classList.add('disabled');
+            filterBtn.classList.remove('active');
+            filterBtn.classList.remove('has-active-filters');
+        }
+
+        // First save the current unlimited mode state if not completed
+        if (!isGameOver) {
+            // Save the current state to unlimited storage
+            const unlimitedGameState = {
+                attempts: attempts,
+                incorrectGuesses: incorrectGuesses,
+                isDaily: false,
+                dailySeed: dailySeed,
+                peekedAtSongList: peekedAtSongList
+            };
+            localStorage.setItem('unlimitedGameState', JSON.stringify(unlimitedGameState));
+            console.log('Saved unlimited game state before switching to daily');
+        }
+        
+        // Switch to daily mode
+        isDaily = true;
+        document.getElementById('dailyModeBtn').classList.add('active');
+        document.getElementById('unlimitedModeBtn').classList.remove('active');
+        
+        // Reset game state variables for the new mode
+        attempts = 0;
+        incorrectGuesses = [];
+        isGameOver = false;
+        gameWon = false;
+        
+        // Check if there's a completed daily challenge for today
+        const today = new Date().toISOString().slice(0, 10);
+        const lastPlayed = localStorage.getItem('lastDailyPlayed');
+        
+        if (lastPlayed === today) {
+            // Show completed daily challenge
+            dailyAttempted = true;
+            dailySeed = today;
+            showDailyResultModal();
+        } else {
+            // Check if we have a saved daily game state
+            const savedDailyState = localStorage.getItem('dailyGameState');
+            
+            if (savedDailyState) {
+                // Parse the saved state
+                const gameState = JSON.parse(savedDailyState);
                 
-                // Reset progress bar
-                const progressFill = document.querySelector('.progress-fill');
-                progressFill.style.width = '0%';
-                                
-                // Stop wave animation if it's running
-                if (animationId) {
-                    cancelAnimationFrame(animationId);
-                    animationId = null;
-                }
-            }
-            
-            const filterBtn = document.getElementById('filterButton');
-            if (filterBtn) {
-                filterBtn.classList.add('disabled');
-                filterBtn.classList.remove('active');
-                filterBtn.classList.remove('has-active-filters');
-            }
-    
-            // First save the current unlimited mode state if not completed
-            if (!isGameOver) {
-                // Save the current state to unlimited storage
-                const unlimitedGameState = {
-                    attempts: attempts,
-                    incorrectGuesses: incorrectGuesses,
-                    isDaily: false,
-                    dailySeed: dailySeed,
-                    peekedAtSongList: peekedAtSongList
-                };
-                localStorage.setItem('unlimitedGameState', JSON.stringify(unlimitedGameState));
-                console.log('Saved unlimited game state before switching to daily');
-            }
-            
-            // Switch to daily mode
-            isDaily = true;
-            document.getElementById('dailyModeBtn').classList.add('active');
-            document.getElementById('unlimitedModeBtn').classList.remove('active');
-            
-            // Reset game state variables for the new mode
-            attempts = 0;
-            incorrectGuesses = [];
-            isGameOver = false;
-            gameWon = false;
-            
-            // Check if there's a completed daily challenge for today
-            const today = new Date().toISOString().slice(0, 10);
-            const lastPlayed = localStorage.getItem('lastDailyPlayed');
-            
-            if (lastPlayed === today) {
-                // Show completed daily challenge
-                dailyAttempted = true;
-                dailySeed = today;
-                showDailyResultModal();
-            } else {
-                // Check if we have a saved daily game state
-                const savedDailyState = localStorage.getItem('dailyGameState');
-                
-                if (savedDailyState) {
-                    // Parse the saved state
-                    const gameState = JSON.parse(savedDailyState);
+                // Make sure it's for today (in case it's an old state)
+                if (gameState.dailySeed === today) {
+                    console.log('Found saved daily game state for today:', gameState);
                     
-                    // Make sure it's for today (in case it's an old state)
-                    if (gameState.dailySeed === today) {
-                        console.log('Found saved daily game state for today:', gameState);
+                    // Restore the state
+                    attempts = gameState.attempts;
+                    incorrectGuesses = gameState.incorrectGuesses;
+                    dailySeed = gameState.dailySeed;
+                    peekedAtSongList = gameState.peekedAtSongList;
+                    
+                    // Load the daily song
+                    const savedSongKey = localStorage.getItem('dailySongKey');
+                    if (savedSongKey && gameData[savedSongKey]) {
+                        currentSong = gameData[savedSongKey];
+                        currentSong.cleanArtist = cleanupText(currentSong.artist);
                         
-                        // Restore the state
-                        attempts = gameState.attempts;
-                        incorrectGuesses = gameState.incorrectGuesses;
-                        dailySeed = gameState.dailySeed;
-                        peekedAtSongList = gameState.peekedAtSongList;
+                        // Set up the audio player
+                        const player = document.getElementById('audio-player');
+                        player.src = `game_audio/${encodeFilename(currentSong.heardle_file)}`;
                         
-                        // Load the daily song
-                        const savedSongKey = localStorage.getItem('dailySongKey');
-                        if (savedSongKey && gameData[savedSongKey]) {
-                            currentSong = gameData[savedSongKey];
-                            currentSong.cleanArtist = cleanupText(currentSong.artist);
-                            
-                            // Set up the audio player
-                            const player = document.getElementById('audio-player');
-                            player.src = `game_audio/${encodeFilename(currentSong.heardle_file)}`;
-                            
-                            // Update UI to reflect loaded state
-                            console.log('Restoring daily game with attempts:', attempts);
-                            updateGuessHistory();
-                            updateProgressBar();
-                            updateSkipButtonText();
-                        } else {
-                            console.log('Could not find saved song, starting new game');
-                            startNewGame();
-                        }
+                        // Update UI to reflect loaded state
+                        console.log('Restoring daily game with attempts:', attempts);
+                        updateGuessHistory();
+                        updateProgressBar();
+                        updateSkipButtonText();
                     } else {
-                        console.log('Saved daily state is for a different day, starting new game');
+                        console.log('Could not find saved song, starting new game');
                         startNewGame();
                     }
                 } else {
-                    console.log('No saved daily game state, starting new game');
+                    console.log('Saved daily state is for a different day, starting new game');
                     startNewGame();
                 }
+            } else {
+                console.log('No saved daily game state, starting new game');
+                startNewGame();
             }
         }
-    });
+    }
+});
 
 // Update the unlimited mode button click handler
 document.getElementById('unlimitedModeBtn').addEventListener('click', () => {
@@ -3525,7 +3542,7 @@ document.getElementById('unlimitedModeBtn').addEventListener('click', () => {
             }
         }
         
-        // Enable the filter button - moved outside the isPlaying check
+        // Enable the filter button - make sure to do this regardless of audio state
         const filterBtn = document.getElementById('filterButton');
         if (filterBtn) {
             filterBtn.classList.remove('disabled');
@@ -3641,7 +3658,14 @@ document.getElementById('unlimitedModeBtn').addEventListener('click', () => {
                 isDaily = false;
                 document.getElementById('dailyModeBtn').classList.remove('active');
                 document.getElementById('unlimitedModeBtn').classList.add('active');
-                updateFilterVisibility();
+                
+                // Make sure to enable and update the filter button
+                const filterBtn = document.getElementById('filterButton');
+                if (filterBtn) {
+                    filterBtn.classList.remove('disabled');
+                    filterBtn.classList.add('active');
+                    updateFilterButtonAppearance();
+                }
             }
             
             // Start a new game
