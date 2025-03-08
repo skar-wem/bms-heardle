@@ -468,7 +468,7 @@ body {
     margin-bottom: 10px;
     width: 100%;
     box-sizing: border-box;
-    z-index: 1002;
+    z-index: 1005;
 }
 
 .song-reveal {
@@ -1163,13 +1163,17 @@ body {
     margin-top: 5px;
     background: #0a0a0f;
     border-radius: 10px;
-    max-height: 374px; /* Desktop height */
+    max-height: 374px;
     overflow-y: auto;
     display: none;
-    z-index: 1001;
+    z-index: 1010; /* Increase this value - was 1001 */
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
     padding: 4px;
+}
+
+.suggestions-backdrop {
+    z-index: 1009; 
 }
 
 .suggestion-box::-webkit-scrollbar {
@@ -1710,7 +1714,7 @@ body {
     width: 100%;
     max-width: 400px;
     position: relative;
-    z-index: 2;
+    z-index: 1;
 }
 
 .mode-btn {
