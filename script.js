@@ -40,7 +40,11 @@ function loadPlayedSongs() {
 function updateFilteredSongCount() {
     const selectedLevels = JSON.parse(localStorage.getItem('selectedDifficultyLevels') || '[]');
     const hidePlayedSongs = localStorage.getItem('filterHidePlayed') === 'true';
-    const languageFilter = localStorage.getItem('languageFilter') || 'all';
+    
+    // Get language filter selections
+    const allLanguagesSelected = localStorage.getItem('allLanguagesSelected') === 'true';
+    const selectedLanguages = allLanguagesSelected ? [] : 
+                             JSON.parse(localStorage.getItem('languageFilters') || '[]');
     
     // Count eligible songs
     let eligibleSongsCount = Object.keys(gameData).filter(songKey => {
@@ -61,10 +65,10 @@ function updateFilteredSongCount() {
             }
         }
         
-        // Apply language filter
-        if (languageFilter !== 'all') {
+        // Apply language filter(s)
+        if (!allLanguagesSelected && selectedLanguages.length > 0) {
             const titleLanguage = detectTitleLanguage(song.display_title);
-            if (languageFilter !== titleLanguage) {
+            if (!selectedLanguages.includes(titleLanguage)) {
                 return false;
             }
         }
@@ -129,10 +133,12 @@ function getFilteredRandomSong() {
     const selectedLevels = JSON.parse(localStorage.getItem('selectedDifficultyLevels') || '[]');
     const hidePlayedSongs = localStorage.getItem('filterHidePlayed') === 'true';
     
-    // Get selected language filter
-    const languageFilter = localStorage.getItem('languageFilter') || 'all';
+    // Get language filter selections
+    const allLanguagesSelected = localStorage.getItem('allLanguagesSelected') === 'true';
+    const selectedLanguages = allLanguagesSelected ? [] : 
+                             JSON.parse(localStorage.getItem('languageFilters') || '[]');
     
-    console.log("Filter values:", { selectedLevels, hidePlayedSongs, languageFilter });
+    console.log("Filter values:", { selectedLevels, hidePlayedSongs, allLanguagesSelected, selectedLanguages });
     
     // Filter songs based on criteria
     let eligibleSongs = Object.keys(gameData).filter(songKey => {
@@ -153,10 +159,10 @@ function getFilteredRandomSong() {
             }
         }
         
-        // Apply language filter
-        if (languageFilter !== 'all') {
+        // Apply language filter(s)
+        if (!allLanguagesSelected && selectedLanguages.length > 0) {
             const titleLanguage = detectTitleLanguage(song.display_title);
-            if (languageFilter !== titleLanguage) {
+            if (!selectedLanguages.includes(titleLanguage)) {
                 return false;
             }
         }
@@ -192,16 +198,28 @@ function updateFilterButtonAppearance() {
     // Get hide played state
     const hidePlayedSongs = document.getElementById('hidePlayedFilter')?.checked || false;
     
-    // Get language filter
-    const languageFilter = document.querySelector('input[name="languageFilter"]:checked')?.value || 'all';
+    // Get selected language filters (multiple now possible)
+    const selectedLanguages = [];
+    const allLanguagesSelected = document.getElementById('languageFilterAll')?.checked || false;
+    
+    if (!allLanguagesSelected) {
+        if (document.getElementById('languageFilterEnglish')?.checked) selectedLanguages.push('english');
+        if (document.getElementById('languageFilterJapanese')?.checked) selectedLanguages.push('japanese');
+        if (document.getElementById('languageFilterMixed')?.checked) selectedLanguages.push('mixed');
+    }
     
     // Save filter values to localStorage
     localStorage.setItem('selectedDifficultyLevels', JSON.stringify(selectedLevels));
     localStorage.setItem('filterHidePlayed', hidePlayedSongs.toString());
-    localStorage.setItem('languageFilter', languageFilter);
+    
+    // Save multiple language selections
+    localStorage.setItem('languageFilters', JSON.stringify(selectedLanguages));
+    localStorage.setItem('allLanguagesSelected', allLanguagesSelected.toString());
     
     // Check if any filters are active
-    const hasActiveFilters = selectedLevels.length > 0 || hidePlayedSongs || languageFilter !== 'all';
+    const hasActiveFilters = selectedLevels.length > 0 || 
+                            hidePlayedSongs || 
+                            (!allLanguagesSelected && selectedLanguages.length > 0);
     
     if (hasActiveFilters) {
         filterButton.classList.add('has-active-filters');
@@ -272,20 +290,21 @@ function resetFilters() {
         btn.classList.remove('selected');
     });
     
-    // Reset hide played checkbox
+    // Set hide played checkbox to true (default)
     const hidePlayedFilter = document.getElementById('hidePlayedFilter');
-    hidePlayedFilter.checked = false;
+    hidePlayedFilter.checked = true;
     
     // Reset language filter to "all"
-    const allLanguageOption = document.getElementById('languageFilterAll');
-    if (allLanguageOption) {
-        allLanguageOption.checked = true;
-    }
+    document.getElementById('languageFilterAll').checked = true;
+    document.getElementById('languageFilterEnglish').checked = false;
+    document.getElementById('languageFilterJapanese').checked = false;
+    document.getElementById('languageFilterMixed').checked = false;
     
     // Save reset state to localStorage
     localStorage.setItem('selectedDifficultyLevels', '[]');
-    localStorage.setItem('filterHidePlayed', 'false');
-    localStorage.setItem('languageFilter', 'all');
+    localStorage.setItem('filterHidePlayed', 'true');
+    localStorage.setItem('allLanguagesSelected', 'true');
+    localStorage.setItem('languageFilters', '[]');
     
     // Update filter button appearance
     updateFilterButtonAppearance();
@@ -295,6 +314,60 @@ function resetFilters() {
     
     showResult("Filters reset");
 }
+
+// Add language checkbox event handlers
+function initializeLanguageFilters() {
+    // Handle language filter checkboxes special behavior
+    const allLanguageCheckbox = document.getElementById('languageFilterAll');
+    const languageCheckboxes = document.querySelectorAll('input[name="languageFilter"]:not(#languageFilterAll)');
+    
+    // When "All" is clicked
+    allLanguageCheckbox.addEventListener('change', function() {
+        if (this.checked) {
+            // Uncheck all other language options
+            languageCheckboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+        } else {
+            // If unchecking "All" with nothing else selected, re-check it
+            const anyOtherChecked = Array.from(languageCheckboxes).some(checkbox => checkbox.checked);
+            if (!anyOtherChecked) {
+                this.checked = true;
+            }
+        }
+        updateFilterButtonAppearance();
+    });
+    
+    // When any other language option is clicked
+    languageCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            if (this.checked) {
+                // If checking a specific language, uncheck "All"
+                allLanguageCheckbox.checked = false;
+            } else {
+                // If unchecking and no other specific languages are checked, check "All"
+                const anyOtherChecked = Array.from(languageCheckboxes).some(cb => cb.checked && cb !== this);
+                if (!anyOtherChecked) {
+                    allLanguageCheckbox.checked = true;
+                }
+            }
+            updateFilterButtonAppearance();
+        });
+    });
+}
+
+// Load saved language filters
+function loadSavedLanguageFilters() {
+    const allLanguagesSelected = localStorage.getItem('allLanguagesSelected') === 'true';
+    const selectedLanguages = JSON.parse(localStorage.getItem('languageFilters') || '[]');
+    
+    // Set checkbox states based on saved values
+    document.getElementById('languageFilterAll').checked = allLanguagesSelected;
+    document.getElementById('languageFilterEnglish').checked = selectedLanguages.includes('english');
+    document.getElementById('languageFilterJapanese').checked = selectedLanguages.includes('japanese');
+    document.getElementById('languageFilterMixed').checked = selectedLanguages.includes('mixed');
+}
+
 
 // Show play history modal
 function showPlayHistory() {
@@ -723,20 +796,18 @@ function handleChallenge(songKey) {
     
     // Switch to challenge mode
     isDaily = false;
-    document.getElementById('dailyModeBtn').classList.remove('active');
-    document.getElementById('unlimitedModeBtn').classList.add('active');
     
-    // Remove any existing challenge banner first
-    const existingBanner = document.querySelector('.challenge-banner');
-    if (existingBanner) {
-        existingBanner.remove();
+    // Get the center controls container where mode buttons are
+    const centerControls = document.querySelector('.center-controls');
+    if (centerControls) {
+        // Store the original content so we can restore it later
+        if (!centerControls.hasAttribute('data-original-content')) {
+            centerControls.setAttribute('data-original-content', centerControls.innerHTML);
+        }
+        
+        // Replace mode buttons with challenge banner
+        centerControls.innerHTML = '<div class="challenge-banner"><span>👑 Friend Challenge Mode 👑</span></div>';
     }
-    
-    // Show a special message
-    const challengeBanner = document.createElement('div');
-    challengeBanner.className = 'challenge-banner';
-    challengeBanner.innerHTML = '<span>👑 Friend Challenge Mode 👑</span>';
-    document.querySelector('.header').appendChild(challengeBanner);
     
     // Override the normal song selection and load the challenge song
     if (gameData[songKey]) {
@@ -1641,12 +1712,8 @@ function showFilterModal() {
         // Load selected difficulty levels from localStorage
         const selectedLevels = JSON.parse(localStorage.getItem('selectedDifficultyLevels') || '[]');
         
-        // Load language filter from localStorage
-        const savedLanguageFilter = localStorage.getItem('languageFilter') || 'all';
-        const languageRadio = document.querySelector(`input[name="languageFilter"][value="${savedLanguageFilter}"]`);
-        if (languageRadio) {
-            languageRadio.checked = true;
-        }
+        // Load language filter selections
+        loadSavedLanguageFilters();
 
         // Update button states based on selected levels
         const difficultyButtons = document.querySelectorAll('.difficulty-filter-btn');
@@ -1658,9 +1725,8 @@ function showFilterModal() {
         const hidePlayedFilter = document.getElementById('hidePlayedFilter');
         hidePlayedFilter.checked = localStorage.getItem('filterHidePlayed') === 'true';
         
-        document.querySelectorAll('input[name="languageFilter"]').forEach(radio => {
-            radio.addEventListener('change', updateFilterButtonAppearance);
-        });
+        // Initialize language filter event handlers if not already done
+        initializeLanguageFilters();
 
         // Add click handlers for difficulty buttons if not already added
         difficultyButtons.forEach(btn => {
@@ -1680,6 +1746,7 @@ function showFilterModal() {
         modal.style.display = 'block';
     }
 }
+
 // Close filter modal
 function closeFilterModal(event) {
     if (event) {
@@ -1830,6 +1897,36 @@ function showModal(message, isWin = false) {
     const modalContent = modal.querySelector('.modal-content'); // Now specific to game over modal
     const difficultyContainer = document.getElementById('difficultyGuessContainer');
     
+    // Check if this was a challenge and restore mode buttons (using centerControls approach)
+    const centerControls = document.querySelector('.center-controls');
+    if (centerControls && centerControls.querySelector('.challenge-banner')) {
+        // Restore the original mode buttons
+        if (centerControls.hasAttribute('data-original-content')) {
+            centerControls.innerHTML = centerControls.getAttribute('data-original-content');
+        }
+        
+        // Update the active mode button
+        document.getElementById('dailyModeBtn').classList.remove('active');
+        document.getElementById('unlimitedModeBtn').classList.add('active');
+    }
+
+    // Also check for any standalone challenge banner (fallback)
+    const challengeBanner = document.querySelector('.challenge-banner:not(.center-controls .challenge-banner)');
+    if (challengeBanner) {
+        // Remove the standalone challenge banner
+        challengeBanner.remove();
+        
+        // Show the mode buttons if they were hidden
+        const modeButtons = document.querySelector('.center-controls');
+        if (modeButtons) {
+            modeButtons.style.display = 'flex';
+        }
+        
+        // Update the active mode button
+        document.getElementById('dailyModeBtn').classList.remove('active');
+        document.getElementById('unlimitedModeBtn').classList.add('active');
+    }
+
     // If in unlimited mode, save the song to play history
     if (!isDaily) {
         // Find the key for the current song
@@ -2139,6 +2236,19 @@ function playGameOverSound(isSuccess) {
 }
 
 function startNewGame() {
+
+    // Remove any challenge banner and restore mode buttons
+    const challengeBanner = document.querySelector('.challenge-banner');
+    if (challengeBanner) {
+        challengeBanner.remove();
+        
+        // Show the mode buttons again
+        const modeButtons = document.querySelector('.center-controls');
+        if (modeButtons) {
+            modeButtons.style.display = 'flex';
+        }
+    }
+
     // If there was a current song and game is over, save it to history
     if (currentSong && !isDaily) {
         // Find the key for the current song
