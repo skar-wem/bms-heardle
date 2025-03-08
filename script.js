@@ -32,7 +32,36 @@ let playedSongs = [];
 function loadPlayedSongs() {
     const storedSongs = localStorage.getItem('playedSongs');
     if (storedSongs) {
-        playedSongs = JSON.parse(storedSongs);
+        try {
+            const parsed = JSON.parse(storedSongs);
+            
+            // Check if we need to migrate from old format (array of strings)
+            // to new format (array of objects with win/loss status)
+            if (parsed.length > 0) {
+                if (typeof parsed[0] === 'string') {
+                    console.log("Migrating old format play history to new format");
+                    // Convert old format to new format
+                    playedSongs = parsed.map(songKey => ({
+                        songKey: songKey,
+                        timestamp: Date.now(), // We don't have the original timestamp
+                        won: false, // Default to false since we don't know
+                        attempts: 6 // Default to max attempts since we don't know
+                    }));
+                    // Save the converted format
+                    localStorage.setItem('playedSongs', JSON.stringify(playedSongs));
+                } else {
+                    // Already in new format
+                    playedSongs = parsed;
+                }
+            } else {
+                playedSongs = parsed;
+            }
+        } catch (e) {
+            console.error("Error parsing playedSongs from localStorage:", e);
+            playedSongs = [];
+        }
+    } else {
+        playedSongs = [];
     }
 }
 
@@ -51,8 +80,11 @@ function updateFilteredSongCount() {
         const song = gameData[songKey];
         const songLevels = song.metadata?.insane_levels || [];
         
-        // Check if song has been played before
-        const hasBeenPlayed = playedSongs.includes(songKey);
+        // Check if song has been played before - FIXED FOR NEW FORMAT
+        const hasBeenPlayed = playedSongs.some(item => 
+            typeof item === 'object' ? item.songKey === songKey : item === songKey
+        );
+        
         if (hidePlayedSongs && hasBeenPlayed) {
             return false;
         }
@@ -113,16 +145,33 @@ function detectTitleLanguage(title) {
     }
 }
 
-// Function to save a song to played history
-function saveToPlayHistory(songKey) {
-    if (!playedSongs.includes(songKey)) {
-        playedSongs.push(songKey);
-        // Limit history to 100 songs to prevent localStorage overflow
-        if (playedSongs.length > 100) {
-            playedSongs = playedSongs.slice(-100);
-        }
-        localStorage.setItem('playedSongs', JSON.stringify(playedSongs));
+// Function to save a song to played history with win/loss status and attempts
+function saveToPlayHistory(songKey, wonGame = false, attemptsUsed = 0) {
+    console.log("Saving song to history:", songKey, "Won:", wonGame, "Attempts:", attemptsUsed);
+    
+    // Check if song is already in history
+    const existingIndex = playedSongs.findIndex(item => 
+        typeof item === 'object' ? item.songKey === songKey : item === songKey);
+    
+    if (existingIndex !== -1) {
+        // If found, remove it so we can add updated version
+        playedSongs.splice(existingIndex, 1);
     }
+    
+    // Add the song with win/loss status and attempts
+    playedSongs.push({
+        songKey: songKey,
+        timestamp: Date.now(),
+        won: wonGame,
+        attempts: attemptsUsed
+    });
+    
+    // Limit history to 100 songs to prevent localStorage overflow
+    if (playedSongs.length > 100) {
+        playedSongs = playedSongs.slice(-100);
+    }
+    
+    localStorage.setItem('playedSongs', JSON.stringify(playedSongs));
 }
 
 // Apply filters to get a filtered song
@@ -145,8 +194,11 @@ function getFilteredRandomSong() {
         const song = gameData[songKey];
         const songLevels = song.metadata?.insane_levels || [];
         
-        // Check if song has been played before
-        const hasBeenPlayed = playedSongs.includes(songKey);
+        // Check if song has been played before - FIXED FOR NEW FORMAT
+        const hasBeenPlayed = playedSongs.some(item => 
+            typeof item === 'object' ? item.songKey === songKey : item === songKey
+        );
+        
         if (hidePlayedSongs && hasBeenPlayed) {
             return false;
         }
@@ -185,7 +237,6 @@ function getFilteredRandomSong() {
     console.log("Selected song:", selectedSong);
     return selectedSong;
 }
-
 // Add a function to check if there are active filters and update the button appearance
 function updateFilterButtonAppearance() {
     const filterButton = document.getElementById('filterButton');
@@ -237,6 +288,33 @@ function updateFilterButtonAppearance() {
 function applyFiltersAndStart() {
     const songKey = getFilteredRandomSong();
     if (songKey) {
+        // Stop any currently playing audio first
+        const player = document.getElementById('audio-player');
+        const playButton = document.querySelector('.play-button');
+        
+        if (isPlaying) {
+            player.pause();
+            player.currentTime = 0;
+            playButton.textContent = 'Play';
+            isPlaying = false;
+            
+            // Reset progress bar
+            const progressFill = document.querySelector('.progress-fill');
+            progressFill.style.width = '0%';
+            
+            // Stop wave animation if it's running
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+            }
+            
+            // Clear any ongoing timeouts
+            if (currentTimeout) {
+                clearTimeout(currentTimeout);
+                currentTimeout = null;
+            }
+        }
+        
         // Save the new song key
         localStorage.setItem('unlimitedSongKey', songKey);
         
@@ -251,7 +329,6 @@ function applyFiltersAndStart() {
         currentSong.cleanArtist = cleanupText(currentSong.artist);
         
         // Set up the audio player
-        const player = document.getElementById('audio-player');
         player.src = `game_audio/${encodeFilename(currentSong.heardle_file)}`;
         
         // Reset the UI
@@ -270,13 +347,24 @@ function applyFiltersAndStart() {
         // Close the filter modal
         closeFilterModal();
         
-        // Add song to played songs if not already there
-        if (!playedSongs.includes(songKey)) {
-            playedSongs.push(songKey);
-            localStorage.setItem('playedSongs', JSON.stringify(playedSongs));
-        }
+        // Show result message with green color
+        const attemptsInfo = document.getElementById('attempts-info');
+        attemptsInfo.innerHTML = '<span id="filter-applied-message" style="color: #00ff8a; transition: opacity 1s ease-out;">Filters applied. New song loaded!</span>';
         
-        showResult("Filters applied. New song loaded!");
+        // Set timeout to fade out the message after 2 seconds
+        setTimeout(() => {
+            const message = document.getElementById('filter-applied-message');
+            if (message) {
+                message.style.opacity = '0';
+                
+                // Optional: Remove the element after fade completes
+                setTimeout(() => {
+                    if (message && message.parentNode) {
+                        message.parentNode.innerHTML = '';
+                    }
+                }, 500); // Wait for the transition to complete
+            }
+        }, 1000);
     }
 }
 
@@ -424,7 +512,12 @@ function showPlayHistory() {
     }
     
     // Populate with played songs (most recent first)
-    const historyHTML = playedSongs.slice().reverse().map(songKey => {
+    const historyHTML = playedSongs.slice().reverse().map(historyItem => {
+        // Handle both old format (string) and new format (object)
+        const songKey = typeof historyItem === 'object' ? historyItem.songKey : historyItem;
+        const won = typeof historyItem === 'object' && historyItem.won === true;
+        const attemptCount = typeof historyItem === 'object' ? historyItem.attempts || 6 : 6;
+        
         if (!gameData[songKey]) return ''; // Skip if song doesn't exist
         
         const song = gameData[songKey];
@@ -433,11 +526,23 @@ function showPlayHistory() {
             ? `<span class="play-history-difficulty">${levels.join(', ')}</span>`
             : '';
         
+        // Add win/loss class based on status
+        const resultClass = won ? 'history-win' : 'history-loss';
+        
+        // Create attempts indicator
+        const attemptsHtml = won ? 
+            `<span class="attempt-count">${attemptCount}/6</span>` : 
+            `<span class="attempt-count">X/6</span>`;
+        
         return `
-            <div class="play-history-item" data-song-key="${songKey}">
+            <div class="play-history-item ${resultClass}" data-song-key="${songKey}">
                 <div class="play-history-details">
                     <div class="play-history-title">${song.display_title}</div>
                     <div class="play-history-artist">${cleanupText(song.artist)}${levelsHtml}</div>
+                </div>
+                <div class="history-result-container">
+                    ${attemptsHtml}
+                    <div class="history-result-indicator">${won ? '✓' : '✗'}</div>
                 </div>
             </div>
         `;
@@ -1581,18 +1686,18 @@ function updateSongList() {
         const songKey = Object.keys(gameData).find(key => gameData[key].display_title === song.display_title);
             
         return `
-            <div class="song-list-item ${playingClass}" data-preview="${song.preview_file}">
-                <div class="song-list-details">
-                    <span class="song-list-title">${song.display_title}</span>
-                    ${levelsHtml}
-                </div>
-                <div class="song-list-actions">
-                    <button class="challenge-icon" data-song-key="${songKey}" title="Challenge a friend with this song">
-                        <i class="fas fa-crown"></i>
-                    </button>
-                </div>
+        <div class="song-list-item ${playingClass}" data-preview="${song.preview_file}">
+            <div class="song-list-details">
+                <span class="song-list-title" title="${song.display_title}">${song.display_title}</span>
+                ${levelsHtml}
             </div>
-        `;
+            <div class="song-list-actions">
+                <button class="challenge-icon" data-song-key="${songKey}" title="Challenge a friend with this song">
+                    <i class="fas fa-crown"></i>
+                </button>
+            </div>
+        </div>
+    `;
     }).join('');
 
     // Add click event listeners to all song items
@@ -1927,14 +2032,15 @@ function showModal(message, isWin = false) {
         document.getElementById('unlimitedModeBtn').classList.add('active');
     }
 
-    // If in unlimited mode, save the song to play history
+    // If in unlimited mode, save the song to play history with attempts
     if (!isDaily) {
         // Find the key for the current song
         const songKey = Object.keys(gameData).find(key => 
             gameData[key].display_title === currentSong.display_title);
             
         if (songKey) {
-            saveToPlayHistory(songKey);
+            console.log("Saving song to history from showModal:", songKey, "Won:", isWin, "Attempts:", attempts);
+            saveToPlayHistory(songKey, isWin, attempts);
         }
     }
     
@@ -2256,9 +2362,11 @@ function startNewGame() {
             gameData[key].display_title === currentSong.display_title);
             
         if (songKey) {
-            saveToPlayHistory(songKey);
+            console.log("Saving previous song to history:", songKey, "Won:", gameWon, "Attempts:", attempts);
+            saveToPlayHistory(songKey, gameWon, attempts);
         }
     }
+
     // Reset all game state variables
     gameWon = false;
     difficultyGuessed = false;
