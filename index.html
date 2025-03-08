@@ -30,15 +30,127 @@
                 <h1>発狂BMS Heardle</h1>
                 <p>オーディオプレビューからBMSの曲を当てよう</p>
                 <p>Guess the BMS song from the audio preview</p>
-                <button id="songListButton" class="song-list-icon" title="Song List">
-                    <i class="fas fa-list"></i>
-                </button>
             </div>
 
             <div class="game-mode-toggle">
-                <button id="dailyModeBtn" class="mode-btn active">Daily Challenge</button>
-                <button id="unlimitedModeBtn" class="mode-btn">Unlimited Play</button>
+                <!-- Create a left-aligned container for the history button -->
+                <div class="left-controls">
+                    <button id="playHistoryButton" class="play-history-icon" title="Play History">
+                        <i class="fas fa-history"></i>
+                    </button>
+                </div>
+                
+                <!-- Center-aligned mode buttons -->
+                <div class="center-controls">
+                    <button id="dailyModeBtn" class="mode-btn active">Daily</button>
+                    <button id="unlimitedModeBtn" class="mode-btn">Unlimited</button>
+                </div>
+                
+                <!-- Right-aligned control buttons -->
+                <div class="control-buttons">
+                    <button id="filterButton" class="filter-circle-btn" title="Song Filters">
+                        <i class="fas fa-filter"></i>
+                    </button>
+                    <button id="songListButton" class="song-list-icon" title="Song List">
+                        <i class="fas fa-list"></i>
+                    </button>
+                </div>
             </div>
+
+            <!-- Add this to create the Play History modal -->
+            <div id="playHistoryModal" class="modal">
+                <div class="modal-content song-list-modal">
+                    <button class="modal-close-x" onclick="closePlayHistory(event)">×</button>
+                    <h2 class="modal-title">Play History</h2>
+                    <div class="play-history-container">
+                        <!-- Play history will be populated here -->
+                        <div class="empty-history-message">No play history yet</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filter Modal -->
+            <div id="filterModal" class="modal">
+                <div class="modal-content filter-modal">
+                    <button class="modal-close-x" onclick="closeFilterModal(event)">×</button>
+                    <h2 class="modal-title">Song Filters</h2>
+                    <div class="filter-stats">
+                        <span id="filteredSongCount">Songs: 0</span>
+                    </div>
+                    <div class="filter-options">
+                        <div class="filter-row">
+                            <label class="filter-label">Difficulty:</label>
+                            <div class="difficulty-filter-container">
+                                <div class="difficulty-buttons">
+                                    <button class="difficulty-filter-btn" data-level="★1">★1</button>
+                                    <button class="difficulty-filter-btn" data-level="★2">★2</button>
+                                    <button class="difficulty-filter-btn" data-level="★3">★3</button>
+                                    <button class="difficulty-filter-btn" data-level="★4">★4</button>
+                                    <button class="difficulty-filter-btn" data-level="★5">★5</button>
+                                    <button class="difficulty-filter-btn" data-level="★6">★6</button>
+                                    <button class="difficulty-filter-btn" data-level="★7">★7</button>
+                                    <button class="difficulty-filter-btn" data-level="★8">★8</button>
+                                    <button class="difficulty-filter-btn" data-level="★9">★9</button>
+                                    <button class="difficulty-filter-btn" data-level="★10">★10</button>
+                                    <button class="difficulty-filter-btn" data-level="★11">★11</button>
+                                    <button class="difficulty-filter-btn" data-level="★12">★12</button>
+                                    <button class="difficulty-filter-btn" data-level="★13">★13</button>
+                                    <button class="difficulty-filter-btn" data-level="★14">★14</button>
+                                    <button class="difficulty-filter-btn" data-level="★15">★15</button>
+                                    <button class="difficulty-filter-btn" data-level="★16">★16</button>
+                                    <button class="difficulty-filter-btn" data-level="★17">★17</button>
+                                    <button class="difficulty-filter-btn" data-level="★18">★18</button>
+                                    <button class="difficulty-filter-btn" data-level="★19">★19</button>
+                                    <button class="difficulty-filter-btn" data-level="★20">★20</button>
+                                    <button class="difficulty-filter-btn" data-level="★21">★21</button>
+                                    <button class="difficulty-filter-btn" data-level="★22">★22</button>
+                                    <button class="difficulty-filter-btn" data-level="★23">★23</button>
+                                    <button class="difficulty-filter-btn" data-level="★24">★24</button>
+                                    <button class="difficulty-filter-btn" data-level="★25">★25</button>
+                                    <button class="difficulty-filter-btn" data-level="★???">★???</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="filter-row">
+                            <label class="filter-label">Title:</label>
+                            <div class="language-filter horizontal">
+                                <label class="language-option">
+                                    <input type="radio" name="languageFilter" id="languageFilterAll" value="all" checked>
+                                    <span>All</span>
+                                </label>
+                                <label class="language-option">
+                                    <input type="radio" name="languageFilter" id="languageFilterEnglish" value="english">
+                                    <span>English</span>
+                                </label>
+                                <label class="language-option">
+                                    <input type="radio" name="languageFilter" id="languageFilterJapanese" value="japanese">
+                                    <span>Japanese</span>
+                                </label>
+                                <label class="language-option">
+                                    <input type="radio" name="languageFilter" id="languageFilterMixed" value="mixed">
+                                    <span>Mixed</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="filter-row">
+                            <label class="filter-label">Status:</label>
+                            <div class="status-filter">
+                                <label class="status-option">
+                                    <input type="checkbox" id="hidePlayedFilter">
+                                    <span>Hide already played</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="filter-buttons">
+                            <button id="applyFilters" class="filter-button" onclick="applyFiltersAndStart()">Apply Filters</button>
+                            <button id="resetFilters" class="filter-button secondary" onclick="resetFilters()">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
             <!-- 
             <button id="devResetBtn" style="position:fixed; bottom:10px; right:10px; z-index:1000; font-size:10px; opacity:0.3;">
@@ -129,8 +241,8 @@
                 </div>
 
                 <div class="modal-buttons">
-                    <button class="modal-button" onclick="startNewGame()">Play Again</button>
-                    <button class="modal-button share-button" onclick="shareResult()">Share</button>
+                    <button id="playAgainButton" class="modal-button" onclick="startNewGame()">Play Again</button>
+                    <button id="shareButton" class="modal-button share-button" onclick="shareResult()">Share</button>
                 </div>
                 <input type="text" id="challengeLink" class="hidden">
             </div>
@@ -174,9 +286,10 @@
                 <div class="song-list-container">
                     <!-- Songs will be populated here -->
                 </div>
-                <button class="modal-button" onclick="closeSongList()">Close</button>
+                <button class="modal-button modal-close-btn" onclick="closeSongList(event)">Close</button>
             </div>
         </div>
+
 
         <!-- Challenge Banner (will be shown when receiving a challenge) -->
         <div id="challengeBanner" class="challenge-banner hidden">

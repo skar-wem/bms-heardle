@@ -26,6 +26,428 @@ let dailySeed = new Date().toISOString().slice(0, 10); // YYYY-MM-DD format
 let dailyAttempted = false;
 let peekedAtSongList = false;
 let pendingChallenge = null;
+let playedSongs = [];
+
+// Function to load played songs from localStorage
+function loadPlayedSongs() {
+    const storedSongs = localStorage.getItem('playedSongs');
+    if (storedSongs) {
+        playedSongs = JSON.parse(storedSongs);
+    }
+}
+
+// Add this function to update the filtered song count
+function updateFilteredSongCount() {
+    const selectedLevels = JSON.parse(localStorage.getItem('selectedDifficultyLevels') || '[]');
+    const hidePlayedSongs = localStorage.getItem('filterHidePlayed') === 'true';
+    const languageFilter = localStorage.getItem('languageFilter') || 'all';
+    
+    // Count eligible songs
+    let eligibleSongsCount = Object.keys(gameData).filter(songKey => {
+        const song = gameData[songKey];
+        const songLevels = song.metadata?.insane_levels || [];
+        
+        // Check if song has been played before
+        const hasBeenPlayed = playedSongs.includes(songKey);
+        if (hidePlayedSongs && hasBeenPlayed) {
+            return false;
+        }
+        
+        // Apply difficulty filter if any selected
+        if (selectedLevels.length > 0) {
+            const matchesDifficulty = songLevels.some(level => selectedLevels.includes(level));
+            if (!matchesDifficulty) {
+                return false;
+            }
+        }
+        
+        // Apply language filter
+        if (languageFilter !== 'all') {
+            const titleLanguage = detectTitleLanguage(song.display_title);
+            if (languageFilter !== titleLanguage) {
+                return false;
+            }
+        }
+        
+        return true;
+    }).length;
+    
+    // Update the counter
+    const countElement = document.getElementById('filteredSongCount');
+    if (countElement) {
+        countElement.textContent = `Songs: ${eligibleSongsCount}`;
+        
+        // Visually highlight if count is low
+        if (eligibleSongsCount === 0) {
+            countElement.style.color = 'var(--neon-pink)';
+        } else if (eligibleSongsCount < 10) {
+            countElement.style.color = '#FFAE00'; // Orange/yellow warning color
+        } else {
+            countElement.style.color = 'var(--text-secondary)';
+        }
+    }
+}
+
+// Language detection function
+function detectTitleLanguage(title) {
+    // Check for Japanese characters (hiragana, katakana, kanji)
+    // Exclude full-width punctuation and symbols
+    const hasJapanese = /[\u3040-\u309f\u30a0-\u30ff\u4e00-\u9faf]/.test(title);
+    
+    // Check for English/Latin characters
+    const hasEnglish = /[a-zA-Z]/.test(title);
+    
+    if (hasJapanese && hasEnglish) {
+        return 'mixed';
+    } else if (hasJapanese) {
+        return 'japanese';
+    } else if (hasEnglish) {
+        return 'english';
+    } else {
+        // Default for titles with only numbers/symbols
+        return 'other';
+    }
+}
+
+// Function to save a song to played history
+function saveToPlayHistory(songKey) {
+    if (!playedSongs.includes(songKey)) {
+        playedSongs.push(songKey);
+        // Limit history to 100 songs to prevent localStorage overflow
+        if (playedSongs.length > 100) {
+            playedSongs = playedSongs.slice(-100);
+        }
+        localStorage.setItem('playedSongs', JSON.stringify(playedSongs));
+    }
+}
+
+// Apply filters to get a filtered song
+function getFilteredRandomSong() {
+    console.log("getFilteredRandomSong called");
+    
+    // Get selected difficulty levels
+    const selectedLevels = JSON.parse(localStorage.getItem('selectedDifficultyLevels') || '[]');
+    const hidePlayedSongs = localStorage.getItem('filterHidePlayed') === 'true';
+    
+    // Get selected language filter
+    const languageFilter = localStorage.getItem('languageFilter') || 'all';
+    
+    console.log("Filter values:", { selectedLevels, hidePlayedSongs, languageFilter });
+    
+    // Filter songs based on criteria
+    let eligibleSongs = Object.keys(gameData).filter(songKey => {
+        const song = gameData[songKey];
+        const songLevels = song.metadata?.insane_levels || [];
+        
+        // Check if song has been played before
+        const hasBeenPlayed = playedSongs.includes(songKey);
+        if (hidePlayedSongs && hasBeenPlayed) {
+            return false;
+        }
+        
+        // Apply difficulty filter if any selected
+        if (selectedLevels.length > 0) {
+            const matchesDifficulty = songLevels.some(level => selectedLevels.includes(level));
+            if (!matchesDifficulty) {
+                return false;
+            }
+        }
+        
+        // Apply language filter
+        if (languageFilter !== 'all') {
+            const titleLanguage = detectTitleLanguage(song.display_title);
+            if (languageFilter !== titleLanguage) {
+                return false;
+            }
+        }
+        
+        return true;
+    });
+    
+    console.log("Eligible songs count:", eligibleSongs.length);
+    
+    // If no songs match the criteria, show a message and return null
+    if (eligibleSongs.length === 0) {
+        console.log("No eligible songs found");
+        showResult("No songs match your filters. Try different criteria.");
+        return null;
+    }
+    
+    // Select a random song from the filtered list
+    const randomIndex = Math.floor(Math.random() * eligibleSongs.length);
+    const selectedSong = eligibleSongs[randomIndex];
+    console.log("Selected song:", selectedSong);
+    return selectedSong;
+}
+
+// Add a function to check if there are active filters and update the button appearance
+function updateFilterButtonAppearance() {
+    const filterButton = document.getElementById('filterButton');
+    if (!filterButton) return;
+    
+    // Get selected difficulty levels
+    const difficultyButtons = document.querySelectorAll('.difficulty-filter-btn.selected');
+    const selectedLevels = Array.from(difficultyButtons).map(btn => btn.dataset.level);
+    
+    // Get hide played state
+    const hidePlayedSongs = document.getElementById('hidePlayedFilter')?.checked || false;
+    
+    // Get language filter
+    const languageFilter = document.querySelector('input[name="languageFilter"]:checked')?.value || 'all';
+    
+    // Save filter values to localStorage
+    localStorage.setItem('selectedDifficultyLevels', JSON.stringify(selectedLevels));
+    localStorage.setItem('filterHidePlayed', hidePlayedSongs.toString());
+    localStorage.setItem('languageFilter', languageFilter);
+    
+    // Check if any filters are active
+    const hasActiveFilters = selectedLevels.length > 0 || hidePlayedSongs || languageFilter !== 'all';
+    
+    if (hasActiveFilters) {
+        filterButton.classList.add('has-active-filters');
+    } else {
+        filterButton.classList.remove('has-active-filters');
+    }
+    updateFilteredSongCount();
+}
+
+
+
+
+
+// Apply filters and start a new game
+function applyFiltersAndStart() {
+    const songKey = getFilteredRandomSong();
+    if (songKey) {
+        // Save the new song key
+        localStorage.setItem('unlimitedSongKey', songKey);
+        
+        // Reset game state
+        attempts = 0;
+        incorrectGuesses = [];
+        isGameOver = false;
+        gameWon = false;
+        
+        // Set current song
+        currentSong = gameData[songKey];
+        currentSong.cleanArtist = cleanupText(currentSong.artist);
+        
+        // Set up the audio player
+        const player = document.getElementById('audio-player');
+        player.src = `game_audio/${encodeFilename(currentSong.heardle_file)}`;
+        
+        // Reset the UI
+        const segments = document.querySelectorAll('.progress-segment');
+        segments.forEach(segment => {
+            segment.classList.remove('played', 'current', 'correct');
+        });
+        
+        updateGuessHistory();
+        updateProgressBar();
+        updateSkipButtonText();
+        
+        // Update filter button appearance
+        updateFilterButtonAppearance();
+        
+        // Close the filter modal
+        closeFilterModal();
+        
+        // Add song to played songs if not already there
+        if (!playedSongs.includes(songKey)) {
+            playedSongs.push(songKey);
+            localStorage.setItem('playedSongs', JSON.stringify(playedSongs));
+        }
+        
+        showResult("Filters applied. New song loaded!");
+    }
+}
+
+// Reset all filters to default
+function resetFilters() {
+    console.log("resetFilters called");
+    
+    // Deselect all difficulty buttons
+    const difficultyButtons = document.querySelectorAll('.difficulty-filter-btn');
+    difficultyButtons.forEach(btn => {
+        btn.classList.remove('selected');
+    });
+    
+    // Reset hide played checkbox
+    const hidePlayedFilter = document.getElementById('hidePlayedFilter');
+    hidePlayedFilter.checked = false;
+    
+    // Reset language filter to "all"
+    const allLanguageOption = document.getElementById('languageFilterAll');
+    if (allLanguageOption) {
+        allLanguageOption.checked = true;
+    }
+    
+    // Save reset state to localStorage
+    localStorage.setItem('selectedDifficultyLevels', '[]');
+    localStorage.setItem('filterHidePlayed', 'false');
+    localStorage.setItem('languageFilter', 'all');
+    
+    // Update filter button appearance
+    updateFilterButtonAppearance();
+    
+    // Update the count after reset
+    updateFilteredSongCount();
+    
+    showResult("Filters reset");
+}
+
+// Show play history modal
+function showPlayHistory() {
+    const modal = document.getElementById('playHistoryModal');
+    const container = document.querySelector('.play-history-container');
+    const modalContent = modal.querySelector('.modal-content');
+    
+    // Clear previous content
+    container.innerHTML = '';
+    
+    // Add Clear History button in the top left
+    const clearHistoryBtn = document.createElement('button');
+    clearHistoryBtn.className = 'clear-history-btn';
+    clearHistoryBtn.innerHTML = '<i class="fas fa-trash"></i> Clear History';
+    clearHistoryBtn.addEventListener('click', clearPlayHistory);
+    
+    // Add X close button in the top right
+    let closeBtn = modalContent.querySelector('.modal-close-x');
+    if (!closeBtn) {
+        closeBtn = document.createElement('button');
+        closeBtn.className = 'modal-close-x';
+        closeBtn.innerHTML = '×';
+        closeBtn.onclick = function(e) { 
+            closePlayHistory(e); 
+        };
+        modalContent.appendChild(closeBtn);
+    }
+    
+    // Add clear history button to the top left
+    let headerContainer = modalContent.querySelector('.history-header');
+    if (!headerContainer) {
+        // Create header container if it doesn't exist
+        headerContainer = document.createElement('div');
+        headerContainer.className = 'history-header';
+        
+        // Get the modal title
+        const modalTitle = modalContent.querySelector('.modal-title');
+        
+        // Insert header before the title
+        modalContent.insertBefore(headerContainer, modalTitle);
+    } else {
+        // Clear existing header
+        headerContainer.innerHTML = '';
+    }
+    
+    // Add clear button to header
+    headerContainer.appendChild(clearHistoryBtn);
+    
+    // If no played songs, show message
+    if (playedSongs.length === 0) {
+        container.innerHTML = '<div class="empty-history-message">No play history yet</div>';
+        modal.style.display = 'block';
+        return;
+    }
+    
+    // Populate with played songs (most recent first)
+    const historyHTML = playedSongs.slice().reverse().map(songKey => {
+        if (!gameData[songKey]) return ''; // Skip if song doesn't exist
+        
+        const song = gameData[songKey];
+        const levels = song.metadata?.insane_levels || [];
+        const levelsHtml = levels.length > 0 
+            ? `<span class="play-history-difficulty">${levels.join(', ')}</span>`
+            : '';
+        
+        return `
+            <div class="play-history-item" data-song-key="${songKey}">
+                <div class="play-history-details">
+                    <div class="play-history-title">${song.display_title}</div>
+                    <div class="play-history-artist">${cleanupText(song.artist)}${levelsHtml}</div>
+                </div>
+            </div>
+        `;
+    }).join('');
+    
+    container.innerHTML = historyHTML;
+    modal.style.display = 'block';
+}
+
+function clearPlayHistory(e) {
+    e.stopPropagation();
+    
+    if (confirm('Are you sure you want to clear your play history?')) {
+        // Clear the played songs array
+        playedSongs = [];
+        
+        // Save the empty array to localStorage
+        localStorage.setItem('playedSongs', JSON.stringify(playedSongs));
+        
+        // Refresh the play history display
+        showPlayHistory();
+        
+        // Show confirmation message
+        showResult("Play history has been cleared");
+    }
+}
+
+// Close play history modal
+function closePlayHistory() {
+    console.log("closePlayHistory called");
+    const modal = document.getElementById('playHistoryModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+window.closeSongList = closeSongList;
+window.closePlayHistory = closePlayHistory;
+
+// Play a song again from history
+function playAgainFromHistory(songKey) {
+    if (!gameData[songKey]) {
+        showResult("Song not found");
+        return;
+    }
+    
+    // Switch to unlimited mode if in daily mode
+    if (isDaily) {
+        isDaily = false;
+        document.getElementById('dailyModeBtn').classList.remove('active');
+        document.getElementById('unlimitedModeBtn').classList.add('active');
+        updateFilterVisibility();
+    }
+    
+    // Save the song key
+    localStorage.setItem('unlimitedSongKey', songKey);
+    
+    // Reset game state
+    attempts = 0;
+    incorrectGuesses = [];
+    isGameOver = false;
+    gameWon = false;
+    
+    // Set current song
+    currentSong = gameData[songKey];
+    currentSong.cleanArtist = cleanupText(currentSong.artist);
+    
+    // Set up the audio player
+    const player = document.getElementById('audio-player');
+    player.src = `game_audio/${encodeFilename(currentSong.heardle_file)}`;
+    
+    // Reset the UI
+    const segments = document.querySelectorAll('.progress-segment');
+    segments.forEach(segment => {
+        segment.classList.remove('played', 'current', 'correct');
+    });
+    
+    updateGuessHistory();
+    updateProgressBar();
+    updateSkipButtonText();
+    
+    showResult("Playing selected song");
+}
 
 function getDailySong() {
     // Create a deterministic random number based on the date
@@ -479,6 +901,9 @@ async function loadGameData() {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         gameData = await response.json();
+
+        // Load played songs history
+        loadPlayedSongs();
         
         songList = Object.values(gameData).map(song => ({
             title: song.display_title,
@@ -974,6 +1399,18 @@ function playCurrentSegment() {
 function handleSongItemClick(item) {
     const container = document.querySelector('.song-list-container');
     
+    // Check if this is the currently playing song
+    const isSameSong = previewPlayer.dataset.currentSong === item.dataset.preview;
+    
+    // If the same song is currently playing, just stop it
+    if (!previewPlayer.paused && isSameSong) {
+        previewPlayer.pause();
+        previewPlayer.currentTime = 0;
+        previewPlayer.dataset.currentSong = '';
+        item.classList.remove('playing');
+        return;
+    }
+    
     // Remove playing class from all items
     container.querySelectorAll('.song-list-item').forEach(i => {
         i.classList.remove('playing');
@@ -983,12 +1420,6 @@ function handleSongItemClick(item) {
     if (!previewPlayer.paused) {
         previewPlayer.pause();
         previewPlayer.currentTime = 0;
-        
-        // If clicking the same song that's playing, just stop it
-        if (previewPlayer.dataset.currentSong === item.dataset.preview) {
-            previewPlayer.dataset.currentSong = '';
-            return;
-        }
     }
 
     // Add playing class to clicked item
@@ -1012,7 +1443,15 @@ function handleSongItemClick(item) {
         item.classList.remove('playing');
     };
 
-    previewPlayer.play();
+    // Play the audio with better error handling
+    const playPromise = previewPlayer.play();
+    
+    if (playPromise !== undefined) {
+        playPromise.catch(error => {
+            console.error("Error playing audio:", error);
+            item.classList.remove('playing');
+        });
+    }
 }
 
 // Filter songs based on search and difficulty inputs
@@ -1047,6 +1486,7 @@ function filterSongs() {
     });
 }
 
+// Update the song list display based on filters
 // Update the song list display based on filters
 function updateSongList() {
     const container = document.querySelector('.song-list-container');
@@ -1086,9 +1526,13 @@ function updateSongList() {
 
     // Add click event listeners to all song items
     container.querySelectorAll('.song-list-item').forEach(item => {
-        // Play song preview when clicking on the song details
-        const detailsEl = item.querySelector('.song-list-details');
-        detailsEl.addEventListener('click', () => handleSongItemClick(item));
+        // Make the entire item clickable for song playback
+        item.addEventListener('click', (e) => {
+            // Don't handle click if it was on the challenge button
+            if (!e.target.closest('.challenge-icon')) {
+                handleSongItemClick(item);
+            }
+        });
         
         // Handle challenge button click
         const challengeBtn = item.querySelector('.challenge-icon');
@@ -1132,9 +1576,6 @@ function createSongChallenge(songKey) {
                     <input type="text" class="challenge-link-input" value="${challengeLink}" readonly>
                     <button class="copy-link-btn"><i class="fas fa-copy"></i> Copy</button>
                 </div>
-                <div class="share-options">
-                    <button class="share-btn" title="Share"><i class="fas fa-share-alt"></i> Share</button>
-                </div>
                 <button class="close-mini-modal"><i class="fas fa-times"></i></button>
             </div>
         `;
@@ -1145,7 +1586,7 @@ function createSongChallenge(songKey) {
         const linkInput = challengeModal.querySelector('.challenge-link-input');
         linkInput.select();
         
-        // Add event listeners
+        // Add event listener for the copy button
         challengeModal.querySelector('.copy-link-btn').addEventListener('click', () => {
             linkInput.select();
             document.execCommand('copy');
@@ -1154,31 +1595,13 @@ function createSongChallenge(songKey) {
             const copyBtn = challengeModal.querySelector('.copy-link-btn');
             const originalText = copyBtn.innerHTML;
             copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            
+            // Show message in the game area too
+            showResult("Challenge link copied to clipboard!");
+            
             setTimeout(() => {
                 copyBtn.innerHTML = originalText;
             }, 2000);
-        });
-        
-        // Share button (use Web Share API if available)
-        challengeModal.querySelector('.share-btn').addEventListener('click', () => {
-            if (navigator.share) {
-                navigator.share({
-                    title: 'BMS Heardle Challenge',
-                    text: `Can you guess this BMS song? I challenge you!`,
-                    url: challengeLink
-                }).catch(error => {
-                    console.log('Error sharing:', error);
-                    // Fallback to clipboard
-                    linkInput.select();
-                    document.execCommand('copy');
-                    showResult("Challenge link copied to clipboard!");
-                });
-            } else {
-                // If Web Share API is not available, just copy to clipboard
-                linkInput.select();
-                document.execCommand('copy');
-                showResult("Challenge link copied to clipboard!");
-            }
         });
         
         // Close button
@@ -1198,6 +1621,84 @@ function createSongChallenge(songKey) {
     }
 }
 
+// Show filter modal
+function showFilterModal() {
+    const modal = document.getElementById('filterModal');
+    if (modal) {
+        // Add X close button if it doesn't exist
+        let closeBtn = modal.querySelector('.modal-close-x');
+        if (!closeBtn) {
+            const modalContent = modal.querySelector('.modal-content');
+            closeBtn = document.createElement('button');
+            closeBtn.className = 'modal-close-x';
+            closeBtn.innerHTML = '×';
+            closeBtn.onclick = function(e) { 
+                closeFilterModal(e); 
+            };
+            modalContent.appendChild(closeBtn);
+        }
+        
+        // Load selected difficulty levels from localStorage
+        const selectedLevels = JSON.parse(localStorage.getItem('selectedDifficultyLevels') || '[]');
+        
+        // Load language filter from localStorage
+        const savedLanguageFilter = localStorage.getItem('languageFilter') || 'all';
+        const languageRadio = document.querySelector(`input[name="languageFilter"][value="${savedLanguageFilter}"]`);
+        if (languageRadio) {
+            languageRadio.checked = true;
+        }
+
+        // Update button states based on selected levels
+        const difficultyButtons = document.querySelectorAll('.difficulty-filter-btn');
+        difficultyButtons.forEach(btn => {
+            btn.classList.toggle('selected', selectedLevels.includes(btn.dataset.level));
+        });
+        
+        // Load hide played filter state
+        const hidePlayedFilter = document.getElementById('hidePlayedFilter');
+        hidePlayedFilter.checked = localStorage.getItem('filterHidePlayed') === 'true';
+        
+        document.querySelectorAll('input[name="languageFilter"]').forEach(radio => {
+            radio.addEventListener('change', updateFilterButtonAppearance);
+        });
+
+        // Add click handlers for difficulty buttons if not already added
+        difficultyButtons.forEach(btn => {
+            // Remove existing listeners by cloning and replacing
+            const newBtn = btn.cloneNode(true);
+            newBtn.addEventListener('click', function() {
+                this.classList.toggle('selected');
+                updateFilterButtonAppearance();
+            });
+            btn.parentNode.replaceChild(newBtn, btn);
+        });
+        
+        // Update the song count when the modal opens
+        updateFilteredSongCount();
+        
+        // Make the modal visible
+        modal.style.display = 'block';
+    }
+}
+// Close filter modal
+function closeFilterModal(event) {
+    if (event) {
+        event.stopPropagation();
+    }
+    const modal = document.getElementById('filterModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+
+// Make these functions available globally
+window.closeFilterModal = closeFilterModal;
+window.showFilterModal = showFilterModal;
+window.applyFiltersAndStart = applyFiltersAndStart;
+window.resetFilters = resetFilters;
+
+
 // Main function to show the song list modal
 function showSongList() {
     // Set the peeked flag if in daily mode and game is not over
@@ -1207,8 +1708,21 @@ function showSongList() {
     }
     
     const modal = document.getElementById('songListModal');
+    const modalContent = modal.querySelector('.modal-content');
     const searchInput = document.getElementById('songSearchInput');
     const difficultyFilter = document.getElementById('difficultyFilter');
+
+    // Add X close button in the top right
+    let closeBtn = modalContent.querySelector('.modal-close-x');
+    if (!closeBtn) {
+        closeBtn = document.createElement('button');
+        closeBtn.className = 'modal-close-x';
+        closeBtn.innerHTML = '×';
+        closeBtn.onclick = function(e) { 
+            closeSongList(e); 
+        };
+        modalContent.appendChild(closeBtn);
+    }
 
     // Create a new audio element for previews if it doesn't exist
     if (!previewPlayer) {
@@ -1227,31 +1741,36 @@ function showSongList() {
     updateSongList();
     modal.style.display = 'block';
     
-    // Stop preview playback when closing modal
-    const closeButton = modal.querySelector('.modal-button');
-    closeButton.addEventListener('click', closeSongList);
+    // Hide the original close button
+    const originalCloseButton = modal.querySelector('.modal-button');
+    if (originalCloseButton) {
+        originalCloseButton.style.display = 'none';
+    }
 }
 
 // Close the song list modal
 function closeSongList() {
-    document.getElementById('songListModal').style.display = 'none';
-    
-    // Stop preview playback
-    if (previewPlayer && !previewPlayer.paused) {
-        previewPlayer.pause();
-        previewPlayer.currentTime = 0;
-        previewPlayer.dataset.currentSong = '';
+    console.log("closeSongList called");
+    const modal = document.getElementById('songListModal');
+    if (modal) {
+        modal.style.display = 'none';
         
-        // Remove playing class from all items
-        const container = document.querySelector('.song-list-container');
-        if (container) {
-            container.querySelectorAll('.song-list-item').forEach(i => {
-                i.classList.remove('playing');
-            });
+        // Stop preview playback
+        if (previewPlayer && !previewPlayer.paused) {
+            previewPlayer.pause();
+            previewPlayer.currentTime = 0;
+            previewPlayer.dataset.currentSong = '';
+            
+            // Remove playing class from all items
+            const container = modal.querySelector('.song-list-container');
+            if (container) {
+                container.querySelectorAll('.song-list-item').forEach(i => {
+                    i.classList.remove('playing');
+                });
+            }
         }
     }
 }
-
 
 function updateProgressBar(currentTime = 0, duration = 0) {
     const progressFill = document.querySelector('.progress-fill');
@@ -1307,13 +1826,24 @@ function showModal(message, isWin = false) {
 
     const modal = document.getElementById('gameOverModal');
     const modalMessage = document.getElementById('modalMessage');
-    const modalTitle = document.querySelector('.modal-title');
-    const modalContent = document.querySelector('.modal-content');
+    const modalTitle = modal.querySelector('.modal-title'); // Now specific to game over modal
+    const modalContent = modal.querySelector('.modal-content'); // Now specific to game over modal
     const difficultyContainer = document.getElementById('difficultyGuessContainer');
     
+    // If in unlimited mode, save the song to play history
+    if (!isDaily) {
+        // Find the key for the current song
+        const songKey = Object.keys(gameData).find(key => 
+            gameData[key].display_title === currentSong.display_title);
+            
+        if (songKey) {
+            saveToPlayHistory(songKey);
+        }
+    }
+    
     // Get the buttons
-    const playAgainButton = document.querySelector('.modal-button:not(.share-button)');
-    const shareButton = document.querySelector('.share-button');
+    const playAgainButton = document.getElementById('playAgainButton');
+    const shareButton = document.getElementById('shareButton');
     
     // Show or hide share button based on game mode
     if (isDaily) {
@@ -1356,8 +1886,9 @@ function showModal(message, isWin = false) {
     }
     
     if (isWin) {
+        // Set the title for win condition
         modalTitle.textContent = 'Congratulations!';
-        modalTitle.style.color = 'var(--neon-pink)';
+        modalTitle.style.color = '#00ffb3'; // Green color for win
         modalContent.classList.add('win');
         
         // Ensure the correct segment is marked
@@ -1396,8 +1927,9 @@ function showModal(message, isWin = false) {
         
         modalMessage.innerHTML = fullMessage;
     } else {
+        // Set the title for loss condition
         modalTitle.textContent = 'Game Over';
-        modalTitle.style.color = 'var(--neon-blue)';
+        modalTitle.style.color = '#ff0055'; // Red color for loss
         modalContent.classList.add('lose');
         
         // Loss message - keeps "The song was:"
@@ -1477,6 +2009,7 @@ function showModal(message, isWin = false) {
         difficultyContainer.classList.add('hidden');
     }
     
+    // Display the modal
     modal.style.display = 'block';
     isGameOver = true;
     
@@ -1485,20 +2018,25 @@ function showModal(message, isWin = false) {
     }
     
     // If in daily mode, update the Play Again button text to reflect mode
-    if (isDaily) {
-        playAgainButton.textContent = "Play Unlimited";
-        playAgainButton.onclick = function() {
-            isDaily = false;
-            document.getElementById('dailyModeBtn').classList.remove('active');
-            document.getElementById('unlimitedModeBtn').classList.add('active');
-            startNewGame();
-        };
-        
-        // Add this line right here
+    if (playAgainButton) {
+        if (isDaily) {
+            playAgainButton.textContent = "Play Unlimited";
+            playAgainButton.onclick = function() {
+                isDaily = false;
+                document.getElementById('dailyModeBtn').classList.remove('active');
+                document.getElementById('unlimitedModeBtn').classList.add('active');
+                updateFilterVisibility(); // Add this to update filter visibility
+                startNewGame();
+            };
+        } else {
+            playAgainButton.textContent = "Play Again";
+            playAgainButton.onclick = startNewGame;
+        }
+    }
+    
+    // Set up share button
+    if (shareButton) {
         shareButton.onclick = shareResult;
-    } else {
-        playAgainButton.textContent = "Play Again";
-        playAgainButton.onclick = startNewGame;
     }
 }
 
@@ -1601,6 +2139,16 @@ function playGameOverSound(isSuccess) {
 }
 
 function startNewGame() {
+    // If there was a current song and game is over, save it to history
+    if (currentSong && !isDaily) {
+        // Find the key for the current song
+        const songKey = Object.keys(gameData).find(key => 
+            gameData[key].display_title === currentSong.display_title);
+            
+        if (songKey) {
+            saveToPlayHistory(songKey);
+        }
+    }
     // Reset all game state variables
     gameWon = false;
     difficultyGuessed = false;
@@ -1702,6 +2250,25 @@ function startNewGame() {
         localStorage.removeItem('unlimitedSongKey');
     }
     
+    // For unlimited mode, use the filtered song selection
+    if (!isDaily) {
+        const songKey = getFilteredRandomSong();
+        if (songKey) {
+            localStorage.setItem('unlimitedSongKey', songKey);
+            currentSong = gameData[songKey];
+            currentSong.cleanArtist = cleanupText(currentSong.artist);
+            
+            // Set up the audio player
+            const player = document.getElementById('audio-player');
+            player.src = `game_audio/${encodeFilename(currentSong.heardle_file)}`;
+            
+            // Update UI
+            updateGuessHistory();
+            updateProgressBar();
+            updateSkipButtonText();
+            return; // Exit the function since we've set up everything
+        }
+    }
     // Start new game
     startGame();
 }
@@ -1946,34 +2513,102 @@ function showResult(message) {
 }
 
 
+
+
 function handleDifficultyGuess(guessedLevel) {
     const actualLevels = currentSong.metadata?.insane_levels || [];
-    const isCorrect = actualLevels.includes(guessedLevel);
+    const isMystery = actualLevels.includes("★???");
+    
+    // For regular songs, check if guess matches actual level
+    // For mystery songs (★???), any guess is considered "correct" for stats
+    const isCorrect = isMystery ? true : actualLevels.includes(guessedLevel);
     
     if (isDaily) {
         localStorage.setItem('difficultyGuessResult_' + dailySeed, isCorrect.toString());
     }
 
-    // Play the appropriate sound
-    playDifficultySound(isCorrect);
-    
-    const buttons = document.querySelectorAll('.difficulty-btn');
-    
-    // Disable all buttons
-    buttons.forEach(btn => {
-        btn.disabled = true;
-        if (btn.dataset.level === guessedLevel) {
-            btn.classList.add(isCorrect ? 'correct' : 'incorrect');
-        }
-        if (actualLevels.includes(btn.dataset.level)) {
-            setTimeout(() => {
-                btn.classList.add('correct');
-            }, 500);
-        }
-    });
+    // If it's a mystery song, handle the special reveal
+    if (isMystery) {
+        handleMysteryDifficultyReveal(guessedLevel);
+    } else {
+        // Regular handling for normal difficulty songs
+        
+        // Play the appropriate sound
+        playDifficultySound(isCorrect);
+        
+        const buttons = document.querySelectorAll('.difficulty-btn');
+        
+        // Disable all buttons
+        buttons.forEach(btn => {
+            btn.disabled = true;
+            if (btn.dataset.level === guessedLevel) {
+                btn.classList.add(isCorrect ? 'correct' : 'incorrect');
+            }
+            if (actualLevels.includes(btn.dataset.level)) {
+                setTimeout(() => {
+                    btn.classList.add('correct');
+                }, 500);
+            }
+        });
+    }
 
     difficultyGuessResult = isCorrect;
     difficultyGuessed = true;
+}
+
+// Add this function to handle the special case for ★??? songs
+function handleMysteryDifficultyReveal(guessedLevel) {
+    const difficultyButtons = document.querySelectorAll('.difficulty-btn');
+    const difficultyResult = document.querySelector('.difficulty-result');
+    
+    // First, show the user's selection
+    difficultyButtons.forEach(btn => {
+        btn.disabled = true;
+        if (btn.dataset.level === guessedLevel) {
+            btn.classList.add('selected');
+        }
+    });
+    
+    // Play a special "mystery" sound if available, otherwise use the "correct" sound
+    playDifficultySound(true);
+    
+    // Wait a moment, then do the special reveal animation
+    setTimeout(() => {
+        // Flash all buttons with question marks
+        difficultyButtons.forEach(btn => {
+            // Store original text
+            btn.setAttribute('data-original-text', btn.textContent);
+            
+            // Add the flashing class
+            btn.classList.add('mystery-flash');
+            
+            // Change text to question marks
+            btn.textContent = '???';
+        });
+        
+        // After the flash animation, reveal the mystery status
+        setTimeout(() => {
+            // Remove flashing class and restore original text
+            difficultyButtons.forEach(btn => {
+                btn.classList.remove('mystery-flash');
+                btn.classList.remove('selected');
+                btn.textContent = btn.getAttribute('data-original-text');
+            });
+            
+            // Show the special message
+            difficultyResult.classList.remove('hidden');
+            difficultyResult.innerHTML = `
+                <div class="mystery-result">
+                    <p><span class="mystery-rating">★???</span></p>
+                    <p class="mystery-explanation">These special songs don't fit into the standard difficulty scale.</p>
+                </div>
+            `;
+            
+            // Add special visual to the result
+            difficultyResult.classList.add('mystery-result-container');
+            
+        }, 1500); // Duration of question mark display
+    }, 800); // Delay before starting the animation
 }
 
 function playDifficultySound(isCorrect) {
@@ -2006,7 +2641,7 @@ function showDailyResultModal() {
     // Get the stored result
     const result = localStorage.getItem('dailyResult');
     const isWin = result && result !== 'X';
-    const attemptCount = isWin ? parseInt(result) : 6; // X means they lost, so use max attempts
+    const attemptCount = isWin ? parseInt(result) : 6;
     
     // Check if the user peeked at song list during their play
     const didPeek = localStorage.getItem('peekedAtSongList_' + dailySeed) === 'true';
@@ -2024,8 +2659,8 @@ function showDailyResultModal() {
     }
 
     // Store the attempt count globally for sharing
-    attempts = attemptCount; // Set the global attempts variable directly
-    gameWon = isWin; // Set the global gameWon variable
+    attempts = attemptCount;
+    gameWon = isWin;
     
     // Get the daily song information
     const dailySongKey = localStorage.getItem('dailySongKey');
@@ -2043,16 +2678,19 @@ function showDailyResultModal() {
     // Display the modal with the previous result
     const modal = document.getElementById('gameOverModal');
     const modalMessage = document.getElementById('modalMessage');
-    const modalTitle = document.querySelector('.modal-title');
-    const modalContent = document.querySelector('.modal-content');
+    const modalTitle = modal.querySelector('.modal-title'); // Specific to game over modal
+    const modalContent = modal.querySelector('.modal-content'); // Specific to game over modal
     const difficultyContainer = document.getElementById('difficultyGuessContainer');
     
     // Get the buttons
-    const playAgainButton = document.querySelector('.modal-button:not(.share-button)');
-    const shareButton = document.querySelector('.share-button');
+    const playAgainButton = modal.querySelector('.modal-button:not(.share-button)');
+    const shareButton = modal.querySelector('.share-button');
     
-    // Make sure share button is visible
-    shareButton.style.display = 'inline-block';
+    // Make sure modal is in the DOM before proceeding
+    if (!modal || !modalContent) {
+        console.error('Game over modal elements not found');
+        return;
+    }
     
     // Remove previous classes
     modalContent.classList.remove('win', 'lose');
@@ -2169,21 +2807,64 @@ function showDailyResultModal() {
         difficultyContainer.classList.add('hidden');
     }
     
-    // Update the Play Again button
-    playAgainButton.textContent = "Play Unlimited";
-    playAgainButton.onclick = function() {
-        isDaily = false;
-        document.getElementById('dailyModeBtn').classList.remove('active');
-        document.getElementById('unlimitedModeBtn').classList.add('active');
-        startNewGame();
-    };
-    
-    // Set up the share button
-    shareButton.onclick = shareResult;
-    
-    // Display the modal
+    // Display the modal before updating buttons to ensure they exist in the DOM
     modal.style.display = 'block';
     isGameOver = true;
+    
+    
+    // Make sure share button is visible
+    if (shareButton) {
+        shareButton.style.display = 'inline-block';
+        shareButton.onclick = shareResult;
+    }
+    
+    // Update the Play Again button
+    if (playAgainButton) {
+        console.log('Setting daily modal button to "Play Unlimited" by ID');
+        
+        // Create a new button element to replace the old one (to remove any existing listeners)
+        const newButton = document.createElement('button');
+        newButton.id = 'playAgainButton';
+        newButton.className = 'modal-button';
+        newButton.innerHTML = 'Play Unlimited';
+        
+        // Add the click event to the new button
+        newButton.addEventListener('click', function() {
+            isDaily = false;
+            document.getElementById('dailyModeBtn').classList.remove('active');
+            document.getElementById('unlimitedModeBtn').classList.add('active');
+            updateFilterVisibility();
+            startNewGame();
+        });
+        
+        // Replace the old button with the new one
+        playAgainButton.parentNode.replaceChild(newButton, playAgainButton);
+    } else {
+        // Fallback to querySelector if ID selector fails
+        console.log('Play Again button not found by ID, trying class selector');
+        const fallbackButton = document.querySelector('.modal-button:not(.share-button)');
+        
+        if (fallbackButton) {
+            // Create a new button to replace the old one
+            const newButton = document.createElement('button');
+            newButton.className = 'modal-button';
+            newButton.innerHTML = 'Play Unlimited';
+            
+            // Add the click event to the new button
+            newButton.addEventListener('click', function() {
+                isDaily = false;
+                document.getElementById('dailyModeBtn').classList.remove('active');
+                document.getElementById('unlimitedModeBtn').classList.add('active');
+                updateFilterVisibility();
+                startNewGame();
+            });
+            
+            // Replace the old button with the new one
+            fallbackButton.parentNode.replaceChild(newButton, fallbackButton);
+        } else {
+            console.error('Could not find Play Again button by any selector');
+        }
+    }
 }
 
 
@@ -2228,6 +2909,40 @@ function createWinParticles() {
         }
     }, 4000);
 }
+
+
+window.closeSongList = function(event) {
+    // Stop event propagation
+    if (event) {
+        event.stopPropagation();
+    }
+    
+    console.log('closeSongList called');
+    const modal = document.getElementById('songListModal');
+    if (modal) {
+        modal.style.display = 'none';
+        
+        // Stop preview playback
+        if (previewPlayer && !previewPlayer.paused) {
+            previewPlayer.pause();
+            previewPlayer.currentTime = 0;
+            previewPlayer.dataset.currentSong = '';
+        }
+    }
+};
+
+window.closePlayHistory = function(event) {
+    // Stop event propagation
+    if (event) {
+        event.stopPropagation();
+    }
+    
+    console.log('closePlayHistory called');
+    const modal = document.getElementById('playHistoryModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+};
 
 async function shareResult() {
     // Debug logging
@@ -2300,8 +3015,43 @@ async function shareResult() {
     }
 }
 
+function setupModalOutsideClicks() {
+    // For Song List Modal
+    const songListModal = document.getElementById('songListModal');
+    if (songListModal) {
+        songListModal.addEventListener('click', function(e) {
+            // Check if the click is on the modal background (not the content)
+            if (e.target === songListModal) {
+                window.closeSongList();
+            }
+        });
+    }
+    
+    // For Play History Modal
+    const playHistoryModal = document.getElementById('playHistoryModal');
+    if (playHistoryModal) {
+        playHistoryModal.addEventListener('click', function(e) {
+            // Check if the click is on the modal background (not the content)
+            if (e.target === playHistoryModal) {
+                window.closePlayHistory();
+            }
+        });
+    }
+
+    const filterModal = document.getElementById('filterModal');
+    if (filterModal) {
+        filterModal.addEventListener('click', function(e) {
+            // Check if the click is on the modal background (not the content)
+            if (e.target === filterModal) {
+                window.closeFilterModal();
+            }
+        });
+    }
+}
+
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
+    setupModalOutsideClicks();
     // Check for challenge parameter in URL - Store it for processing after data loads
     const urlParams = new URLSearchParams(window.location.search);
     const challengeParam = urlParams.get('c'); // Changed from 'challenge' to 'c'
@@ -2312,9 +3062,26 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Clean up the URL
         window.history.replaceState({}, document.title, window.location.pathname);
-        
     }
     
+    // Add listeners for filter changes
+    const minDifficultyFilter = document.getElementById('minDifficultyFilter');
+    const maxDifficultyFilter = document.getElementById('maxDifficultyFilter');
+    const hidePlayedFilter = document.getElementById('hidePlayedFilter');
+    
+    if (minDifficultyFilter) {
+        minDifficultyFilter.addEventListener('change', updateFilterButtonAppearance);
+    }
+    
+    if (maxDifficultyFilter) {
+        maxDifficultyFilter.addEventListener('change', updateFilterButtonAppearance);
+    }
+    
+    if (hidePlayedFilter) {
+        hidePlayedFilter.addEventListener('change', updateFilterButtonAppearance);
+    }
+
+
     // Initialize volume control - YOUR EXISTING CODE STARTS HERE
     const volumeIcon = document.querySelector('.volume-control i');
     const volumeSlider = document.querySelector('.volume-slider');
@@ -2351,6 +3118,47 @@ document.addEventListener('DOMContentLoaded', () => {
         updateVolume(volumeSlider.value);
     }
 
+    // Filter button event listener
+    const filterButton = document.getElementById('filterButton');
+    if (filterButton) {
+        // Initial state - disabled if in daily mode
+        if (isDaily) {
+            filterButton.classList.add('disabled');
+        } else {
+            filterButton.classList.remove('disabled');
+            filterButton.classList.add('active');
+            // Initialize filter button appearance
+            updateFilterButtonAppearance();
+        }
+        
+        filterButton.addEventListener('click', function() {
+            // This will only execute in unlimited mode due to pointer-events: none in disabled state
+            showFilterModal();
+        });
+    }
+    
+    // Filter modal outside click
+    const filterModal = document.getElementById('filterModal');
+    if (filterModal) {
+        filterModal.addEventListener('click', function(e) {
+            if (e.target === filterModal) {
+                closeFilterModal();
+            }
+        });
+    }
+    
+    // Apply and reset filter buttons
+    const applyFiltersBtn = document.getElementById('applyFilters');
+    const resetFiltersBtn = document.getElementById('resetFilters');
+    
+    if (applyFiltersBtn) {
+        applyFiltersBtn.addEventListener('click', applyFiltersAndStart);
+    }
+    
+    if (resetFiltersBtn) {
+        resetFiltersBtn.addEventListener('click', resetFilters);
+    }
+
     // DEVELOPMENT ONLY - Remove before production
     document.getElementById('devResetBtn')?.addEventListener('click', () => {
         localStorage.removeItem('lastDailyPlayed');
@@ -2361,108 +3169,119 @@ document.addEventListener('DOMContentLoaded', () => {
         location.reload();
     });
 
-
     // Game mode toggle listeners
-// Replace the daily mode button click handler with this
-document.getElementById('dailyModeBtn').addEventListener('click', () => {
-    if (!isDaily) {
-        // Stop any currently playing audio
-        const player = document.getElementById('audio-player');
-        const playButton = document.querySelector('.play-button');
-        
-        if (isPlaying) {
-            player.pause();
-            player.currentTime = 0;
-            playButton.textContent = 'Play';
-            isPlaying = false;
+    document.getElementById('dailyModeBtn').addEventListener('click', () => {
+        if (!isDaily) {
+            // Stop any currently playing audio
+            const player = document.getElementById('audio-player');
+            const playButton = document.querySelector('.play-button');
             
-            // Reset progress bar
-            const progressFill = document.querySelector('.progress-fill');
-            progressFill.style.width = '0%';
-            
-            // Stop wave animation if it's running
-            if (animationId) {
-                cancelAnimationFrame(animationId);
-                animationId = null;
-            }
-        }
-        
-        // First save the current unlimited mode state if not completed
-        if (!isGameOver) {
-            // Save the current state to unlimited storage
-            const unlimitedGameState = {
-                attempts: attempts,
-                incorrectGuesses: incorrectGuesses,
-                isDaily: false,
-                dailySeed: dailySeed,
-                peekedAtSongList: peekedAtSongList
-            };
-            localStorage.setItem('unlimitedGameState', JSON.stringify(unlimitedGameState));
-            console.log('Saved unlimited game state before switching to daily');
-        }
-        
-        // Switch to daily mode
-        isDaily = true;
-        document.getElementById('dailyModeBtn').classList.add('active');
-        document.getElementById('unlimitedModeBtn').classList.remove('active');
-        
-        // Check if there's a completed daily challenge for today
-        const today = new Date().toISOString().slice(0, 10);
-        const lastPlayed = localStorage.getItem('lastDailyPlayed');
-        
-        if (lastPlayed === today) {
-            // Show completed daily challenge
-            dailyAttempted = true;
-            dailySeed = today;
-            showDailyResultModal();
-        } else {
-            // Check if we have a saved daily game state
-            const savedDailyState = localStorage.getItem('dailyGameState');
-            
-            if (savedDailyState) {
-                // Parse the saved state
-                const gameState = JSON.parse(savedDailyState);
+            if (isPlaying) {
+                player.pause();
+                player.currentTime = 0;
+                playButton.textContent = 'Play';
+                isPlaying = false;
                 
-                // Make sure it's for today (in case it's an old state)
-                if (gameState.dailySeed === today) {
-                    console.log('Found saved daily game state for today:', gameState);
+                // Reset progress bar
+                const progressFill = document.querySelector('.progress-fill');
+                progressFill.style.width = '0%';
+                                
+                // Stop wave animation if it's running
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                    animationId = null;
+                }
+            }
+            
+            const filterBtn = document.getElementById('filterButton');
+            if (filterBtn) {
+                filterBtn.classList.add('disabled');
+                filterBtn.classList.remove('active');
+                filterBtn.classList.remove('has-active-filters');
+            }
+    
+            // First save the current unlimited mode state if not completed
+            if (!isGameOver) {
+                // Save the current state to unlimited storage
+                const unlimitedGameState = {
+                    attempts: attempts,
+                    incorrectGuesses: incorrectGuesses,
+                    isDaily: false,
+                    dailySeed: dailySeed,
+                    peekedAtSongList: peekedAtSongList
+                };
+                localStorage.setItem('unlimitedGameState', JSON.stringify(unlimitedGameState));
+                console.log('Saved unlimited game state before switching to daily');
+            }
+            
+            // Switch to daily mode
+            isDaily = true;
+            document.getElementById('dailyModeBtn').classList.add('active');
+            document.getElementById('unlimitedModeBtn').classList.remove('active');
+            
+            // Reset game state variables for the new mode
+            attempts = 0;
+            incorrectGuesses = [];
+            isGameOver = false;
+            gameWon = false;
+            
+            // Check if there's a completed daily challenge for today
+            const today = new Date().toISOString().slice(0, 10);
+            const lastPlayed = localStorage.getItem('lastDailyPlayed');
+            
+            if (lastPlayed === today) {
+                // Show completed daily challenge
+                dailyAttempted = true;
+                dailySeed = today;
+                showDailyResultModal();
+            } else {
+                // Check if we have a saved daily game state
+                const savedDailyState = localStorage.getItem('dailyGameState');
+                
+                if (savedDailyState) {
+                    // Parse the saved state
+                    const gameState = JSON.parse(savedDailyState);
                     
-                    // Restore the state
-                    attempts = gameState.attempts;
-                    incorrectGuesses = gameState.incorrectGuesses;
-                    dailySeed = gameState.dailySeed;
-                    peekedAtSongList = gameState.peekedAtSongList;
-                    
-                    // Load the daily song
-                    const savedSongKey = localStorage.getItem('dailySongKey');
-                    if (savedSongKey && gameData[savedSongKey]) {
-                        currentSong = gameData[savedSongKey];
-                        currentSong.cleanArtist = cleanupText(currentSong.artist);
+                    // Make sure it's for today (in case it's an old state)
+                    if (gameState.dailySeed === today) {
+                        console.log('Found saved daily game state for today:', gameState);
                         
-                        // Set up the audio player
-                        const player = document.getElementById('audio-player');
-                        player.src = `game_audio/${encodeFilename(currentSong.heardle_file)}`;
+                        // Restore the state
+                        attempts = gameState.attempts;
+                        incorrectGuesses = gameState.incorrectGuesses;
+                        dailySeed = gameState.dailySeed;
+                        peekedAtSongList = gameState.peekedAtSongList;
                         
-                        // Update UI to reflect loaded state
-                        console.log('Restoring daily game with attempts:', attempts);
-                        updateGuessHistory();
-                        updateProgressBar();
-                        updateSkipButtonText();
+                        // Load the daily song
+                        const savedSongKey = localStorage.getItem('dailySongKey');
+                        if (savedSongKey && gameData[savedSongKey]) {
+                            currentSong = gameData[savedSongKey];
+                            currentSong.cleanArtist = cleanupText(currentSong.artist);
+                            
+                            // Set up the audio player
+                            const player = document.getElementById('audio-player');
+                            player.src = `game_audio/${encodeFilename(currentSong.heardle_file)}`;
+                            
+                            // Update UI to reflect loaded state
+                            console.log('Restoring daily game with attempts:', attempts);
+                            updateGuessHistory();
+                            updateProgressBar();
+                            updateSkipButtonText();
+                        } else {
+                            console.log('Could not find saved song, starting new game');
+                            startNewGame();
+                        }
                     } else {
-                        console.log('Could not find saved song, starting new game');
+                        console.log('Saved daily state is for a different day, starting new game');
                         startNewGame();
                     }
                 } else {
-                    console.log('Saved daily state is for a different day, starting new game');
+                    console.log('No saved daily game state, starting new game');
                     startNewGame();
                 }
-            } else {
-                console.log('No saved daily game state, starting new game');
-                startNewGame();
             }
         }
-    }
-});
+    });
 
 // Update the unlimited mode button click handler
 document.getElementById('unlimitedModeBtn').addEventListener('click', () => {
@@ -2488,6 +3307,15 @@ document.getElementById('unlimitedModeBtn').addEventListener('click', () => {
             }
         }
         
+        // Enable the filter button - moved outside the isPlaying check
+        const filterBtn = document.getElementById('filterButton');
+        if (filterBtn) {
+            filterBtn.classList.remove('disabled');
+            filterBtn.classList.add('active');
+            // Also update the appearance based on current filters
+            updateFilterButtonAppearance();
+        }
+        
         // First save the current daily mode state if not completed
         if (!isGameOver) {
             // Save the current state to daily storage
@@ -2506,6 +3334,12 @@ document.getElementById('unlimitedModeBtn').addEventListener('click', () => {
         isDaily = false;
         document.getElementById('dailyModeBtn').classList.remove('active');
         document.getElementById('unlimitedModeBtn').classList.add('active');
+        
+        // Reset game state variables for the new mode
+        attempts = 0;
+        incorrectGuesses = [];
+        isGameOver = false;
+        gameWon = false;
         
         // Check if we have saved state for unlimited mode
         const savedUnlimitedState = localStorage.getItem('unlimitedGameState');
@@ -2545,6 +3379,9 @@ document.getElementById('unlimitedModeBtn').addEventListener('click', () => {
     }
 });
 
+
+
+    
     // Add event listener for beforeunload to save state when closing/refreshing
     window.addEventListener('beforeunload', () => {
         if (!isGameOver) {
@@ -2552,64 +3389,160 @@ document.getElementById('unlimitedModeBtn').addEventListener('click', () => {
         }
     });
 
-    document.getElementById('unlimitedModeBtn').addEventListener('click', () => {
-        if (isDaily) {
-            // First save the current daily mode state if not completed
-            if (!isGameOver) {
-                // Save the current state to daily storage
-                const dailyGameState = {
-                    attempts: attempts,
-                    incorrectGuesses: incorrectGuesses,
-                    isDaily: true,
-                    dailySeed: dailySeed,
-                    peekedAtSongList: peekedAtSongList
-                };
-                localStorage.setItem('dailyGameState', JSON.stringify(dailyGameState));
-            }
-            
-            // Switch to unlimited mode
-            isDaily = false;
-            document.getElementById('dailyModeBtn').classList.remove('active');
-            document.getElementById('unlimitedModeBtn').classList.add('active');
-            
-            // Check if we have saved state for unlimited mode
-            const savedUnlimitedState = localStorage.getItem('unlimitedGameState');
-            
-            if (savedUnlimitedState) {
-                // We have a saved unlimited game, restore it
-                const gameState = JSON.parse(savedUnlimitedState);
-                attempts = gameState.attempts;
-                incorrectGuesses = gameState.incorrectGuesses;
-                peekedAtSongList = gameState.peekedAtSongList;
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add event listeners to close buttons
+        document.querySelectorAll('.modal-close-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                e.preventDefault();
                 
-                // Load the unlimited song
-                const unlimitedSongKey = localStorage.getItem('unlimitedSongKey');
-                if (unlimitedSongKey && gameData[unlimitedSongKey]) {
-                    currentSong = gameData[unlimitedSongKey];
-                    currentSong.cleanArtist = cleanupText(currentSong.artist);
-                    
-                    // Set up the audio player
-                    const player = document.getElementById('audio-player');
-                    player.src = `game_audio/${encodeFilename(currentSong.heardle_file)}`;
-                    
-                    // Update UI to reflect loaded state
-                    updateGuessHistory();
-                    updateProgressBar();
-                    updateSkipButtonText();
-                } else {
-                    // If we can't load the song, start a new game
-                    startNewGame();
+                const modal = this.closest('.modal');
+                if (modal) {
+                    if (modal.id === 'songListModal') {
+                        window.closeSongList(e);
+                    } else if (modal.id === 'playHistoryModal') {
+                        window.closePlayHistory(e);
+                    }
                 }
-            } else {
-                // No saved unlimited game, start a new one
-                startNewGame();
-            }
-        }
+            });
+        });
     });
 
-    document.getElementById('songListButton').addEventListener('click', showSongList);
+    // Add a direct event listener for the Play Again button
+    document.addEventListener('click', function(e) {
+        // Check if the clicked element is the play again button
+        if (e.target && (e.target.id === 'playAgainButton' || 
+                        (e.target.classList.contains('modal-button') && 
+                        !e.target.classList.contains('share-button') && 
+                        !e.target.closest('#songListModal') && 
+                        !e.target.closest('#playHistoryModal')))) {
+            console.log('Play button clicked, isDaily =', isDaily);
+            
+            // If we're in daily mode, switch to unlimited mode
+            if (isDaily) {
+                isDaily = false;
+                document.getElementById('dailyModeBtn').classList.remove('active');
+                document.getElementById('unlimitedModeBtn').classList.add('active');
+                updateFilterVisibility();
+            }
+            
+            // Start a new game
+            startNewGame();
+            e.stopPropagation();
+        }
+    }, true);
+
+    // Set up a MutationObserver to ensure modal buttons have correct text
+    const gameOverModal = document.getElementById('gameOverModal');
+    if (gameOverModal) {
+        const modalObserver = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'attributes' && 
+                    mutation.attributeName === 'style' && 
+                    gameOverModal.style.display === 'block') {
+                    
+                    console.log('Modal displayed - ensuring correct button text and styles');
+                    
+                    // Make sure the button text is correct based on the game mode
+                    setTimeout(() => {
+                        // Direct approach using ID
+                        const playAgainButton = document.getElementById('playAgainButton');
+                        if (playAgainButton) {
+                            // Set button text based on game mode
+                            if (isDaily) {
+                                console.log('Setting button to "Play Unlimited" for daily mode');
+                                playAgainButton.innerHTML = "Play Unlimited";
+                                
+                                // Make sure it has the correct event handler
+                                const newButton = playAgainButton.cloneNode(true);
+                                newButton.addEventListener('click', function() {
+                                    isDaily = false;
+                                    document.getElementById('dailyModeBtn').classList.remove('active');
+                                    document.getElementById('unlimitedModeBtn').classList.add('active');
+                                    updateFilterVisibility();
+                                    startNewGame();
+                                });
+                                
+                                // Replace the button to ensure clean event handlers
+                                if (playAgainButton.parentNode) {
+                                    playAgainButton.parentNode.replaceChild(newButton, playAgainButton);
+                                }
+                            } else {
+                                console.log('Setting button to "Play Again" for unlimited mode');
+                                playAgainButton.innerHTML = "Play Again";
+                                
+                                // Make sure it has the correct event handler
+                                const newButton = playAgainButton.cloneNode(true);
+                                newButton.addEventListener('click', function() {
+                                    startNewGame();
+                                });
+                                
+                                // Replace the button to ensure clean event handlers
+                                if (playAgainButton.parentNode) {
+                                    playAgainButton.parentNode.replaceChild(newButton, playAgainButton);
+                                }
+                            }
+                        }
+                        
+                        // Fallback approach using class selector
+                        else {
+                            const fallbackButton = document.querySelector('.modal-content .modal-button:not(.share-button)');
+                            if (fallbackButton) {
+                                // Set button text based on game mode
+                                if (isDaily) {
+                                    fallbackButton.innerHTML = "Play Unlimited";
+                                    
+                                    // Make sure it has the correct event handler
+                                    const newButton = fallbackButton.cloneNode(true);
+                                    newButton.addEventListener('click', function() {
+                                        isDaily = false;
+                                        document.getElementById('dailyModeBtn').classList.remove('active');
+                                        document.getElementById('unlimitedModeBtn').classList.add('active');
+                                        updateFilterVisibility();
+                                        startNewGame();
+                                    });
+                                    
+                                    // Replace the button to ensure clean event handlers
+                                    if (fallbackButton.parentNode) {
+                                        fallbackButton.parentNode.replaceChild(newButton, fallbackButton);
+                                    }
+                                } else {
+                                    fallbackButton.innerHTML = "Play Again";
+                                    
+                                    // Make sure it has the correct event handler
+                                    const newButton = fallbackButton.cloneNode(true);
+                                    newButton.addEventListener('click', function() {
+                                        startNewGame();
+                                    });
+                                    
+                                    // Replace the button to ensure clean event handlers
+                                    if (fallbackButton.parentNode) {
+                                        fallbackButton.parentNode.replaceChild(newButton, fallbackButton);
+                                    }
+                                }
+                            }
+                        }
+                    }, 10); // Small delay to ensure the DOM is ready
+                }
+            });
+        });
+        
+        modalObserver.observe(gameOverModal, { attributes: true });
+    }
 
 
+// Update button event listeners to add emergency close buttons
+document.getElementById('songListButton').addEventListener('click', function() {
+    showSongList();
+    setTimeout(addEmergencyCloseButtons, 100); // Small delay to ensure modal is visible
+});
+
+// History Button
+document.getElementById('playHistoryButton').addEventListener('click', function() {
+    console.log('Play history button clicked');
+    showPlayHistory();
+    setTimeout(addEmergencyCloseButtons, 100); // Small delay to ensure modal is visible
+});
 
     // Play button listener with audio context initialization
     document.getElementById('playButton').addEventListener('click', async () => {
@@ -2706,6 +3639,24 @@ document.getElementById('unlimitedModeBtn').addEventListener('click', () => {
         }
     });
     
+    // Add these new event listeners for the other modals
+    document.getElementById('songListModal')?.querySelector('.modal-button')?.addEventListener('click', function() {
+        console.log('Song list close button clicked');
+        document.getElementById('songListModal').style.display = 'none';
+        
+        // Stop preview playback
+        if (previewPlayer && !previewPlayer.paused) {
+            previewPlayer.pause();
+            previewPlayer.currentTime = 0;
+            previewPlayer.dataset.currentSong = '';
+        }
+    });
+    
+    document.getElementById('playHistoryModal')?.querySelector('.modal-button')?.addEventListener('click', function() {
+        console.log('History close button clicked');
+        document.getElementById('playHistoryModal').style.display = 'none';
+    });
+    
     // Handle window resize for canvas
     window.addEventListener('resize', () => {
         if (waveCanvas) {
@@ -2769,7 +3720,6 @@ document.getElementById('unlimitedModeBtn').addEventListener('click', () => {
     // Initialize submit button state
     updateSubmitButtonState();
 
-
     document.querySelectorAll('.modal-button').forEach(button => {
         button.addEventListener('mouseenter', () => {
             if (!difficultyGuessed) {
@@ -2797,6 +3747,7 @@ document.getElementById('unlimitedModeBtn').addEventListener('click', () => {
         document.getElementById('guess-input').focus();
         document.getElementById('guess-input').classList.add('auto-focus');
     }
+    
     // Load game data
     loadGameData();
 });

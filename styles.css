@@ -926,6 +926,9 @@ body {
     letter-spacing: 1px;
     font-weight: bold;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+    overflow: visible !important;
+    text-overflow: clip !important;
+    white-space: normal !important;
 }
 
 .modal-button.dimmed {
@@ -964,30 +967,31 @@ body {
     box-shadow: 0 0 30px rgba(255, 255, 255, 0.5) !important;
 }
 
-.song-list-icon {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 40px;
-    height: 40px;
+/* Style for all circular buttons */
+.play-history-icon, .filter-circle-btn, .song-list-icon {
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    background: transparent;
-    border: 2px solid #f0f0f0;
-    color:#f0f0f0;
+    background: rgba(10, 10, 15, 0.8);
+    border: 1px solid;
+    border-color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.8);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    z-index: 1000;
     padding: 0;
 }
 
-.song-list-icon:hover {
-    background: rgba(0, 243, 255, 0.1);
-    box-shadow: 0 0 10px var(--neon-blue),
-                inset 0 0 5px rgba(0, 243, 255, 0.3);
+.play-history-icon:hover, .filter-circle-btn:hover, .song-list-icon:hover {
+    transform: translateY(-2px);
+    background: rgba(10, 10, 15, 0.7);
+    color: rgb(0, 204, 255);
+    border-color: rgba(0, 225, 255, 0.781);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
+
 
 .song-list-modal {
     max-width: 600px !important;
@@ -1044,6 +1048,7 @@ body {
     margin: 2px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
+    cursor: pointer; /* Add this to show hand cursor */
 }
 
 .song-list-item:hover {
@@ -1120,6 +1125,10 @@ body {
     justify-content: center;
 }
 
+.song-list-item .challenge-icon {
+    cursor: pointer; /* Explicitly set to pointer to ensure it works */
+}
+
 .song-list-item:hover .challenge-icon {
     opacity: 1;
     color: #FFD700;
@@ -1180,41 +1189,52 @@ body {
     display: flex;
     margin: 15px 0;
     width: 100%;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 .challenge-link-input {
     flex: 1;
-    min-width: 0; /* This prevents flex items from overflowing */
-    padding: 8px 12px;
-    border: 1px solid #333;
+    min-width: 0;
+    padding: 10px 12px;
+    border: 1px solid #444;
+    border-right: none;
     border-radius: 5px 0 0 5px;
     background: #000;
     color: #fff;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-size: 0.9em;
 }
 
 .copy-link-btn {
-    background: #FFD700;
+    background: linear-gradient(45deg, #FFD700, #FFA500);
     color: #000;
     border: none;
-    padding: 8px 12px;
+    padding: 8px 15px;
     border-radius: 0 5px 5px 0;
     cursor: pointer;
     white-space: nowrap;
-    min-width: 90px; /* Ensure button has minimum width */
+    min-width: 90px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 5px;
+    font-weight: bold;
+    transition: all 0.3s ease;
 }
 
-.share-options {
-    display: flex;
-    justify-content: center;
-    margin-top: 15px;
+.copy-link-btn:hover {
+    background: linear-gradient(45deg, #FFD700, #FF8C00);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
 }
+
+.copy-link-btn:active {
+    transform: scale(0.98);
+}
+
 
 .share-btn {
     background: linear-gradient(45deg, #FFD700, #FFA500);
@@ -1883,27 +1903,53 @@ body {
 }
 
 
-/* Game mode toggle styling */
+/* Game mode toggle with filter button */
 .game-mode-toggle {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     gap: 5px;
     margin: 5px auto 15px;
     width: 100%;
-    max-width: 400px;
+    max-width: 100%;
     position: relative;
     z-index: 1;
 }
 
+/* Left controls */
+.left-controls {
+    display: flex;
+    align-items: center;
+}
+
+/* Center controls for mode buttons */
+.center-controls {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    gap: 5px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Right controls */
+.control-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+/* Restore the original mode buttons to full width */
 .mode-btn {
     flex: 1;
+    min-width: 120px; /* Ensure buttons have minimum width */
     background: rgba(0, 0, 0, 0.6);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    color: rgba(255, 255, 255, 0.5); /* Darker text for inactive */
+    color: rgba(255, 255, 255, 0.5);
     padding: 8px 0;
     border-radius: 25px;
     cursor: pointer;
     font-size: 0.9em;
-    transition: all 0.3s ease; /* Simplified transition */
+    transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     position: relative;
@@ -1949,12 +1995,25 @@ body {
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .game-mode-toggle {
-        margin: 10px auto 15px;
+        flex-wrap: wrap;
+    }
+    
+    .left-controls, .control-buttons {
+        flex: 0 0 auto;
     }
     
     .mode-btn {
-        padding: 10px 0;
-        font-size: 0.8em;
+        flex: 0 1 auto; /* Don't grow to fill space on mobile */
+        min-width: 0; /* Remove minimum width constraint */
+        padding: 8px 15px; /* Use horizontal padding instead */
+        font-size: 0.8em; /* Slightly smaller font on mobile */
+        letter-spacing: 1px; /* Reduce letter spacing */
+    }
+    
+    .center-controls {
+        gap: 10px; /* Increase gap between buttons on mobile */
+        justify-content: center; /* Ensure buttons are centered */
+        max-width: 100%; /* Allow full width on mobile */
     }
 }
 
@@ -2020,6 +2079,571 @@ body {
     text-align: center;
     transition: opacity 0.5s;
   }
+
+  .unlimited-filters {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 15px;
+    margin: 15px 0;
+    transition: all 0.3s ease;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+}
+
+.unlimited-filters.visible {
+    max-height: 500px;
+    opacity: 1;
+    margin-bottom: 20px;
+}
+
+.filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.filter-header h3 {
+    color: var(--text-primary);
+    margin: 0;
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+.filter-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.filter-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter-label {
+    min-width: 80px;
+    color: var(--text-secondary);
+    font-size: 0.9em;
+}
+
+.difficulty-range-filter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.difficulty-range-filter select, 
+.status-filter select {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 0.9em;
+}
+
+.status-filter {
+    display: flex;
+    gap: 15px;
+}
+
+.status-option {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.status-option input {
+    accent-color: var(--neon-blue);
+}
+
+.filter-button {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(0, 243, 255, 0.3);
+    color: var(--text-primary);
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+    margin-top: 5px;
+}
+
+.filter-button:hover {
+    background: rgba(0, 243, 255, 0.1);
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+}
+
+.filter-button.secondary {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.filter-button.secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+
+
+
+/* Active state when in unlimited mode */
+.filter-circle-btn.active {
+    /* Use a solid background instead of gradient */
+    background: rgba(10, 10, 15, 0.8);
+    /* Use consistent border style */
+    border-color: rgba(255, 255, 255, 0.8);
+    /* Use consistent text color */
+    color: rgba(255, 255, 255, 0.8);
+    /* Use consistent glow effect */
+    cursor: pointer;
+}
+
+/* Add a subtle glow effect when filter is active */
+.filter-circle-btn.has-active-filters {
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 10px rgb(0, 238, 255);
+    color: rgba(0, 238, 255);
+}
+
+/* Disabled state */
+.filter-circle-btn.disabled {
+    opacity: 0.5;
+    pointer-events: none; /* Keep this to make it unclickable */
+    cursor: not-allowed; /* This shows the "no entry" sign */
+}
+
+/* Filter Modal Styles */
+.filter-modal {
+    max-width: 500px;
+}
+
+/* Add new class for filter buttons container */
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.filter-buttons .filter-button {
+    flex: 1;
+    padding: 10px;
+    margin-top: 0; /* Override the margin-top from .filter-button */
+}
+
+
+/* Update the play-history-icon styles */
+.play-history-container {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    margin: 15px 0;
+}
+
+.play-history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 5px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.play-history-item:hover {
+    background: rgba(0, 243, 255, 0.1);
+}
+
+.play-history-details {
+    flex-grow: 1;
+}
+
+.play-history-title {
+    color: var(--text-primary);
+    font-size: 1em;
+    margin-bottom: 4px;
+}
+
+.play-history-artist {
+    color: var(--text-secondary);
+    font-size: 0.8em;
+}
+
+.play-history-difficulty {
+    color: #FFAE00;
+    text-shadow: 0 0 5px rgba(255, 174, 0, 0.5);
+    font-size: 0.9em;
+    margin-left: 10px;
+}
+
+.play-history-date {
+    color: var(--text-secondary);
+    font-size: 0.8em;
+    text-align: right;
+}
+
+.play-again-btn {
+    background: transparent;
+    border: none;
+    color: var(--neon-blue);
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+    border-radius: 15px;
+}
+
+.play-again-btn:hover {
+    background: rgba(0, 243, 255, 0.1);
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+}
+
+.empty-history-message {
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 20px;
+    font-style: italic;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .play-history-icon {
+        top: 10px;
+        left: 10px;
+        width: 35px;
+        height: 35px;
+    }
+    
+    .filter-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .difficulty-range-filter {
+        width: 100%;
+    }
+    
+    .difficulty-range-filter select {
+        flex: 1;
+    }
+}
+
+.modal-close-x {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(255, 0, 85, 0.2);
+    border: 1px solid rgba(255, 0, 85, 0.4);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 20px;
+    line-height: 25px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 2;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-close-x:hover {
+    background: rgba(255, 0, 85, 0.4);
+    box-shadow: 0 0 10px rgba(255, 0, 85, 0.3);
+}
+
+/* Hide the original close button */
+#songListModal .modal-button,
+#playHistoryModal .modal-button {
+    display: none;
+}
+
+/* History header with clear button */
+.history-header {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 2;
+}
+
+.clear-history-btn {
+    background: rgba(255, 0, 85, 0.2);
+    border: 1px solid rgba(255, 0, 85, 0.4);
+    color: rgba(255, 255, 255, 0.9);
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8em;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.clear-history-btn:hover {
+    background: rgba(255, 0, 85, 0.4);
+    box-shadow: 0 0 10px rgba(255, 0, 85, 0.3);
+}
+
+/* Adjust the modal title to accommodate the clear button */
+#playHistoryModal .modal-title {
+    margin-top: 15px; /* Add more top margin to make space for the button */
+}
+
+/* Keep play history items centered */
+.play-history-item {
+    padding: 10px;
+    margin: 5px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    text-align: center; /* Keep centered */
+}
+
+.play-history-details {
+    width: 100%;
+}
+
+.play-history-title {
+    color: var(--text-primary);
+    font-size: 1em;
+    margin-bottom: 4px;
+    text-align: center; /* Keep centered */
+}
+
+.play-history-artist {
+    color: var(--text-secondary);
+    font-size: 0.8em;
+    text-align: center; /* Keep centered */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center content */
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.play-history-difficulty {
+    color: #FFAE00;
+    text-shadow: 0 0 5px rgba(255, 174, 0, 0.5);
+    font-size: 0.9em;
+    margin-left: 5px;
+}
+
+/* Improve scrollbar for play history */
+.play-history-container {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    margin: 15px 0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--neon-blue) rgba(0, 0, 0, 0.2);
+}
+
+.play-history-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.play-history-container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.play-history-container::-webkit-scrollbar-thumb {
+    background: var(--neon-blue);
+    border-radius: 5px;
+}
+
+.play-history-container::-webkit-scrollbar-thumb:hover {
+    background: var(--neon-pink);
+}
+
+.difficulty-filter-container {
+    margin: 10px 0;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.difficulty-filter-btn {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.7);
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.difficulty-filter-btn:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    color: white;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+.difficulty-filter-btn.selected {
+    background: linear-gradient(45deg, 
+        rgba(0, 243, 255, 0.2), 
+        rgba(255, 0, 255, 0.2));
+    border-color: rgba(0, 243, 255, 0.8);
+    color: white;
+    box-shadow: 
+        0 0 10px rgba(0, 243, 255, 0.3),
+        0 0 20px rgba(255, 0, 255, 0.1);
+}
+
+/* If you need to adjust the existing difficulty-buttons class */
+.difficulty-filter-container .difficulty-buttons {
+    grid-template-columns: repeat(7, 1fr); /* Adjust for filter modal */
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Add to styles.css */
+.language-filter {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.language-filter.horizontal {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+}
+
+.language-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.language-option input[type="radio"] {
+    accent-color: var(--neon-blue);
+    width: 16px;
+    height: 16px;
+}
+
+.language-option span {
+    position: relative;
+    top: 1px;
+}
+
+/* For mobile screens */
+@media (max-width: 768px) {
+    .language-filter {
+        width: 100%;
+        padding-left: 10px;
+    }
+
+    .language-filter.horizontal {
+        width: 100%;
+        padding-left: 10px;
+        justify-content: flex-start;
+        gap: 12px;
+    }
+    
+    .language-option {
+        margin-bottom: 5px;
+    }
+
+}
+
+.control-buttons {
+    display: flex;
+    gap: 8px;
+    margin-left: 5px;
+}
+
+/* CSS for the filter stats */
+.filter-stats {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    background: rgba(0, 0, 0, 0.3);
+    padding: 4px 8px;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#filteredSongCount {
+    font-weight: 500;
+}
+
+
+/* Animation for mystery song reveal */
+@keyframes mysteryFlash {
+    0% { transform: scale(1); background: rgba(0, 0, 0, 0.7); }
+    50% { transform: scale(1.1); background: rgba(128, 0, 128, 0.3); }
+    100% { transform: scale(1); background: rgba(0, 0, 0, 0.7); }
+}
+
+.difficulty-btn.mystery-flash {
+    animation: mysteryFlash 0.5s ease-in-out infinite;
+    color: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 0, 255, 0.6);
+    font-weight: bold;
+}
+
+/* Styling for the mystery result message */
+.mystery-result-container {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 0, 255, 0.4);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.2);
+}
+
+.mystery-result {
+    text-align: center;
+    color: white;
+}
+
+.mystery-icon {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: rgba(255, 0, 255, 0.8);
+}
+
+.mystery-rating {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: rgba(255, 0, 255, 0.9);
+    text-shadow: 0 0 10px rgba(255, 0, 255, 0.7);
+}
+
+.mystery-explanation {
+    font-size: 0.9em;
+    margin-top: 8px;
+    color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
+}
+
+/* Button selection state */
+.difficulty-btn.selected {
+    background: rgba(50, 50, 50, 0.9);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: white;
+}
 
 .hidden {
     display: none;
