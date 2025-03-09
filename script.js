@@ -2268,14 +2268,16 @@ function showModal(message, isWin = false) {
         
         // Only update stats if this is a new play (not just viewing results again)
         if (dailySeed !== stats.lastPlayed) {
-            stats.played++;
-            stats.lastPlayed = dailySeed;
+            // Check if consecutive day - FIXED LOGIC HERE
+            let isConsecutiveDay = false;
+            if (stats.lastPlayed) {
+                const lastPlayedDate = new Date(stats.lastPlayed);
+                lastPlayedDate.setDate(lastPlayedDate.getDate() + 1);
+                const expectedNextDay = lastPlayedDate.toISOString().slice(0, 10);
+                isConsecutiveDay = dailySeed === expectedNextDay;
+            }
             
-            // Check if consecutive day
-            const yesterday = new Date(dailySeed);
-            yesterday.setDate(yesterday.getDate() - 1);
-            const yesterdayStr = yesterday.toISOString().slice(0, 10);
-            const isConsecutiveDay = stats.lastPlayed === yesterdayStr;
+            stats.played++;
             
             if (isWin) {
                 stats.wins++;
@@ -2295,6 +2297,9 @@ function showModal(message, isWin = false) {
                 date: dailySeed,
                 result: todayResult
             });
+            
+            // Save the current day as lastPlayed AFTER processing
+            stats.lastPlayed = dailySeed;
             
             // Save updated stats
             localStorage.setItem('dailyStats', JSON.stringify(stats));
