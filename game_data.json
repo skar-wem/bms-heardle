@@ -7252,6 +7252,21 @@
       ]
     }
   },
+  "Supernova": {
+    "display_title": "Supernova",
+    "artist": "A4paper",
+    "heardle_file": "Supernova_2_heardle.mp3",
+    "preview_file": "Supernova_2_preview.mp3",
+    "metadata": {
+      "genre": "Energetic Trance",
+      "bpm": "156",
+      "original_file": "_a4p_supernova_kakkoii.bms",
+      "mod_time": "2013-06-01 01:55:00",
+      "insane_levels": [
+        "★2"
+      ]
+    }
+  },
   "supersoulsimulator": {
     "display_title": "supersoulsimulator",
     "artist": "Yamajet",
