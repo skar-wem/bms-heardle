@@ -29,6 +29,7 @@ let pendingChallenge = null;
 let playedSongs = [];
 const GAME_VERSION = "1.1";
 
+// Version check
 const savedVersion = localStorage.getItem("gameVersion");
 if (savedVersion !== GAME_VERSION) {
   // First time with new version
@@ -36,6 +37,23 @@ if (savedVersion !== GAME_VERSION) {
   
   console.log("Game updated to version " + GAME_VERSION);
 }
+
+// Algorithm update check - this will reset the daily song cache
+(function() {
+  // Check if we need to do a one-time reset for the new algorithm
+  const algorithmUpdated = localStorage.getItem('algorithmUpdated');
+  if (algorithmUpdated !== 'v1.1') {
+    // Clear only the daily song cache, not player stats
+    localStorage.removeItem('dailySongKey');
+    localStorage.removeItem('dailySongDate');
+    
+    // Mark that we've done the update
+    localStorage.setItem('algorithmUpdated', 'v1.1');
+    
+    console.log("Game updated: Daily challenge refreshed for improved song selection");
+  }
+})();
+
 const pastDailySongs = [
     "HAMMER the TANGRAM",
     "Shade of Gloria",
@@ -66,6 +84,8 @@ const pastDailySongs = [
     "Wild Clown",
     ""
 ]
+
+
 
 // Function to load played songs from localStorage
 function loadPlayedSongs() {
@@ -700,7 +720,7 @@ function getDailySong() {
     const index = adjustedHash % availableSongs.length;
     
     return availableSongs[index];
-  }
+}
   
   function testNextDailySongs() {
     const today = new Date();
