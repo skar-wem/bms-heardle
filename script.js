@@ -27,6 +27,15 @@ let dailyAttempted = false;
 let peekedAtSongList = false;
 let pendingChallenge = null;
 let playedSongs = [];
+const GAME_VERSION = "1.1";
+
+const savedVersion = localStorage.getItem("gameVersion");
+if (savedVersion !== GAME_VERSION) {
+  // First time with new version
+  localStorage.setItem("gameVersion", GAME_VERSION);
+  
+  console.log("Game updated to version " + GAME_VERSION);
+}
 const pastDailySongs = [
     "HAMMER the TANGRAM",
     "Shade of Gloria",
