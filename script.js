@@ -27,6 +27,36 @@ let dailyAttempted = false;
 let peekedAtSongList = false;
 let pendingChallenge = null;
 let playedSongs = [];
+const pastDailySongs = [
+    "HAMMER the TANGRAM",
+    "Shade of Gloria",
+    "SHI☆O☆KA☆RA",
+    "Shooting Silver Bullet",
+    "shooting_moon",
+    "suffruti",
+    "sunlit power stone",
+    "SunnyShinyRing",
+    "Super Mario Brothers Main Theme",
+    "SUPERNOVA",
+    "supersoulsimulator",
+    "symbolic gear",
+    "Synthesized Fortress",
+    "Tears of the Sunrise",
+    "TEN",
+    "Toki (Sound piercer's Timesucker Remix)",
+    "Total Eclipse of the Sun",
+    "Trahison",
+    "Trinity",
+    "Tsukuyomi",
+    "Tuk Tuk Boshi",
+    "TURNDOWN",
+    "TYR",
+    "U.N.Owen ～戯れしは狂妹か？",
+    "Ultimate Weapon",
+    "Wicked plot",
+    "Wild Clown",
+    ""
+]
 
 // Function to load played songs from localStorage
 function loadPlayedSongs() {
@@ -628,22 +658,78 @@ function playAgainFromHistory(songKey) {
 }
 
 function getDailySong() {
-    // Create a deterministic random number based on the date
-    const dateStr = dailySeed;
-    let hash = 0;
-    for (let i = 0; i < dateStr.length; i++) {
-      hash = ((hash << 5) - hash) + dateStr.charCodeAt(i);
-      hash |= 0; // Convert to 32bit integer
-    }
-
-    hash -= 287;
+    // Create a date-based seed
+    const dateStr = dailySeed; // YYYY-MM-DD format
     
-    // Use the hash to select a song
-    const songs = Object.keys(gameData);
-    const index = Math.abs(hash) % songs.length;
-    return songs[index];
+    // Extract date components to create a more varied hash
+    const year = parseInt(dateStr.substring(0, 4));
+    const month = parseInt(dateStr.substring(5, 7));
+    const day = parseInt(dateStr.substring(8, 10));
+    
+    // Use large prime numbers for better distribution
+    const prime1 = 31;
+    const prime2 = 83;
+    const prime3 = 8191; // A larger prime
+    
+    // Create a complex hash that varies significantly day to day
+    let hash = (year * prime1) + (month * prime2) + (day * prime3);
+    
+    // Add more complexity with bit manipulation
+    hash = hash ^ (hash << 13);
+    hash = hash ^ (hash >> 17);
+    hash = hash ^ (hash << 5);
+    
+    // Get available songs (excluding past daily songs)
+    const allSongs = Object.keys(gameData);
+    const availableSongs = allSongs.filter(songKey => !pastDailySongs.includes(songKey));
+    
+    // Use a large prime number that's relatively prime to your song count
+    // 769 is prime and close to but less than 770
+    const adjustedHash = Math.abs(hash) * 769;
+    
+    // Get the index
+    const index = adjustedHash % availableSongs.length;
+    
+    return availableSongs[index];
   }
   
+  function testNextDailySongs() {
+    const today = new Date();
+    const results = [];
+    
+    for (let i = 0; i < 30; i++) {
+      const testDate = new Date(today);
+      testDate.setDate(testDate.getDate() + i);
+      const testDateStr = testDate.toISOString().slice(0, 10);
+      
+      // Save current seed
+      const originalSeed = dailySeed;
+      dailySeed = testDateStr;
+      
+      // Get song for this test date
+      const songKey = getDailySong();
+      const song = gameData[songKey];
+      
+      // Restore original seed
+      dailySeed = originalSeed;
+      
+      results.push({
+        date: testDateStr,
+        title: song.display_title,
+        key: songKey
+      });
+    }
+    
+    console.table(results);
+    
+    // Check if the results appear to be in alphabetical order
+    const titles = results.map(r => r.title);
+    const sortedTitles = [...titles].sort();
+    const isAlphabetical = titles.join() === sortedTitles.join();
+    
+    console.log("Is selection alphabetical?", isAlphabetical);
+  }
+
 // Add this function to save the current game state
 function saveGameState() {
     if (!isGameOver) {
