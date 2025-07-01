@@ -83,7 +83,100 @@ const pastDailySongs = [
     "Ultimate Weapon",
     "Wicked plot",
     "Wild Clown",
-    ""
+    "Born",
+    "永劫の沙漏", 
+    "Rosario -another story-", 
+    "Exit", 
+    "Aragami", 
+    "The SunLight", 
+    "あめふりこねこ", 
+    "Fatal Pulse", 
+    "うみいろ、そらいろ。", 
+    "事象の地平", 
+    "Eclisse", 
+    "AcceptAdvent-Border of Life-", 
+    "M", 
+    "fragment of tears", 
+    "飛燕草", 
+    "Ancient Memory", 
+    "CHRISTMAS EVE", 
+    "Platinum", 
+    "zodiac", 
+    "HARDCORE MACHINEGUN", 
+    "schwerkraft", 
+    "code：endymion", 
+    "Lieselotte", 
+    "κανων", 
+    "Toki", 
+    "Cinderella Cage -Trancecore Mix-", 
+    "Cry-for BMS Mix-", 
+    "Quad Queens", 
+    "夜桜", 
+    "Astrograph", 
+    "EXILE", 
+    "斧と盾", 
+    "orbit", 
+    "furioso melodia", 
+    "After Burner", 
+    "ひつぎとふたご", 
+    "Ruriko FINAL", 
+    "モノリスの園", 
+    "sensitive", 
+    "Retroactive Rain", 
+    "堕楽の園", 
+    "ゲルニカの壁", 
+    "That's the style!!", 
+    "Milly Barll", 
+    "遠い春を告げるあの娘の足音", 
+    "Vantablack", 
+    "Rewinding Sound Wave", 
+    "Yakumo ＞＞JOINT STRUGGLE", 
+    ".357 Magnum", 
+    "Extreme Z4 (Aggressive HC mix)", 
+    "Pursuit Of Outer Space", 
+    "STEPPING WIND -Wake Full Style-", 
+    "Starry Fate", 
+    "Calamity Fortune", 
+    "乙女ノススメ!", 
+    "J2U(crazy remix)", 
+    "Here we go! (TM edit)", 
+    "スーパーイザナギオブジェクト", 
+    "L.D. (Rock Arrange Ver.)", 
+    "RE：START", 
+    "DENGEKI Tube", 
+    "煉獄-Purgatorium-", 
+    "Espresso Shots", 
+    "baby blue blanket", 
+    "DRAGONLADY", 
+    "More Selfish", 
+    "une fleur",
+    "月と狼と砂糖菓子",
+    "κανων",
+    "Baby Baby Frenzy",
+    "Colorful Sunday",
+    "Rewinding Sound Wave",
+    "CG901B",
+    "resta del tramonto",
+    "Ultramarine",
+    "before",
+    "FIONA",
+    "Cinderella Cage -Trancecore Mix-",
+    "Mirage Imitation",
+    "Poppin' Shower",
+    "どうか私を殺して下さい",
+    "Leviathan",
+    "DISCHARGE RUSH",
+    "上海紅茶館",
+    "Ocean Memory",
+    "★LittlE HearTs★", 
+    "Cold Breath", 
+    "Singing of Night birds", 
+    "The Destructive Genesis", 
+    "Demystify Feast", 
+    "風仁雷仁", 
+    "Singing of Night birds", 
+    "Valedict", 
+    "クロートーと星の観測者" // // // //
 ]
 
 
@@ -698,7 +791,7 @@ function getDailySong() {
     
     // Use large prime numbers for better distribution
     const prime1 = 31;
-    const prime2 = 83;
+    const prime2 = 97;
     const prime3 = 8191; // A larger prime
     
     // Create a complex hash that varies significantly day to day
@@ -706,8 +799,8 @@ function getDailySong() {
     
     // Add more complexity with bit manipulation
     hash = hash ^ (hash << 13);
-    hash = hash ^ (hash >> 17);
-    hash = hash ^ (hash << 5);
+    hash = hash ^ (hash >> 19);
+    hash = hash ^ (hash << 7);
     
     // Get available songs (excluding past daily songs)
     const allSongs = Object.keys(gameData);
@@ -727,7 +820,7 @@ function getDailySong() {
     const today = new Date();
     const results = [];
     
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 120; i++) {
       const testDate = new Date(today);
       testDate.setDate(testDate.getDate() + i);
       const testDateStr = testDate.toISOString().slice(0, 10);
