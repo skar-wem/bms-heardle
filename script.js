@@ -176,6 +176,37 @@ const pastDailySongs = [
     "風仁雷仁", 
     "Singing of Night birds", 
     "Valedict", 
+    "少女の檻 ＂Last Night, Last Dancing.＂", 
+    "花鳥風月", 
+    "Dstorv", 
+    "Fate／fete", 
+    "ETERNAL DRAIN", 
+    "elegante", 
+    "Rainy", 
+    "月時計 Last・Dial", 
+    "Complex path(bms edit)", 
+    "AVALON", 
+    "Legend of Seeker", 
+    "Blooming", 
+    "Magical Love Words", 
+    "FUXXING YOUR BRAIN", 
+    "Strahv", 
+    "多重極展開", 
+    "BLACKOUT -Side Story-", 
+    "Act Beloved", 
+    "In a dream", 
+    "Arcadia", 
+    "la noche", 
+    "Jack-the-Ripper◆", 
+    "Xecus", 
+    "りりくろ！", 
+    "Hay FEVER", 
+    "Moon phase Encounter", 
+    "Back 2 Oldskool", 
+    "Cross Galaxy", 
+    "夜明けの少女たち", 
+    "End Time", 
+    "Mirage Garden", 
     "クロートーと星の観測者" // // // //
 ]
 
@@ -790,7 +821,7 @@ function getDailySong() {
     const day = parseInt(dateStr.substring(8, 10));
     
     // Use large prime numbers for better distribution
-    const prime1 = 31;
+    const prime1 = 23;
     const prime2 = 97;
     const prime3 = 8191; // A larger prime
     
