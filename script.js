@@ -207,6 +207,31 @@ const pastDailySongs = [
     "夜明けの少女たち", 
     "End Time", 
     "Mirage Garden", 
+    "サーカス・ギャロップ",
+    "HAELEQUIN",
+    "x-Aria",
+    "PLASTIC GIRLS (ft. Seorryang)",
+    "チョウの標本",
+    "BIAS",
+    "I believe",
+    "絶対チェックメイト領域",
+    "Kronos",
+    "夏夜のノスタルジア",
+    "A c i - L",
+    "Say A Vengeance",
+    "夢人形",
+    "現実をカットアップしてみた",
+    "Bird Sprite -D.K.R. mix-",
+    "VALLISTA",
+    "DTD Emperor",
+    "theme of Maia",
+    "白の魔法の光",
+    "LUNASA the Stormcauser",
+    "to Firmament",
+    "天",
+    "Endless Journey",
+    "夢、幻。",
+    "撃墜-HELL AIR FORCE-",
     "クロートーと星の観測者" // // // //
 ]
 
@@ -822,7 +847,7 @@ function getDailySong() {
     
     // Use large prime numbers for better distribution
     const prime1 = 23;
-    const prime2 = 97;
+    const prime2 = 83;
     const prime3 = 8191; // A larger prime
     
     // Create a complex hash that varies significantly day to day
