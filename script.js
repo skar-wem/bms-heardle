@@ -232,10 +232,66 @@ const pastDailySongs = [
     "Endless Journey",
     "夢、幻。",
     "撃墜-HELL AIR FORCE-",
+    "Love & Justice",
+    "Ordeal",
+    "紫陽花の忘れ物",
+    "analog sky",
+    "cold planet",
+    "芥川龍之介の河童 ～Candid Friend",
+    "Y",
+    "ダークサンバランド",
+    "drivin'FTR",
+    "remote control⇒",
+    "Angelic layer",
+    "天上のポリスルイン",
+    "Flicker",
+    "- JUPITER -",
+    "Blue-White Crazybits",
+    "樟葉 (remix)",
+    "Homura",
+    "Armais",
+    "Creamy Sky",
+    "銀の風",
+    "Last! Least! Regrets!!",
+    "BULLET HELL",
+    "Eleventh Hour (time limit soon! mix)",
+    "おジャ魔女でBANBAN!(Pop-mix)",
+    "Memories of Sky-CoolDownMIX-",
+    "Cynic",
+    "FREEDOM DiVE",
+    "A.S.D.F",
+    "orion ring",
+    "Endkraft",
+    "物怪舞踏",
+    "sola",
+    "Lemuria",
+    "Caelumize",
+    "Alt Futur",
+    "Caixa D' Aqua",
+    "Cynthia -with moon light-",
+    "Fly Again",
+    "アイーシャの剣-Forcing breakthrough-",
+    "星の器～STAR OF ANDROMEDA",
+    "Utopiangela (Cartoon Channel 203)",
+    "ピアノ協奏曲第1番 月光条例",
+    "Cynthia -with moon light-",
+    "FELYS",
+    "ε-δ",
+    "図書室のエルザ",
+    "duty",
+    "桜花撩乱",
+    "Wasabi",
+    "ミルキーベリー・スウィートタイム",
+    "Danse de Romani",
+    "Fly Again",
+    "Homura",
+    "M-A",
+    "点、線、面、立体",
+    "＊ Crow Solace ＊",
+    "妖晶零弐",
+    "LOVE☆BEAM (orange summer mix)",
     "クロートーと星の観測者" // // // //
 ]
-
-
 
 // Function to load played songs from localStorage
 function loadPlayedSongs() {
@@ -847,7 +903,7 @@ function getDailySong() {
     
     // Use large prime numbers for better distribution
     const prime1 = 23;
-    const prime2 = 83;
+    const prime2 = 97;
     const prime3 = 8191; // A larger prime
     
     // Create a complex hash that varies significantly day to day
